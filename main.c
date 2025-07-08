@@ -2,4 +2,5 @@
 
 int main(int argc, char argv)
 {
+	error_msg(ola);
 }
