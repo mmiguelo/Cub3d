@@ -1,6 +1,7 @@
 #include "cub3D.h"
 
-int main(int argc, char argv)
+int main()
 {
-	error_msg(ola);
+	error_msg("ola");
+	return (0);
 }

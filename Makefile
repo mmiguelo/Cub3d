@@ -9,9 +9,9 @@ RM = rm -rf
 
 VAL = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --errors-for-leak-kinds=definite
 
-GENERAL = main.c
-PARSING = parsing.C
-ERROR = error.c
+GENERAL = main.c error_msg.c
+#PARSING = parsing.C
+ERROR = error_msg.c
 
 NAME = cub3D
 
@@ -32,16 +32,13 @@ RESET = \033[0m
 VPATH += src
 # parsing
 VPATH += src/parse
-#error
-VPATH += src/error
 
 #==============================================================================#
 #                                    FILES                                     #
 #==============================================================================#
 
 SRC +=	$(GENERAL)
-SRC +=	$(PARSING)
-SRC +=	$(ERROR)
+#SRC +=	$(PARSING)
 
 # Library Paths
 LIBFT_DIR = libft
