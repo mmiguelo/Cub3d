@@ -4,7 +4,8 @@
 
 CC = cc
 FLAGS = -g -Wall -Wextra -Werror
-INC = -I./includes
+MLX_FLAGS = -lmlx -lm -lXext -lX11 -lXrandr -lXcursor -lXinerama -lXrender
+INC = -I./includes -I./minilibx-linux
 RM = rm -rf
 
 VAL = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --errors-for-leak-kinds=definite
@@ -21,6 +22,9 @@ NAME = cub3D
 ECHO = @echo
 GREEN = \033[1;32m
 RED = \033[1;31m
+CYAN = \033[0;36m
+MAGENTA = \033[0;35m
+YELLOW  = \033[1;33m
 RESET = \033[0m
 
 #==============================================================================#
@@ -47,6 +51,10 @@ LIBFT = $(LIBFT_DIR)/libft.a
 OBJ_DIR = obj
 OBJS = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
+# Minilibx Path
+MLX_DIR = minilibx-linux
+MLX = $(MLX_DIR)/libmlx.a
+
 #==============================================================================#
 #                                    RULES                                     #
 #==============================================================================#
@@ -62,36 +70,56 @@ $(OBJ_DIR):
 $(OBJ_DIR)/%.o : %.c | $(OBJ_DIR)
 	$(CC) $(FLAGS) -c $< -o $@ $(INC)
 
-$(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME) -lreadline
-	@$(ECHO) "$(GREEN)----------------- cub3D created$(RESET)"
+$(MLX):
+	$(MAKE) -C $(MLX_DIR)
+
+$(NAME): $(OBJS) $(LIBFT) $(MLX)
+	$(CC) $(FLAGS) $(OBJS) $(LIBFT) -L$(MLX_DIR) $(MLX_FLAGS) -o $(NAME)
+	@echo "$(GREEN)[OK] Cub3d built$(RESET)"
+	@echo "--------"
+	@echo "$(CYAN)Usage:$(RESET)"
+	@echo "./cub3d $(YELLOW)[name_of_map_file].cub$(RESET)"
+	@echo "--------"
 
 # Make and run
 r: all
-	./cub3D
+	./$(NAME)
 
 # Make and run with valgrind
 rv: all
-	$(VAL) ./cub3D
+	$(VAL) ./$(NAME)
 
 # Executable minishell with valgrind
 v: re
-	$(VAL) ./cub3D
-
-valgrind: re
-	@valgrind --suppressions=readline.supp --leak-check=full -s --show-leak-kinds=all ./$(NAME)
+	$(VAL) ./$(NAME)
 
 clean:
 	$(RM) $(OBJS)
 	$(MAKE) clean -C $(LIBFT_DIR)
+	@if [-d "minilibx-linux" ]; then \
+		$(MAKE) clean -C $(MLX_DIR); \
+	fi
 	@echo "$(RED)----------------- OBJECTS deleted$(RESET)"
 
 fclean: clean
 	$(RM) $(NAME) $(OBJ_DIR)
 	$(MAKE) fclean -C $(LIBFT_DIR)
+	@if [-d "minilibx-linux" ]; then \
+		$(MAKE) clean -C $(MLX_DIR); \
+	fi
 	@echo "$(RED)----------------- cub3D deleted$(RESET)"
+
+download:
+	@if [ ! -d "minilibx-linux" ]; then \
+		wget https://cdn.intra.42.fr/document/document/25858/minilibx-linux.tgz && \
+		tar -xzf minilibx-linux.tgz; \
+		rm -rf minilibx-linux.tgz; \
+		echo "$(GREEN)MinilibX cloned into ./minilibx-linux$(RESET)"; \
+	else \
+		echo "$(YELLOW)MinilibX already exists at ./minilibx-linux$(RESET)"; \
+	fi
 
 re: fclean all
 
 # Phony Targets
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re r rv v download

@@ -1,11 +1,15 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <sys/time.h>
+# include <unistd.h> // read write close
+# include <stdlib.h> // malloc free exit
+# include <sys/time.h> // for gettimeofday() used in frame timing
 # include <string.h>
-# include <math.h>
+# include <stdbool.h> // true/false
+# include <errno.h> // error codes
+# include <math.h> // math trig fuctions like sin(), cos() sqrt(), floor() ceil()?
+# include </minilibx-linux/mlx.h> // MinilibX (minilibx-linux.tgz needed)
+//# include <mlx_int.h> // internal mlx functions (use with caution)
 # include "../libft/libft.h"
 
 /*=============================================================================#
@@ -39,7 +43,7 @@
 
 typedef struct s_data
 {
-
+	
 } t_data;
 
 /*=============================================================================#
