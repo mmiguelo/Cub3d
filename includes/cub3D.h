@@ -41,10 +41,70 @@
 #                                   STRUCTS                                    #
 #=============================================================================*/
 
+/**
+ * Colors:
+ * r - red
+ * g - green
+ * b - blue
+ */
+typedef struct s_color
+{
+	int	r; // change to float  maybe
+	int	g;
+	int	b;
+}	t_color;
+
+typedef struct s_textures
+{
+	char *north;
+	char *south;
+	char *east;
+	char *west;
+}	t_textures;
+
+/**
+ * grind[y][x] = grid[height][width]
+ * 0- empty
+ * 1- wall
+ * N- player north
+ * S- player south
+ * E- player east
+ * W- player west
+ */
+typedef struct s_map
+{
+	char **grid; // 2D
+	//width and height maybe
+}	t_map;
+
+typedef struct s_player
+{
+	long x; // long? or double?
+	long y; // long?  or double?
+	char direction; // 'N' 'S' 'E' 'W' <- maybe this is better
+	//int	direction; // NORTH SOUTH EAST WEST (escolher)
+}	t_player;
+
+// maybe
+/* typedef struct s_img_data
+{
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img_data; */
+
 typedef struct s_data
 {
-	
-} t_data;
+	t_textures	textures;
+	t_color		floor;
+	t_color		ceiling;
+	t_map		map;
+	t_player	player;
+	//t_img_data	img_data; //maybe?
+	void		*mlx;
+	void		*win;
+}	t_data;
+
 
 /*=============================================================================#
 #                                   FUNCTIONS                                  #
