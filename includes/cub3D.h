@@ -28,16 +28,26 @@
 # define C		"\033[1;36m"	// bold cyan
 # define W		"\033[1;37m"	// bold white
 
+# define NORTH	1
+# define SOUTH	2
+# define WEST	3
+# define EAST	4
+
 /*=============================================================================#
 #                                   STRUCTS                                    #
 #=============================================================================*/
 
+typedef struct s_data
+{
 
+} t_data;
 
 /*=============================================================================#
 #                                   FUNCTIONS                                  #
 #=============================================================================*/
 
 void	error_msg(const char *error);
+int		check_extension(char *filename);
+int		check_directory(char *filename);
 
 #endif
