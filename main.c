@@ -1,7 +1,10 @@
 #include "cub3D.h"
 
-int main()
+int main(int argc, char **argv)
 {
-	error_msg("ola");
+	(void)argv;
+
+	if (argc !=2)
+		error_msg("ola");
 	return (0);
 }
