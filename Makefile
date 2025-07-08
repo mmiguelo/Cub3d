@@ -9,9 +9,8 @@ RM = rm -rf
 
 VAL = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --errors-for-leak-kinds=definite
 
-GENERAL = main.c error_msg.c
+GENERAL = main.c utils.c
 #PARSING = parsing.C
-ERROR = error_msg.c
 
 NAME = cub3D
 
