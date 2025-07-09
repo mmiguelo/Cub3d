@@ -11,7 +11,7 @@ RM = rm -rf
 VAL = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --errors-for-leak-kinds=definite
 
 GENERAL = main.c utils.c
-PARSING = parsing.c
+PARSING = parsing.c extensions.c
 
 NAME = cub3D
 
@@ -111,7 +111,7 @@ fclean: clean
 
 download:
 	@if [ ! -d "minilibx-linux" ]; then \
-		wget https://cdn.intra.42.fr/document/document/25858/minilibx-linux.tgz && \
+		wget https://cdn.intra.42.fr/document/document/36093/minilibx-linux.tgz && \
 		tar -xzf minilibx-linux.tgz; \
 		rm -rf minilibx-linux.tgz; \
 		echo "$(GREEN)MinilibX cloned into ./minilibx-linux$(RESET)"; \
