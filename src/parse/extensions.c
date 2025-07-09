@@ -25,3 +25,16 @@ void	check_directory(char *filename)
 	}
 	close(fd);
 }
+
+void	check_redability(char *filename)
+{
+	int	fd;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+	{
+		close(fd);
+		ft_kill(NULL, ERR_FILE);
+	}
+	close(fd);
+}

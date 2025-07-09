@@ -1,5 +1,10 @@
 #include "cub3D.h"
 
+ft_free(t_data *data)
+{
+	;
+}
+
 const char	*err_message(t_error_code i)
 {
 	const char	*message[12];

@@ -10,6 +10,7 @@ int	main(int ac, char **av)
 		parse(av[1]);
 		ft_memset(&data, 0, sizeof(t_data));
 		ft_memset(&texture, 0, sizeof(t_textures));
+		
 		ft_printf_fd(1, G"congratulations\n"RST);
 	}
 	else if (ac != 2)

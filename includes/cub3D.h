@@ -78,15 +78,14 @@ typedef struct s_textures
 	char	*east;
 	char	*west;
 	char	*floor;
-	char	*sky;
+	char	*ceiling;
 }				t_textures;
 
 typedef struct s_player
 {
 	double	x;
 	double	y;
-	char	direction; // 'N' 'S' 'E' 'W' <- maybe this is better
-	//int	direction; // NORTH SOUTH EAST WEST (escolher)
+	char	direction; // 'N' 'S' 'E' 'W'
 }	t_player;
 
 
@@ -118,9 +117,11 @@ typedef struct s_data
 #=============================================================================*/
 
 int			ft_kill(t_data *data, t_error_code code);
+void		parse(char *filename);
+void		parse_file_content(t_data *data, char *filename);
 void		check_extension(char *filename);
 void		check_directory(char *filename);
-void		parse(char *filename);
+void		check_redability(char *filename);
 const char	*message(t_error_code i);
 
 #endif
