@@ -81,45 +81,34 @@ typedef struct s_textures
 	char	*sky;
 }				t_textures;
 
-/**
- * grind[y][x] = grid[height][width]
- * 0- empty
- * 1- wall
- * N- player north
- * S- player south
- * E- player east
- * W- player west
- */
-typedef struct s_map
-{
-	char	**grid; // 2D
-	//width and height maybe
-}				t_map;
-
 typedef struct s_player
 {
-	long	x; // long? or double?
-	long	y; // long?  or double?
+	double	x;
+	double	y;
 	char	direction; // 'N' 'S' 'E' 'W' <- maybe this is better
 	//int	direction; // NORTH SOUTH EAST WEST (escolher)
 }	t_player;
 
-// maybe
-/* typedef struct s_img_data
+
+typedef struct s_img_data
 {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}	t_img_data; */
+	int		width;
+	int		height;
+}	t_img_data;
 
 typedef struct s_data
 {
+	char		**grid;
+	int			x;
+	int			y;
 	t_textures	textures;
 	t_color		floor;
 	t_color		ceiling;
-	t_map		map;
 	t_player	player;
-	//t_img_data	img_data; //maybe?
+	t_img_data	img_data;
 	void		*mlx;
 	void		*win;
 }	t_data;
@@ -128,7 +117,7 @@ typedef struct s_data
 #                                   FUNCTIONS                                  #
 #=============================================================================*/
 
-int			error_msg(t_error_code code);
+int			ft_kill(t_data *data, t_error_code code);
 void		check_extension(char *filename);
 void		check_directory(char *filename);
 void		parse(char *filename);
