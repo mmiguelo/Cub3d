@@ -37,6 +37,20 @@
 # define WEST	3
 # define EAST	4
 
+typedef enum e_error_code
+{
+	ERR_ARGS,
+	ERR_FILE,
+	ERR_MAP,
+	ERR_MALLOC,
+	ERR_COLOR,
+	ERR_TEXTURE,
+	ERR_MLX,
+	ERR_ORDER,
+	ERR_DUPLICATION,
+	ERR_MAX
+} t_error_code;
+
 /*=============================================================================#
 #                                   STRUCTS                                    #
 #=============================================================================*/
