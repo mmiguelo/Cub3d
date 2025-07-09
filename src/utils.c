@@ -1,4 +1,4 @@
-#include "../includes/cub3D.h"
+#include "cub3D.h"
 
 const char	*message(t_error_code i)
 {
