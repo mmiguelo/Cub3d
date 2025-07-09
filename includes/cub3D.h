@@ -75,6 +75,10 @@ typedef struct s_color
  * //TODO Comment: Pos assim para ficar mais organizado porque acabei de 
  * 				saber que cada textura precisa de muita informacao 
  * 				e caso no futuro houver mais texturas.
+ * 
+ * 			strdup (path)						image_load (img)
+ * 		if (data.textures.north.path == NULL || data.textures.north.img.img == NULL)
+ * 			error
  */
 typedef struct s_texture
 {
