@@ -66,18 +66,52 @@ typedef enum e_error_code
  */
 typedef struct s_color
 {
-	int	r; // change to float  maybe
+	int	r;
 	int	g;
 	int	b;
 }	t_color;
 
+/**
+ * //TODO Comment: Pos assim para ficar mais organizado porque acabei de 
+ * 				saber que cada textura precisa de muita informacao 
+ * 				e caso no futuro houver mais texturas.
+ */
+typedef struct s_texture
+{
+	char		*path; // north.path == NULL
+	t_img_data	img;
+}	t_texture;
+
 typedef struct s_textures
 {
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
-}				t_textures;
+	t_texture	north; // data.textures.north == NULL; (memset?)
+	t_texture	south;
+	t_texture	east;
+	t_texture	west;
+}	t_textures;
+
+/**
+ * @brief Image metadata used for raw pixel manipulation in MiniLibX
+ * 
+ * @param img MLX image object created by mlx_new_image()
+ * @param addr raw memory address of image pixels (returned by mlx_get_data_addr)
+ * @param bits_per_pixel Number of bits used to represent one pixel
+ * 	(32 = ARGB, 64 = ARGB with extended precision)
+ * @param line_length number bites of one line/row of pixels
+ * @param endian Byte order-> 0 = little_endian (BGRA) | 1 = big_endian (ARGB)
+ * @param width Width of the image in pixels
+ * @param height Height of the image in pixels
+ */
+typedef struct s_img_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}	t_img_data;
 
 typedef struct s_player
 {
@@ -85,16 +119,6 @@ typedef struct s_player
 	double	y;
 	char	direction; // 'N' 'S' 'E' 'W'
 }	t_player;
-
-
-typedef struct s_img_data
-{
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		width;
-	int		height;
-}	t_img_data;
 
 typedef struct s_map
 {
@@ -105,11 +129,12 @@ typedef struct s_map
 
 typedef struct s_data
 {
-	t_textures	*textures;
-	t_color		*floor;
-	t_color		*ceiling;
-	t_player	*player;
-	t_img_data	*img_data;
+	t_textures	textures; //memset
+	t_color		floor;
+	t_color		ceiling;
+	t_img_data	img_data;
+	t_player	player;
+	t_map		map;
 	void		*mlx;
 	void		*win;
 }	t_data;
