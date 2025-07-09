@@ -7,8 +7,9 @@
 # include <string.h>
 # include <stdbool.h> // true/false
 # include <errno.h> // error codes
-# include <math.h> // math trig fuctions like sin(), cos() sqrt(), floor() ceil()?
-# include </minilibx-linux/mlx.h> // MinilibX (minilibx-linux.tgz needed)
+# include <fcntl.h> // ofr files
+# include <math.h> // math trig fuctions like sin(),cos(),sqrt(),floor(),ceil()?
+# include <../minilibx-linux/mlx.h> // MinilibX (minilibx-linux.tgz needed)
 //# include <mlx_int.h> // internal mlx functions (use with caution)
 # include "../libft/libft.h"
 
@@ -40,16 +41,18 @@
 typedef enum e_error_code
 {
 	ERR_ARGS,
+	ERR_NAME,
+	ERR_EXTENSION,
 	ERR_FILE,
 	ERR_MAP,
+	ERR_DIRECTORY,
 	ERR_MALLOC,
 	ERR_COLOR,
 	ERR_TEXTURE,
 	ERR_MLX,
 	ERR_ORDER,
 	ERR_DUPLICATION,
-	ERR_MAX
-} t_error_code;
+}			t_error_code;
 
 /*=============================================================================#
 #                                   STRUCTS                                    #
@@ -70,11 +73,11 @@ typedef struct s_color
 
 typedef struct s_textures
 {
-	char *north;
-	char *south;
-	char *east;
-	char *west;
-}	t_textures;
+	char	*north;
+	char	*south;
+	char	*east;
+	char	*west;
+}				t_textures;
 
 /**
  * grind[y][x] = grid[height][width]
@@ -87,15 +90,15 @@ typedef struct s_textures
  */
 typedef struct s_map
 {
-	char **grid; // 2D
+	char	**grid; // 2D
 	//width and height maybe
-}	t_map;
+}				t_map;
 
 typedef struct s_player
 {
-	long x; // long? or double?
-	long y; // long?  or double?
-	char direction; // 'N' 'S' 'E' 'W' <- maybe this is better
+	long	x; // long? or double?
+	long	y; // long?  or double?
+	char	direction; // 'N' 'S' 'E' 'W' <- maybe this is better
 	//int	direction; // NORTH SOUTH EAST WEST (escolher)
 }	t_player;
 
@@ -119,13 +122,14 @@ typedef struct s_data
 	void		*win;
 }	t_data;
 
-
 /*=============================================================================#
 #                                   FUNCTIONS                                  #
 #=============================================================================*/
 
-void	error_msg(const char *error);
-int		check_extension(char *filename);
-int		check_directory(char *filename);
+int			error_msg(t_error_code code);
+void		check_extension(char *filename);
+void		check_directory(char *filename);
+void		parse(char *filename);
+const char	*message(t_error_code i);
 
 #endif
