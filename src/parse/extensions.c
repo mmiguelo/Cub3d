@@ -6,11 +6,11 @@ void	check_extension(char *filename)
 
 	len = ft_strlen(filename);
 	if (ft_strlen(filename) <= 4)
-		error_msg(ERR_NAME);
+		ft_kill(NULL, ERR_NAME);
 	else if (filename[len - 5] == '/')
-		error_msg(ERR_FILE);
+		ft_kill(NULL, ERR_FILE);
 	else if (ft_strncmp(filename + len - 4, ".cub", 4) != 0)
-		error_msg(ERR_EXTENSION);
+		ft_kill(NULL, ERR_EXTENSION);
 }
 
 void	check_directory(char *filename)
@@ -21,7 +21,7 @@ void	check_directory(char *filename)
 	if (fd >= 0)
 	{
 		close(fd);
-		error_msg(ERR_DIRECTORY);
+		ft_kill(NULL, ERR_DIRECTORY);
 	}
 	close(fd);
 }
