@@ -9,10 +9,25 @@ void	parse(char *filename)
 	check_redability(filename);
 }
 
-void	parse_file_content(t_data *data, char *filename)
+/* void	parse_file_content(t_data *data, char *filename)
 {
+	int	fd;
 	char	*line;
 
-	line = get_next_line()
-	check_map();
-}
+	fd = open(filename, O_RDONLY);
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (!check_map(line, data))
+			break ;
+	}
+} */
+/* 
+if ((line[i] == 'N' && line[i + 1] == 'O'))
+	insert_north
+
+else if (line[i] == 'S' && line[i + 1] == 'O')
+else if (line[i] == 'W' && line[i + 1] == 'E')
+else if (line[i] == 'S' && line[i + 1] == 'E')
+else if (line[i] == 'F' && line[i + 1] == ' ')
+else if (line[i] == 'C' && line[i + 1] == ' ') */

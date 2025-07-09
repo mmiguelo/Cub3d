@@ -2,15 +2,15 @@
 
 int	main(int ac, char **av)
 {
-	t_data	*data;
-	t_textures	*texture;
+	t_data	data;
 
 	if (ac == 2)
 	{
 		parse(av[1]);
 		ft_memset(&data, 0, sizeof(t_data));
-		ft_memset(&texture, 0, sizeof(t_textures));
-		
+		//init(&data); // calloc to structs inside t_data
+		//parse_file_content(&data, av[1]);
+		//mlx_functions();
 		ft_printf_fd(1, G"congratulations\n"RST);
 	}
 	else if (ac != 2)

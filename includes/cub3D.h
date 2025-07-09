@@ -77,8 +77,6 @@ typedef struct s_textures
 	char	*south;
 	char	*east;
 	char	*west;
-	char	*floor;
-	char	*ceiling;
 }				t_textures;
 
 typedef struct s_player
@@ -98,16 +96,20 @@ typedef struct s_img_data
 	int		height;
 }	t_img_data;
 
-typedef struct s_data
+typedef struct s_map
 {
 	char		**grid;
-	int			x;
-	int			y;
-	t_textures	textures;
-	t_color		floor;
-	t_color		ceiling;
-	t_player	player;
-	t_img_data	img_data;
+	int			width;
+	int			height;
+}	t_map;
+
+typedef struct s_data
+{
+	t_textures	*textures;
+	t_color		*floor;
+	t_color		*ceiling;
+	t_player	*player;
+	t_img_data	*img_data;
 	void		*mlx;
 	void		*win;
 }	t_data;
