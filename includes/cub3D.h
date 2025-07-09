@@ -7,7 +7,7 @@
 # include <string.h>
 # include <stdbool.h> // true/false
 # include <errno.h> // error codes
-# include <fcntl.h> // ofr files
+# include <fcntl.h> // for O_DIRECTORY
 # include <math.h> // math trig fuctions like sin(),cos(),sqrt(),floor(),ceil()?
 # include <../minilibx-linux/mlx.h> // MinilibX (minilibx-linux.tgz needed)
 //# include <mlx_int.h> // internal mlx functions (use with caution)
@@ -77,6 +77,8 @@ typedef struct s_textures
 	char	*south;
 	char	*east;
 	char	*west;
+	char	*floor;
+	char	*sky;
 }				t_textures;
 
 /**
