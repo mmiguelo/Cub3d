@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-const char	*message(t_error_code i)
+const char	*err_message(t_error_code i)
 {
 	const char	*message[12];
 
@@ -19,10 +19,12 @@ const char	*message(t_error_code i)
 	return (message[i]);
 }
 
-int	error_msg(t_error_code code)
+int	ft_kill(t_data *data, t_error_code code)
 {
+	if (data)
+		 ft_free(data);
 	if (code >= 0 && code <= 12)
-		ft_printf_fd(2, RED"Error\n%s\n"RST, message(code));
+		ft_printf_fd(2, RED"Error\n%s\n"RST, error_message(code));
 	else
 		ft_printf_fd(2, RED"Unkown Error\n"RST);
 	exit(EXIT_FAILURE);
