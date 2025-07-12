@@ -9,7 +9,7 @@ void	parse(char *filename)
 	check_redability(filename);
 }
 
-/* void	parse_file_content(t_data *data, char *filename)
+void	parse_file_content(t_data *data, char *filename)
 {
 	int	fd;
 	char	*line;
@@ -18,10 +18,10 @@ void	parse(char *filename)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!check_map(line, data))
+		if (!check_textures(line, data))
 			break ;
 	}
-} */
+}
 /* 
 if ((line[i] == 'N' && line[i + 1] == 'O'))
 	insert_north
