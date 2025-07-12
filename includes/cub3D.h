@@ -72,29 +72,6 @@ typedef struct s_color
 }	t_color;
 
 /**
- * //TODO Comment: Pos assim para ficar mais organizado porque acabei de 
- * 				saber que cada textura precisa de muita informacao 
- * 				e caso no futuro houver mais texturas.
- * 
- * 			strdup (path)						image_load (img)
- * 		if (data.textures.north.path == NULL || data.textures.north.img.img == NULL)
- * 			error
- */
-typedef struct s_texture
-{
-	char		*path; // north.path == NULL
-	t_img_data	img;
-}	t_texture;
-
-typedef struct s_textures
-{
-	t_texture	north; // data.textures.north == NULL; (memset?)
-	t_texture	south;
-	t_texture	east;
-	t_texture	west;
-}	t_textures;
-
-/**
  * @brief Image metadata used for raw pixel manipulation in MiniLibX
  * 
  * @param img MLX image object created by mlx_new_image()
@@ -116,6 +93,29 @@ typedef struct s_img_data
 	int		width;
 	int		height;
 }	t_img_data;
+
+/**
+ * //TODO Comment: Pos assim para ficar mais organizado porque acabei de 
+ * 				saber que cada textura precisa de muita informacao 
+ * 				e caso no futuro houver mais texturas.
+ * 
+ * 			strdup (path)						image_load (img)
+ * 		if (data.textures.north.path == NULL || data.textures.north.img.img == NULL)
+ * 			error
+ */
+typedef struct s_texture
+{
+	char		*path; // north.path == NULL
+	t_img_data	img;
+}	t_texture;
+
+typedef struct s_textures
+{
+	t_texture	north; // data.textures.north == NULL; (memset?)
+	t_texture	south;
+	t_texture	east;
+	t_texture	west;
+}	t_textures;
 
 typedef struct s_player
 {
@@ -154,5 +154,6 @@ void		check_extension(char *filename);
 void		check_directory(char *filename);
 void		check_redability(char *filename);
 const char	*message(t_error_code i);
+void		init(t_data *data);
 
 #endif
