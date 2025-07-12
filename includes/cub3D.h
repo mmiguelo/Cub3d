@@ -33,6 +33,8 @@
 # define C		"\033[1;36m"	// bold cyan
 # define W		"\033[1;37m"	// bold white
 
+# define MAX_RGB 255
+# define MIN_RGB 0
 # define NORTH	1
 # define SOUTH	2
 # define WEST	3
@@ -42,7 +44,8 @@ typedef enum e_error_code
 {
 	ERR_ARGS,
 	ERR_NAME,
-	ERR_EXTENSION,
+	ERR_EXTENSION_FILE,
+	ERR_EXTENSION_TEXTURE,
 	ERR_FILE,
 	ERR_MAP,
 	ERR_DIRECTORY,
@@ -150,10 +153,17 @@ typedef struct s_data
 int			ft_kill(t_data *data, t_error_code code);
 void		parse(char *filename);
 void		parse_file_content(t_data *data, char *filename);
-void		check_extension(char *filename);
+void		check_extension(char *filename, char *extension);
+void		check_extension_texture(t_data *data, char *filename, char *extension);
 void		check_directory(char *filename);
 void		check_redability(char *filename);
 const char	*message(t_error_code i);
-void		init(t_data *data);
+t_data		*init(void);
+void		check_textures(t_data *data, char *line);
+void		insert_texture(t_data *data, char **path, char *line, int *i);
+void		insert_rgb(t_data *data, t_color *color, char *line, int *i);
+void		parse_color(t_data *data, t_color *color);
+void		check_duplicated_color(t_data *data, t_color *ceiling, t_color *floor);
+void		check_duplicated_textures(t_textures *texture);
 
 #endif
