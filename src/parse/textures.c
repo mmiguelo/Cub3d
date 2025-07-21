@@ -7,17 +7,17 @@ void	check_textures(t_data *data, char *line)
 	i = 0;
 	while (ft_isspace(line[i]))
 		i++;
-	if (line[i] == 'N' && line[i + 1] == 'O')
+	if (line[i] == 'N' && line[i + 1] == 'O' && ft_isspace(line[i + 2]) == 1)
 		assign_texture(data, &data->textures.north.path, line, &i);
-	else if (line[i] == 'S' && line[i + 1] == 'O')
+	else if (line[i] == 'S' && line[i + 1] == 'O' && ft_isspace(line[i + 2]) == 1)
 		assign_texture(data, &data->textures.south.path, line, &i);
-	else if (line[i] == 'W' && line[i + 1] == 'E')
+	else if (line[i] == 'W' && line[i + 1] == 'E' && ft_isspace(line[i + 2]) == 1)
 		assign_texture(data, &data->textures.west.path, line, &i);
-	else if (line[i] == 'E' && line[i + 1] == 'A')
+	else if (line[i] == 'E' && line[i + 1] == 'A' && ft_isspace(line[i + 2]) == 1)
 		assign_texture(data, &data->textures.east.path, line, &i);
-	else if (line[i] == 'F' && line[i + 1] == ' ')
+	else if (line[i] == 'F' && line[i + 1] == ' ' && ft_isspace(line[i + 2]) == 1)
 		assign_rgb(data, &data->floor, line, &i);
-	else if (line[i] == 'C' && line[i + 1] == ' ')
+	else if (line[i] == 'C' && line[i + 1] == ' ' && ft_isspace(line[i + 2]) == 1)
 		assign_rgb(data, &data->ceiling, line, &i);
 }
 
@@ -26,7 +26,7 @@ void	assign_texture(t_data *data, char **path, char *line, int *i)
 	int len;
 
 	*i += 2;
-	while (line[*i] == ' ')
+	while (ft_isspace(line[*i]))
 		(*i)++;
 	if (line[*i] == '\0')
 		ft_kill(data, ERR_TEXTURE);

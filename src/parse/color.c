@@ -3,7 +3,7 @@
 void	assign_rgb(t_data *data, t_color *color, char *line, int *i)
 {
 	*i += 2;
-	while (line[*i] == ' ')
+	while (ft_isspace(line[*i]))
 		(*i)++;
 	if (line[*i] == '\0')
 		ft_kill(data, ERR_COLOR);
