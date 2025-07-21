@@ -43,22 +43,27 @@ void	insert_texture(t_data *data, char **path, char *line, int *i)
 
 void	check_duplicated_textures(t_textures *textures)
 {
-	if (textures->north.path && textures->south.path
-		&& ft_strcmp(textures->north.path, textures->south.path) == 0)
-		ft_kill(NULL, ERR_DUPLICATION);
-	if (textures->north.path && textures->west.path
-		&& ft_strcmp(textures->north.path, textures->west.path) == 0)
-		ft_kill(NULL, ERR_DUPLICATION);
-	if (textures->north.path && textures->east.path
-		&& ft_strcmp(textures->north.path, textures->east.path) == 0)
-		ft_kill(NULL, ERR_DUPLICATION);
-	if (textures->south.path && textures->west.path
-		&& ft_strcmp(textures->south.path, textures->west.path) == 0)
-		ft_kill(NULL, ERR_DUPLICATION);
-	if (textures->south.path && textures->east.path
-		&& ft_strcmp(textures->south.path, textures->east.path) == 0)
-		ft_kill(NULL, ERR_DUPLICATION);
-	if (textures->west.path && textures->east.path
-		&& ft_strcmp(textures->west.path, textures->east.path) == 0)
-		ft_kill(NULL, ERR_DUPLICATION);
+	char	*paths[4];
+	int		i;
+	int		j;
+
+	i = 0;
+	paths[0] = textures->north.path;
+	paths[1] = textures->south.path;
+	paths[2] = textures->west.path;
+	paths[3] = textures->east.path;
+	
+	while (i <= 4)
+	{
+		if (!paths[i])
+			continue;
+		j = i + 1;
+		while (j < 4)
+		{
+			if (paths[j] && ft_strcmp(paths[i], paths[j]) == 0)
+				ft_kill(NULL, ERR_DUPLICATION);
+			j++;
+		}
+		i++;
+	}
 }
