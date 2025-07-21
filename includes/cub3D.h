@@ -164,6 +164,8 @@ void		insert_texture(t_data *data, char **path, char *line, int *i);
 void		insert_rgb(t_data *data, t_color *color, char *line, int *i);
 void		parse_color(t_data *data, t_color *color);
 void		check_duplicated_color(t_data *data, t_color *ceiling, t_color *floor);
-void		check_duplicated_textures(t_textures *texture);
+void		check_duplicated_textures(t_data *data, t_textures *textures);
+
+void		print_assets(t_data *data);
 
 #endif

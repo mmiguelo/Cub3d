@@ -45,9 +45,9 @@ void	check_extension_texture(t_data *data, char *filename, char *extension)
 
 	len = ft_strlen(filename);
 	if (ft_strlen(filename) <= 4)
-		ft_kill(NULL, ERR_NAME);
+		ft_kill(data, ERR_NAME);
 	else if (filename[len - 5] == '/')
-		ft_kill(NULL, ERR_FILE);
+		ft_kill(data, ERR_FILE);
 	else if (ft_strncmp(filename + len - 4, extension, 4) != 0)
 		ft_kill(data, ERR_EXTENSION_TEXTURE);
 }

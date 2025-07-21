@@ -41,7 +41,7 @@ void	insert_texture(t_data *data, char **path, char *line, int *i)
 	check_extension_texture(data, *path, ".xpm");
 }
 
-void	check_duplicated_textures(t_textures *textures)
+void	check_duplicated_textures(t_data *data, t_textures *textures)
 {
 	char	*paths[4];
 	int		i;
@@ -61,7 +61,7 @@ void	check_duplicated_textures(t_textures *textures)
 		while (j < 4)
 		{
 			if (paths[j] && ft_strcmp(paths[i], paths[j]) == 0)
-				ft_kill(NULL, ERR_DUPLICATION);
+				ft_kill(data, ERR_DUPLICATION);
 			j++;
 		}
 		i++;

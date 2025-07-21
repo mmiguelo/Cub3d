@@ -14,6 +14,9 @@ GENERAL = main.c utils.c
 PARSING = parse.c textures.c extensions.c color.c
 INIT	= data.c
 
+#TO DELETE IN THE END
+DELETE_AFTER = print.c
+
 NAME = cub3D
 
 #==============================================================================#
@@ -38,6 +41,8 @@ VPATH += src
 VPATH += src/parse
 # init
 VPATH += src/init
+# TO DELETE IN THE END
+VPATH += to_delete_after
 
 #==============================================================================#
 #                                    FILES                                     #
@@ -46,6 +51,7 @@ VPATH += src/init
 SRC +=	$(GENERAL)
 SRC +=	$(PARSING)
 SRC +=	$(INIT)
+SRC +=	$(DELETE_AFTER)
 
 # Library Paths
 LIBFT_DIR = libft
