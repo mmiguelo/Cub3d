@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-void	insert_rgb(t_data *data, t_color *color, char *line, int *i)
+void	assign_rgb(t_data *data, t_color *color, char *line, int *i)
 {
 	*i += 2;
 	while (line[*i] == ' ')

@@ -8,20 +8,20 @@ void	check_textures(t_data *data, char *line)
 	while (ft_isspace(line[i]))
 		i++;
 	if (line[i] == 'N' && line[i + 1] == 'O')
-		insert_texture(data, &data->textures.north.path, line, &i);
+		assign_texture(data, &data->textures.north.path, line, &i);
 	else if (line[i] == 'S' && line[i + 1] == 'O')
-		insert_texture(data, &data->textures.south.path, line, &i);
+		assign_texture(data, &data->textures.south.path, line, &i);
 	else if (line[i] == 'W' && line[i + 1] == 'E')
-		insert_texture(data, &data->textures.west.path, line, &i);
+		assign_texture(data, &data->textures.west.path, line, &i);
 	else if (line[i] == 'E' && line[i + 1] == 'A')
-		insert_texture(data, &data->textures.east.path, line, &i);
+		assign_texture(data, &data->textures.east.path, line, &i);
 	else if (line[i] == 'F' && line[i + 1] == ' ')
-		insert_rgb(data, &data->floor, line, &i);
+		assign_rgb(data, &data->floor, line, &i);
 	else if (line[i] == 'C' && line[i + 1] == ' ')
-		insert_rgb(data, &data->ceiling, line, &i);
+		assign_rgb(data, &data->ceiling, line, &i);
 }
 
-void	insert_texture(t_data *data, char **path, char *line, int *i)
+void	assign_texture(t_data *data, char **path, char *line, int *i)
 {
 	int len;
 
