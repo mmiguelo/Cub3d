@@ -16,13 +16,14 @@ void	parse_file_content(t_data *data, char *filename)
 
 	fd = open(filename, O_RDONLY);
 	line = get_next_line(fd);
+	print_assets(data, "Before assigning");
 	while (line)
 	{
 		check_textures(data, line);
 		free(line);
 		line = get_next_line(fd);
 	}
-	check_duplicated_textures(data, &data->textures);
+	check_required_textures(data, &data->textures);
 	check_duplicated_color(data, &data->ceiling, &data->floor);
-	print_assets(data);
+	print_assets(data, "After assigning");
 }

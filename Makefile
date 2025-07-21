@@ -97,11 +97,7 @@ r: all
 
 # Make and run with valgrind
 rv: all
-	$(VAL) ./$(NAME)
-
-# Executable minishell with valgrind
-v: re
-	$(VAL) ./$(NAME)
+	$(VAL) ./$(NAME) 
 
 clean:
 	$(RM) $(OBJS)

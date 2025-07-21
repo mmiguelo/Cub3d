@@ -55,6 +55,7 @@ typedef enum e_error_code
 	ERR_MLX,
 	ERR_ORDER,
 	ERR_DUPLICATION,
+	GAME_ENDED
 }			t_error_code;
 
 /*=============================================================================#
@@ -164,8 +165,10 @@ void		assign_texture(t_data *data, char **path, char *line, int *i);
 void		assign_rgb(t_data *data, t_color *color, char *line, int *i);
 void		parse_color(t_data *data, t_color *color);
 void		check_duplicated_color(t_data *data, t_color *ceiling, t_color *floor);
-void		check_duplicated_textures(t_data *data, t_textures *textures);
+void		check_required_textures(t_data *data, t_textures *textures);
+void		free_textures(t_textures *textures);
+void		freedom(t_data *data);
 
-void		print_assets(t_data *data);
+void		print_assets(t_data *data, char *process);
 
 #endif

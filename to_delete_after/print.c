@@ -1,7 +1,8 @@
 #include "cub3D.h"
 
-void print_assets(t_data *data)
+void	print_assets(t_data *data, char *process)
 {
+	ft_printf_fd(1, "\n\n%s:\n", process);
 	ft_printf_fd(1, "NO: %s\n", data->textures.north.path);
 	ft_printf_fd(1, "SO: %s\n", data->textures.south.path);
 	ft_printf_fd(1, "WE: %s\n", data->textures.west.path);
