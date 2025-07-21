@@ -43,5 +43,22 @@ void	insert_texture(t_data *data, char **path, char *line, int *i)
 
 void	check_duplicated_textures(t_textures *textures)
 {
-	if (strncmp)
+	if (textures->north.path && textures->south.path
+		&& ft_strcmp(textures->north.path, textures->south.path) == 0)
+		ft_kill(NULL, ERR_DUPLICATION);
+	if (textures->north.path && textures->west.path
+		&& ft_strcmp(textures->north.path, textures->west.path) == 0)
+		ft_kill(NULL, ERR_DUPLICATION);
+	if (textures->north.path && textures->east.path
+		&& ft_strcmp(textures->north.path, textures->east.path) == 0)
+		ft_kill(NULL, ERR_DUPLICATION);
+	if (textures->south.path && textures->west.path
+		&& ft_strcmp(textures->south.path, textures->west.path) == 0)
+		ft_kill(NULL, ERR_DUPLICATION);
+	if (textures->south.path && textures->east.path
+		&& ft_strcmp(textures->south.path, textures->east.path) == 0)
+		ft_kill(NULL, ERR_DUPLICATION);
+	if (textures->west.path && textures->east.path
+		&& ft_strcmp(textures->west.path, textures->east.path) == 0)
+		ft_kill(NULL, ERR_DUPLICATION);
 }

@@ -28,6 +28,10 @@ void	parse_file_content(t_data *data, char *filename)
 	ft_printf_fd(1, "SO: %s\n", data->textures.south.path);
 	ft_printf_fd(1, "WE: %s\n", data->textures.west.path);
 	ft_printf_fd(1, "EA: %s\n", data->textures.east.path);
-	ft_printf_fd(1, "Floor: %d, %d, %d\n", data->floor.r, data->floor.g, data->floor.b);
-	ft_printf_fd(1, "Ceiling: %d, %d, %d\n", data->ceiling.r, data->ceiling.g, data->ceiling.b);
+	ft_printf_fd(1, "Floor->R: %d\n", data->floor.r);
+	ft_printf_fd(1, "Floor->G: %d\n", data->floor.g);
+	ft_printf_fd(1, "Floor->B: %d\n", data->floor.b);
+	ft_printf_fd(1, "Ceiling->R: %d\n", data->ceiling.r);
+	ft_printf_fd(1, "Ceiling->G: %d\n", data->ceiling.g);
+	ft_printf_fd(1, "Ceiling->B: %d\n", data->ceiling.b);
 }
