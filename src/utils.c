@@ -43,7 +43,7 @@ void	freedom(t_data *data)
 	if (data && data->map.grid)
 	{
 		i = -1;
-		while(data->map.grid[++i])
+		while (data->map.grid[++i])
 			free(data->map.grid[i]);
 		free(data->map.grid);
 		data->map.grid = NULL;

@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-t_data	*init()
+t_data	*init(void)
 {
 	t_data	*data;
 

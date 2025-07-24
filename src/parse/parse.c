@@ -32,20 +32,31 @@ void	check_assets(t_data *data, char *line)
 
 void	parse_file_content(t_data *data, char *filename)
 {
-	int	fd;
+	int		fd;
 	char	*line;
+	int	i;
 
+	i = -1;
 	fd = open(filename, O_RDONLY);
-	line = get_next_line(fd);
-	print_assets(data, "Before assigning");
-	while (line)
+	while ((line = get_next_line(fd)) != NULL)
 	{
-		check_assets(data, line);
+		if (ft_has_white_spaces(line))
+		{
+			if (data->map.started)
+				data->map.ended = true;
+			free(line);
+			continue ;
+		}
+		if (is_all_assets(data))
+			check_map(data, &data->map, line, ++i);
+		else
+			check_assets(data, line);
 		free(line);
-		line = get_next_line(fd);
 	}
+/* 	check_map_walls(data, );
+	check_player_position(data, ); */
 	check_required_textures(data, &data->textures);
 	check_duplicated_color(data, &data->ceiling, &data->floor);
-	
 	print_assets(data, "After assigning");
+	print_map(data);
 }

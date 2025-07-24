@@ -2,7 +2,7 @@
 
 void	assign_texture(t_data *data, char **path, char *line, int *i)
 {
-	int len;
+	int	len;
 
 	*i += 2;
 	while (ft_isspace(line[*i]))
@@ -32,4 +32,19 @@ void	check_required_textures(t_data *data, t_textures *textures)
 		ft_kill(data, ERR_TEXTURE);
 	if (!textures->east.path)
 		ft_kill(data, ERR_TEXTURE);
+}
+
+int	is_all_assets(t_data *data)
+{
+	if (!data)
+		return (0);
+	if (!data->textures.north.path || !data->textures.south.path
+		|| !data->textures.west.path || !data->textures.east.path)
+		return (0);
+	if (data->floor.r == -1 || data->floor.g == -1 || data->floor.b == -1)
+		return (0);
+	if (data->ceiling.r == -1 || data->ceiling.g == -1
+		|| data->ceiling.b == -1)
+		return (0);
+	return (1);
 }

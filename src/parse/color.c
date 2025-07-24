@@ -31,6 +31,6 @@ void	assign_rgb(t_data *data, t_color *color, char *line, int *i)
 void	check_duplicated_color(t_data *data, t_color *ceiling, t_color *floor)
 {
 	if (ceiling->r == floor->r && ceiling->g == floor->g
-			&& ceiling->b == floor->b)
+		&& ceiling->b == floor->b)
 		ft_kill(data, ERR_DUPLICATION);
 }

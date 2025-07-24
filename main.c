@@ -6,7 +6,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		ft_kill(NULL, ERR_ARGS);
-	parse(av[1]); // check file name, extension, directory, readability
+	parse(av[1]);
 	data = init();
 	parse_file_content(data, av[1]);
 	//mlx_functions();

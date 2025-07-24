@@ -14,3 +14,17 @@ void	print_assets(t_data *data, char *process)
 	ft_printf_fd(1, "Ceiling->G: %d\n", data->ceiling.g);
 	ft_printf_fd(1, "Ceiling->B: %d\n", data->ceiling.b);
 }
+
+void print_map(t_data *data)
+{
+	int i = 0;
+
+	ft_printf_fd(1, Y"\n\nMAP:\n\n"RST);
+	while(data->map.grid[i])
+	{
+		ft_printf_fd(1, "len:%d   %s", ft_strlen(data->map.grid[i]), data->map.grid[i]);
+		i++;
+	}
+	ft_printf_fd(1, "height: %d\n", data->map.height);
+	ft_printf_fd(1, "width: %d\n", data->map.width);
+}

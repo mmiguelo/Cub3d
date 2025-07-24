@@ -40,6 +40,9 @@
 # define WEST	3
 # define EAST	4
 
+#define VALID_MAP_CHARS "01NSWE"
+#define WS " \t\n\r\v\f"
+
 typedef enum e_error_code
 {
 	ERR_ARGS,
@@ -98,15 +101,6 @@ typedef struct s_img_data
 	int		height;
 }	t_img_data;
 
-/**
- * //TODO Comment: Pos assim para ficar mais organizado porque acabei de 
- * 				saber que cada textura precisa de muita informacao 
- * 				e caso no futuro houver mais texturas.
- * 
- * 			strdup (path)						image_load (img)
- * 		if (data.textures.north.path == NULL || data.textures.north.img.img == NULL)
- * 			error
- */
 typedef struct s_texture
 {
 	char		*path; // north.path == NULL
@@ -125,11 +119,13 @@ typedef struct s_player
 {
 	double	x;
 	double	y;
-	char	direction; // 'N' 'S' 'E' 'W'
 }	t_player;
 
 typedef struct s_map
 {
+	char		direction; // 'N' 'S' 'E' 'W'
+	bool		started;
+	bool		ended;
 	char		**grid;
 	int			width;
 	int			height;
@@ -155,21 +151,29 @@ int			ft_kill(t_data *data, t_error_code code);
 void		parse(char *filename);
 void		parse_file_content(t_data *data, char *filename);
 void		check_extension(char *filename, char *extension);
-void		check_extension_texture(t_data *data, char *filename, char *extension);
+void		check_extension_texture(t_data *data, char *filename,
+				char *extension);
 void		check_directory(char *filename);
 void		check_redability(char *filename);
-void		check_map(t_data *data, char *filename);
+void		check_map(t_data *data, t_map	*map, char *line, int height);
 const char	*message(t_error_code i);
 t_data		*init(void);
 void		check_textures(t_data *data, char *line);
 void		assign_texture(t_data *data, char **path, char *line, int *i);
 void		assign_rgb(t_data *data, t_color *color, char *line, int *i);
 void		parse_color(t_data *data, t_color *color);
-void		check_duplicated_color(t_data *data, t_color *ceiling, t_color *floor);
+int			is_all_assets(t_data *data);
+void		check_duplicated_color(t_data *data, t_color *ceiling,
+				t_color *floor);
 void		check_required_textures(t_data *data, t_textures *textures);
 void		free_textures(t_textures *textures);
 void		freedom(t_data *data);
+int			count_width(const char *str);
+void		append_map_line(t_data *data, char ***grid, char *line,
+				int height);
+int			empty_line(char *line);
 
 void		print_assets(t_data *data, char *process);
+void 		print_map(t_data *data);
 
 #endif
