@@ -60,12 +60,25 @@ void	append_map_line(t_data *data, char ***grid, char *line, int height)
 		new_grid[i] = (*grid)[i];
 		i++;
 	}
-	new_grid[i] = ft_strdup(line);
+	new_grid[i] = clean_ws(data, line);
 	if (!new_grid[i])
 		ft_kill(data, ERR_MALLOC);
 	new_grid[i + 1] = NULL;
 	free(*grid);
 	*grid = new_grid;
+}
+
+char *clean_ws(t_data *data, char *line)
+{
+	char *new_line;
+	int	width;
+
+	width = count_width(line);
+	new_line = ft_calloc((size_t)(width + 1), sizeof(char));
+	if (!new_line)
+		ft_kill(data, ERR_MALLOC);
+	ft_strlcpy(new_line, line, (size_t)width + 1);
+	return (new_line);
 }
 
 int	count_width(const char *str)
@@ -75,8 +88,6 @@ int	count_width(const char *str)
 	i = 0;
 	while (!(ft_has_white_spaces((char *)(str + i))))
 		i++;
-	/* while (str[i] != '\n' && str[i] != '\r' && str[i] != '\0')
-		i++; */
 	return (i);
 }
 

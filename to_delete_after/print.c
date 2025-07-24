@@ -22,7 +22,7 @@ void print_map(t_data *data)
 	ft_printf_fd(1, Y"\n\nMAP:\n\n"RST);
 	while(data->map.grid[i])
 	{
-		ft_printf_fd(1, "len:%d   %s", ft_strlen(data->map.grid[i]), data->map.grid[i]);
+		ft_printf_fd(1, "%s    len:%d\n", data->map.grid[i], ft_strlen(data->map.grid[i]));
 		i++;
 	}
 	ft_printf_fd(1, "height: %d\n", data->map.height);

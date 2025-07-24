@@ -172,6 +172,7 @@ int			count_width(const char *str);
 void		append_map_line(t_data *data, char ***grid, char *line,
 				int height);
 int			empty_line(char *line);
+char 		*clean_ws(t_data *data, char *line);
 
 void		print_assets(t_data *data, char *process);
 void 		print_map(t_data *data);
