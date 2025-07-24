@@ -1,26 +1,5 @@
 #include "cub3D.h"
 
-void	check_textures(t_data *data, char *line)
-{
-	int	i;
-
-	i = 0;
-	while (ft_isspace(line[i]))
-		i++;
-	if (line[i] == 'N' && line[i + 1] == 'O' && ft_isspace(line[i + 2]))
-		assign_texture(data, &data->textures.north.path, line, &i);
-	else if (line[i] == 'S' && line[i + 1] == 'O' && ft_isspace(line[i + 2]))
-		assign_texture(data, &data->textures.south.path, line, &i);
-	else if (line[i] == 'W' && line[i + 1] == 'E' && ft_isspace(line[i + 2]))
-		assign_texture(data, &data->textures.west.path, line, &i);
-	else if (line[i] == 'E' && line[i + 1] == 'A' && ft_isspace(line[i + 2]))
-		assign_texture(data, &data->textures.east.path, line, &i);
-	else if (line[i] == 'F' && ft_isspace(line[i + 1]))
-		assign_rgb(data, &data->floor, line, &i);
-	else if (line[i] == 'C' && ft_isspace(line[i + 1]))
-		assign_rgb(data, &data->ceiling, line, &i);
-}
-
 void	assign_texture(t_data *data, char **path, char *line, int *i)
 {
 	int len;

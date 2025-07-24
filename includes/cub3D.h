@@ -158,6 +158,7 @@ void		check_extension(char *filename, char *extension);
 void		check_extension_texture(t_data *data, char *filename, char *extension);
 void		check_directory(char *filename);
 void		check_redability(char *filename);
+void		check_map(t_data *data, char *filename);
 const char	*message(t_error_code i);
 t_data		*init(void);
 void		check_textures(t_data *data, char *line);
