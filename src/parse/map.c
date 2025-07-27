@@ -1,25 +1,9 @@
 #include "cub3D.h"
 
-bool	is_valid_map_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	while(line[i])
-	{
-		if (!ft_strchr(WS, line[i]) && !ft_strchr(VALID_MAP_CHARS, line[i]))
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
 void	check_map(t_data *data, t_map	*map, char *line, int height)
 {
-	int	i;
 	int	width;
 
-	i = 0;
 	width = 0;
 	if (!is_valid_map_line(line))
 		ft_kill(data, ERR_MAP);
@@ -35,16 +19,6 @@ void	check_map(t_data *data, t_map	*map, char *line, int height)
 		append_map_line(data, &map->grid, line, height);
 	}
 }
-
-/* void	check_map2(t_data *data, t_map	*map, char *line, int height)
-{
-	while (line = get_next_line(fd) != NULL)
-	{
-		if (ft_has_white_spaces(line))
-		
-	}
-	
-} */
 
 void	append_map_line(t_data *data, char ***grid, char *line, int height)
 {
@@ -68,49 +42,49 @@ void	append_map_line(t_data *data, char ***grid, char *line, int height)
 	*grid = new_grid;
 }
 
-char *clean_ws(t_data *data, char *line)
+void check_map_walls_and_player(t_data *data, t_map *map)
 {
-	char *new_line;
-	int	width;
-
-	width = count_width(line);
-	new_line = ft_calloc((size_t)(width + 1), sizeof(char));
-	if (!new_line)
-		ft_kill(data, ERR_MALLOC);
-	ft_strlcpy(new_line, line, (size_t)width + 1);
-	return (new_line);
-}
-
-int	count_width(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (!(ft_has_white_spaces((char *)(str + i))))
-		i++;
-	return (i);
-}
-
-/* void check_map_walls(t_data *data, t_map *map)
-{
-	int	x;	int width;
+	int	x;
 	int	y;
 
-	y = 0;
-	while (y <= map->height)
+	y = -1;
+	printf(Y"CHECKING WALLS AND PLAYER\n"RST);
+	while (++y < map->height)
 	{
-		x = 0;
-		while (x <= map->width)
+		if (y < 10)
+			printf("grid[0%d] : %s\n", y, data->map.grid[y]);
+		else
+			printf("grid[%d] : %s\n", y, data->map.grid[y]);
+		x = -1;
+		while (++x < (int)(ft_strlen(map->grid[y])))
 		{
-			if (map->grid[y][x] == '0')
-			{
-				
-			}
+			if (map->grid[y][x] == '1' || ft_strchr(WS, map->grid[y][x]))
+				continue ;
+			else if (map->grid[y][x] == '0')
+				check_surroundings(data, map->grid, x, y, false);
+			else if (ft_strchr("NSEW", map->grid[y][x]))
+				check_surroundings(data, map->grid, x, y, true);
 		}
-
 	}
-	
-
 }
 
-void check_player_position */
+void	check_surroundings(t_data *data, char **grid, int x, int y, bool player)
+{
+	if (player)
+	{
+		if (data->map.direction)
+			ft_kill(data, ERR_MAP);
+		data->map.direction = grid[y][x];
+	}
+	if (y == 0 || !grid[y - 1] || x >= (int)ft_strlen(grid[y - 1]) || ft_strchr(WS, grid[y - 1][x])) // y == 0 || y == max nunca pode ser '0' ou player, same para x
+	{
+		printf("died at grid[%d][%d]\n", y, x);
+		ft_kill(data, ERR_MAP);
+	}
+	if (!grid[y + 1] || x >= (int)ft_strlen(grid[y + 1]) || ft_strchr(WS, grid[y + 1][x]))
+		ft_kill(data, ERR_MAP);
+	if (x == 0 || !grid[y] || ft_strchr(WS, grid[y][x - 1]))
+		ft_kill(data, ERR_MAP);
+	if (x + 1 >= (int)ft_strlen(grid[y]) || ft_strchr(WS, grid[y][x + 1]))
+		ft_kill(data, ERR_MAP);
+}

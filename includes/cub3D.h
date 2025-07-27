@@ -43,6 +43,21 @@
 #define VALID_MAP_CHARS "01NSWE"
 #define WS " \t\n\r\v\f"
 
+/* #define ERR_ARGS "Arguments are invalid\n";
+#define ERR_NAME "File must be *.cub\n";
+#define ERR_EXTENSION_FILE "Extension must be .cub\n";
+#define ERR_EXTENSION_TEXTURE "EXtension must be .xpm\n";
+#define ERR_FILE "File is invalid or no permissions\n";
+#define ERR_MAP "Map is invalid\n";
+#define ERR_DIRECTORY "Map sent is a directory\n";
+#define ERR_MALLOC "Malloc failed\n";
+#define ERR_COLOR "Color is invalid\n";
+#define ERR_TEXTURE "Texture is invalid\n";
+#define ERR_MLX "MLX failed\n";
+#define ERR_ORDER "Order is invalid\n";
+#define ERR_DUPLICATION "Duplication found\n";
+#define GAME_ENDED "Game Ended\n"; */
+
 typedef enum e_error_code
 {
 	ERR_ARGS,
@@ -173,6 +188,9 @@ void		append_map_line(t_data *data, char ***grid, char *line,
 				int height);
 int			empty_line(char *line);
 char 		*clean_ws(t_data *data, char *line);
+void 		check_map_walls_and_player(t_data *data, t_map *map);
+void		check_surroundings(t_data *data, char **grid, int x, int y, bool player);
+bool		is_valid_map_line(char *line);
 
 void		print_assets(t_data *data, char *process);
 void 		print_map(t_data *data);

@@ -11,6 +11,5 @@ int	main(int ac, char **av)
 	parse_file_content(data, av[1]);
 	//mlx_functions();
 	ft_kill(data, GAME_ENDED);
-	ft_printf_fd(1, G"\nCongratulations\n\n"RST);
 	return (0);
 }

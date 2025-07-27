@@ -53,8 +53,8 @@ void	parse_file_content(t_data *data, char *filename)
 			check_assets(data, line);
 		free(line);
 	}
-/* 	check_map_walls(data, );
-	check_player_position(data, ); */
+	check_map_walls_and_player(data, &data->map);
+	/* check_player_position(data, ); */
 	check_required_textures(data, &data->textures);
 	check_duplicated_color(data, &data->ceiling, &data->floor);
 	print_assets(data, "After assigning");
