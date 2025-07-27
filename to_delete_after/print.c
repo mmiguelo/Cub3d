@@ -29,3 +29,11 @@ void print_map(t_data *data)
 	ft_printf_fd(1, "width: %d\n", data->map.width);
 	ft_printf_fd(1, "Direction of player: %c\n\n\n", data->map.direction);
 }
+
+void print_parsing_map(t_data *data, int y)
+{
+	if (y < 10)
+		printf("grid[0%d] : %s\n", y, data->map.grid[y]);
+	else
+		printf("grid[%d] : %s\n", y, data->map.grid[y]);
+}

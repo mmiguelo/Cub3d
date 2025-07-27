@@ -43,22 +43,22 @@
 #define VALID_MAP_CHARS "01NSWE"
 #define WS " \t\n\r\v\f"
 
-/* #define ERR_ARGS "Arguments are invalid\n";
-#define ERR_NAME "File must be *.cub\n";
-#define ERR_EXTENSION_FILE "Extension must be .cub\n";
-#define ERR_EXTENSION_TEXTURE "EXtension must be .xpm\n";
-#define ERR_FILE "File is invalid or no permissions\n";
-#define ERR_MAP "Map is invalid\n";
-#define ERR_DIRECTORY "Map sent is a directory\n";
-#define ERR_MALLOC "Malloc failed\n";
-#define ERR_COLOR "Color is invalid\n";
-#define ERR_TEXTURE "Texture is invalid\n";
-#define ERR_MLX "MLX failed\n";
-#define ERR_ORDER "Order is invalid\n";
-#define ERR_DUPLICATION "Duplication found\n";
-#define GAME_ENDED "Game Ended\n"; */
+#define ERR_ARGS "Arguments are invalid\n"
+#define ERR_NAME "File must be *.cub\n"
+#define ERR_EXTENSION_FILE "Extension must be .cub\n"
+#define ERR_EXTENSION_TEXTURE "EXtension must be .xpm\n"
+#define ERR_FILE "File is invalid or no permissions\n"
+#define ERR_MAP "Map is invalid\n"
+#define ERR_DIRECTORY "Map sent is a directory\n"
+#define ERR_MALLOC "Malloc failed\n"
+#define ERR_COLOR "Color is invalid\n"
+#define ERR_TEXTURE "Texture is invalid\n"
+#define ERR_MLX "MLX failed\n"
+#define ERR_ORDER "Order is invalid\n"
+#define ERR_DUPLICATION "Duplication found\n"
+#define GAME_ENDED "Game Ended\n"
 
-typedef enum e_error_code
+/* typedef enum e_error_code
 {
 	ERR_ARGS,
 	ERR_NAME,
@@ -74,7 +74,7 @@ typedef enum e_error_code
 	ERR_ORDER,
 	ERR_DUPLICATION,
 	GAME_ENDED
-}			t_error_code;
+}			t_error_code; */
 
 /*=============================================================================#
 #                                   STRUCTS                                    #
@@ -162,7 +162,8 @@ typedef struct s_data
 #                                   FUNCTIONS                                  #
 #=============================================================================*/
 
-int			ft_kill(t_data *data, t_error_code code);
+//int			ft_kill(t_data *data, t_error_code code);
+int			ft_kill(t_data *data, char *message);
 void		parse(char *filename);
 void		parse_file_content(t_data *data, char *filename);
 void		check_extension(char *filename, char *extension);
@@ -171,7 +172,7 @@ void		check_extension_texture(t_data *data, char *filename,
 void		check_directory(char *filename);
 void		check_redability(char *filename);
 void		check_map(t_data *data, t_map	*map, char *line, int height);
-const char	*message(t_error_code i);
+//const char	*message(t_error_code i);
 t_data		*init(void);
 void		check_textures(t_data *data, char *line);
 void		assign_texture(t_data *data, char **path, char *line, int *i);
@@ -192,7 +193,10 @@ void 		check_map_walls_and_player(t_data *data, t_map *map);
 void		check_surroundings(t_data *data, char **grid, int x, int y, bool player);
 bool		is_valid_map_line(char *line);
 
+
+// TODO: delete in the end
 void		print_assets(t_data *data, char *process);
 void 		print_map(t_data *data);
+void 		print_parsing_map(t_data *data, int y);
 
 #endif

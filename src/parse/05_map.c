@@ -48,13 +48,10 @@ void check_map_walls_and_player(t_data *data, t_map *map)
 	int	y;
 
 	y = -1;
-	printf(Y"CHECKING WALLS AND PLAYER\n"RST);
+	printf(Y"CHECKING WALLS AND PLAYER\n"RST); // TODO: delete in the end
 	while (++y < map->height)
 	{
-		if (y < 10)
-			printf("grid[0%d] : %s\n", y, data->map.grid[y]);
-		else
-			printf("grid[%d] : %s\n", y, data->map.grid[y]);
+		//print_parsing_map(data, y); // TODO: delete in the end
 		x = -1;
 		while (++x < (int)(ft_strlen(map->grid[y])))
 		{

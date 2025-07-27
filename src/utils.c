@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-const char	*message(t_error_code i)
+/* const char	*message(t_error_code i)
 {
 	const char	*message[14];
 
@@ -19,7 +19,7 @@ const char	*message(t_error_code i)
 	message[12] = "Duplication found\n";
 	message[13] = "Game Ended\n";
 	return (message[i]);
-}
+} */
 
 void	free_textures(t_textures *textures)
 {
@@ -52,7 +52,7 @@ void	freedom(t_data *data)
 	//TODO: free images
 }
 
-int	ft_kill(t_data *data, t_error_code code)
+/* int	ft_kill(t_data *data, t_error_code code)
 {
 	(void) data;
 	if (data)
@@ -64,5 +64,19 @@ int	ft_kill(t_data *data, t_error_code code)
 		ft_printf_fd(2, G"Game Ended\n"RST);
 	else if (code >= 0 && code <= 13)
 		ft_printf_fd(2, RED"Error\n%s\n"RST, message(code));
+	exit(EXIT_FAILURE);
+} */
+
+int	ft_kill(t_data *data, char *msg)
+{
+	if (data)
+	{
+		freedom(data);
+		free(data);
+	}
+	if (ft_strcmp(msg, GAME_ENDED) == 0)
+		ft_printf_fd(1, G"\nCongratulations\n\n"RST);
+	else
+		ft_printf_fd(2, RED"Error\n%s\n"RST, msg);
 	exit(EXIT_FAILURE);
 }

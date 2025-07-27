@@ -11,7 +11,7 @@ RM = rm -rf
 VAL = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --errors-for-leak-kinds=definite
 
 GENERAL = main.c utils.c
-PARSING = parse.c textures.c extensions.c color.c map.c map_utils.c
+PARSING = 01_parse.c 02_extensions.c 03_textures.c 04_color.c 05_map.c 06_map_utils.c
 INIT	= data.c
 
 #TO DELETE IN THE END
