@@ -63,6 +63,8 @@ void check_map_walls_and_player(t_data *data, t_map *map)
 				check_surroundings(data, map->grid, x, y, true);
 		}
 	}
+	if (!map->direction)
+		ft_kill(data, ERR_PLAYER);
 }
 
 void	check_surroundings(t_data *data, char **grid, int x, int y, bool player)

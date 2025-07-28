@@ -2,8 +2,10 @@
 
 void	assign_texture(t_data *data, char **path, char *line, int *i)
 {
-	int	len;
+	/* int	len; */
+	char	*trimed;
 
+	trimed = NULL;
 	*i += 2;
 	while (ft_isspace(line[*i]))
 		(*i)++;
@@ -16,9 +18,12 @@ void	assign_texture(t_data *data, char **path, char *line, int *i)
 		ft_kill(data, ERR_MALLOC);
 	if (!path)
 		ft_kill(data, ERR_MALLOC);
-	len = ft_strlen(*path);
+	trimed = ft_strtrim(*path, WS);
+	free(*path);
+	*path = trimed;
+/* 	len = ft_strlen(*path);
 	if (len > 0 && (*path)[len - 1] == '\n')
-		(*path)[len - 1] = '\0';
+		(*path)[len - 1] = '\0'; */
 	check_extension_texture(data, *path, ".xpm");
 }
 

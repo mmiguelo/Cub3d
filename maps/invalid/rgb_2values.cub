@@ -1,0 +1,14 @@
+NO textures/wall.xpm
+SO textures/wall_1_.xpm
+WE textures/wall_2_.xpm
+EA textures/wall_3_.xpm
+
+F 191, 160, 116
+C 229, 227
+
+11111111
+10000001
+1000S001
+11111111
+
+//TODO: aceita assim, terceiro elemento fica em zero
