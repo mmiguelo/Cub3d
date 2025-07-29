@@ -68,7 +68,7 @@ void	check_map_walls_and_player(t_data *data, t_map *map)
 
 void	check_surroundings(t_data *data, char **grid, int x, int y)
 {
-	if (ft_strchr("NSEW", map->grid[y][x]))
+	if (ft_strchr("NSEW", data->map.grid[y][x]))
 	{
 		if (data->map.direction)
 			ft_kill(data, "Map must have only one player\n");

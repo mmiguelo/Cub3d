@@ -85,7 +85,18 @@ $(MLX):
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	$(CC) $(FLAGS) $(OBJS) $(LIBFT) -L$(MLX_DIR) $(MLX_FLAGS) -o $(NAME)
+	@echo "$(CYAN)  ______   __     __  _______    ______   _______  $(RESET)"
+	@echo "$(CYAN) / _____\ | _\   | _\| ______\  / _____\ | _____ \ $(RESET)"
+	@echo "$(CYAN)| /######\| ##|  | ##| #######\| /######\| #######\$(RESET)"
+	@echo "$(CYAN)| ##   \##| ##|  | ##| ##__/ ## \##__| ##| ##  | ##$(RESET)"
+	@echo "$(CYAN)| ##      | ##|  | ##| ##___ ##  | ___ ##| ##  | ##$(RESET)"
+	@echo "$(CYAN)| ##   __ | ##|  | ##| #######\ __\#####\| ##  | ##$(RESET)"
+	@echo "$(CYAN)| ##__/  \| ##|__/ ##| ##__/ ##| _\__| ##| ##__/ ##$(RESET)"
+	@echo "$(CYAN) \##____## \##|____##| ##___ ## \##____##| ##__  ##$(RESET)"
+	@echo "$(CYAN)  \######   \######   \#######   \######  \####### $(RESET)"
+	@echo "\n"
 	@echo "$(GREEN)[OK] Cub3d built$(RESET)"
+	@echo "$(YELLOW)This $(NAME) was created by mmiguelo and frbranda!$(RESET)"
 	@echo "--------"
 	@echo "$(CYAN)Usage:$(RESET)"
 	@echo "./cub3d $(YELLOW)[name_of_map_file].cub$(RESET)"
