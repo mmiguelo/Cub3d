@@ -2,7 +2,6 @@
 
 void	assign_texture(t_data *data, char **path, char *line, int *i)
 {
-	/* int	len; */
 	char	*trimed;
 
 	trimed = NULL;
@@ -16,27 +15,22 @@ void	assign_texture(t_data *data, char **path, char *line, int *i)
 	*path = ft_strdup(&line[*i]);
 	if (!*path)
 		ft_kill(data, ERR_MALLOC);
-	if (!path)
-		ft_kill(data, ERR_MALLOC);
 	trimed = ft_strtrim(*path, WS);
 	free(*path);
 	*path = trimed;
-/* 	len = ft_strlen(*path);
-	if (len > 0 && (*path)[len - 1] == '\n')
-		(*path)[len - 1] = '\0'; */
-	check_extension_texture(data, *path, ".xpm");
+	parse(data, *path, ".xpm");
 }
 
 void	check_required_textures(t_data *data, t_textures *textures)
 {
 	if (!textures->north.path)
-		ft_kill(data, ERR_TEXTURE);
+		ft_kill(data, ERR_TEXTURE_MISSING);
 	if (!textures->south.path)
-		ft_kill(data, ERR_TEXTURE);
+		ft_kill(data, ERR_TEXTURE_MISSING);
 	if (!textures->west.path)
-		ft_kill(data, ERR_TEXTURE);
+		ft_kill(data, ERR_TEXTURE_MISSING);
 	if (!textures->east.path)
-		ft_kill(data, ERR_TEXTURE);
+		ft_kill(data, ERR_TEXTURE_MISSING);
 }
 
 int	is_all_assets(t_data *data)

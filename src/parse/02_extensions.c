@@ -1,19 +1,6 @@
 #include "cub3D.h"
 
-void	check_extension(char *filename, char *extension)
-{
-	int	len;
-
-	len = ft_strlen(filename);
-	if (ft_strlen(filename) <= 4)
-		ft_kill(NULL, ERR_NAME);
-	else if (filename[len - 5] == '/')
-		ft_kill(NULL, ERR_FILE);
-	else if (ft_strncmp(filename + len - 4, extension, 4) != 0)
-		ft_kill(NULL, ERR_EXTENSION_FILE);
-}
-
-void	check_directory(char *filename)
+void	check_directory(t_data *data, char *filename)
 {
 	int	fd;
 
@@ -21,25 +8,12 @@ void	check_directory(char *filename)
 	if (fd >= 0)
 	{
 		close(fd);
-		ft_kill(NULL, ERR_DIRECTORY);
+		ft_kill(data, ERR_DIRECTORY);
 	}
 	close(fd);
 }
 
-void	check_redability(char *filename)
-{
-	int	fd;
-
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-	{
-		close(fd);
-		ft_kill(NULL, ERR_FILE);
-	}
-	close(fd);
-}
-
-void	check_extension_texture(t_data *data, char *filename, char *extension)
+void	check_extension(t_data *data, char *filename, char *extension)
 {
 	int	len;
 
@@ -49,5 +23,10 @@ void	check_extension_texture(t_data *data, char *filename, char *extension)
 	else if (filename[len - 5] == '/')
 		ft_kill(data, ERR_FILE);
 	else if (ft_strncmp(filename + len - 4, extension, 4) != 0)
-		ft_kill(data, ERR_EXTENSION_TEXTURE);
+	{
+		if (ft_strncmp(extension, ".cub", 4) == 0)
+			ft_kill(data, ERR_EXTENSION_FILE);
+		else if (ft_strncmp(extension, ".xpm", 4) == 0)
+			ft_kill(data, ERR_EXTENSION_TEXTURE);
+	}
 }

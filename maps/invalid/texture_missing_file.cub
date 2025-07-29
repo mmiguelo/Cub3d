@@ -1,6 +1,6 @@
 NO textures/wall.xpm
 SO textures/wall_1_.xpm
-WE textures/direction/
+WE textures/missing.xpm
 EA textures/wall_3_.xpm
 
 F 191, 160, 116
@@ -10,5 +10,3 @@ C 229, 227, 196
 10000001
 100N0001
 11111111
-
-TODO: aceitamos isto???

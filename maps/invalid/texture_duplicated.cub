@@ -1,7 +1,8 @@
 NO textures/wall.xpm
-NO textures/wall_1_.xpm
+SO textures/wall_1_.xpm
 WE textures/wall_2_.xpm
 EA textures/wall_3_.xpm
+SO textures/wall_4_.xpm
 
 F 191, 160, 116
 C 229, 227, 196

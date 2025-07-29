@@ -1,12 +1,11 @@
 #include "cub3D.h"
 
-void	parse(char *filename)
+void	parse(t_data *data, char *filename, char *extension)
 {
-	if (access(filename, F_OK | W_OK) == -1)
-		ft_kill(NULL, ERR_FILE);
-	check_directory(filename);
-	check_extension(filename, ".cub");
-	check_redability(filename);
+	check_extension(data, filename, extension);
+	check_directory(data, filename);
+	if (access(filename, F_OK | R_OK) == -1)
+		ft_kill(data, ERR_FILE);
 }
 
 void	check_assets(t_data *data, char *line)
@@ -25,38 +24,48 @@ void	check_assets(t_data *data, char *line)
 	else if (line[i] == 'E' && line[i + 1] == 'A' && ft_isspace(line[i + 2]))
 		assign_texture(data, &data->textures.east.path, line, &i);
 	else if (line[i] == 'F' && ft_isspace(line[i + 1]))
-		assign_rgb(data, &data->floor, line, &i);
+		assign_rgb(data, &data->floor, line);
 	else if (line[i] == 'C' && ft_isspace(line[i + 1]))
-		assign_rgb(data, &data->ceiling, line, &i);
+		assign_rgb(data, &data->ceiling, line);
 }
 
 void	parse_file_content(t_data *data, char *filename)
 {
 	int		fd;
 	char	*line;
-	int	i;
+	int		i;
 
 	i = -1;
 	fd = open(filename, O_RDONLY);
-	while ((line = get_next_line(fd)) != NULL)
+	if (fd < 0)
+		ft_kill(NULL, ERR_FILE);
+	line = get_next_line(fd);
+	if (!line)
+		ft_kill(NULL, ERR_EMPTY);
+	while (line)
 	{
-		if (ft_has_white_spaces(line))
-		{
-			if (data->map.started)
-				data->map.ended = true;
-			free(line);
-			continue ;
-		}
-		if (is_all_assets(data))
-			check_map(data, &data->map, line, ++i);
-		else
-			check_assets(data, line);
+		process_line(data, line, &i);
 		free(line);
+		line = get_next_line(fd);
 	}
-	check_map_walls_and_player(data, &data->map);
-	/* check_player_position(data, ); */
+	close(fd);
 	check_required_textures(data, &data->textures);
+	check_map_walls_and_player(data, &data->map);
 	check_duplicated_color(data, &data->ceiling, &data->floor);
 	print_assets(data, "After assigning");
 	print_map(data);
+}
+
+void	process_line(t_data *data, char *line, int *i)
+{
+	if (ft_has_white_spaces(line))
+	{
+		if (data->map.started)
+			data->map.ended = true;
+		return ;
+	}
+	if (is_all_assets(data))
+		check_map(data, &data->map, line, ++(*i));
+	else
+		check_assets(data, line);
 }

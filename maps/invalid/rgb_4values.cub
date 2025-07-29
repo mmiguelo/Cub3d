@@ -3,12 +3,10 @@ SO textures/wall_1_.xpm
 WE textures/wall_2_.xpm
 EA textures/wall_3_.xpm
 
-F 191, 160, 116, 111
-C 229, 227, 196, 200
+F 191, 160, 116, 20
+C 229, 227,	230, 120
 
 11111111
 10000001
 100S0001
 11111111
-
-//TODO: aceita. ignora o ultimo elemento

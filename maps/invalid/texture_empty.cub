@@ -1,14 +1,21 @@
-NO textures/wall.xpm
-SO textures/something.xpm
-WE textures/wall_2_.xpm
-EA textures/wall_3_.xpm
+WE textures/bricks.xpm
+SO textures/empty.xpm
+NO textures/ice.xpm
+EA textures/leaves.xpm
 
-F 191, 160, 116
-C 229, 227, 196
+F 20,20,20
+C 200,200,200
 
-11111111
-10000001
-100N0001
-11111111
-
-TODO: aceita. verificar se da para abrir. acho que ja faço isso??
+11111
+10001
+10S01
+10001
+10001
+10001
+11001
+10001
+10001
+10001
+10001
+10001
+11111

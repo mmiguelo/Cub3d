@@ -5,6 +5,7 @@ void	check_map(t_data *data, t_map	*map, char *line, int height)
 	int	width;
 
 	width = 0;
+	parse_line(data, line);
 	if (!is_valid_map_line(line))
 		ft_kill(data, ERR_MAP);
 	map->started = true;
@@ -42,45 +43,42 @@ void	append_map_line(t_data *data, char ***grid, char *line, int height)
 	*grid = new_grid;
 }
 
-void check_map_walls_and_player(t_data *data, t_map *map)
+void	check_map_walls_and_player(t_data *data, t_map *map)
 {
 	int	x;
 	int	y;
 
 	y = -1;
-	printf(Y"CHECKING WALLS AND PLAYER\n"RST); // TODO: delete in the end
+	if (!map->started)
+		ft_kill(data, ERR_ORDER);
 	while (++y < map->height)
 	{
-		//print_parsing_map(data, y); // TODO: delete in the end
 		x = -1;
 		while (++x < (int)(ft_strlen(map->grid[y])))
 		{
-			if (map->grid[y][x] == '1' || ft_strchr(WS, map->grid[y][x]))
+			if (map->grid[y][x] == '0' || ft_strchr("NSEW", map->grid[y][x]))
+				check_surroundings(data, map->grid, x, y);
+			else if (map->grid[y][x] == '1' || ft_strchr(WS, map->grid[y][x]))
 				continue ;
-			else if (map->grid[y][x] == '0')
-				check_surroundings(data, map->grid, x, y, false);
-			else if (ft_strchr("NSEW", map->grid[y][x]))
-				check_surroundings(data, map->grid, x, y, true);
 		}
 	}
 	if (!map->direction)
 		ft_kill(data, ERR_PLAYER);
 }
 
-void	check_surroundings(t_data *data, char **grid, int x, int y, bool player)
+void	check_surroundings(t_data *data, char **grid, int x, int y)
 {
-	if (player)
+	if (ft_strchr("NSEW", map->grid[y][x]))
 	{
 		if (data->map.direction)
-			ft_kill(data, ERR_MAP);
+			ft_kill(data, "Map must have only one player\n");
 		data->map.direction = grid[y][x];
 	}
-	if (y == 0 || !grid[y - 1] || x >= (int)ft_strlen(grid[y - 1]) || ft_strchr(WS, grid[y - 1][x])) // y == 0 || y == max nunca pode ser '0' ou player, same para x
-	{
-		printf("died at grid[%d][%d]\n", y, x);
+	if (y == 0 || !grid[y - 1] || x >= (int)ft_strlen(grid[y - 1])
+		|| ft_strchr(WS, grid[y - 1][x]))
 		ft_kill(data, ERR_MAP);
-	}
-	if (!grid[y + 1] || x >= (int)ft_strlen(grid[y + 1]) || ft_strchr(WS, grid[y + 1][x]))
+	if (!grid[y + 1] || x >= (int)ft_strlen(grid[y + 1])
+		|| ft_strchr(WS, grid[y + 1][x]))
 		ft_kill(data, ERR_MAP);
 	if (x == 0 || !grid[y] || ft_strchr(WS, grid[y][x - 1]))
 		ft_kill(data, ERR_MAP);

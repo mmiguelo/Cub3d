@@ -40,53 +40,34 @@
 # define WEST	3
 # define EAST	4
 
-#define VALID_MAP_CHARS "01NSWE"
-#define WS " \t\n\r\v\f"
+# define VALID_MAP_CHARS "01NSWE"
+# define WS " \t\n\r\v\f"
 
-#define ERR_ARGS "Arguments are invalid\n"
-#define ERR_NAME "File must be *.cub\n"
-#define ERR_EXTENSION_FILE "Extension must be .cub\n"
-#define ERR_EXTENSION_TEXTURE "Extension must be .xpm\n"
-#define ERR_FILE "File is invalid or no permissions\n"
-#define ERR_MAP "Map is invalid\n"
-#define ERR_PLAYER "Map must have a player\n"
-#define ERR_DIRECTORY "Map sent is a directory\n"
-#define ERR_MALLOC "Malloc failed\n"
-#define ERR_COLOR "Color is invalid\n"
-#define ERR_TEXTURE "Texture is invalid\n"
-#define ERR_MLX "MLX failed\n"
-#define ERR_ORDER "Order is invalid\n"
-#define ERR_DUPLICATION "Duplication found\n"
-#define GAME_ENDED "Game Ended\n"
-
-/* typedef enum e_error_code
-{
-	ERR_ARGS,
-	ERR_NAME,
-	ERR_EXTENSION_FILE,
-	ERR_EXTENSION_TEXTURE,
-	ERR_FILE,
-	ERR_MAP,
-	ERR_DIRECTORY,
-	ERR_MALLOC,
-	ERR_COLOR,
-	ERR_TEXTURE,
-	ERR_MLX,
-	ERR_ORDER,
-	ERR_DUPLICATION,
-	GAME_ENDED
-}			t_error_code; */
+# define ERR_EMPTY "File is empty\n"
+# define ERR_ARGS "Arguments are invalid\n"
+# define ERR_NAME "File must be *.cub\n"
+# define ERR_EXTENSION_FILE "Extension must be .cub\n"
+# define ERR_EXTENSION_TEXTURE "Extension must be .xpm\n"
+# define ERR_FILE "File is invalid or no permissions\n"
+# define ERR_MAP "Map is invalid\n"
+# define ERR_PLAYER "Map must have a player\n"
+# define ERR_DIRECTORY "Map sent is a directory\n"
+# define ERR_MALLOC "Malloc failed\n"
+# define ERR_COLOR "Color is invalid\n"
+# define ERR_COLOR_RANGE "Color has invalid range\n"
+# define ERR_COLOR_MISSING "Missing color value\n"
+# define ERR_COLOR_MORE "RGB has more than 3 values\n"
+# define ERR_TEXTURE "Texture is invalid\n"
+# define ERR_TEXTURE_MISSING "Texture path is missing\n"
+# define ERR_MLX "MLX failed\n"
+# define ERR_ORDER "Order is invalid OR Missing Color/Texture\n"
+# define ERR_DUPLICATION "Duplication found\n"
+# define GAME_ENDED "Game Ended\n"
 
 /*=============================================================================#
 #                                   STRUCTS                                    #
 #=============================================================================*/
 
-/**
- * Colors:
- * r - red
- * g - green
- * b - blue
- */
 typedef struct s_color
 {
 	int	r;
@@ -123,9 +104,17 @@ typedef struct s_texture
 	t_img_data	img;
 }	t_texture;
 
+typedef struct s_txt
+{
+	void	*no;
+	void	*so;
+	void	*we;
+	void	*ea;
+}	t_txt;
+
 typedef struct s_textures
 {
-	t_texture	north; // data.textures.north == NULL; (memset?)
+	t_texture	north;
 	t_texture	south;
 	t_texture	east;
 	t_texture	west;
@@ -139,7 +128,7 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	char		direction; // 'N' 'S' 'E' 'W'
+	char		direction;
 	bool		started;
 	bool		ended;
 	char		**grid;
@@ -157,47 +146,43 @@ typedef struct s_data
 	t_map		map;
 	void		*mlx;
 	void		*win;
+	t_txt		txt; // mlx textures
 }	t_data;
 
 /*=============================================================================#
 #                                   FUNCTIONS                                  #
 #=============================================================================*/
 
-//int			ft_kill(t_data *data, t_error_code code);
-int			ft_kill(t_data *data, char *message);
-void		parse(char *filename);
-void		parse_file_content(t_data *data, char *filename);
-void		check_extension(char *filename, char *extension);
-void		check_extension_texture(t_data *data, char *filename,
-				char *extension);
-void		check_directory(char *filename);
-void		check_redability(char *filename);
-void		check_map(t_data *data, t_map	*map, char *line, int height);
-//const char	*message(t_error_code i);
-t_data		*init(void);
-void		check_textures(t_data *data, char *line);
-void		assign_texture(t_data *data, char **path, char *line, int *i);
-void		assign_rgb(t_data *data, t_color *color, char *line, int *i);
-void		parse_color(t_data *data, t_color *color);
-int			is_all_assets(t_data *data);
-void		check_duplicated_color(t_data *data, t_color *ceiling,
-				t_color *floor);
-void		check_required_textures(t_data *data, t_textures *textures);
-void		free_textures(t_textures *textures);
-void		freedom(t_data *data);
-int			count_width(const char *str);
-void		append_map_line(t_data *data, char ***grid, char *line,
-				int height);
-int			empty_line(char *line);
-char 		*clean_ws(t_data *data, char *line);
-void 		check_map_walls_and_player(t_data *data, t_map *map);
-void		check_surroundings(t_data *data, char **grid, int x, int y, bool player);
-bool		is_valid_map_line(char *line);
-
+int		ft_kill(t_data *data, char *message);
+void	parse(t_data *data, char *filename, char *extension);
+void	parse_file_content(t_data *data, char *filename);
+void	process_line(t_data *data, char *line, int *i);
+void	check_extension(t_data *data, char *filename, char *extension);
+void	check_directory(t_data *data, char *filename);
+void	check_map(t_data *data, t_map	*map, char *line, int height);
+t_data	*init(void);
+void	check_textures(t_data *data, char *line);
+void	assign_texture(t_data *data, char **path, char *line, int *i);
+void	assign_rgb(t_data *data, t_color *color, char *line);
+void	parse_color(t_data *data, t_color *color);
+int		is_all_assets(t_data *data);
+void	check_duplicated_color(t_data *data, t_color *ceiling, t_color *floor);
+void	check_required_textures(t_data *data, t_textures *textures);
+void	free_textures(t_textures *textures);
+void	freedom(t_data *data);
+int		count_width(const char *str);
+void	append_map_line(t_data *data, char ***grid, char *line, int height);
+int		empty_line(char *line);
+char	*clean_ws(t_data *data, char *line);
+void	check_map_walls_and_player(t_data *data, t_map *map);
+void	check_surroundings(t_data *data, char **grid, int x, int y);
+bool	is_valid_map_line(char *line);
+bool	is_already_rgb(t_color *color);
+void	parse_line(t_data *data, char *line);
 
 // TODO: delete in the end
-void		print_assets(t_data *data, char *process);
-void 		print_map(t_data *data);
-void 		print_parsing_map(t_data *data, int y);
+void	print_assets(t_data *data, char *process);
+void	print_map(t_data *data);
+void	print_parsing_map(t_data *data, int y);
 
 #endif

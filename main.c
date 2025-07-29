@@ -6,8 +6,8 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		ft_kill(NULL, ERR_ARGS);
-	parse(av[1]);
 	data = init();
+	parse(data, av[1], ".cub");
 	parse_file_content(data, av[1]);
 	//mlx_functions();
 	ft_kill(data, GAME_ENDED);
