@@ -13,9 +13,8 @@ VAL = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --err
 GENERAL = main.c utils.c
 PARSING = 01_parse.c 02_extensions.c 03_textures.c 04_color.c 05_map.c 06_map_utils.c
 INIT	= data.c
-
-#TO DELETE IN THE END
-DELETE_AFTER = print.c
+DEBUG = print.c
+MINIMAP = minimap_init.c
 
 NAME = cub3D
 
@@ -41,8 +40,10 @@ VPATH += src
 VPATH += src/parse
 # init
 VPATH += src/init
-# TO DELETE IN THE END
-VPATH += to_delete_after
+# debug
+VPATH += src/debug
+# minimap
+VPATH += src/minimap
 
 #==============================================================================#
 #                                    FILES                                     #
@@ -51,7 +52,8 @@ VPATH += to_delete_after
 SRC +=	$(GENERAL)
 SRC +=	$(PARSING)
 SRC +=	$(INIT)
-SRC +=	$(DELETE_AFTER)
+SRC +=	$(DEBUG)
+SRC +=	$(MINIMAP)
 
 # Library Paths
 LIBFT_DIR = libft

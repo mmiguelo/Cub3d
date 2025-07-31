@@ -9,8 +9,9 @@
 # include <errno.h> // error codes
 # include <fcntl.h> // for O_DIRECTORY
 # include <math.h> // math trig fuctions like sin(),cos(),sqrt(),floor(),ceil()?
+# include <X11/keysym.h> // key press number?
 # include <../minilibx-linux/mlx.h> // MinilibX (minilibx-linux.tgz needed)
-//# include <mlx_int.h> // internal mlx functions (use with caution)
+# include <mlx_int.h> // internal mlx functions (use with caution)
 # include "../libft/libft.h"
 
 /*=============================================================================#
@@ -35,10 +36,18 @@
 
 # define MAX_RGB 255
 # define MIN_RGB 0
+
 # define NORTH	1
 # define SOUTH	2
 # define WEST	3
 # define EAST	4
+
+# define TILE_SIZE 64
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 768
+# define PI 3.1415926535
+# define FOV 66
+// #define FOV 1.1519173063 in case we need
 
 # define VALID_MAP_CHARS "01NSWE"
 # define WS " \t\n\r\v\f"
@@ -63,10 +72,22 @@
 # define ERR_ORDER "Order is invalid OR Missing Color/Texture\n"
 # define ERR_DUPLICATION "Duplication found\n"
 # define GAME_ENDED "Game Ended\n"
+# define ERR_MLX "MLX failed\n"
+# define ERR_MLX_INIT "MLX failed to initialize\n"
+# define ERR_MLX_WIN "MLX failed to open window\n"
+# define ERR_TEX_LOAD "Failed to load image/texture\n"
 
 /*=============================================================================#
 #                                   STRUCTS                                    #
 #=============================================================================*/
+
+typedef struct s_minimap
+{
+	void	*floor;
+	void	*wall;
+	void	*player;
+	int		tile_size;
+}	t_minimap;
 
 typedef struct s_color
 {
@@ -78,8 +99,10 @@ typedef struct s_color
 /**
  * @brief Image metadata used for raw pixel manipulation in MiniLibX
  * 
+ * @param path to the XPM file.
  * @param img MLX image object created by mlx_new_image()
- * @param addr raw memory address of image pixels (returned by mlx_get_data_addr)
+ * @param addr raw memory address of image pixels 
+ * 	(returned by mlx_get_data_addr)
  * @param bits_per_pixel Number of bits used to represent one pixel
  * 	(32 = ARGB, 64 = ARGB with extended precision)
  * @param line_length number bites of one line/row of pixels
@@ -87,7 +110,19 @@ typedef struct s_color
  * @param width Width of the image in pixels
  * @param height Height of the image in pixels
  */
-typedef struct s_img_data
+typedef struct s_tex
+{
+	char	*path;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}	t_tex;
+
+/* typedef struct s_img_data
 {
 	void	*img;
 	char	*addr;
@@ -102,7 +137,7 @@ typedef struct s_texture
 {
 	char		*path; // north.path == NULL
 	t_img_data	img;
-}	t_texture;
+}	t_texture; */
 
 typedef struct s_txt
 {
@@ -114,16 +149,21 @@ typedef struct s_txt
 
 typedef struct s_textures
 {
-	t_texture	north;
-	t_texture	south;
-	t_texture	east;
-	t_texture	west;
+	t_tex	north;
+	t_tex	south;
+	t_tex	east;
+	t_tex	west;
 }	t_textures;
 
 typedef struct s_player
 {
-	double	x;
+	double	x; //position vector of the player
 	double	y;
+	char	direction; // 'N' 'S' 'E' 'W'
+	double	dir_x; // x direction vector
+	double	dir_y; 
+	double	plane_x; // 2d raycaster version of camera plane
+	double	plane_y; 
 }	t_player;
 
 typedef struct s_map
@@ -136,17 +176,26 @@ typedef struct s_map
 	int			height;
 }	t_map;
 
+
+typedef struct s_frames
+{
+	double	time;
+	double	old_time;
+	//frame_time / fps / tick / delta (might or not use in the future)
+}	t_frames;
+
 typedef struct s_data
 {
 	t_textures	textures; //memset
 	t_color		floor;
 	t_color		ceiling;
-	t_img_data	img_data;
 	t_player	player;
 	t_map		map;
+	t_frames	frames;
 	void		*mlx;
 	void		*win;
 	t_txt		txt; // mlx textures
+	t_minimap	minimap; //variavles for minimap
 }	t_data;
 
 /*=============================================================================#
@@ -184,5 +233,9 @@ void	parse_line(t_data *data, char *line);
 void	print_assets(t_data *data, char *process);
 void	print_map(t_data *data);
 void	print_parsing_map(t_data *data, int y);
+
+// minimap
+void 	create_minimap(t_data *data);
+void	init_minimap(t_data *data);
 
 #endif
