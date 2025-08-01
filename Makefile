@@ -15,6 +15,7 @@ PARSING = 01_parse.c 02_extensions.c 03_textures.c 04_color.c 05_map.c 06_map_ut
 INIT	= data.c
 DEBUG = print.c
 MINIMAP = minimap_init.c
+GAME = close_window.c keypress_handler.c
 
 NAME = cub3D
 
@@ -44,6 +45,8 @@ VPATH += src/init
 VPATH += src/debug
 # minimap
 VPATH += src/minimap
+#game
+VPATH += src/game
 
 #==============================================================================#
 #                                    FILES                                     #
@@ -54,6 +57,7 @@ SRC +=	$(PARSING)
 SRC +=	$(INIT)
 SRC +=	$(DEBUG)
 SRC +=	$(MINIMAP)
+SRC +=	$(GAME)
 
 # Library Paths
 LIBFT_DIR = libft

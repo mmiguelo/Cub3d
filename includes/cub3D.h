@@ -237,5 +237,18 @@ void	print_parsing_map(t_data *data, int y);
 // minimap
 void 	create_minimap(t_data *data);
 void	init_minimap(t_data *data);
+void	open_window(t_data *data);
+void	load_textures(t_data *data);
+void	calculate_tile_size(t_data *data);
+void	fill_image_with_color(void *img, int tile_size, int color);
+
+
+int		close_window(t_data *data, char *msg);
+int		x_press(t_data *data);
+int		keypress_handler(int keycode, t_data *data);
+void	destroy_textures(t_textures *textures, void *mlx);
+void	free_tex(t_tex *tex, void *mlx);
+void	render_image(t_data *data, char c, int x, int y);
+void	render_minimap(t_data *data);
 
 #endif

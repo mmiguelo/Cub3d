@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-void	fill_image_with_color(void *img, void *mlx, int tile_size, int color)
+void	fill_image_with_color(void *img, int tile_size, int color)
 {
 	int		*pixel;
 	char	*addr;
@@ -30,17 +30,17 @@ void load_textures(t_data *data)
 	data->minimap.floor = mlx_new_image(data->mlx, data->minimap.tile_size, data->minimap.tile_size);
 	if (!data->minimap.floor)
 		ft_kill(data, "Error loading floor texture");
-	fill_image_with_color(data->minimap.floor, data->mlx, data->minimap.tile_size, 0x000000);
+	fill_image_with_color(data->minimap.floor, data->minimap.tile_size, 0x000000);
 
 	data->minimap.wall = mlx_new_image(data->mlx, data->minimap.tile_size, data->minimap.tile_size);
 	if (!data->minimap.wall)
 		ft_kill(data, "Error loading wall texture");
-	fill_image_with_color(data->minimap.wall, data->mlx, data->minimap.tile_size, 0x808080);
+	fill_image_with_color(data->minimap.wall, data->minimap.tile_size, 0x808080);
 
 	data->minimap.player = mlx_new_image(data->mlx, data->minimap.tile_size, data->minimap.tile_size);
 	if (!data->minimap.player)
 		ft_kill(data, "Error loading player texture");
-	fill_image_with_color(data->minimap.player, data->mlx, data->minimap.tile_size, 0x008000);
+	fill_image_with_color(data->minimap.player, data->minimap.tile_size, 0x008000);
 }
 
 void	calculate_tile_size(t_data *data)
@@ -62,6 +62,35 @@ void	calculate_tile_size(t_data *data)
 		data->minimap.tile_size = 2;
 }
 
+void	render_minimap(t_data *data)
+{
+	int	y;
+	int	x;
+
+	y = -1;
+	while (++y < data->map.height && data->map.grid[y])
+	{
+		x = -1;
+		while (++x < data->map.width && data->map.grid[y][x])
+			render_image(data, data->map.grid[y][x], x, y);
+	}
+}
+
+
+void	render_image(t_data *data, char c, int x, int y)
+{
+	if (c == '0' || c == ' ')
+		mlx_put_image_to_window(data->mlx, data->win,
+			data->minimap.floor, x * data->minimap.tile_size, y * data->minimap.tile_size);
+	else if (c == '1')
+		mlx_put_image_to_window(data->mlx, data->win,
+			data->minimap.wall, x * data->minimap.tile_size, y * data->minimap.tile_size);
+	else if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+		mlx_put_image_to_window(data->mlx, data->win,
+			data->minimap.player, data->player.x * data->minimap.tile_size,
+			data->player.y * data->minimap.tile_size);
+}
+
 void	open_window(t_data *data)
 {
 	data->mlx = mlx_init();
@@ -72,8 +101,9 @@ void	open_window(t_data *data)
 		ft_kill(data, ERR_MLX_WIN);
 	calculate_tile_size(data);
 	load_textures(data);
-	/* mlx_hook(data->win, KeyPress, KeyPressMask, keypress_handler, data);
-	mlx_hook(data->win, DestroyNotify, StructureNotifyMask, x_press, data); */
+	render_minimap(data);
+	mlx_hook(data->win, KeyPress, KeyPressMask, keypress_handler, data);
+	mlx_hook(data->win, DestroyNotify, StructureNotifyMask, x_press, data);
 	mlx_loop(data->mlx);
 }
 

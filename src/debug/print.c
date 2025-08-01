@@ -23,13 +23,14 @@ void	print_map(t_data *data)
 	ft_printf_fd(1, Y"\n\nMAP:\n\n"RST);
 	while (data->map.grid[i])
 	{
-		ft_printf_fd(1, "len:%d			%s\n", ft_strlen(data->map.grid[i]),
+		ft_printf_fd(1, "len:%d			'%s'\n", ft_strlen(data->map.grid[i]),
 			data->map.grid[i]);
 		i++;
 	}
 	ft_printf_fd(1, "height: %d\n", data->map.height);
 	ft_printf_fd(1, "width: %d\n", data->map.width);
 	ft_printf_fd(1, "Direction of player: %c\n\n\n", data->map.direction);
+	ft_printf_fd(1, "player position:  x = %d, y = %d\n", data->player.x, data->player.y);
 }
 
 void	print_parsing_map(t_data *data, int y)
