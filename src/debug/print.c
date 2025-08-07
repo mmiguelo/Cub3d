@@ -2,17 +2,17 @@
 
 void	print_assets(t_data *data, char *process)
 {
-	ft_printf_fd(1, "\n\n%s:\n", process);
-	ft_printf_fd(1, "NO: '%s'\n", data->textures.north.path);
-	ft_printf_fd(1, "SO: '%s'\n", data->textures.south.path);
-	ft_printf_fd(1, "WE: '%s'\n", data->textures.west.path);
-	ft_printf_fd(1, "EA: '%s'\n", data->textures.east.path);
-	ft_printf_fd(1, "Floor->R: '%d'\n", data->floor.r);
-	ft_printf_fd(1, "Floor->G: '%d'\n", data->floor.g);
-	ft_printf_fd(1, "Floor->B: '%d'\n", data->floor.b);
-	ft_printf_fd(1, "Ceiling->R: '%d'\n", data->ceiling.r);
-	ft_printf_fd(1, "Ceiling->G: '%d'\n", data->ceiling.g);
-	ft_printf_fd(1, "Ceiling->B: '%d'", data->ceiling.b);
+	ft_printf("\n\n%s:\n", process);
+	ft_printf("NO: '%s'\n", data->textures.north.path);
+	ft_printf("SO: '%s'\n", data->textures.south.path);
+	ft_printf("WE: '%s'\n", data->textures.west.path);
+	ft_printf("EA: '%s'\n", data->textures.east.path);
+	ft_printf("Floor->R: '%d'\n", data->floor.r);
+	ft_printf("Floor->G: '%d'\n", data->floor.g);
+	ft_printf("Floor->B: '%d'\n", data->floor.b);
+	ft_printf("Ceiling->R: '%d'\n", data->ceiling.r);
+	ft_printf("Ceiling->G: '%d'\n", data->ceiling.g);
+	ft_printf("Ceiling->B: '%d'", data->ceiling.b);
 }
 
 void	print_map(t_data *data)
@@ -27,16 +27,16 @@ void	print_map(t_data *data)
 			data->map.grid[i]);
 		i++;
 	}
-	ft_printf_fd(1, "height: %d\n", data->map.height);
-	ft_printf_fd(1, "width: %d\n", data->map.width);
-	ft_printf_fd(1, "Direction of player: %c\n\n\n", data->map.direction);
-	ft_printf_fd(1, "player position:  x = %d, y = %d\n", data->player.x, data->player.y);
+	ft_printf("height: %d\n", data->map.height);
+	ft_printf("width: %d\n", data->map.width);
+	ft_printf("Direction of player: %c\n\n\n", data->map.direction);
+	ft_printf("player postion: x-> %f y-> %f", data->player.x, data->player.y);
 }
 
 void	print_parsing_map(t_data *data, int y)
 {
 	if (y < 10)
-		printf("grid[0%d] : %s\n", y, data->map.grid[y]);
+		ft_printf("grid[0%d] : %s\n", y, data->map.grid[y]);
 	else
-		printf("grid[%d] : %s\n", y, data->map.grid[y]);
+		ft_printf("grid[%d] : %s\n", y, data->map.grid[y]);
 }

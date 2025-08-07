@@ -43,25 +43,6 @@ void load_textures(t_data *data)
 	fill_image_with_color(data->minimap.player, data->minimap.tile_size, 0x008000);
 }
 
-void	calculate_tile_size(t_data *data)
-{
-	int	max_width;
-	int	max_height;
-	int	tile_w;
-	int	tile_h;
-
-	max_width = WIN_WIDTH / 4;
-	max_height = WIN_HEIGHT / 4;
-	tile_w = max_width / data->map.width;
-	tile_h = max_height / data->map.height;
-	if (tile_w < tile_h)
-		data->minimap.tile_size = tile_w;
-	else
-		data->minimap.tile_size = tile_h;
-	if (data->minimap.tile_size < 2)
-		data->minimap.tile_size = 2;
-}
-
 void	render_minimap(t_data *data)
 {
 	int	y;
@@ -79,19 +60,19 @@ void	render_minimap(t_data *data)
 
 void	render_image(t_data *data, char c, int x, int y)
 {
-	if (c == '0' || c == ' ')
+	if (c == '0' || c == ' ' || c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		mlx_put_image_to_window(data->mlx, data->win,
 			data->minimap.floor, x * data->minimap.tile_size, y * data->minimap.tile_size);
 	else if (c == '1')
 		mlx_put_image_to_window(data->mlx, data->win,
 			data->minimap.wall, x * data->minimap.tile_size, y * data->minimap.tile_size);
-	else if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+	if ((int)data->player.x == x && (int)data->player.y == y) 
 		mlx_put_image_to_window(data->mlx, data->win,
 			data->minimap.player, data->player.x * data->minimap.tile_size,
 			data->player.y * data->minimap.tile_size);
 }
 
-void	open_window(t_data *data)
+void init_minimap(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
@@ -105,9 +86,4 @@ void	open_window(t_data *data)
 	mlx_hook(data->win, KeyPress, KeyPressMask, keypress_handler, data);
 	mlx_hook(data->win, DestroyNotify, StructureNotifyMask, x_press, data);
 	mlx_loop(data->mlx);
-}
-
-void init_minimap(t_data *data)
-{
-	open_window(data);
 }

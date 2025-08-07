@@ -21,15 +21,15 @@ void	assign_texture(t_data *data, char **path, char *line, int *i)
 	parse(data, *path, ".xpm");
 }
 
-void	check_required_textures(t_data *data, t_textures *textures)
+void	check_required_textures(t_data *data, t_textures textures)
 {
-	if (!textures->north.path)
+	if (!textures.north.path)
 		ft_kill(data, ERR_TEXTURE_MISSING);
-	if (!textures->south.path)
+	if (!textures.south.path)
 		ft_kill(data, ERR_TEXTURE_MISSING);
-	if (!textures->west.path)
+	if (!textures.west.path)
 		ft_kill(data, ERR_TEXTURE_MISSING);
-	if (!textures->east.path)
+	if (!textures.east.path)
 		ft_kill(data, ERR_TEXTURE_MISSING);
 }
 
@@ -37,13 +37,18 @@ int	is_all_assets(t_data *data)
 {
 	if (!data)
 		return (0);
-	if (!data->textures.north.path || !data->textures.south.path
-		|| !data->textures.west.path || !data->textures.east.path)
+	if (!data->textures.north.path)
 		return (0);
-	if (data->floor.r == -1 || data->floor.g == -1 || data->floor.b == -1)
+	if (!data->textures.south.path)
 		return (0);
-	if (data->ceiling.r == -1 || data->ceiling.g == -1
-		|| data->ceiling.b == -1)
+	if (!data->textures.west.path)
+		return (0);
+	if (!data->textures.east.path)
+		return (0);
+	if (data->floor.r == -1 && data->floor.g == -1 && data->floor.b == -1)
+		return (0);
+	if (data->ceiling.r == -1 && data->ceiling.g == -1
+		&& data->ceiling.b == -1)
 		return (0);
 	return (1);
 }

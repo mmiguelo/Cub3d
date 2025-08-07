@@ -47,6 +47,8 @@
 # define WIN_HEIGHT 768
 # define PI 3.1415926535
 # define FOV 66
+# define FOV_RAD (POV * PI / 180)
+# define PLANE_LEN TAN(FOV_RAD / 2)
 // #define FOV 1.1519173063 in case we need
 
 # define VALID_MAP_CHARS "01NSWE"
@@ -155,15 +157,18 @@ typedef struct s_textures
 	t_tex	west;
 }	t_textures;
 
+typedef struct s_pair{
+	double x;
+	double y;
+}	t_pair;
+
 typedef struct s_player
 {
 	double	x; //position vector of the player
 	double	y;
 	char	direction; // 'N' 'S' 'E' 'W'
-	double	dir_x; // x direction vector
-	double	dir_y; 
-	double	plane_x; // 2d raycaster version of camera plane
-	double	plane_y; 
+	t_pair	dir; // x direction vector// y direction vector
+	t_pair	plane; // 2d raycaster version of camera plane
 }	t_player;
 
 typedef struct s_map
@@ -176,12 +181,11 @@ typedef struct s_map
 	int			height;
 }	t_map;
 
-
 typedef struct s_frames
 {
 	double	time;
 	double	old_time;
-	//frame_time / fps / tick / delta (might or not use in the future)
+	double	frame_time; // fps / tick / delta (might or not use in the future)
 }	t_frames;
 
 typedef struct s_data
@@ -192,6 +196,7 @@ typedef struct s_data
 	t_player	player;
 	t_map		map;
 	t_frames	frames;
+	double		move_speed;
 	void		*mlx;
 	void		*win;
 	t_txt		txt; // mlx textures
@@ -209,15 +214,15 @@ void	process_line(t_data *data, char *line, int *i);
 void	check_extension(t_data *data, char *filename, char *extension);
 void	check_directory(t_data *data, char *filename);
 void	check_map(t_data *data, t_map	*map, char *line, int height);
-t_data	*init(void);
+void	init(t_data *data);
 void	check_textures(t_data *data, char *line);
 void	assign_texture(t_data *data, char **path, char *line, int *i);
 void	assign_rgb(t_data *data, t_color *color, char *line);
 void	parse_color(t_data *data, t_color *color);
 int		is_all_assets(t_data *data);
 void	check_duplicated_color(t_data *data, t_color *ceiling, t_color *floor);
-void	check_required_textures(t_data *data, t_textures *textures);
-void	free_textures(t_textures *textures);
+void	check_required_textures(t_data *data, t_textures textures);
+void	free_textures(t_data *data);
 void	freedom(t_data *data);
 int		count_width(const char *str);
 void	append_map_line(t_data *data, char ***grid, char *line, int height);
@@ -235,20 +240,23 @@ void	print_map(t_data *data);
 void	print_parsing_map(t_data *data, int y);
 
 // minimap
-void 	create_minimap(t_data *data);
+void	create_minimap(t_data *data);
 void	init_minimap(t_data *data);
-void	open_window(t_data *data);
 void	load_textures(t_data *data);
 void	calculate_tile_size(t_data *data);
 void	fill_image_with_color(void *img, int tile_size, int color);
 
-
 int		close_window(t_data *data, char *msg);
 int		x_press(t_data *data);
+void	move_up(t_data *data);
+void	move_down(t_data *data);
+void	move_left(t_data *data);
+void	move_right(t_data *data);
 int		keypress_handler(int keycode, t_data *data);
 void	destroy_textures(t_textures *textures, void *mlx);
 void	free_tex(t_tex *tex, void *mlx);
 void	render_image(t_data *data, char c, int x, int y);
 void	render_minimap(t_data *data);
+int		game_loop(t_data *data);
 
 #endif

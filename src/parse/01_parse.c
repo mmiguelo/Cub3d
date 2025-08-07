@@ -49,11 +49,9 @@ void	parse_file_content(t_data *data, char *filename)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	check_required_textures(data, &data->textures);
+	check_required_textures(data, data->textures);
 	check_map_walls_and_player(data, &data->map);
 	check_duplicated_color(data, &data->ceiling, &data->floor);
-	print_assets(data, "After assigning");
-	print_map(data);
 }
 
 void	process_line(t_data *data, char *line, int *i)

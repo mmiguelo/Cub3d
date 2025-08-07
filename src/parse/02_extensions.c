@@ -10,7 +10,6 @@ void	check_directory(t_data *data, char *filename)
 		close(fd);
 		ft_kill(data, ERR_DIRECTORY);
 	}
-	close(fd);
 }
 
 void	check_extension(t_data *data, char *filename, char *extension)
