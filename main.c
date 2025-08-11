@@ -2,14 +2,16 @@
 
 int	main(int ac, char **av)
 {
-	t_data	*data;
+	t_data	data;
 
 	if (ac != 2)
 		ft_kill(NULL, ERR_ARGS);
-	data = init();
-	parse(data, av[1], ".cub");
-	parse_file_content(data, av[1]);
-	//mlx_functions();
-	ft_kill(data, GAME_ENDED);
+	init(&data);
+	parse(&data, av[1], ".cub");
+	parse_file_content(&data, av[1]);
+	get_player_vector(&data);
+	print_map(&data);
+	game_loop(&data);
+	init_minimap(&data);
 	return (0);
 }
