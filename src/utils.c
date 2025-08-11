@@ -2,22 +2,16 @@
 
 void	free_images(t_data *data)
 {
-	if (!data->mlx)
-		return ;
-	if (data->minimap.floor)
+	if (data && data->mlx)
 	{
-		mlx_destroy_image(data->mlx, data->minimap.floor);
-		data->minimap.floor = NULL;
-	}
-	if (data->minimap.wall)
-	{
-		mlx_destroy_image(data->mlx, data->minimap.wall);
-		data->minimap.wall = NULL;
-	}
-	if (data->minimap.player)
-	{
-		mlx_destroy_image(data->mlx, data->minimap.player);
-		data->minimap.player = NULL;
+		mlx_destroy_image(data->mlx, data->textures.east.img);
+		mlx_destroy_image(data->mlx, data->textures.west.img);
+		mlx_destroy_image(data->mlx, data->textures.south.img);
+		mlx_destroy_image(data->mlx, data->textures.north.img);
+		mlx_destroy_image(data->mlx, data->bg.img);
+		mlx_clear_window(data->mlx, data->win);
+		mlx_destroy_window(data->mlx, data->win);
+		mlx_destroy_display(data->mlx);
 	}
 }
 
@@ -48,14 +42,8 @@ void	freedom(t_data *data)
 	free_textures(data);
 	free_images(data);
 	destroy_textures(&data->textures, data->mlx);
-	if (data->win)
-	{
-		mlx_destroy_window(data->mlx, data->win);
-		data->win = NULL;
-	}
 	if (data->mlx)
 	{
-		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 		data->mlx = NULL;
 	}

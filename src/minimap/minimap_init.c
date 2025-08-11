@@ -1,4 +1,4 @@
-#include "cub3D.h"
+/* #include "cub3D.h"
 
 void	fill_image_with_color(void *img, int tile_size, int color)
 {
@@ -86,4 +86,4 @@ void init_minimap(t_data *data)
 	mlx_hook(data->win, KeyPress, KeyPressMask, keypress_handler, data);
 	mlx_hook(data->win, DestroyNotify, StructureNotifyMask, x_press, data);
 	mlx_loop(data->mlx);
-}
+} */

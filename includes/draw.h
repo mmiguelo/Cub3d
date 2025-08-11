@@ -13,12 +13,21 @@
  */
 typedef struct s_draw
 {
+	void	*texture; //to store current texture to render
 	double	perpWallDist;
 	int		line_height;
 	int		start;
 	int		end;
 	int		side;
 	bool	hit;
+	int		texNum;
+	int		pitch;
+	double	wallX;
+	int		texX;
+	int		texY;
+	double	texPos;
+	double	step;
+	unsigned int	color;
 }	t_draw;
 
 /*=============================================================================#

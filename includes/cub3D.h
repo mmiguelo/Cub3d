@@ -9,9 +9,9 @@
 # include <errno.h> // error codes
 # include <fcntl.h> // for O_DIRECTORY
 # include <math.h> // math trig fuctions like sin(),cos(),sqrt(),floor(),ceil()?
+# include <X11/X.h>
 # include <X11/keysym.h> // key press number?
 # include <../minilibx-linux/mlx.h> // MinilibX (minilibx-linux.tgz needed)
-# include <mlx_int.h> // internal mlx functions (use with caution)
 # include "../libft/libft.h"
 # include "ray.h"
 # include "draw.h"
@@ -39,11 +39,6 @@
 # define MAX_RGB 255
 # define MIN_RGB 0
 
-# define NORTH	1
-# define SOUTH	2
-# define WEST	3
-# define EAST	4
-
 # define TILE_SIZE 64
 # define WIN_WIDTH 1024
 # define WIN_HEIGHT 768
@@ -51,7 +46,6 @@
 # define FOV 66
 # define FOV_RAD (FOV * PI / 180)
 # define PLANE_LEN tan(FOV_RAD / 2)
-// #define FOV 1.1519173063 in case we need
 
 # define VALID_MAP_CHARS "01NSWE"
 # define WS " \t\n\r\v\f"
@@ -100,23 +94,8 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
-/**
- * @brief Image metadata used for raw pixel manipulation in MiniLibX
- * 
- * @param path to the XPM file.
- * @param img MLX image object created by mlx_new_image()
- * @param addr raw memory address of image pixels 
- * 	(returned by mlx_get_data_addr)
- * @param bits_per_pixel Number of bits used to represent one pixel
- * 	(32 = ARGB, 64 = ARGB with extended precision)
- * @param line_length number bites of one line/row of pixels
- * @param endian Byte order-> 0 = little_endian (BGRA) | 1 = big_endian (ARGB)
- * @param width Width of the image in pixels
- * @param height Height of the image in pixels
- */
-typedef struct s_tex
+typedef struct s_img
 {
-	char	*path;
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -124,7 +103,8 @@ typedef struct s_tex
 	int		endian;
 	int		width;
 	int		height;
-}	t_tex;
+	char	*path;
+}	t_img;
 
 typedef struct s_txt
 {
@@ -136,10 +116,10 @@ typedef struct s_txt
 
 typedef struct s_textures
 {
-	t_tex	north;
-	t_tex	south;
-	t_tex	east;
-	t_tex	west;
+	t_img	north;
+	t_img	south;
+	t_img	east;
+	t_img	west;
 }	t_textures;
 
 typedef struct s_pair{
@@ -149,11 +129,17 @@ typedef struct s_pair{
 
 typedef struct s_player
 {
-	char	direction; // 'N' 'S' 'E' 'W'
+	char	direction;
 	double	x; //position vector of the player
 	double	y;
 	t_pair	dir; // x direction vector// y direction vector
 	t_pair	plane; // 2d raycaster version of camera plane
+	int		move_forward;
+	int		move_backward;
+	int		move_left;
+	int		move_right;
+	int		turn_left;
+	int		turn_right;
 }	t_player;
 
 typedef struct s_map
@@ -175,7 +161,7 @@ typedef struct s_frames
 
 typedef struct s_data
 {
-	t_textures	textures; //memset
+	t_textures	textures;
 	t_color		floor;
 	t_color		ceiling;
 	t_player	player;
@@ -185,8 +171,9 @@ typedef struct s_data
 	void		*mlx;
 	void		*win;
 	t_txt		txt; // mlx textures
-	t_minimap	minimap; //variavles for minimap
-	t_ray		ray;
+	t_img		bg;
+	t_img		frame;
+	t_minimap	minimap; //variables for minimap
 }	t_data;
 
 /*=============================================================================#
@@ -201,6 +188,8 @@ void	check_extension(t_data *data, char *filename, char *extension);
 void	check_directory(t_data *data, char *filename);
 void	check_map(t_data *data, t_map	*map, char *line, int height);
 void	init(t_data *data);
+void	init_game(t_data *data);
+void	init_image(t_data *data);
 void	check_textures(t_data *data, char *line);
 void	assign_texture(t_data *data, char **path, char *line, int *i);
 void	assign_rgb(t_data *data, t_color *color, char *line);
@@ -235,23 +224,28 @@ void	render_image(t_data *data, char c, int x, int y);
 void	render_minimap(t_data *data);
 
 //game
-int		close_window(t_data *data, char *msg);
+void	close_window(t_data *data, char *msg);
 int		x_press(t_data *data);
 void	move_up(t_data *data);
 void	move_down(t_data *data);
 void	move_left(t_data *data);
 void	move_right(t_data *data);
-int		keypress_handler(int keycode, t_data *data);
+int		key_hook_press(int keycode, t_data *data);
+int		key_hook_release(int keycode, t_data *data);
 void	destroy_textures(t_textures *textures, void *mlx);
-void	free_tex(t_tex *tex, void *mlx);
+void	free_tex(t_img *tex, void *mlx);
 
 //map
 void	game_loop(t_data *data);
 void	get_player_vector(t_data *data);
 void	get_player_vector2(t_data *data);
-void	draw_loop(t_data *data);
-void	calculate_variables(t_data *data, int *x);
-void	calculate_variables2(t_data *data);
-void	check_hit(t_data *data, int *side, int *hit);
+int		draw_loop(t_data *data);
+void	put_fc(t_data *data);
+void	calculate_variables(t_player *player, t_ray *ray, int x);
+void	calculate_variables2(t_ray *ray, double player_x, double player_y);
+void	check_hit(t_data *data, t_ray *ray);
+void	calculate_perpwalldist(t_ray *ray, t_draw *draw);
+void	calculate_texture(t_data *data, t_ray *ray);
+void	render_texture(t_ray *ray);
 
 #endif
