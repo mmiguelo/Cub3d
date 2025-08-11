@@ -13,6 +13,8 @@
 # include <../minilibx-linux/mlx.h> // MinilibX (minilibx-linux.tgz needed)
 # include <mlx_int.h> // internal mlx functions (use with caution)
 # include "../libft/libft.h"
+# include "ray.h"
+# include "draw.h"
 
 /*=============================================================================#
 #                                   DEFINES                                    #
@@ -47,8 +49,8 @@
 # define WIN_HEIGHT 768
 # define PI 3.1415926535
 # define FOV 66
-# define FOV_RAD (POV * PI / 180)
-# define PLANE_LEN TAN(FOV_RAD / 2)
+# define FOV_RAD (FOV * PI / 180)
+# define PLANE_LEN tan(FOV_RAD / 2)
 // #define FOV 1.1519173063 in case we need
 
 # define VALID_MAP_CHARS "01NSWE"
@@ -124,23 +126,6 @@ typedef struct s_tex
 	int		height;
 }	t_tex;
 
-/* typedef struct s_img_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		width;
-	int		height;
-}	t_img_data;
-
-typedef struct s_texture
-{
-	char		*path; // north.path == NULL
-	t_img_data	img;
-}	t_texture; */
-
 typedef struct s_txt
 {
 	void	*no;
@@ -164,9 +149,9 @@ typedef struct s_pair{
 
 typedef struct s_player
 {
+	char	direction; // 'N' 'S' 'E' 'W'
 	double	x; //position vector of the player
 	double	y;
-	char	direction; // 'N' 'S' 'E' 'W'
 	t_pair	dir; // x direction vector// y direction vector
 	t_pair	plane; // 2d raycaster version of camera plane
 }	t_player;
@@ -201,6 +186,7 @@ typedef struct s_data
 	void		*win;
 	t_txt		txt; // mlx textures
 	t_minimap	minimap; //variavles for minimap
+	t_ray		ray;
 }	t_data;
 
 /*=============================================================================#
@@ -245,7 +231,10 @@ void	init_minimap(t_data *data);
 void	load_textures(t_data *data);
 void	calculate_tile_size(t_data *data);
 void	fill_image_with_color(void *img, int tile_size, int color);
+void	render_image(t_data *data, char c, int x, int y);
+void	render_minimap(t_data *data);
 
+//game
 int		close_window(t_data *data, char *msg);
 int		x_press(t_data *data);
 void	move_up(t_data *data);
@@ -255,8 +244,14 @@ void	move_right(t_data *data);
 int		keypress_handler(int keycode, t_data *data);
 void	destroy_textures(t_textures *textures, void *mlx);
 void	free_tex(t_tex *tex, void *mlx);
-void	render_image(t_data *data, char c, int x, int y);
-void	render_minimap(t_data *data);
-int		game_loop(t_data *data);
+
+//map
+void	game_loop(t_data *data);
+void	get_player_vector(t_data *data);
+void	get_player_vector2(t_data *data);
+void	draw_loop(t_data *data);
+void	calculate_variables(t_data *data, int *x);
+void	calculate_variables2(t_data *data);
+void	check_hit(t_data *data, int *side, int *hit);
 
 #endif

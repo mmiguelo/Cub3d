@@ -15,7 +15,7 @@ PARSING = 01_parse.c 02_extensions.c 03_textures.c 04_color.c 05_map.c 06_map_ut
 INIT	= data.c
 DEBUG = print.c
 MINIMAP = minimap_init.c minimap_utils.c
-MAP = map.c
+MAP = map.c map_utils.c
 GAME = close_window.c keypress_handler.c
 
 NAME = cub3D

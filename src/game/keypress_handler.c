@@ -29,6 +29,8 @@ void	move_up(t_data *data)
 		data->player.y = new_y;
 	/* if (data->map.grid[(int)data->player.y][(int)new_x] != '1')
 		data->player.x = new_x; */
+	printf("player position: x-> %f, y->%f\n", data->player.x, data->player.y);
+	printf("player dir x = %f\n", data->player.dir.x);
 }
 
 void	move_down(t_data *data)
@@ -51,6 +53,8 @@ void	move_left(t_data *data)
 		data->player.y = new_y; */
 	if (data->map.grid[(int)data->player.y][(int)new_x] != '1')
 		data->player.x = new_x;
+	printf("player position: x-> %f, y->%f\n", data->player.x, data->player.y);
+	printf("player dir x = %f\n", data->player.dir.x);
 }
 
 void	move_right(t_data *data)
@@ -61,4 +65,6 @@ void	move_right(t_data *data)
 		data->player.y = new_y; */
 	if (data->map.grid[(int)data->player.y][(int)new_x] != '1')
 		data->player.x = new_x;
+	printf("player position: x-> %f, y->%f\n", data->player.x, data->player.y);
+	printf("player dir x = %f\n", data->player.dir.x);
 }
