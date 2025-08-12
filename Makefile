@@ -16,7 +16,7 @@ INIT	= data.c
 DEBUG = print.c
 MINIMAP = minimap_init.c minimap_utils.c
 MAP = map.c map_utils.c
-GAME = close_window.c keypress_handler.c
+GAME = close_window.c keypress_handler.c movements.c
 
 NAME = cub3D
 

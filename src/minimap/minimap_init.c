@@ -25,7 +25,7 @@ void	fill_image_with_color(void *img, int tile_size, int color)
 	}
 }
 
-void load_textures(t_data *data)
+void load_minimap_textures(t_data *data)
 {
 	data->minimap.floor = mlx_new_image(data->mlx, data->minimap.tile_size, data->minimap.tile_size);
 	if (!data->minimap.floor)
@@ -81,7 +81,7 @@ void init_minimap(t_data *data)
 	if (!data->win)
 		ft_kill(data, ERR_MLX_WIN);
 	calculate_tile_size(data);
-	load_textures(data);
+	load_minimap_textures(data);
 	render_minimap(data);
 	mlx_hook(data->win, KeyPress, KeyPressMask, keypress_handler, data);
 	mlx_hook(data->win, DestroyNotify, StructureNotifyMask, x_press, data);

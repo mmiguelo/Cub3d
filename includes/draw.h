@@ -27,7 +27,7 @@ typedef struct s_draw
 	int		texY;
 	double	texPos;
 	double	step;
-	unsigned int	color;
+	int		color;
 }	t_draw;
 
 /*=============================================================================#

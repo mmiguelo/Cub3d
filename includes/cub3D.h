@@ -46,6 +46,9 @@
 # define FOV 66
 # define FOV_RAD (FOV * PI / 180)
 # define PLANE_LEN tan(FOV_RAD / 2)
+# define MOVE_SPEED 0.01
+# define ROT_SPEED 0.03
+# define PITCH 0
 
 # define VALID_MAP_CHARS "01NSWE"
 # define WS " \t\n\r\v\f"
@@ -70,7 +73,6 @@
 # define ERR_ORDER "Order is invalid OR Missing Color/Texture\n"
 # define ERR_DUPLICATION "Duplication found\n"
 # define GAME_ENDED "Game Ended\n"
-# define ERR_MLX "MLX failed\n"
 # define ERR_MLX_INIT "MLX failed to initialize\n"
 # define ERR_MLX_WIN "MLX failed to open window\n"
 # define ERR_TEX_LOAD "Failed to load image/texture\n"
@@ -105,14 +107,6 @@ typedef struct s_img
 	int		height;
 	char	*path;
 }	t_img;
-
-typedef struct s_txt
-{
-	void	*no;
-	void	*so;
-	void	*we;
-	void	*ea;
-}	t_txt;
 
 typedef struct s_textures
 {
@@ -170,9 +164,8 @@ typedef struct s_data
 	double		move_speed;
 	void		*mlx;
 	void		*win;
-	t_txt		txt; // mlx textures
 	t_img		bg;
-	t_img		frame;
+	t_img		image;
 	t_minimap	minimap; //variables for minimap
 }	t_data;
 
@@ -190,6 +183,8 @@ void	check_map(t_data *data, t_map	*map, char *line, int height);
 void	init(t_data *data);
 void	init_game(t_data *data);
 void	init_image(t_data *data);
+void	init_textures(t_data *data);
+void	load_textures(t_data *data, t_img *texture);
 void	check_textures(t_data *data, char *line);
 void	assign_texture(t_data *data, char **path, char *line, int *i);
 void	assign_rgb(t_data *data, t_color *color, char *line);
@@ -217,7 +212,7 @@ void	print_parsing_map(t_data *data, int y);
 // minimap
 void	create_minimap(t_data *data);
 void	init_minimap(t_data *data);
-void	load_textures(t_data *data);
+void	load_minimap_textures(t_data *data);
 void	calculate_tile_size(t_data *data);
 void	fill_image_with_color(void *img, int tile_size, int color);
 void	render_image(t_data *data, char c, int x, int y);
@@ -230,6 +225,9 @@ void	move_up(t_data *data);
 void	move_down(t_data *data);
 void	move_left(t_data *data);
 void	move_right(t_data *data);
+void	calculate_raycasting(t_data *data);
+void	calculate_movements(t_data *data);
+void	calculate_rotation(t_data *data, double rotation_speed);
 int		key_hook_press(int keycode, t_data *data);
 int		key_hook_release(int keycode, t_data *data);
 void	destroy_textures(t_textures *textures, void *mlx);
@@ -247,5 +245,8 @@ void	check_hit(t_data *data, t_ray *ray);
 void	calculate_perpwalldist(t_ray *ray, t_draw *draw);
 void	calculate_texture(t_data *data, t_ray *ray);
 void	render_texture(t_ray *ray);
+void	draw_line(t_data *data, t_ray *ray, int x);
+int		color(t_draw *draw, t_img *texture);
+void	put_pixel(t_img *img, int x, int y, int color);
 
 #endif

@@ -34,3 +34,22 @@ void	init_image(t_data *data)
 			&data->bg.bits_per_pixel, &data->bg.line_length, &data->bg.endian);
 	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 }
+
+void	load_textures(t_data *data, t_img *texture)
+{
+	texture->img = mlx_xpm_file_to_image(data->mlx,
+		texture->path, &texture->width, &texture->height);
+	if (!texture->img)
+		ft_kill(data, ERR_TEX_LOAD);
+	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel, &texture->line_length, &texture->endian);
+	if (!texture->addr)
+		ft_kill(data, ERR_TEX_LOAD);
+}
+
+void	init_textures(t_data *data)
+{
+	load_textures(data, &data->textures.north);
+	load_textures(data, &data->textures.south);
+	load_textures(data, &data->textures.east);
+	load_textures(data, &data->textures.west);
+}

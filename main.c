@@ -9,7 +9,7 @@ int	main(int ac, char **av)
 	init(&data);
 	parse(&data, av[1], ".cub");
 	parse_file_content(&data, av[1]);
-	//load_textures(&data);
+	init_textures(&data);
 	get_player_vector(&data);
 	game_loop(&data);
 	//init_minimap(&data);

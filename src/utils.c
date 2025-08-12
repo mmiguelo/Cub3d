@@ -4,14 +4,21 @@ void	free_images(t_data *data)
 {
 	if (data && data->mlx)
 	{
-		mlx_destroy_image(data->mlx, data->textures.east.img);
-		mlx_destroy_image(data->mlx, data->textures.west.img);
-		mlx_destroy_image(data->mlx, data->textures.south.img);
-		mlx_destroy_image(data->mlx, data->textures.north.img);
-		mlx_destroy_image(data->mlx, data->bg.img);
+		if (data->textures.east.img)
+			mlx_destroy_image(data->mlx, data->textures.east.img);
+		if (data->textures.west.img)
+			mlx_destroy_image(data->mlx, data->textures.west.img);
+		if (data->textures.south.img)
+			mlx_destroy_image(data->mlx, data->textures.south.img);
+		if (data->textures.north.img)
+			mlx_destroy_image(data->mlx, data->textures.north.img);
+		if (data->bg.img)
+			mlx_destroy_image(data->mlx, data->bg.img);
 		mlx_clear_window(data->mlx, data->win);
 		mlx_destroy_window(data->mlx, data->win);
+		data->win = NULL;
 		mlx_destroy_display(data->mlx);
+		data->mlx = NULL;
 	}
 }
 
@@ -40,13 +47,9 @@ void	freedom(t_data *data)
 		data->map.grid = NULL;
 	}
 	free_textures(data);
-	free_images(data);
 	destroy_textures(&data->textures, data->mlx);
-	if (data->mlx)
-	{
-		free(data->mlx);
-		data->mlx = NULL;
-	}
+	free_images(data);
+	data->mlx = NULL;
 }
 
 int	ft_kill(t_data *data, char *msg)

@@ -39,6 +39,6 @@ int	key_hook_release(int keycode, t_data *data)
 int	x_press(t_data *data)
 {
 	mlx_loop_end(data->mlx);
-	freedom(data);
-	exit(0);
+	close_window(data, GAME_ENDED);
+	return (0);
 }
