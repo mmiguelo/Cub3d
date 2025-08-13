@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   03_textures.c                                      :+:      :+:    :+:   */
+/*   03_textures_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:25 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/13 13:00:26 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/13 14:28:06 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3D_bonus.h"
 
 void	assign_texture(t_data *data, char **path, char *line, int *i)
 {
