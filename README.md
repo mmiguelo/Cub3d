@@ -1,7 +1,7 @@
 # 🎮 cub3D
 
 ## 📌 About
-cub3D is a 42 project inspired by the classic **Wolfenstein 3D**, developed to explore raycasting concepts, 2D/3D rendering, and image manipulation using **MiniLibX**, , following the strict [Norminette](https://github.com/42School/norminette) coding style.
+cub3D is a 42 project inspired by the classic **Wolfenstein 3D**, developed to explore raycasting concepts, 2D/3D rendering, and image manipulation using **MiniLibX**, , following the strict [Norminette](https://github.com/42School/norminette) coding style.  
 The goal is to create a simple graphics engine capable of:
 - Rendering textured walls using raycasting
 - Detecting collisions with the environment
