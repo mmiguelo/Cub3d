@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02_extensions.c                                    :+:      :+:    :+:   */
+/*   02_extensions_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:29 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/13 13:00:30 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/13 14:28:17 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3D_bonus.h"
 
 void	check_directory(t_data *data, char *filename)
 {
