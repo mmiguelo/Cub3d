@@ -10,13 +10,11 @@ RM = rm -rf
 
 VAL = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --errors-for-leak-kinds=definite
 
-GENERAL = main.c utils.c
+GENERAL = main.c free.c
 PARSING = 01_parse.c 02_extensions.c 03_textures.c 04_color.c 05_map.c 06_map_utils.c
 INIT	= data.c
 DEBUG = print.c
-MINIMAP = minimap_init.c minimap_utils.c
-MAP = map.c map_utils.c
-GAME = close_window.c keypress_handler.c movements.c
+GAME = close_window.c game_loop.c keypress_handler.c player.c raycasting.c render.c
 
 NAME = cub3D
 
@@ -44,11 +42,8 @@ VPATH += src/parse
 VPATH += src/init
 # debug
 VPATH += src/debug
-# minimap
-VPATH += src/minimap
 #game
 VPATH += src/game
-VPATH += src/map
 
 #==============================================================================#
 #                                    FILES                                     #
@@ -58,9 +53,7 @@ SRC +=	$(GENERAL)
 SRC +=	$(PARSING)
 SRC +=	$(INIT)
 SRC +=	$(DEBUG)
-SRC +=	$(MINIMAP)
 SRC +=	$(GAME)
-SRC += 	$(MAP)
 
 # Library Paths
 LIBFT_DIR = libft

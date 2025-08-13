@@ -26,13 +26,13 @@ typedef struct s_ray_pos
 
 typedef struct s_ray_step
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	double	side_dist_x;
 	double	side_dist_y;
 	double	delta_dist_x;
 	double	delta_dist_y;
-}	t_ray_step;
+}			t_ray_step;
 
 typedef struct s_ray
 {

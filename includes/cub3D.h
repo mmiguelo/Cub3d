@@ -44,10 +44,11 @@
 # define WIN_HEIGHT 768
 # define PI 3.1415926535
 # define FOV 66
-# define FOV_RAD (FOV * PI / 180)
-# define PLANE_LEN tan(FOV_RAD / 2)
-# define MOVE_SPEED 0.01
+# define FOV_RAD 1.1519173063162575
+# define PLANE_LEN 0.7673269879789604
+# define MOVE_SPEED 0.015
 # define ROT_SPEED 0.03
+# define PLAYER_RAD 0.2
 # define PITCH 0
 
 # define VALID_MAP_CHARS "01NSWE"
@@ -116,9 +117,10 @@ typedef struct s_textures
 	t_img	west;
 }	t_textures;
 
-typedef struct s_pair{
-	double x;
-	double y;
+typedef struct s_pair
+{
+	double	x;
+	double	y;
 }	t_pair;
 
 typedef struct s_player
@@ -209,15 +211,6 @@ void	print_assets(t_data *data, char *process);
 void	print_map(t_data *data);
 void	print_parsing_map(t_data *data, int y);
 
-// minimap
-void	create_minimap(t_data *data);
-void	init_minimap(t_data *data);
-void	load_minimap_textures(t_data *data);
-void	calculate_tile_size(t_data *data);
-void	fill_image_with_color(void *img, int tile_size, int color);
-void	render_image(t_data *data, char c, int x, int y);
-void	render_minimap(t_data *data);
-
 //game
 void	close_window(t_data *data, char *msg);
 int		x_press(t_data *data);
@@ -228,6 +221,8 @@ void	move_right(t_data *data);
 void	calculate_raycasting(t_data *data);
 void	calculate_movements(t_data *data);
 void	calculate_rotation(t_data *data, double rotation_speed);
+void	check_collision(char **map, t_player *player, double *new_x,
+	double *new_y);
 int		key_hook_press(int keycode, t_data *data);
 int		key_hook_release(int keycode, t_data *data);
 void	destroy_textures(t_textures *textures, void *mlx);

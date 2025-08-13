@@ -12,7 +12,7 @@ void	free_tex(t_img *tex, void *mlx)
 void	destroy_textures(t_textures *textures, void *mlx)
 {
 	if (!textures || !mlx)
-		return;
+		return ;
 	if (textures->north.img)
 		free_tex(&textures->north, mlx);
 	if (textures->south.img)

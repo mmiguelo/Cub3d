@@ -6,7 +6,6 @@ void	init(t_data *data)
 		ft_kill(NULL, ERR_MALLOC);
 	ft_bzero(data, sizeof(t_data));
 	init_game(data);
-	init_image(data);
 }
 
 void	init_game(t_data *data)
@@ -38,10 +37,11 @@ void	init_image(t_data *data)
 void	load_textures(t_data *data, t_img *texture)
 {
 	texture->img = mlx_xpm_file_to_image(data->mlx,
-		texture->path, &texture->width, &texture->height);
+			texture->path, &texture->width, &texture->height);
 	if (!texture->img)
 		ft_kill(data, ERR_TEX_LOAD);
-	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel, &texture->line_length, &texture->endian);
+	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel,
+			&texture->line_length, &texture->endian);
 	if (!texture->addr)
 		ft_kill(data, ERR_TEX_LOAD);
 }
