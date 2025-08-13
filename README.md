@@ -58,7 +58,6 @@ make
 ---
 
 ### 🚀 Mandatory Project<br>
-
 <details>
 <summary>✨ Features</summary><br>
   
@@ -87,8 +86,7 @@ make
 
 ---
 
-333 🎯 Bonus
-
+### 🎯 Bonus
 <details>
 <summary>✨ Features</summary><br>
 
