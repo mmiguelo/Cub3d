@@ -113,10 +113,10 @@ void	calculate_perpwalldist(t_ray *ray, t_draw *draw)
 	else
 		draw->perpwalldist = ray->step.side_dist_y - ray->step.delta_dist_y;
 	draw->line_height = (int)(WIN_HEIGHT / draw->perpwalldist);
-	draw->start = -draw->line_height / 2 + WIN_HEIGHT / 2 + PITCH;
+	draw->start = -draw->line_height / 2 + WIN_HEIGHT / 2;
 	if (draw->start < 0)
 		draw->start = 0;
-	draw->end = draw->line_height / 2 + WIN_HEIGHT / 2 + PITCH;
+	draw->end = draw->line_height / 2 + WIN_HEIGHT / 2;
 	if (draw->end >= WIN_HEIGHT)
 		draw->end = WIN_HEIGHT - 1;
 }

@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/13 13:02:45 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:27:26 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@
 # define MOVE_SPEED 0.015
 # define ROT_SPEED 0.03
 # define PLAYER_RAD 0.2
-# define PITCH 0
 
 # define VALID_MAP_CHARS "01NSWE"
 # define WS " \t\n\r\v\f"

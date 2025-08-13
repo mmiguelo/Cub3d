@@ -53,7 +53,7 @@ void	calculate_texture(t_data *data, t_ray *ray)
 	if (ray->draw.side == 1 && ray->dir.y < 0)
 		ray->draw.tex_x = TILE_SIZE - ray->draw.tex_x - 1;
 	ray->draw.step = 1.0 * TILE_SIZE / ray->draw.line_height;
-	ray->draw.tex_pos = (ray->draw.start - PITCH - WIN_HEIGHT / 2
+	ray->draw.tex_pos = (ray->draw.start - WIN_HEIGHT / 2
 			+ ray->draw.line_height / 2) * ray->draw.step;
 }
 
@@ -62,13 +62,13 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 	ray->draw.tex_y = ray->draw.tex_pos;
 	ray->draw.tex_pos += ray->draw.step;
 	if (ray->draw.side == 0 && ray->dir.x > 0)
-		ray->draw.color = color(&ray->draw, &data->textures.west);
-	else if (ray->draw.side == 0 && ray->dir.x < 0)
 		ray->draw.color = color(&ray->draw, &data->textures.east);
+	else if (ray->draw.side == 0 && ray->dir.x < 0)
+		ray->draw.color = color(&ray->draw, &data->textures.west);
 	else if (ray->draw.side == 1 && ray->dir.y > 0)
-		ray->draw.color = color(&ray->draw, &data->textures.south);
-	else
 		ray->draw.color = color(&ray->draw, &data->textures.north);
+	else
+		ray->draw.color = color(&ray->draw, &data->textures.south);
 	put_pixel(&data->bg, x, ray->draw.start, ray->draw.color);
 	ray->draw.start++;
 }
