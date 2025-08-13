@@ -91,13 +91,15 @@ all: $(NAME)
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
+#mandatory
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o : %.c
+#bonus
+$(OBJ_DIR)/%.o : %.c | $(OBJ_DIR)
 	$(CC) $(FLAGS) -c $< -o $@ $(INC)
 
-$(OBJ_DIR)/%.o : %.c
+$(OBJ_DIR)/%.o : %.c | $(OBJ_DIR)
 	$(CC) $(FLAGS) -c $< -o $@ $(BONUS_INC)
 
 $(MLX):
