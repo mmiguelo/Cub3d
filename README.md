@@ -120,3 +120,5 @@ make
 + add minimap exemples and fps
 + add picture of dist-based brightness falloff
 + add demonstrating video
+
+<p align="right">(<a href="#readme-top">get to top</a>)</p>
