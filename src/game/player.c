@@ -32,7 +32,7 @@ void	calculate_movements(t_player *player, char **map)
 		calculate_rotation(player, ROT_SPEED);
 }
 
-void	check_collision(t_player *player, char **map,)
+void	check_collision(t_player *player, char **map)
 {
 	if (map[(int)player->y][(int)(player->new_x + PLAYER_RAD)] != '1'
 			&& map[(int)player->y][(int)(player->new_x - PLAYER_RAD)] != '1')
