@@ -177,8 +177,17 @@ typedef struct s_data
 #                                   FUNCTIONS                                  #
 #=============================================================================*/
 
+// ERROR HANDLING / CLEAN UP
 int		ft_kill(t_data *data, char *message);
+void	close_window(t_data *data, char *msg);
+void	free_textures(t_data *data);
+void	freedom(t_data *data);
+void	destroy_textures(t_textures *textures, void *mlx);
+void	free_tex(t_img *tex, void *mlx);
+
+// PARSING / INITIALIZATION
 void	parse(t_data *data, char *filename, char *extension);
+void	parse_line(t_data *data, char *line);
 void	parse_file_content(t_data *data, char *filename);
 void	process_line(t_data *data, char *line, int *i);
 void	check_extension(t_data *data, char *filename, char *extension);
@@ -196,8 +205,8 @@ void	parse_color(t_data *data, t_color *color);
 int		is_all_assets(t_data *data);
 void	check_duplicated_color(t_data *data, t_color *ceiling, t_color *floor);
 void	check_required_textures(t_data *data, t_textures textures);
-void	free_textures(t_data *data);
-void	freedom(t_data *data);
+
+// MAP UTILITIES
 int		count_width(const char *str);
 void	append_map_line(t_data *data, char ***grid, char *line, int height);
 int		empty_line(char *line);
@@ -206,36 +215,33 @@ void	check_map_walls_and_player(t_data *data, t_map *map);
 void	check_surroundings(t_data *data, char **grid, int x, int y);
 bool	is_valid_map_line(char *line);
 bool	is_already_rgb(t_color *color);
-void	parse_line(t_data *data, char *line);
 
+// DEBUG / PRINT
 // TODO: delete in the end
 void	print_assets(t_data *data, char *process);
 void	print_map(t_data *data);
 void	print_parsing_map(t_data *data, int y);
 
-//game
-void	close_window(t_data *data, char *msg);
+// GAME LOOP / INPUT
+void	game_loop(t_data *data);
+int		draw_loop(void *param);
 int		x_press(t_data *data);
-void	move_up(t_data *data);
-void	move_down(t_data *data);
-void	move_left(t_data *data);
-void	move_right(t_data *data);
-void	calculate_raycasting(t_data *data);
+int		key_hook_press(int keycode, t_data *data);
+int		key_hook_release(int keycode, t_data *data);
+
+// PLAYER MOVEMENT
 void	calculate_movements(t_player *player, char **map);
 void	move_strafe(t_player *player, char **map);
 void	turn_player(t_player *player);
 void	calculate_rotation(t_player *player, double rotation_speed);
 void	check_collision(t_player *player, char **map);
-int		key_hook_press(int keycode, t_data *data);
-int		key_hook_release(int keycode, t_data *data);
-void	destroy_textures(t_textures *textures, void *mlx);
-void	free_tex(t_img *tex, void *mlx);
 
-//map
-void	game_loop(t_data *data);
+// PLAYER VECTOR
 void	get_player_vector(t_data *data);
 void	get_player_vector2(t_data *data);
-int		draw_loop(void *param);
+
+// RAYCASTING / RENDERING
+void	calculate_raycasting(t_data *data);
 void	put_fc(t_data *data);
 void	calculate_variables(t_player *player, t_ray *ray, int x);
 void	calculate_variables2(t_ray *ray, double player_x, double player_y);
