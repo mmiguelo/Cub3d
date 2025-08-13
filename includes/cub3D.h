@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
+/*   Updated: 2025/08/13 13:02:45 by mmiguelo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -20,13 +32,6 @@
 #                                   DEFINES                                    #
 #=============================================================================*/
 
-/*
-** ANSI color codes for terminal output
-** Usage:
-** 		printf(RED "This text is red" RST);
-** 		printf(G "This text is green" RST);
-** Remember to reset the color after using it with RST.
-*/
 # define RST	"\033[0m"		// reset color
 # define RED	"\033[1;31m"	// bold red
 # define G		"\033[1;32m"	// bold green
@@ -82,14 +87,6 @@
 #                                   STRUCTS                                    #
 #=============================================================================*/
 
-typedef struct s_minimap
-{
-	void	*floor;
-	void	*wall;
-	void	*player;
-	int		tile_size;
-}	t_minimap;
-
 typedef struct s_color
 {
 	int	r;
@@ -126,7 +123,7 @@ typedef struct s_pair
 typedef struct s_player
 {
 	char	direction;
-	double	x; //position vector of the player
+	double	x;
 	double	y;
 	double	new_x;
 	double	new_y;
@@ -170,7 +167,6 @@ typedef struct s_data
 	void		*win;
 	t_img		bg;
 	t_img		image;
-	t_minimap	minimap; //variables for minimap
 }	t_data;
 
 /*=============================================================================#
