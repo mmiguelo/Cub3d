@@ -38,17 +38,16 @@ void	calculate_movements(t_data *data)
 void	check_collision(char **map, t_player *player, double *new_x,
 	double *new_y)
 {
-    if (map[(int)player->y][(int)(*new_x + PLAYER_RAD)] != '1' &&
-        map[(int)player->y][(int)(*new_x - PLAYER_RAD)] != '1')
-    {
-        player->x = *new_x;
-    }
-
-    if (map[(int)(*new_y + PLAYER_RAD)][(int)player->x] != '1' &&
-        map[(int)(*new_y - PLAYER_RAD)][(int)player->x] != '1')
-    {
-        player->y = *new_y;
-    }
+	if (map[(int)player->y][(int)(*new_x + PLAYER_RAD)] != '1'
+			&& map[(int)player->y][(int)(*new_x - PLAYER_RAD)] != '1')
+	{
+		player->x = *new_x;
+	}
+	if (map[(int)(*new_y + PLAYER_RAD)][(int)player->x] != '1'
+			&& map[(int)(*new_y - PLAYER_RAD)][(int)player->x] != '1')
+	{
+		player->y = *new_y;
+	}
 }
 
 void	calculate_rotation(t_data *data, double rotation_speed)

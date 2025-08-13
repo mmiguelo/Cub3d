@@ -222,7 +222,7 @@ void	calculate_raycasting(t_data *data);
 void	calculate_movements(t_data *data);
 void	calculate_rotation(t_data *data, double rotation_speed);
 void	check_collision(char **map, t_player *player, double *new_x,
-	double *new_y);
+			double *new_y);
 int		key_hook_press(int keycode, t_data *data);
 int		key_hook_release(int keycode, t_data *data);
 void	destroy_textures(t_textures *textures, void *mlx);
