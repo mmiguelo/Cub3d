@@ -2,34 +2,34 @@
 
 void	calculate_movements(t_player *player, char **map)
 {
-	if (data->player.move_forward)
+	if (player->move_forward)
 	{
-		player->new_x = data->player.x + data->player.dir.x * MOVE_SPEED;
-		player->new_y = data->player.y + data->player.dir.y * MOVE_SPEED;
+		player->new_x = player->x + player->dir.x * MOVE_SPEED;
+		player->new_y = player->y + player->dir.y * MOVE_SPEED;
 		check_collision(player, map);
 	}
-	if (data->player.move_backward)
+	if (player->move_backward)
 	{
-		player->new_x = data->player.x - data->player.dir.x * MOVE_SPEED;
-		player->new_y = data->player.y - data->player.dir.y * MOVE_SPEED;
+		player->new_x = player->x - player->dir.x * MOVE_SPEED;
+		player->new_y = player->y - player->dir.y * MOVE_SPEED;
 		check_collision(player, map);
 	}
-	if (data->player.move_left)
+	if (player->move_left)
 	{
-		player->new_x = data->player.x + data->player.dir.y * MOVE_SPEED;
-		player->new_y = data->player.y - data->player.dir.x * MOVE_SPEED;
+		player->new_x = player->x + player->dir.y * MOVE_SPEED;
+		player->new_y = player->y - player->dir.x * MOVE_SPEED;
 		check_collision(player, map);
 	}
-	if (data->player.move_right)
+	if (player->move_right)
 	{
-		player->new_x = data->player.x - data->player.dir.y * MOVE_SPEED;
-		player->new_y = data->player.y + data->player.dir.x * MOVE_SPEED;
+		player->new_x = player->x - player->dir.y * MOVE_SPEED;
+		player->new_y = player->y + player->dir.x * MOVE_SPEED;
 		check_collision(player, map);
 	}
-	if (data->player.turn_left)
-		calculate_rotation(data, -ROT_SPEED);
-	if (data->player.turn_right)
-		calculate_rotation(data, ROT_SPEED);
+	if (player->turn_left)
+		calculate_rotation(player, -ROT_SPEED);
+	if (player->turn_right)
+		calculate_rotation(player, ROT_SPEED);
 }
 
 void	check_collision(t_player *player, char **map,)
@@ -46,21 +46,21 @@ void	check_collision(t_player *player, char **map,)
 	}
 }
 
-void	calculate_rotation(t_data *data, double rotation_speed)
+void	calculate_rotation(t_player *player, double rotation_speed)
 {
 	double	old_dir_x;
 	double	old_plane_x;
 
-	old_dir_x = data->player.dir.x;
-	data->player.dir.x = data->player.dir.x * cos(rotation_speed)
-		- data->player.dir.y * sin(rotation_speed);
-	data->player.dir.y = old_dir_x * sin(rotation_speed)
-		+ data->player.dir.y * cos(rotation_speed);
-	old_plane_x = data->player.plane.x;
-	data->player.plane.x = data->player.plane.x * cos(rotation_speed)
-		- data->player.plane.y * sin(rotation_speed);
-	data->player.plane.y = old_plane_x * sin(rotation_speed)
-		+ data->player.plane.y * cos(rotation_speed);
+	old_dir_x = player->dir.x;
+	player->dir.x = player->dir.x * cos(rotation_speed) - player->dir.y
+		* sin(rotation_speed);
+	player->dir.y = old_dir_x * sin(rotation_speed) + player->dir.y
+		* cos(rotation_speed);
+	old_plane_x = player->plane.x;
+	player->plane.x = player->plane.x * cos(rotation_speed) - player->plane.y
+		* sin(rotation_speed);
+	player->plane.y = old_plane_x * sin(rotation_speed) + player->plane.y
+		* cos(rotation_speed);
 }
 
 void	get_player_vector(t_data *data)
