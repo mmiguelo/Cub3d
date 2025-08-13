@@ -11,7 +11,7 @@ The goal is to create a simple graphics engine capable of:
 
 ---
 
-⚙️ How to build<br> 
+### ⚙️ How to build<br> 
 <details>
 <summary>📦 Dependencies</summary><br>
 - In order to compile and run the game, you will need several dependencies, which you can install on the terminal:
@@ -57,7 +57,7 @@ make
 
 ---
 
-🚀 Mandatory Project<br>
+### 🚀 Mandatory Project<br>
 <details>
 <summary>✨ Features</summary><br>
   
@@ -86,7 +86,7 @@ make
 
 ---
 
-🎯 Bonus
+333 🎯 Bonus
 
 <details>
 <summary>✨ Features</summary><br>
