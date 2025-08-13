@@ -112,3 +112,11 @@ make
 | `ESC` | Exit game         |
 
 </details>
+
+---
+
+### TODO:
+
++ add minimap exemples and fps
++ add picture of dist-based brightness falloff
++ add demonstrating video
