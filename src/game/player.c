@@ -14,6 +14,12 @@ void	calculate_movements(t_player *player, char **map)
 		player->new_y = player->y - player->dir.y * MOVE_SPEED;
 		check_collision(player, map);
 	}
+	move_strafe(player, map);
+	turn_player(player);
+}
+
+void	move_strafe(t_player *player, char **map)
+{
 	if (player->move_left)
 	{
 		player->new_x = player->x + player->dir.y * MOVE_SPEED;
@@ -26,24 +32,14 @@ void	calculate_movements(t_player *player, char **map)
 		player->new_y = player->y + player->dir.x * MOVE_SPEED;
 		check_collision(player, map);
 	}
+}
+
+void	turn_player(t_player *player)
+{
 	if (player->turn_left)
 		calculate_rotation(player, -ROT_SPEED);
 	if (player->turn_right)
 		calculate_rotation(player, ROT_SPEED);
-}
-
-void	check_collision(t_player *player, char **map)
-{
-	if (map[(int)player->y][(int)(player->new_x + PLAYER_RAD)] != '1'
-			&& map[(int)player->y][(int)(player->new_x - PLAYER_RAD)] != '1')
-	{
-		player->x = player->new_x;
-	}
-	if (map[(int)(player->new_y + PLAYER_RAD)][(int)player->x] != '1'
-			&& map[(int)(player->new_y - PLAYER_RAD)][(int)player->x] != '1')
-	{
-		player->y = player->new_y;
-	}
 }
 
 void	calculate_rotation(t_player *player, double rotation_speed)
@@ -63,39 +59,16 @@ void	calculate_rotation(t_player *player, double rotation_speed)
 		* cos(rotation_speed);
 }
 
-void	get_player_vector(t_data *data)
+void	check_collision(t_player *player, char **map)
 {
-	if (data->map.direction == 'N')
+	if (map[(int)player->y][(int)(player->new_x + PLAYER_RAD)] != '1'
+			&& map[(int)player->y][(int)(player->new_x - PLAYER_RAD)] != '1')
 	{
-		data->player.dir.x = 0;
-		data->player.dir.y = -1;
-		data->player.plane.x = PLANE_LEN;
-		data->player.plane.y = 0;
+		player->x = player->new_x;
 	}
-	if (data->map.direction == 'S')
+	if (map[(int)(player->new_y + PLAYER_RAD)][(int)player->x] != '1'
+			&& map[(int)(player->new_y - PLAYER_RAD)][(int)player->x] != '1')
 	{
-		data->player.dir.x = 0;
-		data->player.dir.y = 1;
-		data->player.plane.x = -PLANE_LEN;
-		data->player.plane.y = 0;
-	}
-	get_player_vector2(data);
-}
-
-void	get_player_vector2(t_data *data)
-{
-	if (data->map.direction == 'W')
-	{
-		data->player.dir.x = -1;
-		data->player.dir.y = 0;
-		data->player.plane.x = 0;
-		data->player.plane.y = -PLANE_LEN;
-	}
-	if (data->map.direction == 'E')
-	{
-		data->player.dir.x = 1;
-		data->player.dir.y = 0;
-		data->player.plane.x = 0;
-		data->player.plane.y = PLANE_LEN;
+		player->y = player->new_y;
 	}
 }

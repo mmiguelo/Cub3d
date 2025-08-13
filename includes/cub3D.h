@@ -222,6 +222,8 @@ void	move_left(t_data *data);
 void	move_right(t_data *data);
 void	calculate_raycasting(t_data *data);
 void	calculate_movements(t_player *player, char **map);
+void	move_strafe(t_player *player, char **map);
+void	turn_player(t_player *player);
 void	calculate_rotation(t_player *player, double rotation_speed);
 void	check_collision(t_player *player, char **map);
 int		key_hook_press(int keycode, t_data *data);
