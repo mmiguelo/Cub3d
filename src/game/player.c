@@ -1,33 +1,30 @@
 #include "cub3D.h"
 
-void	calculate_movements(t_data *data)
+void	calculate_movements(t_player *player, char **map)
 {
-	double	new_x;
-	double	new_y;
-
 	if (data->player.move_forward)
 	{
-		new_x = data->player.x + data->player.dir.x * MOVE_SPEED;
-		new_y = data->player.y + data->player.dir.y * MOVE_SPEED;
-		check_collision(data->map.grid, &data->player, &new_x, &new_y);
+		player->new_x = data->player.x + data->player.dir.x * MOVE_SPEED;
+		player->new_y = data->player.y + data->player.dir.y * MOVE_SPEED;
+		check_collision(player, map);
 	}
 	if (data->player.move_backward)
 	{
-		new_x = data->player.x - data->player.dir.x * MOVE_SPEED;
-		new_y = data->player.y - data->player.dir.y * MOVE_SPEED;
-		check_collision(data->map.grid, &data->player, &new_x, &new_y);
+		player->new_x = data->player.x - data->player.dir.x * MOVE_SPEED;
+		player->new_y = data->player.y - data->player.dir.y * MOVE_SPEED;
+		check_collision(player, map);
 	}
 	if (data->player.move_left)
 	{
-		new_x = data->player.x + data->player.dir.y * MOVE_SPEED;
-		new_y = data->player.y - data->player.dir.x * MOVE_SPEED;
-		check_collision(data->map.grid, &data->player, &new_x, &new_y);
+		player->new_x = data->player.x + data->player.dir.y * MOVE_SPEED;
+		player->new_y = data->player.y - data->player.dir.x * MOVE_SPEED;
+		check_collision(player, map);
 	}
 	if (data->player.move_right)
 	{
-		new_x = data->player.x - data->player.dir.y * MOVE_SPEED;
-		new_y = data->player.y + data->player.dir.x * MOVE_SPEED;
-		check_collision(data->map.grid, &data->player, &new_x, &new_y);
+		player->new_x = data->player.x - data->player.dir.y * MOVE_SPEED;
+		player->new_y = data->player.y + data->player.dir.x * MOVE_SPEED;
+		check_collision(player, map);
 	}
 	if (data->player.turn_left)
 		calculate_rotation(data, -ROT_SPEED);
@@ -35,18 +32,17 @@ void	calculate_movements(t_data *data)
 		calculate_rotation(data, ROT_SPEED);
 }
 
-void	check_collision(char **map, t_player *player, double *new_x,
-	double *new_y)
+void	check_collision(t_player *player, char **map,)
 {
-	if (map[(int)player->y][(int)(*new_x + PLAYER_RAD)] != '1'
-			&& map[(int)player->y][(int)(*new_x - PLAYER_RAD)] != '1')
+	if (map[(int)player->y][(int)(player->new_x + PLAYER_RAD)] != '1'
+			&& map[(int)player->y][(int)(player->new_x - PLAYER_RAD)] != '1')
 	{
-		player->x = *new_x;
+		player->x = player->new_x;
 	}
-	if (map[(int)(*new_y + PLAYER_RAD)][(int)player->x] != '1'
-			&& map[(int)(*new_y - PLAYER_RAD)][(int)player->x] != '1')
+	if (map[(int)(player->new_y + PLAYER_RAD)][(int)player->x] != '1'
+			&& map[(int)(player->new_y - PLAYER_RAD)][(int)player->x] != '1')
 	{
-		player->y = *new_y;
+		player->y = player->new_y;
 	}
 }
 

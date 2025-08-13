@@ -128,6 +128,8 @@ typedef struct s_player
 	char	direction;
 	double	x; //position vector of the player
 	double	y;
+	double	new_x;
+	double	new_y;
 	t_pair	dir; // x direction vector// y direction vector
 	t_pair	plane; // 2d raycaster version of camera plane
 	int		move_forward;

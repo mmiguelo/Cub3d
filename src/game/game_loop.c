@@ -11,9 +11,12 @@ void	game_loop(t_data *data)
 	mlx_loop(data->mlx);
 }
 
-int	draw_loop(t_data *data)
+int	draw_loop(void *param)
 {
-	calculate_movements(data);
+	t_data	*data;
+
+	data = (t_data *)param;
+	calculate_movements(&data->player, data->map.grid);
 	calculate_raycasting(data);
 	return (0);
 }
