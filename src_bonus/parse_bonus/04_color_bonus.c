@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3D_bonus.h"
 
 void	check_duplicated_color(t_data *data, t_color *ceiling, t_color *floor)
 {
