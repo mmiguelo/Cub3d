@@ -1,12 +1,13 @@
-NO textures/wall.xpm
-SO textures/wall_1_.xpm
-WE textures/wall_2_.xpm
-EA textures/wall_3_.xpm
+NO textures/north.xpm
+SO textures/south.xpm
+WE textures/west.xpm
+EA textures/east.xpm
 
 F 191, 160, 116
 C 229, 227, 196
 
-111
-101
-1N1
-111
+11111
+10001
+10N01
+10001
+11111
