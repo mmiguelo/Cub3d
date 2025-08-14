@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/14 20:15:34 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/14 20:58:53 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,11 +161,13 @@ typedef struct s_data
 	t_player	player;
 	t_map		map;
 	t_frames	frames;
+	t_img		bg;
+	t_img		image;
 	double		move_speed;
 	void		*mlx;
 	void		*win;
-	t_img		bg;
-	t_img		image;
+	int			fd;
+	char		*line;
 }	t_data;
 
 /*=============================================================================#

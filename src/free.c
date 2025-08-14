@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:59:59 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/14 20:15:05 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/14 21:01:53 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	free_gnl(t_data *data)
 		return ;
 	while (data->line)
 	{
-		free(data->line)
-		data->line = get_next_line(data->line);
+		free(data->line);
+		data->line = get_next_line(data->fd);
 	}
 }
 
