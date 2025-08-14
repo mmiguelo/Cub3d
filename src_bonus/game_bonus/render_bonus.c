@@ -57,18 +57,40 @@ void	calculate_texture(t_data *data, t_ray *ray)
 			+ ray->draw.line_height / 2) * ray->draw.step;
 }
 
+int	apply_brightness(int color, double brightness)
+{
+	int	rgb[3];
+
+	rgb[0] = ((color >> 16) & 0xFF) * brightness;
+    rgb[1] = ((color >> 8) & 0xFF) * brightness;
+    rgb[2] = (color & 0xFF) * brightness;
+	if (rgb[0] > 255)
+		rgb[0] = 255;
+	if (rgb[1] > 255)
+		rgb[1] = 255;
+	if (rgb[2] > 255)
+		rgb[2] = 255;
+	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
+}
+
 void	draw_line(t_data *data, t_ray *ray, int x)
 {
+	
+
 	ray->draw.tex_y = ray->draw.tex_pos;
 	ray->draw.tex_pos += ray->draw.step;
 	if (ray->draw.side == 0 && ray->dir.x > 0)
-		ray->draw.color = color(&ray->draw, &data->textures.east);
-	else if (ray->draw.side == 0 && ray->dir.x < 0)
 		ray->draw.color = color(&ray->draw, &data->textures.west);
-	else if (ray->draw.side == 1 && ray->dir.y > 0)
-		ray->draw.color = color(&ray->draw, &data->textures.north);
-	else
+	else if (ray->draw.side == 0 && ray->dir.x < 0)
+		ray->draw.color = color(&ray->draw, &data->textures.east);
+	else if (ray->draw.side == 1 && ray->dir.y < 0)
 		ray->draw.color = color(&ray->draw, &data->textures.south);
+	else
+		ray->draw.color = color(&ray->draw, &data->textures.north);
+	ray->draw.brightness = 1 / (1 + ray->draw.perpwalldist * DARKNESS);
+    if (ray->draw.brightness < 0.2)
+		ray->draw.brightness = 0.2;
+	ray->draw.color = apply_brightness(ray->draw.color, ray->draw.brightness);
 	put_pixel(&data->bg, x, ray->draw.start, ray->draw.color);
 	ray->draw.start++;
 }

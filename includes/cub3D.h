@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/13 17:27:26 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/14 20:15:34 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ void	free_textures(t_data *data);
 void	freedom(t_data *data);
 void	destroy_textures(t_textures *textures, void *mlx);
 void	free_tex(t_img *tex, void *mlx);
+void	free_gnl(t_data *data);
 
 // PARSING / INITIALIZATION
 void	parse(t_data *data, char *filename, char *extension);

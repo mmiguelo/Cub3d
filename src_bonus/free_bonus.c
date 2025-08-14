@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:59:59 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/13 14:26:25 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/14 20:14:12 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,20 @@ void	freedom(t_data *data)
 	data->mlx = NULL;
 }
 
+void	free_gnl(t_data *data)
+{
+	if (!data->line)
+		return ;
+	while (data->line)
+	{
+		free(data->line)
+		data->line = get_next_line(data->line);
+	}
+}
+
 int	ft_kill(t_data *data, char *msg)
 {
+	free_gnl(data);
 	if (data)
 		freedom(data);
 	if (ft_strcmp(msg, GAME_ENDED) == 0)

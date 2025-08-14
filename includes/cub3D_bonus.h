@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/13 17:46:35 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/14 20:15:24 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 # define MOVE_SPEED 0.015
 # define ROT_SPEED 0.03
 # define PLAYER_RAD 0.2
+# define DARKNESS 0.12
 
 # define VALID_MAP_CHARS "01NSWE"
 # define WS " \t\n\r\v\f"
@@ -179,6 +180,7 @@ void	free_textures(t_data *data);
 void	freedom(t_data *data);
 void	destroy_textures(t_textures *textures, void *mlx);
 void	free_tex(t_img *tex, void *mlx);
+void	free_gnl(t_data *data);
 
 // PARSING / INITIALIZATION
 void	parse(t_data *data, char *filename, char *extension);
