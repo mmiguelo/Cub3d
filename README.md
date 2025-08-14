@@ -91,6 +91,8 @@ make
 <details>
 <summary>✨ Features</summary><br>
 
+(currently in branch bonus_minimap)
+
 + Real-time minimap rendering
 + Real time FPS visualizer
 + Distance-based brightness attenuation
