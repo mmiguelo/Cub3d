@@ -34,8 +34,11 @@ void	init_game(t_data *data)
 	data->player.plane.y = 0.66;
 	data->frames.time = 0.0;
 	data->frames.old_time = 0.0;
-	data->move_speed = 1;
-	data->global_light = 1;
+	data->move_speed = 1.0;
+	data->global_light = 1.0;
+	data->light_direction = -1;
+	data->n = 0x14183C;
+	data->d = 0xE5E3C4;
 }
 
 void	init_image(t_data *data)

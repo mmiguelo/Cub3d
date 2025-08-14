@@ -31,6 +31,7 @@ void	calculate_raycasting(t_data *data)
 			draw_line(data, &ray, x);
 		x += 1;
 	}
+	update_global_light(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->bg.img, 0, 0);
 }
 

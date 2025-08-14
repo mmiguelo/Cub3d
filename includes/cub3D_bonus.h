@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/14 20:15:24 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/14 22:25:20 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 # define ROT_SPEED 0.03
 # define PLAYER_RAD 0.2
 # define DARKNESS 0.12
+# define DAY_NIGHT_SPEED 0.0002
 
 # define VALID_MAP_CHARS "01NSWE"
 # define WS " \t\n\r\v\f"
@@ -162,11 +163,17 @@ typedef struct s_data
 	t_player	player;
 	t_map		map;
 	t_frames	frames;
+	t_img		bg;
+	t_img		image;
+	int			d;
+	int			n;
+	double		global_light;
+	double		light_direction;
 	double		move_speed;
 	void		*mlx;
 	void		*win;
-	t_img		bg;
-	t_img		image;
+	int			fd;
+	char		*line;
 }	t_data;
 
 /*=============================================================================#
@@ -249,5 +256,9 @@ void	render_texture(t_ray *ray);
 void	draw_line(t_data *data, t_ray *ray, int x);
 int		color(t_draw *draw, t_img *texture);
 void	put_pixel(t_img *img, int x, int y, int color);
+int		apply_brightness(int color, double brightness);
+int		apply_global_brightness(int color, double global_light);
+void	update_global_light(t_data *data);
+int		lerp_ceilling(int day_color, int night_color, double global_light);
 
 #endif
