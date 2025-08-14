@@ -93,9 +93,10 @@ make
 
 + Real-time minimap rendering
 + Real time FPS visualizer
-+ Addition of distance-based brightness falloff
++ Distance-based brightness attenuation
 + Wall collision detection
-+ Rotation of the point of view with the mouse
++ Dynamic ceiling color using LERP
++ Global day/night ambient lighting cycle
 
 </details>
 
@@ -118,6 +119,7 @@ make
 
 ### TODO:
 
++ Mouse-based view rotation
 + add minimap exemples and fps
 + add picture of dist-based brightness falloff
 + add demonstrating video
