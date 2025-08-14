@@ -11,17 +11,40 @@ RM = rm -rf
 
 VAL = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --errors-for-leak-kinds=definite
 
-GENERAL = main.c free.c
-PARSING = 01_parse.c 02_extensions.c 03_textures.c 04_color.c 05_map.c 06_map_utils.c
-INIT	= data.c
-DEBUG 	= print.c
-GAME 	= close_window.c game_loop.c keypress_handler.c player.c raycasting.c render.c
-
-GENERAL_BONUS 	= main_bonus.c free_bonus.c
-PARSING_BONUS 	= 01_parse_bonus.c 02_extensions_bonus.c 03_textures_bonus.c 04_color_bonus.c 05_map_bonus.c 06_map_utils_bonus.c
-INIT_BONUS		= data_bonus.c
-DEBUG_BONUS 	= print_bonus.c
-GAME_BONUS 		= close_window_bonus.c game_loop_bonus.c keypress_handler_bonus.c player_bonus.c raycasting_bonus.c render_bonus.c
+GENERAL = 	main.c \
+			free.c
+PARSING = 	01_parse.c \
+			02_extensions.c \
+			03_textures.c \
+			04_color.c \
+			05_map.c \
+			06_map_utils.c
+INIT	= 	data.c
+DEBUG 	=	 print.c
+GAME 	= 	close_window.c \
+			game_loop.c \
+			keypress_handler.c \
+			player.c \
+			raycasting.c \
+			render.c
+GENERAL_BONUS	=	main_bonus.c \
+					free_bonus.c
+PARSING_BONUS	= 	01_parse_bonus.c \
+					02_extensions_bonus.c \
+					03_textures_bonus.c \
+					04_color_bonus.c \
+					05_map_bonus.c \
+					06_map_utils_bonus.c
+INIT_BONUS		= 	data_bonus.c
+DEBUG_BONUS		= 	print_bonus.c
+GAME_BONUS		= 	close_window_bonus.c \
+					game_loop_bonus.c \
+					keypress_handler_bonus.c \
+					player_bonus.c \
+					raycasting_bonus.c \
+					render_bonus.c \
+					light_bonus.c \
+					render_utils_bonus.c
 
 NAME 		= cub3D
 NAME_BONUS 	= cub3D_bonus
