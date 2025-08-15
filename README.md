@@ -110,6 +110,7 @@ make
 | `S`   | Move backward     |
 | `A`   | Strafe left       |
 | `D`   | Strafe right      |
+| `SPACE` | Run |
 | `← / →` | Rotate camera  |
 | *Mouse Move* | Rotate camera |
 | `ESC` | Exit game         |
