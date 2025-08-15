@@ -121,8 +121,14 @@ make
 
 ### TODO:
 
-+ add minimap exemples and fps
-+ add picture of dist-based brightness falloff
-+ add demonstrating video
+game:
++ add door
++ add item to end game
++ create interactive features only at night and others at day
++ put item with clue in north part of map and other in south
+
+git hub
++ add picture of dist-based brightness falloff before and after
++ add demonstrating video to show the whole day / night cicle
 
 <p align="right">(<a href="#readme-top">get to top</a>)</p>
