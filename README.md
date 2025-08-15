@@ -73,15 +73,14 @@ make
 <details>
 <summary>🎮 Controls</summary><br>
 
-| Key   | Action            |
-| ----- | ----------------- |
-| `W`   | Move forward      |
-| `S`   | Move backward     |
-| `A`   | Strafe left       |
-| `D`   | Strafe right      |
-| `←`   | Rotate view left  |
-| `→`   | Rotate view right |
-| `ESC` | Exit game         |
+| Key / Input   | Action                    |
+| ------------- | ------------------------- |
+| `W`           | Move forward              |
+| `S`           | Move backward             |
+| `A`           | Strafe left               |
+| `D`           | Strafe right              |
+| `← / →`       | Rotate camera (keyboard)  |
+| `ESC`         | Quit game                 |
 
 </details>
 
@@ -105,16 +104,16 @@ make
 <details>
 <summary>🎮 Controls</summary><br>
 
-| Key   | Action            |
-| ----- | ----------------- |
-| `W`   | Move forward      |
-| `S`   | Move backward     |
-| `A`   | Strafe left       |
-| `D`   | Strafe right      |
-| `SPACE` | Sprint / Run |
-| `← / →` | Rotate camera (keyboard)  |
-| *Mouse Move* | Rotate camera (mouse) |
-| `ESC` | Exit game         |
+| Key / Input   | Action                    |
+| ------------- | ------------------------- |
+| `W`           | Move forward              |
+| `S`           | Move backward             |
+| `A`           | Strafe left               |
+| `D`           | Strafe right              |
+| `SPACE`       | Sprint / Run              |
+| `← / →`       | Rotate camera (keyboard)  |
+| *Mouse Move*  | Rotate camera (mouse)     |
+| `ESC`         | Quit game                 |
 
 </details>
 
