@@ -17,8 +17,9 @@ void	calculate_raycasting(t_data *data)
 	t_ray	ray;
 	int		x;
 
-	x = 0;
+	clear_image(&data->image, 0x000000);
 	put_fc(data);
+	x = 0;
 	while (x < WIN_WIDTH)
 	{
 		ray.draw.hit = false;
@@ -29,10 +30,13 @@ void	calculate_raycasting(t_data *data)
 		calculate_texture(data, &ray);
 		while (ray.draw.start < ray.draw.end)
 			draw_line(data, &ray, x);
-		x += 1;
+		x++;
 	}
+	copy_bg_to_image(&data->bg, &data->image);
 	update_global_light(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->bg.img, 0, 0);
+	if (MINIMAP_ENABLED)
+		render_minimap(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
 }
 
 void	calculate_variables(t_player *player, t_ray *ray, int x)

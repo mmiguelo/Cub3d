@@ -28,3 +28,20 @@ void	put_pixel(t_img *img, int x, int y, int color)
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
+
+void	copy_bg_to_image(t_img *bg, t_img *image)
+{
+    int x, y;
+    char *src;
+    char *dst;
+
+    for (y = 0; y < bg->height; y++)
+    {
+        for (x = 0; x < bg->width; x++)
+        {
+            src = bg->addr + (y * bg->line_length + x * (bg->bits_per_pixel / 8));
+            dst = image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8));
+            *(unsigned int *)dst = *(unsigned int *)src;
+        }
+    }
+}

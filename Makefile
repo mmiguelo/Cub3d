@@ -45,7 +45,8 @@ GAME_BONUS		= 	close_window_bonus.c \
 					render_bonus.c \
 					light_bonus.c \
 					render_utils_bonus.c
-MINIMAP_BONUS	= 	minimap_init_bonus.c
+MINIMAP_BONUS	= 	minimap_bonus.c \
+					minimap_utils_bonus.c
 
 NAME 		= cub3D
 NAME_BONUS 	= cub3D_bonus

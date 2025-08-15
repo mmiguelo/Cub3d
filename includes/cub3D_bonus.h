@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/15 11:03:25 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/15 12:45:36 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@
 # define PLAYER_RAD 0.2
 # define DARKNESS 0.12
 # define DAY_NIGHT_SPEED 0.0002
+# define MINIMAP_ENABLED 1
 
 # define VALID_MAP_CHARS "01NSWE"
 # define WS " \t\n\r\v\f"
@@ -157,9 +158,10 @@ typedef struct s_frames
 
 typedef struct s_minimap
 {
-	t_img	*floor;
-	t_img	*wall;
-	t_img	*player;
+	t_img	minimap_buffer;
+	int		floor_color;
+	int		wall_color;
+	int		player_color;
 	int		tile_size;
 }	t_minimap;
 
@@ -273,6 +275,13 @@ void	update_global_light(t_data *data);
 int		lerp_ceilling(int day_color, int night_color, double global_light);
 
 // MINIMAP
+void	init_minimap(t_data *data);
 void	calculate_tile_size(t_data *data);
+void	render_minimap(t_data *data);
+void	draw_minimap(t_data *data, int map_x, int map_y, int color);
+void	draw_minimap_player(t_data *data, int tile_x, int tile_y);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	clear_image(t_img *img, int color);
+void	copy_bg_to_image(t_img *bg, t_img *image);
 
 #endif

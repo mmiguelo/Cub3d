@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:59:59 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/15 10:12:51 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/15 13:10:37 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	free_images(t_data *data)
 			mlx_destroy_image(data->mlx, data->textures.north.img);
 		if (data->bg.img)
 			mlx_destroy_image(data->mlx, data->bg.img);
+		if (data->image.img)
+   			mlx_destroy_image(data->mlx, data->image.img);
 		mlx_clear_window(data->mlx, data->win);
 		mlx_destroy_window(data->mlx, data->win);
 		data->win = NULL;
