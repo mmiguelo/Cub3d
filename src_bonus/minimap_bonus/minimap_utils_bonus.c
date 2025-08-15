@@ -30,8 +30,14 @@ void	calculate_tile_size(t_data *data)
 
 void clear_image(t_img *img, int color)
 {
-    int x, y;
-    for (y = 0; y < img->height; y++)
-        for (x = 0; x < img->width; x++)
+	int	x;
+	int	y;
+
+	y = -1;
+    while (++y < img->height)
+	{
+		x = -1;
+        while (++x < img->width)
             my_mlx_pixel_put(img, x, y, color);
+	}
 }

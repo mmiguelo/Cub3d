@@ -56,8 +56,10 @@ void	draw_minimap_player(t_data *data, int tile_x, int tile_y)
 	size = data->minimap.tile_size * 0.6;
 	if (size < 2)
         size = 2;
-	start_x = tile_x * data->minimap.tile_size + (data->minimap.tile_size - size) / 2;
-	start_y = tile_y * data->minimap.tile_size + (data->minimap.tile_size - size) / 2;
+	start_x = tile_x * data->minimap.tile_size
+		+ (data->minimap.tile_size - size) / 2;
+	start_y = tile_y * data->minimap.tile_size
+		+ (data->minimap.tile_size - size) / 2;
 	y = -1;
 	while (++y < size)
 	{

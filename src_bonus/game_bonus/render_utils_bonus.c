@@ -29,19 +29,25 @@ void	put_pixel(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	copy_bg_to_image(t_img *bg, t_img *image)
+void	change_buffer_image(t_img *bg, t_img *image)
 {
-    int x, y;
-    char *src;
-    char *dst;
+    int		x;
+	int		y;
+    char	*src;
+    char	*dst;
 
-    for (y = 0; y < bg->height; y++)
+	y = -1;
+    while (++y < bg->height)
     {
-        for (x = 0; x < bg->width; x++)
+		x = -1;
+        while (++x < bg->width)
         {
-            src = bg->addr + (y * bg->line_length + x * (bg->bits_per_pixel / 8));
-            dst = image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8));
+            src = bg->addr + (y * bg->line_length + x
+				* (bg->bits_per_pixel / 8));
+            dst = image->addr + (y * image->line_length + x
+				* (image->bits_per_pixel / 8));
             *(unsigned int *)dst = *(unsigned int *)src;
         }
     }
+	draw_fps_box(image);
 }

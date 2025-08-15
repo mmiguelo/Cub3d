@@ -17,6 +17,7 @@ void	calculate_raycasting(t_data *data)
 	t_ray	ray;
 	int		x;
 
+	update_fps(data);
 	clear_image(&data->image, 0x000000);
 	put_fc(data);
 	x = 0;
@@ -32,11 +33,12 @@ void	calculate_raycasting(t_data *data)
 			draw_line(data, &ray, x);
 		x++;
 	}
-	copy_bg_to_image(&data->bg, &data->image);
+	change_buffer_image(&data->bg, &data->image);
 	update_global_light(data);
 	if (MINIMAP_ENABLED)
 		render_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
+	render_fps(data);
 }
 
 void	calculate_variables(t_player *player, t_ray *ray, int x)

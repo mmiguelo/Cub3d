@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/15 12:45:36 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/15 16:05:37 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,8 @@ typedef struct s_frames
 {
 	double	time;
 	double	old_time;
-	double	frame_time; // fps / tick / delta (might or not use in the future)
+	double	delta_time;
+	double	fps;
 }	t_frames;
 
 typedef struct s_minimap
@@ -172,9 +173,10 @@ typedef struct s_data
 	t_color		ceiling;
 	t_player	player;
 	t_map		map;
-	t_frames	frames;
 	t_img		bg;
 	t_img		image;
+	t_img		fps;
+	t_frames	frames;
 	t_minimap	minimap;
 	int			d;
 	int			n;
@@ -282,6 +284,13 @@ void	draw_minimap(t_data *data, int map_x, int map_y, int color);
 void	draw_minimap_player(t_data *data, int tile_x, int tile_y);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	clear_image(t_img *img, int color);
-void	copy_bg_to_image(t_img *bg, t_img *image);
+void	change_buffer_image(t_img *bg, t_img *image);
+
+// FPS
+void	init_fps(t_data *data);
+double	get_current_time_in_seconds(void);
+void	update_fps(t_data *data);
+void	render_fps(t_data *data);
+void	draw_fps_box(t_img *image);
 
 #endif

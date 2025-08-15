@@ -47,6 +47,7 @@ GAME_BONUS		= 	close_window_bonus.c \
 					render_utils_bonus.c
 MINIMAP_BONUS	= 	minimap_bonus.c \
 					minimap_utils_bonus.c
+FPS_BONUS		=	fps_utils_bonus.c
 
 NAME 		= cub3D
 NAME_BONUS 	= cub3D_bonus
@@ -78,6 +79,7 @@ VPATH += src_bonus/init_bonus
 VPATH += src_bonus/debug_bonus
 VPATH += src_bonus/game_bonus
 VPATH += src_bonus/minimap_bonus
+VPATH += src_bonus/fps_bonus
 
 #==============================================================================#
 #                                    FILES                                     #
@@ -95,6 +97,7 @@ SRC_BONUS += $(INIT_BONUS)
 SRC_BONUS += $(DEBUG_BONUS)
 SRC_BONUS += $(GAME_BONUS)
 SRC_BONUS += $(MINIMAP_BONUS)
+SRC_BONUS += $(FPS_BONUS)
 
 # Library Paths
 LIBFT_DIR = libft
