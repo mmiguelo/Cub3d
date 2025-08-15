@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/15 17:20:21 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/15 18:05:13 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <math.h> // math trig fuctions like sin(),cos(),sqrt(),floor(),ceil()?
 # include <X11/X.h>
 # include <X11/keysym.h> // key press number?
+# include <X11/Xlib.h>
 # include <../minilibx-linux/mlx.h> // MinilibX (minilibx-linux.tgz needed)
 # include "../libft/libft.h"
 # include "ray.h"
@@ -138,7 +139,6 @@ typedef struct s_player
 	int		move_right;
 	int		turn_left;
 	int		turn_right;
-	int		last_mouse_x;
 }	t_player;
 
 typedef struct s_map
@@ -250,6 +250,7 @@ int		x_press(t_data *data);
 int		key_hook_press(int keycode, t_data *data);
 int		key_hook_release(int keycode, t_data *data);
 int		mouse_move(int x, int y, t_data *data);
+//void	center_mouse(void *win);
 
 // PLAYER MOVEMENT
 void	calculate_movements(t_player *player, char **map);

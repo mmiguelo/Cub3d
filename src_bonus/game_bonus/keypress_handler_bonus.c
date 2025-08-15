@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:56 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/15 17:22:55 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/15 18:53:37 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,34 @@ int	x_press(t_data *data)
 int mouse_move(int x, int y, t_data *data)
 {
 	(void)y;
-	int dx;
-
-	if (data->player.last_mouse_x == -1)
-		data->player.last_mouse_x = x;
-	dx = x - data->player.last_mouse_x;
-	data->player.last_mouse_x = x;
-	if (dx > 0)
-		calculate_rotation(&data->player, ROT_SPEED * dx * 0.05);
-	else if (dx < 0)
-		calculate_rotation(&data->player, -ROT_SPEED * -dx * 0.05);
+	
+	if (x < WIN_WIDTH / 2)
+		calculate_rotation(&data->player, -ROT_SPEED);
+	else if (x > WIN_WIDTH / 2)
+		calculate_rotation(&data->player, ROT_SPEED);
+	mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, y);
 	return (0);
 }
+
+/* int mouse_move(int x, int y, t_data *data) // improve 1
+{
+    (void)y;
+
+    static int prev_c = WIN_WIDTH / 2; // store previous mouse x position
+    int m = WIN_WIDTH / 2;             // middle of the screen
+    int c = x;                          // current mouse x
+	
+    if (c > m && c > prev_c)
+        calculate_rotation(&data->player, ROT_SPEED);      // move right
+    else if (c > m && c < prev_c)
+        calculate_rotation(&data->player, -ROT_SPEED);     // move left
+    else if (c < m && c < prev_c)
+        calculate_rotation(&data->player, -ROT_SPEED);     // move left
+    else if (c < m && c > prev_c)
+        calculate_rotation(&data->player, ROT_SPEED);      // move right
+    // else c == m or mouse not moving ? do nothing
+
+    prev_c = c; // update previous position
+    mlx_mouse_move(data->mlx, data->win, m, y); // recenter mouse
+    return (0);
+} */
