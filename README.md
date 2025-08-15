@@ -93,10 +93,11 @@ make
 
 + Wall collision detection
 + Real-time minimap rendering
-+ Real time FPS visualizer
++ Real-time FPS counter
 + Distance-based brightness attenuation
 + Global day/night ambient lighting cycle
-+ Dynamic ceiling' color using LERP
++ Dynamic ceiling color using LERP
++ Player sprint mechanic
 
 
 </details>
