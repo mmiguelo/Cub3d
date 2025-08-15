@@ -91,14 +91,13 @@ make
 <details>
 <summary>✨ Features</summary><br>
 
-(currently in branch bonus_minimap)
-
++ Wall collision detection
 + Real-time minimap rendering
 + Real time FPS visualizer
 + Distance-based brightness attenuation
-+ Wall collision detection
-+ Dynamic ceiling color using LERP
 + Global day/night ambient lighting cycle
++ Dynamic ceiling' color using LERP
+
 
 </details>
 
