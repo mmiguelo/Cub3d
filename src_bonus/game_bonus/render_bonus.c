@@ -26,13 +26,13 @@ void	put_fc(t_data *data)
 		while (++x < WIN_WIDTH)
 		{
 			if (y < WIN_HEIGHT / 2)
-				color = (data->ceiling.r << 16) | (data->ceiling.g << 8)
-					| data->ceiling.b;
+				color = lerp_ceilling(data->d, data->n, data->global_light);
 			else
 			{
 				color = (data->floor.r << 16) | (data->floor.g << 8)
 					| data->floor.b;
 			}
+			color = apply_global_brightness(color, data->global_light);
 			pixel_addr = data->bg.addr + (y * data->bg.line_length)
 				+ (x * (data->bg.bits_per_pixel / 8));
 			*(unsigned int *)pixel_addr = color;
@@ -59,33 +59,23 @@ void	calculate_texture(t_data *data, t_ray *ray)
 
 void	draw_line(t_data *data, t_ray *ray, int x)
 {
+	double	total_light;
+
 	ray->draw.tex_y = ray->draw.tex_pos;
 	ray->draw.tex_pos += ray->draw.step;
 	if (ray->draw.side == 0 && ray->dir.x > 0)
-		ray->draw.color = color(&ray->draw, &data->textures.east);
-	else if (ray->draw.side == 0 && ray->dir.x < 0)
 		ray->draw.color = color(&ray->draw, &data->textures.west);
-	else if (ray->draw.side == 1 && ray->dir.y > 0)
-		ray->draw.color = color(&ray->draw, &data->textures.north);
-	else
+	else if (ray->draw.side == 0 && ray->dir.x < 0)
+		ray->draw.color = color(&ray->draw, &data->textures.east);
+	else if (ray->draw.side == 1 && ray->dir.y < 0)
 		ray->draw.color = color(&ray->draw, &data->textures.south);
+	else
+		ray->draw.color = color(&ray->draw, &data->textures.north);
+	ray->draw.brightness = 1 / (1 + ray->draw.perpwalldist * DARKNESS);
+	if (ray->draw.brightness < 0.2)
+		ray->draw.brightness = 0.2;
+	total_light = ray->draw.brightness * data->global_light;
+	ray->draw.color = apply_brightness(ray->draw.color, total_light);
 	put_pixel(&data->bg, x, ray->draw.start, ray->draw.color);
 	ray->draw.start++;
-}
-
-int	color(t_draw *draw, t_img *texture)
-{
-	return (*(int *)(texture->addr + (draw->tex_y * texture->line_length
-			+ draw->tex_x * (texture->bits_per_pixel / 8))));
-}
-
-void	put_pixel(t_img *img, int x, int y, int color)
-{
-	char	*dst;
-
-	if (y < 0 || y > WIN_HEIGHT - 1 || x < 0
-		|| x > WIN_WIDTH - 1)
-		return ;
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
 }

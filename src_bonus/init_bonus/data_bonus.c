@@ -34,16 +34,28 @@ void	init_game(t_data *data)
 	data->player.plane.y = 0.66;
 	data->frames.time = 0.0;
 	data->frames.old_time = 0.0;
-	data->move_speed = 1;
+	data->move_speed = 1.0;
+	data->global_light = 1.0;
+	data->light_direction = -1;
+	data->n = 0x14183C;
+	data->d = 0xE5E3C4;
 }
 
 void	init_image(t_data *data)
 {
 	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	data->bg.img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	data->bg.addr = mlx_get_data_addr(data->bg.img,
 			&data->bg.bits_per_pixel, &data->bg.line_length, &data->bg.endian);
-	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+	// TODO: Check if results
+	data->bg.width = WIN_WIDTH;
+	data->bg.height = WIN_HEIGHT;
+	data->image.img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
+	data->image.addr = mlx_get_data_addr(data->image.img,
+			&data->image.bits_per_pixel, &data->image.line_length, &data->image.endian);
+	data->image.width = WIN_WIDTH;
+	data->image.height = WIN_HEIGHT;
 }
 
 void	load_textures(t_data *data, t_img *texture)

@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/13 17:46:35 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/15 12:45:36 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@
 # define MOVE_SPEED 0.015
 # define ROT_SPEED 0.03
 # define PLAYER_RAD 0.2
+# define DARKNESS 0.12
+# define DAY_NIGHT_SPEED 0.0002
+# define MINIMAP_ENABLED 1
 
 # define VALID_MAP_CHARS "01NSWE"
 # define WS " \t\n\r\v\f"
@@ -153,6 +156,15 @@ typedef struct s_frames
 	double	frame_time; // fps / tick / delta (might or not use in the future)
 }	t_frames;
 
+typedef struct s_minimap
+{
+	t_img	minimap_buffer;
+	int		floor_color;
+	int		wall_color;
+	int		player_color;
+	int		tile_size;
+}	t_minimap;
+
 typedef struct s_data
 {
 	t_textures	textures;
@@ -161,11 +173,18 @@ typedef struct s_data
 	t_player	player;
 	t_map		map;
 	t_frames	frames;
+	t_img		bg;
+	t_img		image;
+	t_minimap	minimap;
+	int			d;
+	int			n;
+	double		global_light;
+	double		light_direction;
 	double		move_speed;
 	void		*mlx;
 	void		*win;
-	t_img		bg;
-	t_img		image;
+	int			fd;
+	char		*line;
 }	t_data;
 
 /*=============================================================================#
@@ -179,6 +198,7 @@ void	free_textures(t_data *data);
 void	freedom(t_data *data);
 void	destroy_textures(t_textures *textures, void *mlx);
 void	free_tex(t_img *tex, void *mlx);
+void	free_gnl(t_data *data);
 
 // PARSING / INITIALIZATION
 void	parse(t_data *data, char *filename, char *extension);
@@ -247,5 +267,21 @@ void	render_texture(t_ray *ray);
 void	draw_line(t_data *data, t_ray *ray, int x);
 int		color(t_draw *draw, t_img *texture);
 void	put_pixel(t_img *img, int x, int y, int color);
+
+// LIGHT MANIPULATION
+int		apply_brightness(int color, double brightness);
+int		apply_global_brightness(int color, double global_light);
+void	update_global_light(t_data *data);
+int		lerp_ceilling(int day_color, int night_color, double global_light);
+
+// MINIMAP
+void	init_minimap(t_data *data);
+void	calculate_tile_size(t_data *data);
+void	render_minimap(t_data *data);
+void	draw_minimap(t_data *data, int map_x, int map_y, int color);
+void	draw_minimap_player(t_data *data, int tile_x, int tile_y);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	clear_image(t_img *img, int color);
+void	copy_bg_to_image(t_img *bg, t_img *image);
 
 #endif

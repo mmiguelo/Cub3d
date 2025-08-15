@@ -43,24 +43,22 @@ void	check_assets(t_data *data, char *line)
 
 void	parse_file_content(t_data *data, char *filename)
 {
-	int		fd;
-	char	*line;
-	int		i;
+	int	i;
 
 	i = -1;
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	data->fd = open(filename, O_RDONLY);
+	if (data->fd < 0)
 		ft_kill(NULL, ERR_FILE);
-	line = get_next_line(fd);
-	if (!line)
+	data->line = get_next_line(data->fd);
+	if (!data->line)
 		ft_kill(NULL, ERR_EMPTY);
-	while (line)
+	while (data->line)
 	{
-		process_line(data, line, &i);
-		free(line);
-		line = get_next_line(fd);
+		process_line(data, data->line, &i);
+		free(data->line);
+		data->line = get_next_line(data->fd);
 	}
-	close(fd);
+	close(data->fd);
 	check_required_textures(data, data->textures);
 	check_map_walls_and_player(data, &data->map);
 	check_duplicated_color(data, &data->ceiling, &data->floor);

@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/13 17:27:26 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/14 20:58:53 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,11 +161,13 @@ typedef struct s_data
 	t_player	player;
 	t_map		map;
 	t_frames	frames;
+	t_img		bg;
+	t_img		image;
 	double		move_speed;
 	void		*mlx;
 	void		*win;
-	t_img		bg;
-	t_img		image;
+	int			fd;
+	char		*line;
 }	t_data;
 
 /*=============================================================================#
@@ -179,6 +181,7 @@ void	free_textures(t_data *data);
 void	freedom(t_data *data);
 void	destroy_textures(t_textures *textures, void *mlx);
 void	free_tex(t_img *tex, void *mlx);
+void	free_gnl(t_data *data);
 
 // PARSING / INITIALIZATION
 void	parse(t_data *data, char *filename, char *extension);
