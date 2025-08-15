@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/15 18:05:13 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/16 00:16:56 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 # define FOV 66
 # define FOV_RAD 1.1519173063162575
 # define PLANE_LEN 0.7673269879789604
-# define MOVE_SPEED 0.015
+# define SPEED 0.015
 # define ROT_SPEED 0.03
 # define PLAYER_RAD 0.2
 # define DARKNESS 0.12
@@ -139,6 +139,7 @@ typedef struct s_player
 	int		move_right;
 	int		turn_left;
 	int		turn_right;
+	int		sprint;
 }	t_player;
 
 typedef struct s_map

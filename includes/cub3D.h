@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/14 20:58:53 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/16 00:17:02 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # define FOV 66
 # define FOV_RAD 1.1519173063162575
 # define PLANE_LEN 0.7673269879789604
-# define MOVE_SPEED 0.015
+# define SPEED 0.015
 # define ROT_SPEED 0.03
 # define PLAYER_RAD 0.2
 

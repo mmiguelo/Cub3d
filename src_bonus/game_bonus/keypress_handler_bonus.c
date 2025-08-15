@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:56 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/15 18:53:37 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/16 00:11:16 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	key_hook_press(int keycode, t_data *data)
 		data->player.turn_left = 1;
 	if (keycode == XK_Right)
 		data->player.turn_right = 1;
+	if (keycode == XK_space)
+		data->player.sprint = 1;
 	return (0);
 }
 
@@ -45,6 +47,8 @@ int	key_hook_release(int keycode, t_data *data)
 		data->player.turn_left = 0;
 	if (keycode == XK_Right && data->player.turn_right)
 		data->player.turn_right = 0;
+	if (keycode == XK_space && data->player.sprint)
+		data->player.sprint = 0;
 	return (0);
 }
 

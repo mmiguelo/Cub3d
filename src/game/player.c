@@ -16,14 +16,14 @@ void	calculate_movements(t_player *player, char **map)
 {
 	if (player->move_forward)
 	{
-		player->new_x = player->x + player->dir.x * MOVE_SPEED;
-		player->new_y = player->y + player->dir.y * MOVE_SPEED;
+		player->new_x = player->x + player->dir.x * SPEED;
+		player->new_y = player->y + player->dir.y * SPEED;
 		check_collision(player, map);
 	}
 	if (player->move_backward)
 	{
-		player->new_x = player->x - player->dir.x * MOVE_SPEED;
-		player->new_y = player->y - player->dir.y * MOVE_SPEED;
+		player->new_x = player->x - player->dir.x * SPEED;
+		player->new_y = player->y - player->dir.y * SPEED;
 		check_collision(player, map);
 	}
 	move_strafe(player, map);
@@ -34,14 +34,14 @@ void	move_strafe(t_player *player, char **map)
 {
 	if (player->move_left)
 	{
-		player->new_x = player->x + player->dir.y * MOVE_SPEED;
-		player->new_y = player->y - player->dir.x * MOVE_SPEED;
+		player->new_x = player->x + player->dir.y * SPEED;
+		player->new_y = player->y - player->dir.x * SPEED;
 		check_collision(player, map);
 	}
 	if (player->move_right)
 	{
-		player->new_x = player->x - player->dir.y * MOVE_SPEED;
-		player->new_y = player->y + player->dir.x * MOVE_SPEED;
+		player->new_x = player->x - player->dir.y * SPEED;
+		player->new_y = player->y + player->dir.x * SPEED;
 		check_collision(player, map);
 	}
 }
