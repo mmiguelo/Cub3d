@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:59:59 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/14 21:01:53 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/15 10:09:27 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ void	free_gnl(t_data *data)
 
 int	ft_kill(t_data *data, char *msg)
 {
-	free_gnl(data);
+	if (ft_strcmp(msg, ERR_EMPTY) != 0)
+		free_gnl(data);
 	if (data)
 		freedom(data);
 	if (ft_strcmp(msg, GAME_ENDED) == 0)
