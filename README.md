@@ -111,9 +111,9 @@ make
 | `S`   | Move backward     |
 | `A`   | Strafe left       |
 | `D`   | Strafe right      |
-| `SPACE` | Run |
-| `← / →` | Rotate camera  |
-| *Mouse Move* | Rotate camera |
+| `SPACE` | Sprint / Run |
+| `← / →` | Rotate camera (keyboard)  |
+| *Mouse Move* | Rotate camera (mouse) |
 | `ESC` | Exit game         |
 
 </details>
@@ -122,7 +122,6 @@ make
 
 ### TODO:
 
-+ Mouse-based view rotation
 + add minimap exemples and fps
 + add picture of dist-based brightness falloff
 + add demonstrating video
