@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/14 22:25:20 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/15 11:03:25 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,14 @@ typedef struct s_frames
 	double	frame_time; // fps / tick / delta (might or not use in the future)
 }	t_frames;
 
+typedef struct s_minimap
+{
+	t_img	*floor;
+	t_img	*wall;
+	t_img	*player;
+	int		tile_size;
+}	t_minimap;
+
 typedef struct s_data
 {
 	t_textures	textures;
@@ -165,6 +173,7 @@ typedef struct s_data
 	t_frames	frames;
 	t_img		bg;
 	t_img		image;
+	t_minimap	minimap;
 	int			d;
 	int			n;
 	double		global_light;
@@ -256,9 +265,14 @@ void	render_texture(t_ray *ray);
 void	draw_line(t_data *data, t_ray *ray, int x);
 int		color(t_draw *draw, t_img *texture);
 void	put_pixel(t_img *img, int x, int y, int color);
+
+// LIGHT MANIPULATION
 int		apply_brightness(int color, double brightness);
 int		apply_global_brightness(int color, double global_light);
 void	update_global_light(t_data *data);
 int		lerp_ceilling(int day_color, int night_color, double global_light);
+
+// MINIMAP
+void	calculate_tile_size(t_data *data);
 
 #endif
