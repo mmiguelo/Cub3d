@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/15 16:05:37 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/15 16:30:06 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 # define DARKNESS 0.12
 # define DAY_NIGHT_SPEED 0.0002
 # define MINIMAP_ENABLED 1
+#define FPS_HISTORY_SIZE 30
 
 # define VALID_MAP_CHARS "01NSWE"
 # define WS " \t\n\r\v\f"
@@ -155,6 +156,8 @@ typedef struct s_frames
 	double	old_time;
 	double	delta_time;
 	double	fps;
+	double	fps_history[FPS_HISTORY_SIZE];
+    int		fps_index;
 }	t_frames;
 
 typedef struct s_minimap
@@ -291,6 +294,5 @@ void	init_fps(t_data *data);
 double	get_current_time_in_seconds(void);
 void	update_fps(t_data *data);
 void	render_fps(t_data *data);
-void	draw_fps_box(t_img *image);
 
 #endif

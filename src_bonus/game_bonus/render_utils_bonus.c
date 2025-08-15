@@ -49,5 +49,4 @@ void	change_buffer_image(t_img *bg, t_img *image)
             *(unsigned int *)dst = *(unsigned int *)src;
         }
     }
-	draw_fps_box(image);
 }
