@@ -20,6 +20,7 @@ void	game_loop(t_data *data)
 	mlx_loop_hook(data->mlx, &draw_loop, data);
 	mlx_hook(data->win, KeyPress, KeyPressMask, key_hook_press, data);
 	mlx_hook(data->win, KeyRelease, KeyReleaseMask, key_hook_release, data);
+	mlx_hook(data->win, MotionNotify, PointerMotionMask, mouse_move, data);
 	mlx_loop(data->mlx);
 }
 

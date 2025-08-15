@@ -40,14 +40,14 @@ DEBUG_BONUS		= 	print_bonus.c
 GAME_BONUS		= 	close_window_bonus.c \
 					game_loop_bonus.c \
 					keypress_handler_bonus.c \
-					player_bonus.c \
+					player_move_bonus.c \
 					raycasting_bonus.c \
 					render_bonus.c \
 					light_bonus.c \
 					render_utils_bonus.c
 MINIMAP_BONUS	= 	minimap_bonus.c \
 					minimap_utils_bonus.c
-FPS_BONUS		=	fps_utils_bonus.c
+FPS_BONUS		=	fps_bonus.c
 
 NAME 		= cub3D
 NAME_BONUS 	= cub3D_bonus

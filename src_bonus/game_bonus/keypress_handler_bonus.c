@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:56 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/13 14:29:24 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/15 17:22:55 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,21 @@ int	x_press(t_data *data)
 {
 	mlx_loop_end(data->mlx);
 	close_window(data, GAME_ENDED);
+	return (0);
+}
+
+int mouse_move(int x, int y, t_data *data)
+{
+	(void)y;
+	int dx;
+
+	if (data->player.last_mouse_x == -1)
+		data->player.last_mouse_x = x;
+	dx = x - data->player.last_mouse_x;
+	data->player.last_mouse_x = x;
+	if (dx > 0)
+		calculate_rotation(&data->player, ROT_SPEED * dx * 0.05);
+	else if (dx < 0)
+		calculate_rotation(&data->player, -ROT_SPEED * -dx * 0.05);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/15 16:30:06 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/15 17:20:21 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ typedef struct s_player
 	int		move_right;
 	int		turn_left;
 	int		turn_right;
+	int		last_mouse_x;
 }	t_player;
 
 typedef struct s_map
@@ -248,6 +249,7 @@ int		draw_loop(void *param);
 int		x_press(t_data *data);
 int		key_hook_press(int keycode, t_data *data);
 int		key_hook_release(int keycode, t_data *data);
+int		mouse_move(int x, int y, t_data *data);
 
 // PLAYER MOVEMENT
 void	calculate_movements(t_player *player, char **map);
