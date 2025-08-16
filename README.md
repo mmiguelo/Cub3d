@@ -122,10 +122,10 @@ make
 ### TODO:
 
 game:
-+ add door
-+ add item to end game
-+ create interactive features only at night and others at day
-+ put item with clue in north part of map and other in south
++ add door to be appear and able to interacte only at night
++ add item to end game inside that room
++ create item to appear and to be able to catch only at day
++ put item with clue in easternmost part of map and other in westernmost part
 
 git hub
 + add picture of dist-based brightness falloff before and after
