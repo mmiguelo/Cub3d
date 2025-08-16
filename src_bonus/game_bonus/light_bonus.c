@@ -46,7 +46,7 @@ int	apply_brightness(int color, double brightness)
 
 void	update_global_light(t_data *data)
 {
-	data->global_light += DAY_NIGHT_SPEED * data->light_direction;
+	data->global_light += DAY_NIGHT_CICLE * data->light_direction;
 	if (data->global_light <= 0.2)
 	{
 		data->global_light = 0.2;
