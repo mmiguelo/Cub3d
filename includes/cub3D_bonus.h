@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/16 01:19:47 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/16 23:59:19 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@
 # define DAY_NIGHT_CICLE 0.0002
 # define MINIMAP_ENABLED 1
 # define FPS_HISTORY_SIZE 30
-# define NIGHT_START 0.4
-# define NIGHT_END 0.6
 
 # define VALID_MAP_CHARS "01NSWE"
 # define WS " \t\n\r\v\f"
@@ -89,8 +87,13 @@
 # define ERR_MLX_WIN "MLX failed to open window\n"
 # define ERR_TEX_LOAD "Failed to load image/texture\n"
 
+// TODO: things to add on the long run
+# define NIGHT_START 0.4
+# define NIGHT_END 0.6
 # define DAY_CLUE "At dawn's first golden ray, the hidden key may stay"
 # define NIGHT_CLUE "Where the last light fades, your path awaits"
+# define MAP_CLUE "In the heart of the maze, where walls conceal, the truth\
+ will reveal."
 
 /*=============================================================================#
 #                                   STRUCTS                                    #
