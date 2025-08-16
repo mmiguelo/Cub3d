@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:56 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/16 00:11:16 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/16 01:23:35 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@ int	x_press(t_data *data)
 	return (0);
 }
 
-int mouse_move(int x, int y, t_data *data)
+int	mouse_move(int x, int y, t_data *data)
 {
 	(void)y;
-	
 	if (x < WIN_WIDTH / 2)
 		calculate_rotation(&data->player, -ROT_SPEED);
 	else if (x > WIN_WIDTH / 2)

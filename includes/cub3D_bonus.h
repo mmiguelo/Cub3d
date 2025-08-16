@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/16 01:16:44 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/16 01:19:47 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ typedef struct s_frames
 	double	delta_time;
 	double	fps;
 	double	fps_history[FPS_HISTORY_SIZE];
-    int		fps_index;
+	int		fps_index;
 }	t_frames;
 
 typedef struct s_minimap

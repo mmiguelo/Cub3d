@@ -52,7 +52,8 @@ void	init_image(t_data *data)
 	data->bg.height = WIN_HEIGHT;
 	data->image.img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	data->image.addr = mlx_get_data_addr(data->image.img,
-			&data->image.bits_per_pixel, &data->image.line_length, &data->image.endian);
+			&data->image.bits_per_pixel, &data->image.line_length,
+			&data->image.endian);
 	data->image.width = WIN_WIDTH;
 	data->image.height = WIN_HEIGHT;
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap_utils_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/16 01:28:44 by mmiguelo          #+#    #+#             */
+/*   Updated: 2025/08/16 01:28:44 by mmiguelo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D_bonus.h"
 
 void	init_minimap(t_data *data)
@@ -7,7 +19,6 @@ void	init_minimap(t_data *data)
 	data->minimap.wall_color = 0xFFFFFF;
 	data->minimap.player_color = 0x00FF00;
 }
-
 
 void	calculate_tile_size(t_data *data)
 {
@@ -28,16 +39,16 @@ void	calculate_tile_size(t_data *data)
 		data->minimap.tile_size = 2;
 }
 
-void clear_image(t_img *img, int color)
+void	clear_image(t_img *img, int color)
 {
 	int	x;
 	int	y;
 
 	y = -1;
-    while (++y < img->height)
+	while (++y < img->height)
 	{
 		x = -1;
-        while (++x < img->width)
-            my_mlx_pixel_put(img, x, y, color);
+		while (++x < img->width)
+			my_mlx_pixel_put(img, x, y, color);
 	}
 }

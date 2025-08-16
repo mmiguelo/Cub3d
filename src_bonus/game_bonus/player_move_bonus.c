@@ -14,22 +14,22 @@
 
 void	calculate_movements(t_player *player, char **map)
 {
-	double speed_mult;
+	double	speed_mult;
 
 	speed_mult = 1.0;
 	if (player->sprint)
 		speed_mult = 4.0;
 	if (player->move_forward)
 	{
-			player->new_x = player->x + player->dir.x * SPEED * speed_mult;
-			player->new_y = player->y + player->dir.y * SPEED * speed_mult;
-			check_collision(player, map);
+		player->new_x = player->x + player->dir.x * SPEED * speed_mult;
+		player->new_y = player->y + player->dir.y * SPEED * speed_mult;
+		check_collision(player, map);
 	}
 	if (player->move_backward)
 	{
-			player->new_x = player->x - player->dir.x * SPEED * speed_mult;
-			player->new_y = player->y - player->dir.y * SPEED * speed_mult;
-			check_collision(player, map);
+		player->new_x = player->x - player->dir.x * SPEED * speed_mult;
+		player->new_y = player->y - player->dir.y * SPEED * speed_mult;
+		check_collision(player, map);
 	}
 	move_strafe(player, map);
 	turn_player(player);
@@ -37,22 +37,22 @@ void	calculate_movements(t_player *player, char **map)
 
 void	move_strafe(t_player *player, char **map)
 {
-	double speed_mult;
+	double	speed_mult;
 
 	speed_mult = 1.0;
 	if (player->sprint)
 		speed_mult = 4.0;
 	if (player->move_left)
 	{
-			player->new_x = player->x + player->dir.y * SPEED * speed_mult;
-			player->new_y = player->y - player->dir.x * SPEED * speed_mult;
-			check_collision(player, map);
+		player->new_x = player->x + player->dir.y * SPEED * speed_mult;
+		player->new_y = player->y - player->dir.x * SPEED * speed_mult;
+		check_collision(player, map);
 	}
 	if (player->move_right)
 	{
-			player->new_x = player->x - player->dir.y * SPEED * speed_mult;
-			player->new_y = player->y + player->dir.x * SPEED * speed_mult;
-			check_collision(player, map);
+		player->new_x = player->x - player->dir.y * SPEED * speed_mult;
+		player->new_y = player->y + player->dir.x * SPEED * speed_mult;
+		check_collision(player, map);
 	}
 }
 

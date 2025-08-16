@@ -31,22 +31,22 @@ void	put_pixel(t_img *img, int x, int y, int color)
 
 void	change_buffer_image(t_img *bg, t_img *image)
 {
-    int		x;
+	int		x;
 	int		y;
-    char	*src;
-    char	*dst;
+	char	*src;
+	char	*dst;
 
 	y = -1;
-    while (++y < bg->height)
-    {
+	while (++y < bg->height)
+	{
 		x = -1;
-        while (++x < bg->width)
-        {
-            src = bg->addr + (y * bg->line_length + x
-				* (bg->bits_per_pixel / 8));
-            dst = image->addr + (y * image->line_length + x
-				* (image->bits_per_pixel / 8));
-            *(unsigned int *)dst = *(unsigned int *)src;
-        }
-    }
+		while (++x < bg->width)
+		{
+			src = bg->addr + (y * bg->line_length + x
+					* (bg->bits_per_pixel / 8));
+			dst = image->addr + (y * image->line_length + x
+					* (image->bits_per_pixel / 8));
+			*(unsigned int *)dst = *(unsigned int *)src;
+		}
+	}
 }

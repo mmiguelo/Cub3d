@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fps_bonus.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/16 01:20:32 by mmiguelo          #+#    #+#             */
+/*   Updated: 2025/08/16 01:20:32 by mmiguelo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D_bonus.h"
 
 void	init_fps(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	data->frames.time = 0.0;
@@ -17,18 +29,19 @@ void	init_fps(t_data *data)
 	}
 }
 
-double get_current_time_in_seconds(void)
+double	get_current_time_in_seconds(void)
 {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return (tv.tv_sec + tv.tv_usec / 1000000.0);
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec + tv.tv_usec / 1000000.0);
 }
 
 void	update_fps(t_data *data)
 {
 	double	current_fps;
 	double	sum;
-	int	i;
+	int		i;
 
 	i = -1;
 	sum = 0.0;
@@ -42,12 +55,12 @@ void	update_fps(t_data *data)
 	data->frames.fps_index = (data->frames.fps_index + 1) % FPS_HISTORY_SIZE;
 	while (++i < FPS_HISTORY_SIZE)
 		sum += data->frames.fps_history[i];
-	data->frames.fps = sum / FPS_HISTORY_SIZE; 
+	data->frames.fps = sum / FPS_HISTORY_SIZE;
 }
 
-void render_fps(t_data *data)
+void	render_fps(t_data *data)
 {
-	char fps_text[16];
+	char	fps_text[16];
 
 	sprintf(fps_text, "FPS: %.0f", data->frames.fps);
 	mlx_string_put(data->mlx, data->win, WIN_WIDTH - 100, 50, 0xFFFFFF,
