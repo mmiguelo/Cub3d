@@ -119,7 +119,8 @@ make
 
 ---
 
-### TODO:
+<details>
+<summary> TODO </summary><br>
 
 game:
 + add door to appear and be able to interacte only at night
@@ -130,5 +131,7 @@ game:
 git hub
 + add picture of dist-based brightness falloff before and after
 + add demonstrating video to show the whole day / night cicle
+
+</details>
 
 <p align="right">(<a href="#readme-top">get to top</a>)</p>
