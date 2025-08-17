@@ -95,7 +95,7 @@ make
 + Real-time FPS counter
 + Distance-based brightness attenuation
 + Global day/night ambient lighting cycle
-+ Dynamic ceiling color using LERP
++ Dynamic ceiling color using 4 LERP cycles
 + Player sprint mechanic
 
 
