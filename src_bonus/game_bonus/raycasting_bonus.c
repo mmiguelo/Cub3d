@@ -35,8 +35,8 @@ void	calculate_raycasting(t_data *data)
 	}
 	change_buffer_image(&data->bg, &data->image);
 	update_global_light(data);
-	if (MINIMAP_ENABLED)
-		render_minimap(data);
+	update_time_of_day(data);
+	render_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
 	render_fps(data);
 }

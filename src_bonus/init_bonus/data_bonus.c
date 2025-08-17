@@ -37,8 +37,7 @@ void	init_game(t_data *data)
 	data->move_speed = 1.0;
 	data->global_light = 1.0;
 	data->light_direction = -1;
-	data->n = 0x14183C;
-	data->d = 0xE5E3C4;
+	data->time_of_day = 0.0;
 }
 
 void	init_image(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/16 23:59:19 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/17 23:07:38 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@
 
 # define MAX_RGB 255
 # define MIN_RGB 0
+# define VALID_MAP_CHARS "01NSWE"
+# define WS " \t\n\r\v\f"
 
 # define TILE_SIZE 64
 # define WIN_WIDTH 1024
@@ -56,12 +58,12 @@
 # define ROT_SPEED 0.03
 # define PLAYER_RAD 0.2
 # define DARKNESS 0.12
-# define DAY_NIGHT_CICLE 0.0002
-# define MINIMAP_ENABLED 1
+# define DAY_NIGHT_CYCLE 0.0002
+# define MORNING 0x87CEEB
+# define NOON    0xFFFFE0
+# define EVENING 0xFCAF45
+# define NIGHT   0x14183C
 # define FPS_HISTORY_SIZE 30
-
-# define VALID_MAP_CHARS "01NSWE"
-# define WS " \t\n\r\v\f"
 
 # define ERR_EMPTY "File is empty\n"
 # define ERR_ARGS "Arguments are invalid\n"
@@ -88,6 +90,7 @@
 # define ERR_TEX_LOAD "Failed to load image/texture\n"
 
 // TODO: things to add on the long run
+
 # define NIGHT_START 0.4
 # define NIGHT_END 0.6
 # define DAY_CLUE "At dawn's first golden ray, the hidden key may stay"
@@ -193,6 +196,7 @@ typedef struct s_data
 	t_minimap	minimap;
 	int			d;
 	int			n;
+	double		time_of_day;
 	double		global_light;
 	double		light_direction;
 	double		move_speed;
@@ -289,7 +293,9 @@ void	put_pixel(t_img *img, int x, int y, int color);
 int		apply_brightness(int color, double brightness);
 int		apply_global_brightness(int color, double global_light);
 void	update_global_light(t_data *data);
-int		lerp_ceilling(int day_color, int night_color, double global_light);
+void	update_time_of_day(t_data *data);
+int		lerp_day_cycle(double day_cycle);
+int		lerp_color(int start, int end, double t);
 
 // MINIMAP
 void	init_minimap(t_data *data);

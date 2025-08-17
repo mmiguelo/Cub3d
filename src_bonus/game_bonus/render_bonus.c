@@ -26,7 +26,7 @@ void	put_fc(t_data *data)
 		while (++x < WIN_WIDTH)
 		{
 			if (y < WIN_HEIGHT / 2)
-				color = lerp_ceilling(data->d, data->n, data->global_light);
+				color = lerp_day_cycle(data->time_of_day);
 			else
 			{
 				color = (data->floor.r << 16) | (data->floor.g << 8)

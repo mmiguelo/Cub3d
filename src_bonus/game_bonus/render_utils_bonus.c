@@ -50,3 +50,10 @@ void	change_buffer_image(t_img *bg, t_img *image)
 		}
 	}
 }
+
+void	update_time_of_day(t_data *data)
+{
+	data->time_of_day += DAY_NIGHT_CYCLE;
+	if (data->time_of_day >= 1.0)
+		data->time_of_day -= 1.0;
+}
