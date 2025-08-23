@@ -28,7 +28,8 @@ GAME 	= 	close_window.c \
 			raycasting.c \
 			render.c
 GENERAL_BONUS	=	main_bonus.c \
-					free_bonus.c
+					free_bonus.c \
+					cycle_bonus.c
 PARSING_BONUS	= 	01_parse_bonus.c \
 					02_extensions_bonus.c \
 					03_textures_bonus.c \

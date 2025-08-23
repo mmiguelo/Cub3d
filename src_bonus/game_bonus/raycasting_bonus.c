@@ -14,7 +14,6 @@
 
 void	calculate_raycasting(t_data *data)
 {
-	t_ray	ray;
 	int		x;
 
 	update_fps(data);
@@ -22,23 +21,14 @@ void	calculate_raycasting(t_data *data)
 	put_fc(data);
 	x = 0;
 	while (x < WIN_WIDTH)
-	{
-		ray.draw.hit = false;
-		calculate_variables(&data->player, &ray, x);
-		while (ray.draw.hit == false)
-			check_hit(data, &ray);
-		calculate_perpwalldist(&ray, &ray.draw);
-		calculate_texture(data, &ray);
-		while (ray.draw.start < ray.draw.end)
-			draw_line(data, &ray, x);
-		x++;
-	}
+		render_column(data, x++);
 	change_buffer_image(&data->bg, &data->image);
 	update_global_light(data);
 	update_time_of_day(data);
 	render_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
 	render_fps(data);
+	render_cycle(data);
 }
 
 void	calculate_variables(t_player *player, t_ray *ray, int x)
@@ -85,32 +75,6 @@ void	calculate_variables2(t_ray *ray, double player_x, double player_y)
 		ray->step.side_dist_y = (ray->pos.y + 1.0 - player_y)
 			* ray->step.delta_dist_y;
 	}
-}
-
-void	check_hit(t_data *data, t_ray *ray)
-{
-	if (ray->step.side_dist_x < ray->step.side_dist_y)
-	{
-		ray->step.side_dist_x += ray->step.delta_dist_x;
-		ray->pos.x += ray->step.x;
-		ray->draw.side = 0;
-	}
-	else
-	{
-		ray->step.side_dist_y += ray->step.delta_dist_y;
-		ray->pos.y += ray->step.y;
-		ray->draw.side = 1;
-	}
-	if (ray->pos.x >= 0 && ray->pos.x < data->map.width
-		&& ray->pos.y >= 0 && ray->pos.y < data->map.height)
-	{
-		if (data->map.grid[ray->pos.y][ray->pos.x] == '1')
-			ray->draw.hit = true;
-		else if (data->map.grid[ray->pos.y][ray->pos.x] == '0')
-			ray->draw.hit = false;
-	}
-	else
-		ray->draw.hit = true;
 }
 
 void	calculate_perpwalldist(t_ray *ray, t_draw *draw)

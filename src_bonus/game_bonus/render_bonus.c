@@ -79,3 +79,43 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 	put_pixel(&data->bg, x, ray->draw.start, ray->draw.color);
 	ray->draw.start++;
 }
+
+void	render_column(t_data *data, int x)
+{
+	t_ray	ray;
+
+	ray.draw.hit = false;
+	calculate_variables(&data->player, &ray, x);
+	while (!ray.draw.hit)
+		check_hit(data, &ray);
+	calculate_perpwalldist(&ray, &ray.draw);
+	calculate_texture(data, &ray);
+	while (ray.draw.start < ray.draw.end)
+		draw_line(data, &ray, x);
+}
+
+void	check_hit(t_data *data, t_ray *ray)
+{
+	if (ray->step.side_dist_x < ray->step.side_dist_y)
+	{
+		ray->step.side_dist_x += ray->step.delta_dist_x;
+		ray->pos.x += ray->step.x;
+		ray->draw.side = 0;
+	}
+	else
+	{
+		ray->step.side_dist_y += ray->step.delta_dist_y;
+		ray->pos.y += ray->step.y;
+		ray->draw.side = 1;
+	}
+	if (ray->pos.x >= 0 && ray->pos.x < data->map.width
+		&& ray->pos.y >= 0 && ray->pos.y < data->map.height)
+	{
+		if (data->map.grid[ray->pos.y][ray->pos.x] == '1')
+			ray->draw.hit = true;
+		else if (data->map.grid[ray->pos.y][ray->pos.x] == '0')
+			ray->draw.hit = false;
+	}
+	else
+		ray->draw.hit = true;
+}

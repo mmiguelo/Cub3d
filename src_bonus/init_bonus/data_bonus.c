@@ -55,6 +55,15 @@ void	init_image(t_data *data)
 			&data->image.endian);
 	data->image.width = WIN_WIDTH;
 	data->image.height = WIN_HEIGHT;
+	data->sun.img = mlx_xpm_file_to_image(data->mlx, "textures/bonus/sun.xpm",
+			&data->sun.width, &data->sun.height);
+	data->sun.addr = mlx_get_data_addr(data->sun.img, &data->sun.bits_per_pixel,
+			&data->sun.line_length, &data->sun.endian);
+	data->moon.img = mlx_xpm_file_to_image(data->mlx,
+			"textures/bonus/moon.xpm", &data->moon.width, &data->moon.height);
+	data->moon.addr = mlx_get_data_addr(data->moon.img,
+			&data->moon.bits_per_pixel, &data->moon.line_length,
+			&data->moon.endian);
 }
 
 void	load_textures(t_data *data, t_img *texture)

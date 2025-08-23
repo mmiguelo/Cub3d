@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/17 23:07:38 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/23 23:43:32 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,7 @@
 
 // TODO: things to add on the long run
 
-# define NIGHT_START 0.4
-# define NIGHT_END 0.6
+# define NIGHT_END 0.5
 # define DAY_CLUE "At dawn's first golden ray, the hidden key may stay"
 # define NIGHT_CLUE "Where the last light fades, your path awaits"
 # define MAP_CLUE "In the heart of the maze, where walls conceal, the truth\
@@ -192,6 +191,8 @@ typedef struct s_data
 	t_img		bg;
 	t_img		image;
 	t_img		fps;
+	t_img		sun;
+	t_img		moon;
 	t_frames	frames;
 	t_minimap	minimap;
 	int			d;
@@ -312,5 +313,8 @@ void	init_fps(t_data *data);
 double	get_current_time_in_seconds(void);
 void	update_fps(t_data *data);
 void	render_fps(t_data *data);
+
+bool	is_night(t_data *data);
+void	render_cycle(t_data *data);
 
 #endif
