@@ -1,73 +1,10 @@
-
-Improvements to global light:
-
-Morning ? soft orange/pink
-Noon ? bright blue
-Evening ? purple/red
-Night ? dark blue/black
-
-# define MORNING 0xFFB380   // soft orange / soft pink
-# define NOON    0xFFFF99   // bright blue / yellow
-# define EVENING 0xCC3366   // purple/red
-# define NIGHT   0x14183C   // dark blue
-
-Instead of one LERP, have four LERP interpolation between them in a cicle: to test still !!!!!
-
-Morining -> Noon (starting color) -> Evening -> Night -> Morning (...)
-
-We could assume global_light now represents the time of day as a fraction:
-
-0.0 -> Morning
-0.25 -> Noon
-0.5 -> Evening
-0.75 -> Night
-1.0 -> Morning (wrap-around)
-
-int lerp_color(int Start_color, int End_color, double progress)
-{
-	int r;
-	int g;
-	int b;
-
-	r = ((Start_color >> 16) & 0xFF) * (1 - t) + ((End_color >> 16) & 0xFF) * t;
-	g = ((Start_color >> 8) & 0xFF)  * (1 - t) + ((End_color >> 8) & 0xFF)  * t;
-	b = (Start_color & 0xFF)         * (1 - t) + (End_color & 0xFF)         * t;
-	if (r > 255)
-		r = 255;
-	if (r < 0)
-		r = 0;
-	if (g > 255)
-		g = 255;
-	if (g < 0)
-		g = 0;
-	if (b > 255)
-		b = 255;
-	if (b < 0)
-		b = 0;
-	return (r << 16) | (g << 8) | b;
-}
-
-int lerp_day_cycle(double global_light)
-{
-	global_light = fmod(global_light, 1.0); // wrap around
-
-	if (global_light < 0.25) // Morning -> Noon
-		return lerp_color(MORNING, NOON, global_light / 0.25);
-	else if (global_light < 0.5) // Noon -> Evening
-		return lerp_color(NOON, EVENING, (global_light - 0.25) / 0.25);
-	else if (global_light < 0.75) // Evening -> Night
-		return lerp_color(EVENING, NIGHT, (global_light - 0.5) / 0.25);
-	else // Night -> Morning
-		return lerp_color(NIGHT, MORNING, (global_light - 0.75) / 0.25);
-}
-
 Concept
 
 These values need to be in same range as global_light (0.2 ? 1.0).
 
-# define DAY_CLUE   "At dawn's first golden ray, the hidden key may stay"
-# define NIGHT_CLUE "Where the last light fades, your path awaits"
-# define MAZE_CLUE  "In the heart of the maze, where walls conceal, the truth will reveal"
+? # define DAY_CLUE   "At dawn's first golden ray, the hidden key may stay"
+? # define NIGHT_CLUE "Where the last light fades, your path awaits"
+? # define MAZE_CLUE  "In the heart of the maze, where walls conceal, the truth will reveal"
 
 Day clue: Appears in the first room when the player starts.
 	- Gives a poetic hint for where the key is.
