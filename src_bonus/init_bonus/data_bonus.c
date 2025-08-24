@@ -36,8 +36,11 @@ void	init_game(t_data *data)
 	data->frames.old_time = 0.0;
 	data->move_speed = 1.0;
 	data->global_light = 1.0;
-	data->light_direction = -1;
 	data->time_of_day = 0.0;
+	data->bsunrise = true;
+	data->bsunset = false;
+	data->bsun = false;
+	data->bmoon = false;
 }
 
 void	init_image(t_data *data)
@@ -55,15 +58,7 @@ void	init_image(t_data *data)
 			&data->image.endian);
 	data->image.width = WIN_WIDTH;
 	data->image.height = WIN_HEIGHT;
-	data->sun.img = mlx_xpm_file_to_image(data->mlx, "textures/bonus/sun.xpm",
-			&data->sun.width, &data->sun.height);
-	data->sun.addr = mlx_get_data_addr(data->sun.img, &data->sun.bits_per_pixel,
-			&data->sun.line_length, &data->sun.endian);
-	data->moon.img = mlx_xpm_file_to_image(data->mlx,
-			"textures/bonus/moon.xpm", &data->moon.width, &data->moon.height);
-	data->moon.addr = mlx_get_data_addr(data->moon.img,
-			&data->moon.bits_per_pixel, &data->moon.line_length,
-			&data->moon.endian);
+	init_cycle_images(data);
 }
 
 void	load_textures(t_data *data, t_img *texture)

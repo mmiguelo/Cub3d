@@ -43,20 +43,39 @@ int	apply_brightness(int color, double brightness)
 		rgb[2] = 255;
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
-
+/**
+ * update_global_light - Updates the global lighting intensity based on the time of day.
+ *
+ * The function creates a smooth, continuous day-night cycle using a cosine wave:
+ *
+ *    - At midnight (time_of_day = 0.0 or 1.0), the light is at its minimum (0.2).
+ *    - At sunrise (time_of_day = 0.25), the light begins to increase.
+ *    - At noon (time_of_day = 0.5), the light reaches its maximum (1.0).
+ *    - At sunset (time_of_day = 0.75), the light decreases again.
+ *    - The cycle loops back to midnight (time_of_day = 1.0).
+ *
+ * The cosine function ensures the transition is smooth and continuous,
+ * without flat plateaus between phases (similar to games like Elden Ring).
+ *
+ * Formula:
+ *      cycle = cos((time_of_day * 2?) - ?)   // gives values in [-1, 1]
+ *      global_light = 0.2 + ((cycle + 1) / 2) * (1.0 - 0.2)
+ *
+ * Resulting global_light is always clamped to [0.2, 1.0].
+ *
+ * @param data Pointer to the main game data structure containing:
+ * @param time_of_day : a double in range [0.0, 1.0)
+ * @param global_light: the computed light intensity multiplier
+ */
 void	update_global_light(t_data *data)
 {
-	data->global_light += DAY_NIGHT_CYCLE * data->light_direction;
-	if (data->global_light <= 0.2)
-	{
-		data->global_light = 0.2;
-		data->light_direction = 1;
-	}
-	else if (data->global_light >= 1.0)
-	{
-		data->global_light = 1.0;
-		data->light_direction = -1;
-	}
+	double t = fmod(data->time_of_day, 1.0);
+    double cycle = cos((t * 2.0 * PI) - PI);
+    data->global_light = 0.2 + ((cycle + 1.0) / 2.0) * (1.0 - 0.2);
+    if (data->global_light < 0.2)
+        data->global_light = 0.2;
+    if (data->global_light > 1.0)
+        data->global_light = 1.0;
 }
 
 int	lerp_color(int start, int end, double t)
@@ -83,15 +102,43 @@ int	lerp_color(int start, int end, double t)
 	return ((r << 16) | (g << 8) | b);
 }
 
-int	lerp_day_cycle(double day_cycle)
+int	lerp_day_cycle(t_data *data, double day_cycle)
 {
 	day_cycle = fmod(day_cycle, 1.0);
 	if (day_cycle < 0.25)
+	{
+		if (data->bmoon)
+		{
+			data->bmoon = false;
+			data->bsunrise = true;
+		}
 		return (lerp_color(MORNING, NOON, day_cycle / 0.25));
+	}
 	else if (day_cycle < 0.5)
+	{
+		if (data->bsunrise)
+		{
+			data->bsunrise = false;
+			data->bsun = true;
+		}
 		return (lerp_color(NOON, EVENING, (day_cycle - 0.25) / 0.25));
+	}
 	else if (day_cycle < 0.75)
+	{	
+		if (data->bsun)
+		{
+			data->bsun = false;
+			data->bsunset = true;
+		}
 		return (lerp_color(EVENING, NIGHT, (day_cycle - 0.5) / 0.25));
+	}
 	else
+	{
+		if (data->bsunset)
+		{
+			data->bsunset = false;
+			data->bmoon = true;
+		}
 		return (lerp_color(NIGHT, MORNING, (day_cycle - 0.75) / 0.25));
+	}
 }

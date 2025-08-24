@@ -36,7 +36,8 @@ PARSING_BONUS	= 	01_parse_bonus.c \
 					04_color_bonus.c \
 					05_map_bonus.c \
 					06_map_utils_bonus.c
-INIT_BONUS		= 	data_bonus.c
+INIT_BONUS		= 	data_bonus.c \
+					data_util_bonus.c
 DEBUG_BONUS		= 	print_bonus.c
 GAME_BONUS		= 	close_window_bonus.c \
 					game_loop_bonus.c \

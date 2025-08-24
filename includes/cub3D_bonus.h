@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/23 23:43:32 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/24 18:13:59 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # define TILE_SIZE 64
 # define WIN_WIDTH 1024
 # define WIN_HEIGHT 768
-# define PI 3.1415926535
+# define PI 3.14159265358979323846
 # define FOV 66
 # define FOV_RAD 1.1519173063162575
 # define PLANE_LEN 0.7673269879789604
@@ -192,14 +192,17 @@ typedef struct s_data
 	t_img		image;
 	t_img		fps;
 	t_img		sun;
+	t_img		sunrise;
+	t_img		sunset;
 	t_img		moon;
 	t_frames	frames;
 	t_minimap	minimap;
-	int			d;
-	int			n;
+	bool		bsun;
+	bool		bmoon;
+	bool		bsunrise;
+	bool		bsunset;
 	double		time_of_day;
 	double		global_light;
-	double		light_direction;
 	double		move_speed;
 	void		*mlx;
 	void		*win;
@@ -231,6 +234,7 @@ void	check_map(t_data *data, t_map	*map, char *line, int height);
 void	init(t_data *data);
 void	init_game(t_data *data);
 void	init_image(t_data *data);
+void	init_cycle_images(t_data *data);
 void	init_textures(t_data *data);
 void	load_textures(t_data *data, t_img *texture);
 void	check_textures(t_data *data, char *line);
@@ -286,6 +290,7 @@ void	check_hit(t_data *data, t_ray *ray);
 void	calculate_perpwalldist(t_ray *ray, t_draw *draw);
 void	calculate_texture(t_data *data, t_ray *ray);
 void	render_texture(t_ray *ray);
+void	render_column(t_data *data, int x);
 void	draw_line(t_data *data, t_ray *ray, int x);
 int		color(t_draw *draw, t_img *texture);
 void	put_pixel(t_img *img, int x, int y, int color);
@@ -295,7 +300,7 @@ int		apply_brightness(int color, double brightness);
 int		apply_global_brightness(int color, double global_light);
 void	update_global_light(t_data *data);
 void	update_time_of_day(t_data *data);
-int		lerp_day_cycle(double day_cycle);
+int		lerp_day_cycle(t_data *data, double day_cycle);
 int		lerp_color(int start, int end, double t);
 
 // MINIMAP
@@ -314,7 +319,7 @@ double	get_current_time_in_seconds(void);
 void	update_fps(t_data *data);
 void	render_fps(t_data *data);
 
-bool	is_night(t_data *data);
+//bool	is_night(t_data *data);
 void	render_cycle(t_data *data);
 
 #endif
