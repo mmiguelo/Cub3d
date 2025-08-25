@@ -49,16 +49,45 @@ void	init_image(t_data *data)
 	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	data->bg.img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	data->bg.addr = mlx_get_data_addr(data->bg.img,
-			&data->bg.bits_per_pixel, &data->bg.line_length, &data->bg.endian);
+			&data->bg.bpp, &data->bg.line_length, &data->bg.endian);
 	data->bg.width = WIN_WIDTH;
 	data->bg.height = WIN_HEIGHT;
 	data->image.img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	data->image.addr = mlx_get_data_addr(data->image.img,
-			&data->image.bits_per_pixel, &data->image.line_length,
+			&data->image.bpp, &data->image.line_length,
 			&data->image.endian);
 	data->image.width = WIN_WIDTH;
 	data->image.height = WIN_HEIGHT;
 	init_cycle_images(data);
+}
+
+void	init_cycle_images(t_data *data)
+{
+	parse(data, "./textures/bonus/sun.xpm", ".xpm");
+	data->sun.img = mlx_xpm_file_to_image(data->mlx, "./textures/bonus/sun.xpm",
+			&data->sun.width, &data->sun.height);
+	data->sun.addr = mlx_get_data_addr(data->sun.img,
+			&data->sun.bpp, &data->sun.line_length, &data->sun.endian);
+	parse(data, "./textures/bonus/moon.xpm", ".xpm");
+	data->moon.img = mlx_xpm_file_to_image(data->mlx,
+			"./textures/bonus/moon.xpm", &data->moon.width, &data->moon.height);
+	data->moon.addr = mlx_get_data_addr(data->moon.img,
+			&data->moon.bpp, &data->moon.line_length,
+			&data->moon.endian);
+	parse(data, "./textures/bonus/sunrise.xpm", ".xpm");
+	data->sunrise.img = mlx_xpm_file_to_image(data->mlx,
+			"./textures/bonus/sunrise.xpm", &data->sunrise.width,
+			&data->sunrise.height);
+	data->sunrise.addr = mlx_get_data_addr(data->sunrise.img,
+			&data->sunrise.bpp, &data->sunrise.line_length,
+			&data->sunrise.endian);
+	parse(data, "./textures/bonus/sunset.xpm", ".xpm");
+	data->sunset.img = mlx_xpm_file_to_image(data->mlx,
+			"./textures/bonus/sunset.xpm", &data->sunset.width,
+			&data->sunset.height);
+	data->sunset.addr = mlx_get_data_addr(data->sunset.img,
+			&data->sunset.bpp, &data->sunset.line_length,
+			&data->sunset.endian);
 }
 
 void	load_textures(t_data *data, t_img *texture)
@@ -67,16 +96,8 @@ void	load_textures(t_data *data, t_img *texture)
 			texture->path, &texture->width, &texture->height);
 	if (!texture->img)
 		ft_kill(data, ERR_TEX_LOAD);
-	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel,
+	texture->addr = mlx_get_data_addr(texture->img, &texture->bpp,
 			&texture->line_length, &texture->endian);
 	if (!texture->addr)
 		ft_kill(data, ERR_TEX_LOAD);
-}
-
-void	init_textures(t_data *data)
-{
-	load_textures(data, &data->textures.north);
-	load_textures(data, &data->textures.south);
-	load_textures(data, &data->textures.east);
-	load_textures(data, &data->textures.west);
 }

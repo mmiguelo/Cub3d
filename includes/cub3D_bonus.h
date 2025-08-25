@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/25 16:43:13 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/25 22:08:59 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ typedef struct s_img
 {
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
+	int		bpp;
 	int		line_length;
 	int		endian;
 	int		width;
@@ -303,6 +303,7 @@ void	update_global_light(t_data *data);
 void	update_time_of_day(t_data *data);
 int		lerp_day_cycle(t_data *data, double day_cycle);
 int		lerp_color(int start, int end, double t);
+void	change_day(bool *to_false, bool *to_true);
 
 // MINIMAP
 void	init_minimap(t_data *data);

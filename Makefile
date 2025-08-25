@@ -27,6 +27,7 @@ GAME 	= 	close_window.c \
 			player.c \
 			raycasting.c \
 			render.c
+
 GENERAL_BONUS	=	main_bonus.c \
 					cycle_bonus.c
 FREE_BONUS		=	free_bonus.c \
@@ -39,6 +40,8 @@ PARSING_BONUS	= 	01_parse_bonus.c \
 					06_map_utils_bonus.c
 INIT_BONUS		= 	data_bonus.c \
 					data_util_bonus.c
+LIGHT_BONUS		=	light_bonus.c \
+					light_util_bonus.c
 DEBUG_BONUS		= 	print_bonus.c
 GAME_BONUS		= 	close_window_bonus.c \
 					game_loop_bonus.c \
@@ -46,7 +49,6 @@ GAME_BONUS		= 	close_window_bonus.c \
 					player_move_bonus.c \
 					raycasting_bonus.c \
 					render_bonus.c \
-					light_bonus.c \
 					render_utils_bonus.c
 MINIMAP_BONUS	= 	minimap_bonus.c \
 					minimap_utils_bonus.c
@@ -83,6 +85,7 @@ VPATH += src_bonus/fps_bonus
 VPATH += src_bonus/free_bonus
 VPATH += src_bonus/game_bonus
 VPATH += src_bonus/init_bonus
+VPATH += src_bonus/light_bonus
 VPATH += src_bonus/minimap_bonus
 VPATH += src_bonus/parse_bonus
 
@@ -102,6 +105,7 @@ SRC_BONUS += $(FPS_BONUS)
 SRC_BONUS += $(FREE_BONUS)
 SRC_BONUS += $(GAME_BONUS)
 SRC_BONUS += $(INIT_BONUS)
+SRC_BONUS += $(LIGHT_BONUS)
 SRC_BONUS += $(MINIMAP_BONUS)
 SRC_BONUS += $(PARSING_BONUS)
 

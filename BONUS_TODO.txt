@@ -1,10 +1,8 @@
-Concept
+Concept ?
 
-These values need to be in same range as global_light (0.2 ? 1.0).
-
-? # define DAY_CLUE   "At dawn's first golden ray, the hidden key may stay"
-? # define NIGHT_CLUE "Where the last light fades, your path awaits"
-? # define MAZE_CLUE  "In the heart of the maze, where walls conceal, the truth will reveal"
+# define DAY_CLUE   "At dawn's first golden ray, the hidden key may stay"
+# define NIGHT_CLUE "Where the last light fades, your path awaits"
+# define MAZE_CLUE  "In the heart of the maze, where walls conceal, the truth will reveal"
 
 Day clue: Appears in the first room when the player starts.
 	- Gives a poetic hint for where the key is.
@@ -18,16 +16,11 @@ Maze clue: Appears after opening the door.
 	- Hints at the ?heart? of the maze: room to - > win/leave the maze
 	- Door should blend with wall (invisible): by having the same texture as the wall. Clue references hidden walls.
 
-// helper functions to set DAY/NIGHT transition
+// helper functions to set DAY/NIGHT transition ?
 
 bool is_night(double global_light)
 {
     return (global_light <= NIGHT_START);
-}
-
-bool is_day(double global_light)
-{
-    return (global_light >= NIGHT_END);
 }
 ------------------------
 

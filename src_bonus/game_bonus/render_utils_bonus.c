@@ -15,7 +15,7 @@
 int	color(t_draw *draw, t_img *texture)
 {
 	return (*(int *)(texture->addr + (draw->tex_y * texture->line_length
-			+ draw->tex_x * (texture->bits_per_pixel / 8))));
+			+ draw->tex_x * (texture->bpp / 8))));
 }
 
 void	put_pixel(t_img *img, int x, int y, int color)
@@ -25,7 +25,7 @@ void	put_pixel(t_img *img, int x, int y, int color)
 	if (y < 0 || y > WIN_HEIGHT - 1 || x < 0
 		|| x > WIN_WIDTH - 1)
 		return ;
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -43,9 +43,9 @@ void	change_buffer_image(t_img *bg, t_img *image)
 		while (++x < bg->width)
 		{
 			src = bg->addr + (y * bg->line_length + x
-					* (bg->bits_per_pixel / 8));
+					* (bg->bpp / 8));
 			dst = image->addr + (y * image->line_length + x
-					* (image->bits_per_pixel / 8));
+					* (image->bpp / 8));
 			*(unsigned int *)dst = *(unsigned int *)src;
 		}
 	}

@@ -31,7 +31,7 @@ void	put_fc(t_data *data)
 		while (++x < WIN_WIDTH)
 		{
 			pixel_addr = data->bg.addr + (y * data->bg.line_length)
-				+ (x * (data->bg.bits_per_pixel / 8));
+				+ (x * (data->bg.bpp / 8));
 			if (y < WIN_HEIGHT / 2)
 				*(unsigned int *)pixel_addr = sky_color;
 			else
