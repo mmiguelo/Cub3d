@@ -28,8 +28,9 @@ GAME 	= 	close_window.c \
 			raycasting.c \
 			render.c
 GENERAL_BONUS	=	main_bonus.c \
-					free_bonus.c \
 					cycle_bonus.c
+FREE_BONUS		=	free_bonus.c \
+					free_util_bonus.c
 PARSING_BONUS	= 	01_parse_bonus.c \
 					02_extensions_bonus.c \
 					03_textures_bonus.c \
@@ -71,35 +72,38 @@ RESET = \033[0m
 #==============================================================================#
 
 VPATH += src
-VPATH += src/parse
-VPATH += src/init
 VPATH += src/debug
 VPATH += src/game
+VPATH += src/init
+VPATH += src/parse
+
 VPATH += src_bonus
-VPATH += src_bonus/parse_bonus
-VPATH += src_bonus/init_bonus
 VPATH += src_bonus/debug_bonus
-VPATH += src_bonus/game_bonus
-VPATH += src_bonus/minimap_bonus
 VPATH += src_bonus/fps_bonus
+VPATH += src_bonus/free_bonus
+VPATH += src_bonus/game_bonus
+VPATH += src_bonus/init_bonus
+VPATH += src_bonus/minimap_bonus
+VPATH += src_bonus/parse_bonus
 
 #==============================================================================#
 #                                    FILES                                     #
 #==============================================================================#
 
 SRC +=	$(GENERAL)
-SRC +=	$(PARSING)
-SRC +=	$(INIT)
 SRC +=	$(DEBUG)
 SRC +=	$(GAME)
+SRC +=	$(INIT)
+SRC +=	$(PARSING)
 
 SRC_BONUS += $(GENERAL_BONUS)
-SRC_BONUS += $(PARSING_BONUS)
-SRC_BONUS += $(INIT_BONUS)
 SRC_BONUS += $(DEBUG_BONUS)
-SRC_BONUS += $(GAME_BONUS)
-SRC_BONUS += $(MINIMAP_BONUS)
 SRC_BONUS += $(FPS_BONUS)
+SRC_BONUS += $(FREE_BONUS)
+SRC_BONUS += $(GAME_BONUS)
+SRC_BONUS += $(INIT_BONUS)
+SRC_BONUS += $(MINIMAP_BONUS)
+SRC_BONUS += $(PARSING_BONUS)
 
 # Library Paths
 LIBFT_DIR = libft

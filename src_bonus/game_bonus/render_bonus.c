@@ -17,25 +17,25 @@ void	put_fc(t_data *data)
 	int		x;
 	int		y;
 	char	*pixel_addr;
-	int		color;
+	int		sky_color;
+	int		floor_color;
 
+	sky_color = lerp_day_cycle(data, data->time_of_day);
+	sky_color = apply_global_brightness(sky_color, data->global_light);
+	floor_color = (data->floor.r << 16) | (data->floor.g << 8) | data->floor.b;
+	floor_color = apply_global_brightness(floor_color, data->global_light);
 	y = -1;
 	while (++y < WIN_HEIGHT)
 	{
 		x = -1;
 		while (++x < WIN_WIDTH)
 		{
-			if (y < WIN_HEIGHT / 2)
-				color = lerp_day_cycle(data, data->time_of_day);
-			else
-			{
-				color = (data->floor.r << 16) | (data->floor.g << 8)
-					| data->floor.b;
-			}
-			color = apply_global_brightness(color, data->global_light);
 			pixel_addr = data->bg.addr + (y * data->bg.line_length)
 				+ (x * (data->bg.bits_per_pixel / 8));
-			*(unsigned int *)pixel_addr = color;
+			if (y < WIN_HEIGHT / 2)
+				*(unsigned int *)pixel_addr = sky_color;
+			else
+				*(unsigned int *)pixel_addr = floor_color;
 		}
 	}
 }

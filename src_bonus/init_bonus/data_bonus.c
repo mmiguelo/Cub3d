@@ -35,7 +35,7 @@ void	init_game(t_data *data)
 	data->frames.time = 0.0;
 	data->frames.old_time = 0.0;
 	data->move_speed = 1.0;
-	data->global_light = 1.0;
+	data->global_light = lerp_day_cycle(data, data->time_of_day);
 	data->time_of_day = 0.0;
 	data->bsunrise = true;
 	data->bsunset = false;

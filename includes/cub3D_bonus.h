@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/24 18:13:59 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/08/25 16:43:13 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,7 @@ int		ft_kill(t_data *data, char *message);
 void	close_window(t_data *data, char *msg);
 void	free_textures(t_data *data);
 void	freedom(t_data *data);
+void	destroy_images(t_data *data);
 void	destroy_textures(t_textures *textures, void *mlx);
 void	free_tex(t_img *tex, void *mlx);
 void	free_gnl(t_data *data);
