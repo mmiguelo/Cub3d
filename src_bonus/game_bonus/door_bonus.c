@@ -1,6 +1,6 @@
 #include "cub3D_bonus.h"
 
-t_door *find_door_in_front(t_data *data, double max_dist)
+/* t_door *find_door_in_front(t_data *data, double max_dist)
 {
     int     i;
     double  dx, dy, dist, dot;
@@ -31,7 +31,7 @@ t_door *find_door_in_front(t_data *data, double max_dist)
         }
     }
     return (best);
-}
+} */
 
 t_door	*find_door(t_map *map, int x, int y)
 {
@@ -152,9 +152,9 @@ void	engage_door(t_data *data, t_door *door, t_door_state new_state)
 		if (new_state == DOOR_OPENING)
 		{
 			door->frame++;
-			if (door->frame >= 14)
+			if (door->frame >= 13)
 			{
-				door->frame = 14;
+				door->frame = 13;
 				door->state = DOOR_OPEN;
 				door->open = true;
 			}

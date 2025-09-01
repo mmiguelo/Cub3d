@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:56 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/01 18:46:13 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:48:03 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	key_hook_press(int keycode, t_data *data)
 {
+	t_door *door;
+
 	if (keycode == XK_Escape)
 		close_window(data, GAME_ENDED);
 	if (keycode == XK_w)
@@ -32,9 +34,10 @@ int	key_hook_press(int keycode, t_data *data)
 		data->player.sprint = 1;
 	if (keycode == XK_e)
 	{
-		t_door *door;
-		
-		door = find_door_in_front(data, 1.5);
+		printf("Raydir X:%f Y:%f \n", data->ray.dir.x, data->player.x);
+		int map_x = ((int)data->player.x + (int)data->ray.dir.x);
+   		int map_y = ((int)data->player.y + (int)data->ray.dir.y);
+    	door = find_door(&data->map, map_x, map_y);
 		if (door && is_door_active(data, door))
 		{
 			if (door->state == DOOR_CLOSED)

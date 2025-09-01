@@ -221,7 +221,7 @@ fclean: clean clean_bonus
 
 download:
 	@if [ ! -d "minilibx-linux" ]; then \
-		wget https://cdn.intra.42.fr/document/document/36093/minilibx-linux.tgz && \
+		wget https://cdn.intra.42.fr/document/document/38531/minilibx-linux.tgz && \
 		tar -xzf minilibx-linux.tgz; \
 		rm -rf minilibx-linux.tgz; \
 		echo "$(GREEN)MinilibX cloned into ./minilibx-linux$(RESET)"; \
