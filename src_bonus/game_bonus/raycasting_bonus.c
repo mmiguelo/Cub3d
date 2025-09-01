@@ -19,6 +19,7 @@ void	calculate_raycasting(t_data *data)
 	update_fps(data);
 	clear_image(&data->image, 0x000000);
 	put_fc(data);
+	update_doors(data);
 	x = 0;
 	while (x < WIN_WIDTH)
 		render_column(data, x++);

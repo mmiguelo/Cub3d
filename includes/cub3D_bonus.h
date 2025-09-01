@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/01 12:43:13 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/01 14:11:47 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 
 # define MAX_RGB 255
 # define MIN_RGB 0
-# define VALID_MAP_CHARS "01DNSWE"
+# define VALID_MAP_CHARS "01NSWEDdn"
 # define WS " \t\n\r\v\f"
 
 # define TILE_SIZE 64
@@ -180,6 +180,7 @@ typedef struct s_door
 	double			timer;
 	int				row;
 	int				col;
+	char			tile;
 }	t_door;
 
 typedef struct s_map
@@ -361,5 +362,10 @@ void	find_which_door_texture(t_data *data, t_ray *ray);
 void 	render_door(t_data *data, t_ray *ray);
 void	init_door_image(t_data *data);
 void	engage_door(t_data *data, t_door *door, t_door_state new_state);
+int		is_door_active(t_data *data, t_door *door);
+t_door	*find_door(t_map *map, int x, int y);
+t_door	*find_nearby_door(t_data *data, double px, double py, double max_dist);
+void	update_doors(t_data *data);
+
 
 #endif

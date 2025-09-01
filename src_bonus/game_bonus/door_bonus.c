@@ -14,11 +14,33 @@ t_door	*find_door(t_map *map, int x, int y)
 	return (NULL);
 }
 
+t_door *find_nearby_door(t_data *data, double px, double py, double max_dist)
+{
+	int		i;
+	double	dx;
+	double	dy;
+	double	dist;
+
+	i = 0;
+	while (i < data->map.door_count)
+	{
+		t_door *door = &data->map.doors[i];
+		dx = px - (door->x + 0.5);
+		dy = py - (door->y + 0.5);
+		dist = sqrt(dx * dx + dy * dy);
+		if (dist <= max_dist)
+			return door;
+		i++;
+	}
+	return NULL;
+}
+
+
 int	is_door_active(t_data *data, t_door *door)
 {
 	if (!door)
 		return (0);
-	if (door->mode == DOOR_DAY && data->bsun)
+	if (door->mode == DOOR_DAY && data->bsunrise)
 		return (1);
 	if (door->mode == DOOR_NIGHT && data->bmoon)
 		return (1);
@@ -37,18 +59,21 @@ void render_door(t_data *data, t_ray *ray)
 	if (!active)
 	{
 		ray->draw.hit = true;
-		ray->draw.tile = '1';
+		data->map.doors->tile = '1';
 	}
 	else if (active && door && !door->open)
 	{
 		ray->draw.hit = true;
-		ray->draw.tile = 'D';
+		data->map.doors->tile = 'D';
 	}
-	else
+	else if (active && door && door->open)
+	{
 		ray->draw.hit = false;
+		data->map.doors->tile = 'D';
+	}
 }
 
-void    update_doors(t_data *data)
+void	update_doors(t_data *data)
 {
 	int	i;
 

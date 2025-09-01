@@ -76,7 +76,10 @@ void	update_global_light(t_data *data)
 
 	t = fmod(data->time_of_day, 1.0);
 	cycle = cos((t * 2.0 * PI) - PI);
-	data->global_light = 0.2 + ((cycle + 1.0) / 2.0) * (1.0 - 0.2);
+	if (data->player.sprint)
+		data->global_light = 0.2 + ((cycle + 1.0) / 2.0) * (1.0 - 0.2);
+	else
+
 	if (data->global_light < 0.2)
 		data->global_light = 0.2;
 	if (data->global_light > 1.0)

@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:26 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/30 23:30:17 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/01 13:32:55 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_draw
 	double	step;
 	int		color;
 	double	brightness;
-	char	tile;
 }	t_draw;
 
 /*=============================================================================#

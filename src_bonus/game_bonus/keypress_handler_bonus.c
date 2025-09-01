@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:56 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/16 01:23:35 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/01 13:41:39 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,19 @@ int	key_hook_press(int keycode, t_data *data)
 		data->player.turn_right = 1;
 	if (keycode == XK_space)
 		data->player.sprint = 1;
+	if (keycode == XK_e)
+	{
+		t_door *door;
+		
+		door = find_nearby_door(data, data->player.x, data->player.y, 1.0);
+		if (door && is_door_active(data, door))
+		{
+			if (door->state == DOOR_CLOSED)
+				door->state = DOOR_OPENING;
+			else if (door->state == DOOR_OPEN)
+				door->state = DOOR_CLOSING;
+		}
+	}
 	return (0);
 }
 
@@ -69,26 +82,3 @@ int	mouse_move(int x, int y, t_data *data)
 	mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, y);
 	return (0);
 }
-
-/* int mouse_move(int x, int y, t_data *data) // improve 1
-{
-    (void)y;
-
-    static int prev_c = WIN_WIDTH / 2; // store previous mouse x position
-    int m = WIN_WIDTH / 2;             // middle of the screen
-    int c = x;                          // current mouse x
-	
-    if (c > m && c > prev_c)
-        calculate_rotation(&data->player, ROT_SPEED);      // move right
-    else if (c > m && c < prev_c)
-        calculate_rotation(&data->player, -ROT_SPEED);     // move left
-    else if (c < m && c < prev_c)
-        calculate_rotation(&data->player, -ROT_SPEED);     // move left
-    else if (c < m && c > prev_c)
-        calculate_rotation(&data->player, ROT_SPEED);      // move right
-    // else c == m or mouse not moving ? do nothing
-
-    prev_c = c; // update previous position
-    mlx_mouse_move(data->mlx, data->win, m, y); // recenter mouse
-    return (0);
-} */

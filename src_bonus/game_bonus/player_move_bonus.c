@@ -83,6 +83,14 @@ void	calculate_rotation(t_player *player, double rotation_speed)
 
 void	check_collision(t_player *player, char **map)
 {
+/* 	int	new_mx;
+	int	new_my;
+	double	nx = player->new_x;
+	double	ny = player->new_y;
+	double rad = PLAYER_RAD;
+
+
+	if () */
 	if (map[(int)player->y][(int)(player->new_x + PLAYER_RAD)] != '1'
 			&& map[(int)player->y][(int)(player->new_x - PLAYER_RAD)] != '1')
 	{
