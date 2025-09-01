@@ -12,7 +12,7 @@
 
 #include "cub3D_bonus.h"
 
-void	calculate_movements(t_data *data, char **map)
+void	calculate_movements(t_data *data)
 {
 	double		speed_mult;
 	t_player	*player;
@@ -25,19 +25,19 @@ void	calculate_movements(t_data *data, char **map)
 	{
 		player->new_x = player->x + player->dir.x * SPEED * speed_mult;
 		player->new_y = player->y + player->dir.y * SPEED * speed_mult;
-		check_collision(data, player, map);
+		check_collision(data, player);
 	}
 	if (player->move_backward)
 	{
 		player->new_x = player->x - player->dir.x * SPEED * speed_mult;
 		player->new_y = player->y - player->dir.y * SPEED * speed_mult;
-		check_collision(data, player, map);
+		check_collision(data, player);
 	}
-	move_strafe(data, map);
+	move_strafe(data);
 	turn_player(player);
 }
 
-void	move_strafe(t_data *data, char **map)
+void	move_strafe(t_data *data)
 {
 	double		speed_mult;
 	t_player	*player;
@@ -50,13 +50,13 @@ void	move_strafe(t_data *data, char **map)
 	{
 		player->new_x = player->x + player->dir.y * SPEED * speed_mult;
 		player->new_y = player->y - player->dir.x * SPEED * speed_mult;
-		check_collision(data, player, map);
+		check_collision(data, player);
 	}
 	if (player->move_right)
 	{
 		player->new_x = player->x - player->dir.y * SPEED * speed_mult;
 		player->new_y = player->y + player->dir.x * SPEED * speed_mult;
-		check_collision(data, player, map);
+		check_collision(data, player);
 	}
 }
 
@@ -85,24 +85,30 @@ void	calculate_rotation(t_player *player, double rotation_speed)
 		* cos(rotation_speed);
 }
 
-int is_blocking_tile(char c, t_door *door)
+int is_blocking_tile(t_data *data, double x, double y)
 {
-	if (c == '1')
+	int map_x;
+	int map_y;
+	t_door *door;
+	char tile;
+
+	map_x = (int)x;
+	map_y = (int)y;
+	door = find_door(&data->map, map_x, map_y);
+	tile = data->map.grid[map_y][map_x];
+	if (tile == '1')
 		return (1);
-	if (ft_strchr("Ddn", c))
-		return (!door || !door->open);
+	if (ft_strchr("Ddn", tile))
+		return !(door && door->open);
 	return (0);
 }
 
-void	check_collision(t_data *data, t_player *player, char **map)
+void check_collision(t_data *data, t_player *player)
 {
-	t_door	*door;
-
-	door = find_door(&data->map, (int)player->new_x, (int)player->new_y);
-	if (!is_blocking_tile(map[(int)player->y][(int)(player->new_x + PLAYER_RAD)], door) &&
-   		!is_blocking_tile(map[(int)player->y][(int)(player->new_x - PLAYER_RAD)], door))
+	if (!is_blocking_tile(data, player->new_x + PLAYER_RAD, player->y) &&
+		!is_blocking_tile(data, player->new_x - PLAYER_RAD, player->y))
 		player->x = player->new_x;
-	if (!is_blocking_tile(map[(int)(player->new_y + PLAYER_RAD)][(int)player->x], door) &&
-    	!is_blocking_tile(map[(int)(player->new_y - PLAYER_RAD)][(int)player->x], door))
-    	player->y = player->new_y;
+	if (!is_blocking_tile(data, player->x, player->new_y + PLAYER_RAD) &&
+		!is_blocking_tile(data, player->x, player->new_y - PLAYER_RAD))
+		player->y = player->new_y;
 }

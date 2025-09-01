@@ -30,7 +30,7 @@ int	draw_loop(void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
-	calculate_movements(data, data->map.grid);
+	calculate_movements(data);
 	calculate_raycasting(data);
 	return (0);
 }
