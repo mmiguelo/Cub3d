@@ -85,31 +85,24 @@ void	calculate_rotation(t_player *player, double rotation_speed)
 		* cos(rotation_speed);
 }
 
+int is_blocking_tile(char c, t_door *door)
+{
+	if (c == '1')
+		return (1);
+	if (ft_strchr("Ddn", c))
+		return (!door || !door->open);
+	return (0);
+}
+
 void	check_collision(t_data *data, t_player *player, char **map)
 {
 	t_door	*door;
 
 	door = find_door(&data->map, (int)player->new_x, (int)player->new_y);
-	if (door)
-	{
-		if ((!ft_strchr("Ddn", map[(int)player->y][(int)(player->new_x + PLAYER_RAD)]) || door->open)
-			&& (!ft_strchr("Ddn", map[(int)player->y][(int)(player->new_x - PLAYER_RAD)]) || door->open))
-		{
-			player->x = player->new_x;
-		}
-		if ((!ft_strchr("Ddn", map[(int)(player->y + PLAYER_RAD)][(int)player->x]) || door->open)
-			&& (!ft_strchr("Ddn", map[(int)(player->y - PLAYER_RAD)][(int)player->x]) || door->open))
-		{
-			player->y = player->new_y;
-		}
-	}
-	else
-	{
-		if ((map[(int)player->y][(int)(player->new_x + PLAYER_RAD)] != '1'
-				&& map[(int)player->y][(int)(player->new_x - PLAYER_RAD)] != '1'))
-			player->x = player->new_x;
-		if (map[(int)(player->new_y + PLAYER_RAD)][(int)player->x] != '1'
-			&& map[(int)(player->new_y - PLAYER_RAD)][(int)player->x] != '1')
-			player->y = player->new_y;
-	}
+	if (!is_blocking_tile(map[(int)player->y][(int)(player->new_x + PLAYER_RAD)], door) &&
+   		!is_blocking_tile(map[(int)player->y][(int)(player->new_x - PLAYER_RAD)], door))
+		player->x = player->new_x;
+	if (!is_blocking_tile(map[(int)(player->new_y + PLAYER_RAD)][(int)player->x], door) &&
+    	!is_blocking_tile(map[(int)(player->new_y - PLAYER_RAD)][(int)player->x], door))
+    	player->y = player->new_y;
 }

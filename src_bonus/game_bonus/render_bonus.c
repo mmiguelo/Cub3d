@@ -88,16 +88,14 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 
 void	render_column(t_data *data, int x)
 {
-	t_ray	ray;
-
-	ray.draw.hit = false;
-	calculate_variables(&data->player, &ray, x);
-	while (!ray.draw.hit)
-		check_hit(data, &ray);
-	calculate_perpwalldist(&ray, &ray.draw);
-	calculate_texture(data, &ray);
-	while (ray.draw.start < ray.draw.end)
-		draw_line(data, &ray, x);
+	data->ray.draw.hit = false;
+	calculate_variables(&data->player, &data->ray, x);
+	while (!data->ray.draw.hit)
+		check_hit(data, &data->ray);
+	calculate_perpwalldist(&data->ray, &data->ray.draw);
+	calculate_texture(data, &data->ray);
+	while (data->ray.draw.start < data->ray.draw.end)
+		draw_line(data, &data->ray, x);
 }
 
 void	check_hit(t_data *data, t_ray *ray)

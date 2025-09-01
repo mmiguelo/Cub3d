@@ -1,5 +1,38 @@
 #include "cub3D_bonus.h"
 
+t_door *find_door_in_front(t_data *data, double max_dist)
+{
+    int     i;
+    double  dx, dy, dist, dot;
+    t_door *best;
+	t_door *door;
+    double  best_dist;
+
+	best = NULL;
+	best_dist = max_dist;
+	i = -1;
+    while (++i < data->map.door_count)
+    {
+        door = &data->map.doors[i];
+        dx = (door->x + 0.5) - data->player.x;
+        dy = (door->y + 0.5) - data->player.y;
+        dist = sqrt(dx * dx + dy * dy);
+        if (dist > max_dist)
+            continue;
+		dx /= dist;
+        dy /= dist;
+        dot = dx * data->ray.dir.x + dy * data->ray.dir.y;
+        if (dot < 0.9)
+            continue;
+        if (dist < best_dist)
+        {
+            best_dist = dist;
+            best = door;
+        }
+    }
+    return (best);
+}
+
 t_door	*find_door(t_map *map, int x, int y)
 {
 	int	i;
@@ -35,14 +68,13 @@ t_door *find_nearby_door(t_data *data, double px, double py, double max_dist)
 	return NULL;
 }
 
-
 int	is_door_active(t_data *data, t_door *door)
 {
 	if (!door)
 		return (0);
-	if (door->mode == DOOR_DAY && data->bsunrise)
+	if (door->mode == DOOR_DAY && (data->bsun || data->bsunrise))
 		return (1);
-	if (door->mode == DOOR_NIGHT && data->bmoon)
+	if (door->mode == DOOR_NIGHT && (data->bsunset || data->bmoon))
 		return (1);
 	if (door->mode == DOOR_ALWAYS)
 		return (1);
@@ -59,12 +91,12 @@ void render_door(t_data *data, t_ray *ray)
 	if (!active)
 	{
 		ray->draw.hit = true;
-		data->map.doors->tile = '1';
+		door->tile = '1';
 	}
 	else if (active && door && !door->open)
 	{
 		ray->draw.hit = true;
-		data->map.doors->tile = 'D';
+		door->tile = 'D';
 	}
 	else if (active && door && door->open)
 	{
@@ -76,16 +108,36 @@ void render_door(t_data *data, t_ray *ray)
 void	update_doors(t_data *data)
 {
 	int	i;
+	t_door *door;
 
 	i = -1;
 	while (++i < data->map.door_count)
 	{
-		t_door *door = &data->map.doors[i];
-
+		door = &data->map.doors[i];
 		if (door->state == DOOR_OPENING)
+		{
+			printf("door state: %d\n", door->state);
+			printf("door frame: %d\n", door->frame);
+			printf("door open: %d\n", door->open);
+			printf("door tile: %c\n", data->map.doors->tile);
 			engage_door(data, door, DOOR_OPENING);
+			printf("door state: %d\n", door->state);
+			printf("door frame: %d\n", door->frame);
+			printf("door open: %d\n", door->open);
+			printf("door tile: %c\n", data->map.doors->tile);
+		}
 		else if (door->state == DOOR_CLOSING)
+		{
+			printf("door state: %d\n", door->state);
+			printf("door frame: %d\n", door->frame);
+			printf("door open: %d\n", door->open);
+			printf("door tile: %c\n", data->map.doors->tile);
 			engage_door(data, door, DOOR_CLOSING);
+			printf("door state: %d\n", door->state);
+			printf("door frame: %d\n", door->frame);
+			printf("door open: %d\n", door->open);
+			printf("door tile: %c\n", data->map.doors->tile);
+		}
 		if (door->state == DOOR_OPEN && !is_door_active(data, door))
 			door->state = DOOR_CLOSING;
     }

@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:56 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/01 13:41:39 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/01 18:46:13 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,19 @@ int	key_hook_press(int keycode, t_data *data)
 	{
 		t_door *door;
 		
-		door = find_nearby_door(data, data->player.x, data->player.y, 1.0);
+		door = find_door_in_front(data, 1.5);
 		if (door && is_door_active(data, door))
 		{
 			if (door->state == DOOR_CLOSED)
+			{
+				printf("Door open: %d, %d\n", door->x, door->y);
 				door->state = DOOR_OPENING;
+			}
 			else if (door->state == DOOR_OPEN)
+			{
+				printf("Door close: %d, %d\n", door->x, door->y);
 				door->state = DOOR_CLOSING;
+			}
 		}
 	}
 	return (0);
