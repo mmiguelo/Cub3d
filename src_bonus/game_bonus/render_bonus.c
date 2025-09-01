@@ -63,14 +63,20 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 
 	ray->draw.tex_y = ray->draw.tex_pos;
 	ray->draw.tex_pos += ray->draw.step;
-	if (ray->draw.side == 0 && ray->dir.x > 0)
-		ray->draw.color = color(&ray->draw, &data->textures.west);
-	else if (ray->draw.side == 0 && ray->dir.x < 0)
-		ray->draw.color = color(&ray->draw, &data->textures.east);
-	else if (ray->draw.side == 1 && ray->dir.y < 0)
-		ray->draw.color = color(&ray->draw, &data->textures.south);
+	if (ray->draw.tile == 'D' || ray->draw.tile == 'd'
+		|| ray->draw.tile == 'n')
+		find_which_door_texture(data, ray);
 	else
-		ray->draw.color = color(&ray->draw, &data->textures.north);
+	{
+		if (ray->draw.side == 0 && ray->dir.x > 0)
+			ray->draw.color = color(&ray->draw, &data->textures.west);
+		else if (ray->draw.side == 0 && ray->dir.x < 0)
+			ray->draw.color = color(&ray->draw, &data->textures.east);
+		else if (ray->draw.side == 1 && ray->dir.y < 0)
+			ray->draw.color = color(&ray->draw, &data->textures.south);
+		else
+			ray->draw.color = color(&ray->draw, &data->textures.north);
+	}
 	ray->draw.brightness = 1 / (1 + ray->draw.perpwalldist * DARKNESS);
 	if (ray->draw.brightness < 0.2)
 		ray->draw.brightness = 0.2;
@@ -112,7 +118,12 @@ void	check_hit(t_data *data, t_ray *ray)
 		&& ray->pos.y >= 0 && ray->pos.y < data->map.height)
 	{
 		if (data->map.grid[ray->pos.y][ray->pos.x] == '1')
+		{
 			ray->draw.hit = true;
+			ray->draw.tile = '1';
+		}
+		else if (ft_strchr("Ddn", data->map.grid[ray->pos.y][ray->pos.x]))
+			render_door(data, ray);
 		else if (data->map.grid[ray->pos.y][ray->pos.x] == '0')
 			ray->draw.hit = false;
 	}

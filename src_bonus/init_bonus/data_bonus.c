@@ -20,29 +20,6 @@ void	init(t_data *data)
 	init_game(data);
 }
 
-void	init_game(t_data *data)
-{
-	data->ceiling.r = -1;
-	data->ceiling.g = -1;
-	data->ceiling.b = -1;
-	data->floor.r = -1;
-	data->floor.g = -1;
-	data->floor.b = -1;
-	data->player.dir.x = 1.0;
-	data->player.dir.y = 1.0;
-	data->player.plane.x = 1.0;
-	data->player.plane.y = 0.66;
-	data->frames.time = 0.0;
-	data->frames.old_time = 0.0;
-	data->move_speed = 1.0;
-	data->global_light = lerp_day_cycle(data, data->time_of_day);
-	data->time_of_day = 0.0;
-	data->bsunrise = true;
-	data->bsunset = false;
-	data->bsun = false;
-	data->bmoon = false;
-}
-
 void	init_image(t_data *data)
 {
 	data->mlx = mlx_init();
@@ -59,17 +36,18 @@ void	init_image(t_data *data)
 	data->image.width = WIN_WIDTH;
 	data->image.height = WIN_HEIGHT;
 	init_cycle_images(data);
+	init_door_image(data);
 }
 
 void	init_cycle_images(t_data *data)
 {
 	parse(data, "./textures/bonus/sun.xpm", ".xpm");
-	data->sun.img = mlx_xpm_file_to_image(data->mlx, "./textures/bonus/sun.xpm",
-			&data->sun.width, &data->sun.height);
+	data->sun.img = mlx_xpm_file_to_image(data->mlx,
+			"./textures/bonus/sun.xpm", &data->sun.width, &data->sun.height);
 	data->sun.addr = mlx_get_data_addr(data->sun.img,
 			&data->sun.bpp, &data->sun.line_length, &data->sun.endian);
 	parse(data, "./textures/bonus/moon.xpm", ".xpm");
-	data->moon.img = mlx_xpm_file_to_image(data->mlx,
+	data->moon.img = mlx_xpm_file_to_image(data->mlx, 
 			"./textures/bonus/moon.xpm", &data->moon.width, &data->moon.height);
 	data->moon.addr = mlx_get_data_addr(data->moon.img,
 			&data->moon.bpp, &data->moon.line_length,
@@ -88,6 +66,17 @@ void	init_cycle_images(t_data *data)
 	data->sunset.addr = mlx_get_data_addr(data->sunset.img,
 			&data->sunset.bpp, &data->sunset.line_length,
 			&data->sunset.endian);
+}
+
+void	init_door_image(t_data *data)
+{
+	parse(data, "./textures/bonus/spritesheet.xpm", ".xpm");
+	data->door_spritesheet.img = mlx_xpm_file_to_image(data->mlx,
+			"./textures/bonus/spritesheet.xpm", &data->door_spritesheet.width,
+			&data->door_spritesheet.height);
+	data->door_spritesheet.addr = mlx_get_data_addr(data->door_spritesheet.img,
+			&data->door_spritesheet.bpp, &data->door_spritesheet.line_length,
+			&data->door_spritesheet.endian);
 }
 
 void	load_textures(t_data *data, t_img *texture)

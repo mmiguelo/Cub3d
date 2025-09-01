@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/25 22:08:59 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/01 12:43:13 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 
 # define MAX_RGB 255
 # define MIN_RGB 0
-# define VALID_MAP_CHARS "01NSWE"
+# define VALID_MAP_CHARS "01DNSWE"
 # define WS " \t\n\r\v\f"
 
 # define TILE_SIZE 64
@@ -64,6 +64,8 @@
 # define EVENING 0xFCAF45
 # define NIGHT   0x14183C
 # define FPS_HISTORY_SIZE 30
+# define MAX_DOORS 10
+# define DOOR_FPS 10.0
 
 # define ERR_EMPTY "File is empty\n"
 # define ERR_ARGS "Arguments are invalid\n"
@@ -152,6 +154,34 @@ typedef struct s_player
 	int		sprint;
 }	t_player;
 
+typedef enum e_door_mode
+{
+	DOOR_ALWAYS,
+	DOOR_DAY,
+	DOOR_NIGHT
+}   t_door_mode;
+
+typedef enum e_door_state
+{
+	DOOR_CLOSED,
+	DOOR_OPENING,
+	DOOR_OPEN,
+	DOOR_CLOSING
+}   t_door_state;
+
+typedef struct s_door
+{
+	int				x;
+	int				y;
+	bool			open;
+	t_door_mode		mode;
+	t_door_state	state;
+	int				frame;
+	double			timer;
+	int				row;
+	int				col;
+}	t_door;
+
 typedef struct s_map
 {
 	char		direction;
@@ -160,6 +190,8 @@ typedef struct s_map
 	char		**grid;
 	int			width;
 	int			height;
+	t_door		doors[MAX_DOORS];
+	int			door_count;
 }	t_map;
 
 typedef struct s_frames
@@ -195,6 +227,7 @@ typedef struct s_data
 	t_img		sunrise;
 	t_img		sunset;
 	t_img		moon;
+	t_img		door_spritesheet;
 	t_frames	frames;
 	t_minimap	minimap;
 	bool		bsun;
@@ -304,6 +337,7 @@ void	update_time_of_day(t_data *data);
 int		lerp_day_cycle(t_data *data, double day_cycle);
 int		lerp_color(int start, int end, double t);
 void	change_day(bool *to_false, bool *to_true);
+void	render_cycle(t_data *data);
 
 // MINIMAP
 void	init_minimap(t_data *data);
@@ -321,7 +355,11 @@ double	get_current_time_in_seconds(void);
 void	update_fps(t_data *data);
 void	render_fps(t_data *data);
 
-//bool	is_night(t_data *data);
-void	render_cycle(t_data *data);
+//door
+void	parse_door(t_data *data, int x, int y);
+void	find_which_door_texture(t_data *data, t_ray *ray);
+void 	render_door(t_data *data, t_ray *ray);
+void	init_door_image(t_data *data);
+void	engage_door(t_data *data, t_door *door, t_door_state new_state);
 
 #endif

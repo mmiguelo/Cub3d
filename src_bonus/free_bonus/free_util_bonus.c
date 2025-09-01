@@ -34,4 +34,6 @@ void	destroy_images(t_data *data)
 		mlx_destroy_image(data->mlx, data->sunset.img);
 	if (data->moon.img)
 		mlx_destroy_image(data->mlx, data->moon.img);
+	if (data->door_spritesheet.img)
+		mlx_destroy_image(data->mlx, data->door_spritesheet.img);
 }
