@@ -12,10 +12,12 @@
 
 #include "cub3D_bonus.h"
 
-void	calculate_movements(t_player *player, char **map)
+void	calculate_movements(t_data *data, char **map)
 {
-	double	speed_mult;
+	double		speed_mult;
+	t_player	*player;
 
+	player = &data->player;
 	speed_mult = 1.0;
 	if (player->sprint)
 		speed_mult = 4.0;
@@ -23,22 +25,24 @@ void	calculate_movements(t_player *player, char **map)
 	{
 		player->new_x = player->x + player->dir.x * SPEED * speed_mult;
 		player->new_y = player->y + player->dir.y * SPEED * speed_mult;
-		check_collision(player, map);
+		check_collision(data, player, map);
 	}
 	if (player->move_backward)
 	{
 		player->new_x = player->x - player->dir.x * SPEED * speed_mult;
 		player->new_y = player->y - player->dir.y * SPEED * speed_mult;
-		check_collision(player, map);
+		check_collision(data, player, map);
 	}
-	move_strafe(player, map);
+	move_strafe(data, map);
 	turn_player(player);
 }
 
-void	move_strafe(t_player *player, char **map)
+void	move_strafe(t_data *data, char **map)
 {
-	double	speed_mult;
+	double		speed_mult;
+	t_player	*player;
 
+	player = &data->player;
 	speed_mult = 1.0;
 	if (player->sprint)
 		speed_mult = 4.0;
@@ -46,13 +50,13 @@ void	move_strafe(t_player *player, char **map)
 	{
 		player->new_x = player->x + player->dir.y * SPEED * speed_mult;
 		player->new_y = player->y - player->dir.x * SPEED * speed_mult;
-		check_collision(player, map);
+		check_collision(data, player, map);
 	}
 	if (player->move_right)
 	{
 		player->new_x = player->x - player->dir.y * SPEED * speed_mult;
 		player->new_y = player->y + player->dir.x * SPEED * speed_mult;
-		check_collision(player, map);
+		check_collision(data, player, map);
 	}
 }
 
@@ -81,24 +85,31 @@ void	calculate_rotation(t_player *player, double rotation_speed)
 		* cos(rotation_speed);
 }
 
-void	check_collision(t_player *player, char **map)
+void	check_collision(t_data *data, t_player *player, char **map)
 {
-/* 	int	new_mx;
-	int	new_my;
-	double	nx = player->new_x;
-	double	ny = player->new_y;
-	double rad = PLAYER_RAD;
+	t_door	*door;
 
-
-	if () */
-	if (map[(int)player->y][(int)(player->new_x + PLAYER_RAD)] != '1'
-			&& map[(int)player->y][(int)(player->new_x - PLAYER_RAD)] != '1')
+	door = find_door(&data->map, (int)player->new_x, (int)player->new_y);
+	if (door)
 	{
-		player->x = player->new_x;
+		if ((!ft_strchr("Ddn", map[(int)player->y][(int)(player->new_x + PLAYER_RAD)]) || door->open)
+			&& (!ft_strchr("Ddn", map[(int)player->y][(int)(player->new_x - PLAYER_RAD)]) || door->open))
+		{
+			player->x = player->new_x;
+		}
+		if ((!ft_strchr("Ddn", map[(int)(player->y + PLAYER_RAD)][(int)player->x]) || door->open)
+			&& (!ft_strchr("Ddn", map[(int)(player->y - PLAYER_RAD)][(int)player->x]) || door->open))
+		{
+			player->y = player->new_y;
+		}
 	}
-	if (map[(int)(player->new_y + PLAYER_RAD)][(int)player->x] != '1'
-			&& map[(int)(player->new_y - PLAYER_RAD)][(int)player->x] != '1')
+	else
 	{
-		player->y = player->new_y;
+		if ((map[(int)player->y][(int)(player->new_x + PLAYER_RAD)] != '1'
+				&& map[(int)player->y][(int)(player->new_x - PLAYER_RAD)] != '1'))
+			player->x = player->new_x;
+		if (map[(int)(player->new_y + PLAYER_RAD)][(int)player->x] != '1'
+			&& map[(int)(player->new_y - PLAYER_RAD)][(int)player->x] != '1')
+			player->y = player->new_y;
 	}
 }

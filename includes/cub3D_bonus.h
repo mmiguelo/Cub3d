@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/01 14:11:47 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/01 16:49:27 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,11 +306,11 @@ int		mouse_move(int x, int y, t_data *data);
 //void	center_mouse(void *win);
 
 // PLAYER MOVEMENT
-void	calculate_movements(t_player *player, char **map);
-void	move_strafe(t_player *player, char **map);
+void	calculate_movements(t_data *data, char **map);
+void	move_strafe(t_data *data, char **map);
 void	turn_player(t_player *player);
 void	calculate_rotation(t_player *player, double rotation_speed);
-void	check_collision(t_player *player, char **map);
+void	check_collision(t_data *data, t_player *player, char **map);
 
 // PLAYER VECTOR
 void	get_player_vector(t_data *data);
