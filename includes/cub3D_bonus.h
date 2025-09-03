@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/01 20:43:23 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/03 01:31:05 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ typedef struct s_door
 	int				row;
 	int				col;
 	char			tile;
+	int				active;
 }	t_door;
 
 typedef struct s_map

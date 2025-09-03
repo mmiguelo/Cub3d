@@ -87,22 +87,17 @@ void render_door(t_data *data, t_ray *ray)
 	int	active;
 
 	door = find_door(&data->map, ray->pos.x, ray->pos.y);
+	if (!door)
+		return ;
 	active = is_door_active(data, door);
 	if (!active)
 	{
-		ray->draw.hit = true;
 		door->tile = '1';
-	}
-	else if (active && door && !door->open)
-	{
 		ray->draw.hit = true;
-		door->tile = 'D';
+		return ;
 	}
-	else if (active && door && door->open)
-	{
-		ray->draw.hit = false;
-		data->map.doors->tile = 'D';
-	}
+	door->tile = 'D';
+	ray->draw.hit = true;
 }
 
 void	update_doors(t_data *data)
@@ -115,29 +110,9 @@ void	update_doors(t_data *data)
 	{
 		door = &data->map.doors[i];
 		if (door->state == DOOR_OPENING)
-		{
-			printf("door state: %d\n", door->state);
-			printf("door frame: %d\n", door->frame);
-			printf("door open: %d\n", door->open);
-			printf("door tile: %c\n", data->map.doors->tile);
 			engage_door(data, door, DOOR_OPENING);
-			printf("door state: %d\n", door->state);
-			printf("door frame: %d\n", door->frame);
-			printf("door open: %d\n", door->open);
-			printf("door tile: %c\n", data->map.doors->tile);
-		}
 		else if (door->state == DOOR_CLOSING)
-		{
-			printf("door state: %d\n", door->state);
-			printf("door frame: %d\n", door->frame);
-			printf("door open: %d\n", door->open);
-			printf("door tile: %c\n", data->map.doors->tile);
 			engage_door(data, door, DOOR_CLOSING);
-			printf("door state: %d\n", door->state);
-			printf("door frame: %d\n", door->frame);
-			printf("door open: %d\n", door->open);
-			printf("door tile: %c\n", data->map.doors->tile);
-		}
 		if (door->state == DOOR_OPEN && !is_door_active(data, door))
 			door->state = DOOR_CLOSING;
     }
@@ -152,9 +127,9 @@ void	engage_door(t_data *data, t_door *door, t_door_state new_state)
 		if (new_state == DOOR_OPENING)
 		{
 			door->frame++;
-			if (door->frame >= 13)
+			if (door->frame >= 14)
 			{
-				door->frame = 13;
+				door->frame = 14;
 				door->state = DOOR_OPEN;
 				door->open = true;
 			}
@@ -179,9 +154,17 @@ void	find_which_door_texture(t_data *data, t_ray *ray)
 	int		tex_x;
 	int		tex_y;
 	int		local_y;
+	int		frame;
 
 	door = find_door(&data->map, ray->pos.x, ray->pos.y);
+	if (!door)
+		return ;
 	texture = &data->door_spritesheet;
+	frame = door->frame;
+	if (frame < 0)
+		frame = 0;
+	if (frame > 14)
+		frame = 14;
 	door->col = door->frame % 5;
 	door->row = door->frame / 5;
 	tex_x = (int)(ray->draw.wallx * TILE_SIZE);
