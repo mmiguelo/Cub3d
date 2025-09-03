@@ -1,16 +1,16 @@
-SO textures/wall.xpm
-NO textures/wall_1_.xpm
+SO textures/wall_2_.xpm
+NO textures/wall_2_.xpm
 WE textures/wall_2_.xpm
-EA textures/wall_3_.xpm
+EA textures/wall_2_.xpm
 
 F 191, 160, 116
 C 229, 227, 196
 
 
-1111111
-1000001
-111d111
-1000001
-1000001
-100N001
-1111111
+111111111111
+100000000001
+111d11D11n11
+100000000001
+100000000001
+100N00000001
+111111111111

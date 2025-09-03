@@ -8,6 +8,7 @@ void	change_door_state(t_data *data)
 
 	map_x = ((int)data->player.x + (int)data->ray.dir.x);
 	map_y = ((int)data->player.y + (int)data->ray.dir.y);
+	printf("side dist X: %f, side dist Y: %f\n", data->ray.step.side_dist_x, data->ray.step.side_dist_y);
 	door = find_door(&data->map, map_x, map_y);
 	if (door && is_door_active(data, door))
 	{
