@@ -12,6 +12,18 @@
 
 #include "cub3D_bonus.h"
 
+void	render_wall_texture(t_data *data, t_ray *ray)
+{
+	if (ray->draw.side == 0 && ray->dir.x > 0)
+		ray->draw.color = color(&ray->draw, &data->textures.west);
+	else if (ray->draw.side == 0 && ray->dir.x < 0)
+		ray->draw.color = color(&ray->draw, &data->textures.east);
+	else if (ray->draw.side == 1 && ray->dir.y < 0)
+		ray->draw.color = color(&ray->draw, &data->textures.south);
+	else
+		ray->draw.color = color(&ray->draw, &data->textures.north);
+}
+
 int	color(t_draw *draw, t_img *texture)
 {
 	return (*(int *)(texture->addr + (draw->tex_y * texture->line_length

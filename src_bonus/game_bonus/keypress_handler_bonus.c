@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:56 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/01 19:48:03 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/03 02:51:02 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	key_hook_press(int keycode, t_data *data)
 {
-	t_door *door;
-
 	if (keycode == XK_Escape)
 		close_window(data, GAME_ENDED);
 	if (keycode == XK_w)
@@ -33,25 +31,7 @@ int	key_hook_press(int keycode, t_data *data)
 	if (keycode == XK_space)
 		data->player.sprint = 1;
 	if (keycode == XK_e)
-	{
-		printf("Raydir X:%f Y:%f \n", data->ray.dir.x, data->player.x);
-		int map_x = ((int)data->player.x + (int)data->ray.dir.x);
-   		int map_y = ((int)data->player.y + (int)data->ray.dir.y);
-    	door = find_door(&data->map, map_x, map_y);
-		if (door && is_door_active(data, door))
-		{
-			if (door->state == DOOR_CLOSED)
-			{
-				printf("Door open: %d, %d\n", door->x, door->y);
-				door->state = DOOR_OPENING;
-			}
-			else if (door->state == DOOR_OPEN)
-			{
-				printf("Door close: %d, %d\n", door->x, door->y);
-				door->state = DOOR_CLOSING;
-			}
-		}
-	}
+		change_door_state(data);
 	return (0);
 }
 

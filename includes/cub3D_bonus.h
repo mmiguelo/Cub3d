@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/03 01:31:05 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/03 02:55:25 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,7 +361,7 @@ void	render_fps(t_data *data);
 
 //door
 void	parse_door(t_data *data, int x, int y);
-void	find_which_door_texture(t_data *data, t_ray *ray);
+void	find_which_door_texture(t_data *data, t_ray *ray, t_door *door);
 void	render_door(t_data *data, t_ray *ray);
 void	init_door_image(t_data *data);
 void	engage_door(t_data *data, t_door *door, t_door_state new_state);
@@ -369,7 +369,9 @@ int		is_door_active(t_data *data, t_door *door);
 t_door	*find_door(t_map *map, int x, int y);
 t_door	*find_nearby_door(t_data *data, double px, double py, double max_dist);
 void	update_doors(t_data *data);
+void	change_door_state(t_data *data);
 
 t_door	*find_door_in_front(t_data *data, double max_dist);
+void	render_wall_texture(t_data *data, t_ray *ray);
 
 #endif

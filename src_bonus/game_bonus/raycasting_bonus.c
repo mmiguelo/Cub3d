@@ -30,8 +30,8 @@ void	calculate_raycasting(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
 	render_fps(data);
 	render_cycle(data);
-	mlx_string_put(data->mlx, data->win, WIN_WIDTH / 2 , WIN_HEIGHT / 2, 0xFFFFFF,
-		"+");
+	mlx_string_put(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2,
+		0xFFFFFF, "+");
 }
 
 void	calculate_variables(t_player *player, t_ray *ray, int x)

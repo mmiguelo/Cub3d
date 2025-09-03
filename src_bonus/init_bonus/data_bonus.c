@@ -47,7 +47,7 @@ void	init_cycle_images(t_data *data)
 	data->sun.addr = mlx_get_data_addr(data->sun.img,
 			&data->sun.bpp, &data->sun.line_length, &data->sun.endian);
 	parse(data, "./textures/bonus/moon.xpm", ".xpm");
-	data->moon.img = mlx_xpm_file_to_image(data->mlx, 
+	data->moon.img = mlx_xpm_file_to_image(data->mlx,
 			"./textures/bonus/moon.xpm", &data->moon.width, &data->moon.height);
 	data->moon.addr = mlx_get_data_addr(data->moon.img,
 			&data->moon.bpp, &data->moon.line_length,

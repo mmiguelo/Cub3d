@@ -59,6 +59,7 @@ void	calculate_texture(t_data *data, t_ray *ray)
 
 void	draw_line(t_data *data, t_ray *ray, int x)
 {
+	t_door	*door;
 	double	total_light;
 	char	cell;
 
@@ -66,18 +67,15 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 	ray->draw.tex_y = ray->draw.tex_pos;
 	ray->draw.tex_pos += ray->draw.step;
 	if (cell == 'D' || cell == 'd' || cell == 'n')
-		find_which_door_texture(data, &data->ray);
-	else
 	{
-		if (ray->draw.side == 0 && ray->dir.x > 0)
-			ray->draw.color = color(&ray->draw, &data->textures.west);
-		else if (ray->draw.side == 0 && ray->dir.x < 0)
-			ray->draw.color = color(&ray->draw, &data->textures.east);
-		else if (ray->draw.side == 1 && ray->dir.y < 0)
-			ray->draw.color = color(&ray->draw, &data->textures.south);
+		door = find_door(&data->map, ray->pos.x, ray->pos.y);
+		if (door && door->active)
+			find_which_door_texture(data, ray, door);
 		else
-			ray->draw.color = color(&ray->draw, &data->textures.north);
+			render_wall_texture(data, ray);
 	}
+	else
+		render_wall_texture(data, ray);
 	ray->draw.brightness = 1 / (1 + ray->draw.perpwalldist * DARKNESS);
 	if (ray->draw.brightness < 0.2)
 		ray->draw.brightness = 0.2;
