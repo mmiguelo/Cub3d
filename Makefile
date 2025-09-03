@@ -44,7 +44,6 @@ LIGHT_BONUS		=	light_bonus.c \
 					light_util_bonus.c
 DEBUG_BONUS		= 	print_bonus.c
 GAME_BONUS		= 	close_window_bonus.c \
-					door_bonus.c \
 					game_loop_bonus.c \
 					keypress_handler_bonus.c \
 					player_move_bonus.c \
@@ -54,6 +53,8 @@ GAME_BONUS		= 	close_window_bonus.c \
 MINIMAP_BONUS	= 	minimap_bonus.c \
 					minimap_utils_bonus.c
 FPS_BONUS		=	fps_bonus.c
+DOOR_BONUS		=	door_bonus.c \
+					door_util_bonus.c
 
 NAME 		= cub3D
 NAME_BONUS 	= cub3D_bonus
@@ -82,6 +83,7 @@ VPATH += src/parse
 
 VPATH += src_bonus
 VPATH += src_bonus/debug_bonus
+VPATH += src_bonus/door_bonus
 VPATH += src_bonus/fps_bonus
 VPATH += src_bonus/free_bonus
 VPATH += src_bonus/game_bonus
@@ -102,6 +104,7 @@ SRC +=	$(PARSING)
 
 SRC_BONUS += $(GENERAL_BONUS)
 SRC_BONUS += $(DEBUG_BONUS)
+SRC_BONUS += $(DOOR_BONUS)
 SRC_BONUS += $(FPS_BONUS)
 SRC_BONUS += $(FREE_BONUS)
 SRC_BONUS += $(GAME_BONUS)
