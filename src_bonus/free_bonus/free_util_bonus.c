@@ -12,28 +12,29 @@
 
 #include "cub3D_bonus.h"
 
+void	image_destroyer(t_data *data, t_img *texture)
+{
+	if (texture->img)
+	{
+		mlx_destroy_image(data->mlx, texture->img);
+		texture->img = NULL;
+	}
+}
+
 void	destroy_images(t_data *data)
 {
-	if (data->textures.east.img)
-		mlx_destroy_image(data->mlx, data->textures.east.img);
-	if (data->textures.west.img)
-		mlx_destroy_image(data->mlx, data->textures.west.img);
-	if (data->textures.south.img)
-		mlx_destroy_image(data->mlx, data->textures.south.img);
-	if (data->textures.north.img)
-		mlx_destroy_image(data->mlx, data->textures.north.img);
-	if (data->bg.img)
-		mlx_destroy_image(data->mlx, data->bg.img);
-	if (data->image.img)
-		mlx_destroy_image(data->mlx, data->image.img);
-	if (data->sun.img)
-		mlx_destroy_image(data->mlx, data->sun.img);
-	if (data->sunrise.img)
-		mlx_destroy_image(data->mlx, data->sunrise.img);
-	if (data->sunset.img)
-		mlx_destroy_image(data->mlx, data->sunset.img);
-	if (data->moon.img)
-		mlx_destroy_image(data->mlx, data->moon.img);
-	if (data->door_spritesheet.img)
-		mlx_destroy_image(data->mlx, data->door_spritesheet.img);
+	image_destroyer(data, &data->textures.east);
+	image_destroyer(data, &data->textures.east);
+	image_destroyer(data, &data->textures.west);
+	image_destroyer(data, &data->textures.south);
+	image_destroyer(data, &data->textures.north);
+	image_destroyer(data, &data->bg);
+	image_destroyer(data, &data->image);
+	image_destroyer(data, &data->sun);
+	image_destroyer(data, &data->sunrise);
+	image_destroyer(data, &data->sunset);
+	image_destroyer(data, &data->moon);
+	image_destroyer(data, &data->door_spritesheet);
+	image_destroyer(data, &data->textures.celing);
+	image_destroyer(data, &data->textures.floor);
 }

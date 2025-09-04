@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/03 10:59:24 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/04 14:50:12 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,13 @@
 # define MAP_CLUE "In the heart of the maze, where walls conceal, the truth\
  will reveal."
 
+// Bonus Textures Path
+# define IMG_BONUS "textures/bonus/"
+# define IMG_CELING "./textures/bonus/celing/celing.xpm"
+# define IMG_LIGHTS "./textures/bonus/celing/ligths.xpm" //case we have 2 cellings textures
+# define IMG_FLOOR "./textures/bonus/floor/floor.xpm"
+
+
 /*=============================================================================#
 #                                   STRUCTS                                    #
 #=============================================================================*/
@@ -130,6 +137,8 @@ typedef struct s_textures
 	t_img	south;
 	t_img	east;
 	t_img	west;
+	t_img	celing;
+	t_img	floor;
 }	t_textures;
 
 typedef struct s_pair
@@ -364,7 +373,6 @@ void	render_fps(t_data *data);
 void	parse_door(t_data *data, int x, int y);
 void	find_which_door_texture(t_data *data, t_ray *ray, t_door *door);
 void	render_door(t_data *data, t_ray *ray);
-void	init_door_image(t_data *data);
 void	engage_door(t_data *data, t_door *door, t_door_state new_state);
 int		is_door_active(t_data *data, t_door *door);
 t_door	*find_door(t_map *map, int x, int y);

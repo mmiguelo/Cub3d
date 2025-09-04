@@ -36,47 +36,31 @@ void	init_image(t_data *data)
 	data->image.width = WIN_WIDTH;
 	data->image.height = WIN_HEIGHT;
 	init_cycle_images(data);
-	init_door_image(data);
+}
+
+void	init_bonus_image(t_data *data, t_img *texture, char *path)
+{
+	parse(data, path, ".xpm");
+	texture->img = mlx_xpm_file_to_image(data->mlx,
+			path, &texture->width, &texture->height);
+	if (!texture->img)
+		ft_kill(data, ERR_TEX_LOAD);
+	texture->addr = mlx_get_data_addr(texture->img ,
+			&texture->bpp, &texture->line_length, &texture->endian);
+	if (!texture->addr)
+		ft_kill(data, ERR_TEX_LOAD);
 }
 
 void	init_cycle_images(t_data *data)
 {
-	parse(data, "./textures/bonus/sun.xpm", ".xpm");
-	data->sun.img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/bonus/sun.xpm", &data->sun.width, &data->sun.height);
-	data->sun.addr = mlx_get_data_addr(data->sun.img,
-			&data->sun.bpp, &data->sun.line_length, &data->sun.endian);
-	parse(data, "./textures/bonus/moon.xpm", ".xpm");
-	data->moon.img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/bonus/moon.xpm", &data->moon.width, &data->moon.height);
-	data->moon.addr = mlx_get_data_addr(data->moon.img,
-			&data->moon.bpp, &data->moon.line_length,
-			&data->moon.endian);
-	parse(data, "./textures/bonus/sunrise.xpm", ".xpm");
-	data->sunrise.img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/bonus/sunrise.xpm", &data->sunrise.width,
-			&data->sunrise.height);
-	data->sunrise.addr = mlx_get_data_addr(data->sunrise.img,
-			&data->sunrise.bpp, &data->sunrise.line_length,
-			&data->sunrise.endian);
-	parse(data, "./textures/bonus/sunset.xpm", ".xpm");
-	data->sunset.img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/bonus/sunset.xpm", &data->sunset.width,
-			&data->sunset.height);
-	data->sunset.addr = mlx_get_data_addr(data->sunset.img,
-			&data->sunset.bpp, &data->sunset.line_length,
-			&data->sunset.endian);
-}
-
-void	init_door_image(t_data *data)
-{
-	parse(data, "./textures/bonus/RD_WB_spritesheet.xpm", ".xpm");
-	data->door_spritesheet.img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/bonus/RD_WB_spritesheet.xpm",
-			&data->door_spritesheet.width, &data->door_spritesheet.height);
-	data->door_spritesheet.addr = mlx_get_data_addr(data->door_spritesheet.img,
-			&data->door_spritesheet.bpp, &data->door_spritesheet.line_length,
-			&data->door_spritesheet.endian);
+	init_bonus_image(data, &data->sun, "./textures/bonus/sun.xpm");
+	init_bonus_image(data, &data->moon, "./textures/bonus/moon.xpm");
+	init_bonus_image(data, &data->sunrise, "./textures/bonus/sunrise.xpm");
+	init_bonus_image(data, &data->sunset, "./textures/bonus/sunset.xpm");
+	init_bonus_image(data,
+		&data->door_spritesheet, "./textures/bonus/RD_WB_spritesheet.xpm");
+	init_bonus_image(data, &data->textures.celing, IMG_CELING);
+	init_bonus_image(data, &data->textures.floor, IMG_FLOOR);
 }
 
 void	load_textures(t_data *data, t_img *texture)
