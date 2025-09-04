@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/04 14:54:18 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/04 18:27:35 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@
 # define FPS_HISTORY_SIZE 30
 # define MAX_DOORS 10
 # define DOOR_FPS 10.0
-# define ANGLE_THRESHOLD 0.9
 
 # define ERR_EMPTY "File is empty\n"
 # define ERR_ARGS "Arguments are invalid\n"
@@ -100,6 +99,9 @@
 # define NIGHT_CLUE "Where the last light fades, your path awaits"
 # define MAP_CLUE "In the heart of the maze, where walls conceal, the truth\
  will reveal."
+
+// indoors/outdoors
+# define INDOOR 1
 
 // Bonus Textures Path
 # define IMG_BONUS "textures/bonus/"
@@ -382,5 +384,8 @@ void	change_door_state(t_data *data);
 
 t_door	*find_door_in_front(t_data *data, double max_dist);
 void	render_wall_texture(t_data *data, t_ray *ray);
+
+// floor and ceiling (indoor)
+void	render_fc(t_data *data, t_ray *ray);
 
 #endif

@@ -18,7 +18,10 @@ void	calculate_raycasting(t_data *data)
 
 	update_fps(data);
 	clear_image(&data->image, 0x000000);
-	put_fc(data);
+	if (INDOOR == false)
+		put_fc(data);
+	else
+		render_fc(data, &data->ray);
 	x = 0;
 	while (x < WIN_WIDTH)
 		render_column(data, x++);
