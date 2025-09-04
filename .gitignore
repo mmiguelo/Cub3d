@@ -1,4 +1,5 @@
 *.o
 /obj
 /minilibx-linux
-/src
+cub3D_bonus
+/libft/libft.a
