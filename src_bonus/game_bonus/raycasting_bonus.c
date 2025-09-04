@@ -19,7 +19,6 @@ void	calculate_raycasting(t_data *data)
 	update_fps(data);
 	clear_image(&data->image, 0x000000);
 	put_fc(data);
-	update_doors(data);
 	x = 0;
 	while (x < WIN_WIDTH)
 		render_column(data, x++);
@@ -28,6 +27,7 @@ void	calculate_raycasting(t_data *data)
 	update_time_of_day(data);
 	render_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
+	update_doors(data);
 	render_fps(data);
 	render_cycle(data);
 	mlx_string_put(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2,

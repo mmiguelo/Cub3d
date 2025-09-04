@@ -71,8 +71,8 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 		door = find_door(&data->map, ray->pos.x, ray->pos.y);
 		if (door && door->active)
 			find_which_door_texture(data, ray, door);
-		else
-			render_wall_texture(data, ray);
+		/* else
+			render_wall_texture(data, ray); */
 	}
 	else
 		render_wall_texture(data, ray);
@@ -81,7 +81,8 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 		ray->draw.brightness = 0.2;
 	total_light = ray->draw.brightness * data->global_light;
 	ray->draw.color = apply_brightness(ray->draw.color, total_light);
-	put_pixel(&data->bg, x, ray->draw.start, ray->draw.color);
+	if (ray->draw.color != -1)
+		put_pixel(&data->bg, x, ray->draw.start, ray->draw.color);
 	ray->draw.start++;
 }
 
