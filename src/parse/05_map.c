@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   05_map.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:15 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/13 13:00:16 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/04 15:17:10 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void	check_surroundings(t_data *data, char **grid, int x, int y)
 		if (data->map.direction)
 			ft_kill(data, "Map must have only one player\n");
 		data->map.direction = grid[y][x];
-		data->player.x = x;
-		data->player.y = y;
+		data->player.x = x + 0.5;
+		data->player.y = y + 0.5;
 	}
 	if (y == 0 || !grid[y - 1] || x >= (int)ft_strlen(grid[y - 1])
 		|| ft_strchr(WS, grid[y - 1][x]))
