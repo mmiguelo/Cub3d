@@ -71,8 +71,8 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 		door = find_door(&data->map, ray->pos.x, ray->pos.y);
 		if (door && door->active)
 			find_which_door_texture(data, ray, door);
-		/* else
-			render_wall_texture(data, ray); */
+		else
+			render_wall_texture(data, ray);
 	}
 	else
 		render_wall_texture(data, ray);
