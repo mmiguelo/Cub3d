@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/04 14:50:12 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/04 14:54:18 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@
 
 // Bonus Textures Path
 # define IMG_BONUS "textures/bonus/"
-# define IMG_CELING "./textures/bonus/celing/celing.xpm"
-# define IMG_LIGHTS "./textures/bonus/celing/ligths.xpm" //case we have 2 cellings textures
+# define IMG_CELING "./textures/bonus/ceiling/ceiling.xpm"
+# define IMG_LIGHTS "./textures/bonus/ceiling/ligths.xpm" //case we have 2 cellings textures
 # define IMG_FLOOR "./textures/bonus/floor/floor.xpm"
 
 
