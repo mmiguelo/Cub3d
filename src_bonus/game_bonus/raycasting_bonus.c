@@ -17,12 +17,9 @@ void	calculate_raycasting(t_data *data)
 	int		x;
 
 	update_fps(data);
-	clear_image(&data->image, 0x000000);
-	put_fc(data);
 	x = 0;
 	while (x < WIN_WIDTH)
 		render_column(data, x++);
-	change_buffer_image(&data->bg, &data->image);
 	update_global_light(data);
 	update_time_of_day(data);
 	render_minimap(data);

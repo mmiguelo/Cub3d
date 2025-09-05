@@ -1,6 +1,6 @@
 #include "cub3D_bonus.h"
 
-void	change_door_state(t_data *data)
+/* void	change_door_state(t_data *data)
 {
 	t_door	*door;
 	int		map_x;
@@ -8,7 +8,6 @@ void	change_door_state(t_data *data)
 
 	map_x = ((int)data->player.x + (int)data->ray.dir.x);
 	map_y = ((int)data->player.y + (int)data->ray.dir.y);
-	printf("side dist X: %f, side dist Y: %f\n", data->ray.step.side_dist_x, data->ray.step.side_dist_y);
 	door = find_door(&data->map, map_x, map_y);
 	if (door && is_door_active(data, door))
 	{
@@ -17,7 +16,7 @@ void	change_door_state(t_data *data)
 		else if (door->state == DOOR_OPEN)
 			door->state = DOOR_CLOSING;
 	}
-}
+} */
 
 int	is_door_active(t_data *data, t_door *door)
 {
@@ -32,7 +31,7 @@ int	is_door_active(t_data *data, t_door *door)
 	return (0);
 }
 
-t_door	*find_door(t_map *map, int x, int y)
+/* t_door	*find_door(t_map *map, int x, int y)
 {
 	int	i;
 
@@ -44,4 +43,4 @@ t_door	*find_door(t_map *map, int x, int y)
 		i++;
 	}
 	return (NULL);
-}
+} */

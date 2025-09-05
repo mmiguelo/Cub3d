@@ -87,13 +87,13 @@ void	calculate_rotation(t_player *player, double rotation_speed)
 
 int	is_blocking_tile(t_data *data, int x, int y)
 {
-	t_door	*door;
+	//t_door	*door;
 	char	tile;
 
 	tile = data->map.grid[y][x];
 	if (tile == '1')
 		return (1);
-	if (tile == 'D' || tile == 'd' || tile == 'n')
+	/* if (tile == 'D' || tile == 'd' || tile == 'n')
 	{
 		door = find_door(&data->map, x, y);
 		if (!door || !door->active)
@@ -101,7 +101,7 @@ int	is_blocking_tile(t_data *data, int x, int y)
 		if (door->state == DOOR_CLOSED || door->state == DOOR_CLOSING)
 			return (1);
 		return (0);
-	}
+	} */
 	return (0);
 }
 

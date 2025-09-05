@@ -58,13 +58,6 @@ int	apply_brightness(int color, double brightness)
  *    - At sunset (time_of_day = 0.75), the light decreases again.
  *    - The cycle loops back to midnight (time_of_day = 1.0).
  *
- * The cosine function ensures the transition is smooth and continuous,
- * without flat plateaus between phases (similar to games like Elden Ring).
- *
- * Formula:
- *      cycle = cos((time_of_day * 2?) - ?)   // gives values in [-1, 1]
- *      global_light = 0.2 + ((cycle + 1) / 2) * (1.0 - 0.2)
- *
  * Resulting global_light is always clamped to [0.2, 1.0].
  *
  * @param data Pointer to the main game data structure containing:

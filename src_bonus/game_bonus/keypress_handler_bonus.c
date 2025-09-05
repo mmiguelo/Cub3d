@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:56 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/03 02:51:02 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/05 11:27:16 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	key_hook_press(int keycode, t_data *data)
 		data->player.turn_right = 1;
 	if (keycode == XK_space)
 		data->player.sprint = 1;
-	if (keycode == XK_e)
-		change_door_state(data);
+	/* if (keycode == XK_e)
+		change_door_state(data); */
 	return (0);
 }
 

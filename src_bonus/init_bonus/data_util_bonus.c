@@ -41,4 +41,6 @@ void	init_game(t_data *data)
 	data->bsunset = false;
 	data->bsun = true;
 	data->bmoon = false;
+	data->ray.door_increment = -1;
+	data->ray.hit_door = false;
 }

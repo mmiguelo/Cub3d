@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:22 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/13 13:01:23 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/05 12:06:16 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,22 @@ typedef struct s_ray_step
 	double	delta_dist_y;
 }			t_ray_step;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
+
 typedef struct s_ray
 {
 	t_camera	cam;
 	t_ray_dir	dir;
 	t_ray_pos	pos;
+	t_point		doors_found[10];
 	t_ray_step	step;
 	t_draw		draw;
+	bool		hit_door;
+	int			door_increment;
 }	t_ray;
 
 #endif

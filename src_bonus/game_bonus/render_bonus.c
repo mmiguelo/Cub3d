@@ -30,8 +30,8 @@ void	put_fc(t_data *data)
 		x = -1;
 		while (++x < WIN_WIDTH)
 		{
-			pixel_addr = data->bg.addr + (y * data->bg.line_length)
-				+ (x * (data->bg.bpp / 8));
+			pixel_addr = data->image.addr + (y * data->image.line_length)
+				+ (x * (data->image.bpp / 8));
 			if (y < WIN_HEIGHT / 2)
 				*(unsigned int *)pixel_addr = sky_color;
 			else
@@ -59,30 +59,18 @@ void	calculate_texture(t_data *data, t_ray *ray)
 
 void	draw_line(t_data *data, t_ray *ray, int x)
 {
-	t_door	*door;
 	double	total_light;
-	char	cell;
 
-	cell = data->map.grid[data->ray.pos.y][data->ray.pos.x];
 	ray->draw.tex_y = ray->draw.tex_pos;
 	ray->draw.tex_pos += ray->draw.step;
-	if (cell == 'D' || cell == 'd' || cell == 'n')
-	{
-		door = find_door(&data->map, ray->pos.x, ray->pos.y);
-		if (door && door->active)
-			find_which_door_texture(data, ray, door);
-		else
-			render_wall_texture(data, ray);
-	}
-	else
-		render_wall_texture(data, ray);
+	render_wall_texture(data, ray);
 	ray->draw.brightness = 1 / (1 + ray->draw.perpwalldist * DARKNESS);
 	if (ray->draw.brightness < 0.2)
 		ray->draw.brightness = 0.2;
 	total_light = ray->draw.brightness * data->global_light;
 	ray->draw.color = apply_brightness(ray->draw.color, total_light);
 	if (ray->draw.color != -1)
-		put_pixel(&data->bg, x, ray->draw.start, ray->draw.color);
+		put_pixel(&data->image, x, ray->draw.start, ray->draw.color);
 	ray->draw.start++;
 }
 
@@ -96,6 +84,8 @@ void	render_column(t_data *data, int x)
 	calculate_texture(data, &data->ray);
 	while (data->ray.draw.start < data->ray.draw.end)
 		draw_line(data, &data->ray, x);
+	if (data->ray.hit_door)
+		render_door(data, &data->ray, x);
 }
 
 void	check_hit(t_data *data, t_ray *ray)
@@ -115,12 +105,10 @@ void	check_hit(t_data *data, t_ray *ray)
 	if (ray->pos.x >= 0 && ray->pos.x < data->map.width
 		&& ray->pos.y >= 0 && ray->pos.y < data->map.height)
 	{
+		if (ft_strchr("Ddn", data->map.grid[ray->pos.y][ray->pos.x]))
+			get_door_info(ray, &data->map);
 		if (data->map.grid[ray->pos.y][ray->pos.x] == '1')
 			ray->draw.hit = true;
-		else if (ft_strchr("Ddn", data->map.grid[ray->pos.y][ray->pos.x]))
-			render_door(data, ray);
-		else
-			ray->draw.hit = false;
 	}
 	else
 		ray->draw.hit = true;

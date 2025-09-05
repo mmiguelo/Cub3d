@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/03 10:59:24 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/05 13:25:30 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@
 # define FPS_HISTORY_SIZE 30
 # define MAX_DOORS 10
 # define DOOR_FPS 10.0
-# define ANGLE_THRESHOLD 0.9
+# define CFT 0
 
 # define ERR_EMPTY "File is empty\n"
 # define ERR_ARGS "Arguments are invalid\n"
@@ -175,7 +175,6 @@ typedef struct s_door
 {
 	int				x;
 	int				y;
-	bool			open;
 	t_door_mode		mode;
 	t_door_state	state;
 	int				frame;
@@ -184,6 +183,10 @@ typedef struct s_door
 	int				col;
 	char			tile;
 	int				active;
+	int				door_side;
+	double			door_dist;
+	double			wall_hit;
+	t_draw			draw;
 }	t_door;
 
 typedef struct s_map
@@ -206,6 +209,7 @@ typedef struct s_frames
 	double	fps;
 	double	fps_history[FPS_HISTORY_SIZE];
 	int		fps_index;
+	double	next_frame;
 }	t_frames;
 
 typedef struct s_minimap
@@ -224,13 +228,12 @@ typedef struct s_data
 	t_color		ceiling;
 	t_player	player;
 	t_map		map;
-	t_img		bg;
-	t_img		image;
 	t_img		fps;
 	t_img		sun;
 	t_img		sunrise;
 	t_img		sunset;
 	t_img		moon;
+	t_img		image;
 	t_img		door_spritesheet;
 	t_frames	frames;
 	t_minimap	minimap;
@@ -356,14 +359,14 @@ void	change_buffer_image(t_img *bg, t_img *image);
 
 // FPS
 void	init_fps(t_data *data);
-double	get_current_time_in_seconds(void);
+double	get_current_time_in_miliseconds(void);
 void	update_fps(t_data *data);
 void	render_fps(t_data *data);
 
 //door
 void	parse_door(t_data *data, int x, int y);
 void	find_which_door_texture(t_data *data, t_ray *ray, t_door *door);
-void	render_door(t_data *data, t_ray *ray);
+void	render_door(t_data *data, t_ray *ray, int x);
 void	init_door_image(t_data *data);
 void	engage_door(t_data *data, t_door *door, t_door_state new_state);
 int		is_door_active(t_data *data, t_door *door);
@@ -374,5 +377,6 @@ void	change_door_state(t_data *data);
 
 t_door	*find_door_in_front(t_data *data, double max_dist);
 void	render_wall_texture(t_data *data, t_ray *ray);
+void	get_door_info(t_ray *ray, t_map *map);
 
 #endif
