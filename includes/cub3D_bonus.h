@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/04 18:27:35 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/05 19:15:52 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,14 @@
 # define MAP_CLUE "In the heart of the maze, where walls conceal, the truth\
  will reveal."
 
-// indoors/outdoors
-# define INDOOR 1
+
+//	GAME OPTIONS:
+
+/* // player "height"
+# define P_HEIGHT 0.0 */
+
+// indoors (1) / outdoors (0)
+# define INDOOR 1 
 
 // Bonus Textures Path
 # define IMG_BONUS "textures/bonus/"
@@ -386,6 +392,6 @@ t_door	*find_door_in_front(t_data *data, double max_dist);
 void	render_wall_texture(t_data *data, t_ray *ray);
 
 // floor and ceiling (indoor)
-void	render_fc(t_data *data, t_ray *ray);
+void	render_fc(t_data *data, t_floorcast *floor);
 
 #endif
