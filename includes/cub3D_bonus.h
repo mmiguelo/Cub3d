@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/08 14:29:25 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/08 14:55:58 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,7 +347,7 @@ void	init_minimap(t_data *data);
 void	calculate_tile_size(t_data *data);
 void	render_minimap(t_data *data);
 void	draw_minimap(t_data *data, int map_x, int map_y, int color);
-void	draw_minimap_player(t_data *data, int tile_x, int tile_y);
+void	draw_minimap_player(t_data *data);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	clear_image(t_img *img, int color);
 void	change_buffer_image(t_img *bg, t_img *image);
