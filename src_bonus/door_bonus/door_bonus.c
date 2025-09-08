@@ -99,7 +99,6 @@ void	engage_door(t_data *data, t_door *door, t_door_state new_state)
 			{
 				door->frame = 14;
 				door->state = DOOR_OPEN;
-				door->open = true;
 			}
 		}
 		else if (new_state == DOOR_CLOSING)
@@ -109,7 +108,6 @@ void	engage_door(t_data *data, t_door *door, t_door_state new_state)
 			{
 				door->frame = 0;
 				door->state = DOOR_CLOSED;
-				door->open = false;
 			}
 		}
 	}

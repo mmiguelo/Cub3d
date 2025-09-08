@@ -30,8 +30,8 @@ void	put_fc(t_data *data)
 		x = -1;
 		while (++x < WIN_WIDTH)
 		{
-			pixel_addr = data->bg.addr + (y * data->bg.line_length)
-				+ (x * (data->bg.bpp / 8));
+			pixel_addr = data->image.addr + (y * data->image.line_length)
+				+ (x * (data->image.bpp / 8));
 			if (y < WIN_HEIGHT / 2)
 				*(unsigned int *)pixel_addr = sky_color;
 			else
@@ -81,7 +81,7 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 		ray->draw.brightness = 0.2;
 	total_light = ray->draw.brightness * data->global_light;
 	ray->draw.color = apply_brightness(ray->draw.color, total_light);
-	put_pixel(&data->bg, x, ray->draw.start, ray->draw.color);
+	put_pixel(&data->image, x, ray->draw.start, ray->draw.color);
 	ray->draw.start++;
 }
 

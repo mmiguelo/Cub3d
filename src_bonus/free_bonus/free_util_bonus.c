@@ -22,8 +22,6 @@ void	destroy_images(t_data *data)
 		mlx_destroy_image(data->mlx, data->textures.south.img);
 	if (data->textures.north.img)
 		mlx_destroy_image(data->mlx, data->textures.north.img);
-	if (data->bg.img)
-		mlx_destroy_image(data->mlx, data->bg.img);
 	if (data->image.img)
 		mlx_destroy_image(data->mlx, data->image.img);
 	if (data->sun.img)

@@ -18,10 +18,11 @@ void	init_fps(t_data *data)
 
 	i = 0;
 	data->frames.time = 0.0;
-	data->frames.old_time = get_current_time_in_seconds();
+	data->frames.old_time = get_current_time_in_miliseconds();
 	data->frames.delta_time = 0.0;
 	data->frames.fps = 0.0;
 	data->frames.fps_index = 0;
+	data->frames.next_frame = get_current_time_in_miliseconds() + 17;
 	while (i < FPS_HISTORY_SIZE)
 	{
 		data->frames.fps_history[i] = 0.0;
@@ -29,12 +30,12 @@ void	init_fps(t_data *data)
 	}
 }
 
-double	get_current_time_in_seconds(void)
+double	get_current_time_in_miliseconds(void)
 {
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return (tv.tv_sec + tv.tv_usec / 1000000.0);
+	return ((tv.tv_sec * 1000.0) + (tv.tv_usec / 1000.0));
 }
 
 void	update_fps(t_data *data)
@@ -43,10 +44,14 @@ void	update_fps(t_data *data)
 	double	sum;
 	int		i;
 
+	while (get_current_time_in_miliseconds() < data->frames.next_frame)
+		;
+	data->frames.next_frame = get_current_time_in_miliseconds() + 17;
 	i = -1;
 	sum = 0.0;
-	data->frames.time = get_current_time_in_seconds();
-	data->frames.delta_time = data->frames.time - data->frames.old_time;
+	data->frames.time = get_current_time_in_miliseconds();
+	data->frames.delta_time = (data->frames.time - data->frames.old_time)
+		/ 1000.0;
 	if (data->frames.delta_time <= 0.0)
 		data->frames.delta_time = 0.0001;
 	data->frames.old_time = data->frames.time;

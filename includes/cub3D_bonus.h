@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/03 02:55:25 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/08 14:29:25 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@
 # define FPS_HISTORY_SIZE 30
 # define MAX_DOORS 10
 # define DOOR_FPS 10.0
-# define ANGLE_THRESHOLD 0.9
+# define CFT 0
 
 # define ERR_EMPTY "File is empty\n"
 # define ERR_ARGS "Arguments are invalid\n"
@@ -174,7 +174,6 @@ typedef struct s_door
 {
 	int				x;
 	int				y;
-	bool			open;
 	t_door_mode		mode;
 	t_door_state	state;
 	int				frame;
@@ -205,6 +204,7 @@ typedef struct s_frames
 	double	fps;
 	double	fps_history[FPS_HISTORY_SIZE];
 	int		fps_index;
+	double	next_frame;
 }	t_frames;
 
 typedef struct s_minimap
@@ -223,7 +223,6 @@ typedef struct s_data
 	t_color		ceiling;
 	t_player	player;
 	t_map		map;
-	t_img		bg;
 	t_img		image;
 	t_img		fps;
 	t_img		sun;
@@ -355,7 +354,7 @@ void	change_buffer_image(t_img *bg, t_img *image);
 
 // FPS
 void	init_fps(t_data *data);
-double	get_current_time_in_seconds(void);
+double	get_current_time_in_miliseconds(void);
 void	update_fps(t_data *data);
 void	render_fps(t_data *data);
 
