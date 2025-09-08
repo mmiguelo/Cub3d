@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/05 19:15:52 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/08 13:56:17 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@
 # define P_HEIGHT 0.0 */
 
 // indoors (1) / outdoors (0)
-# define INDOOR 1 
+# define INDOOR 1
 
 // Bonus Textures Path
 # define IMG_BONUS "textures/bonus/"
