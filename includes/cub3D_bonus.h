@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/08 13:56:17 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:30:39 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -392,6 +392,6 @@ t_door	*find_door_in_front(t_data *data, double max_dist);
 void	render_wall_texture(t_data *data, t_ray *ray);
 
 // floor and ceiling (indoor)
-void	render_fc(t_data *data, t_floorcast *floor);
+void	render_fc(t_data *data, t_fccast *fc);
 
 #endif

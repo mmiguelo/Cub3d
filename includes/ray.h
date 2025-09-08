@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:22 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/08 17:44:06 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:28:53 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_ray_step
 	double	delta_dist_y;
 }			t_ray_step;
 
-typedef struct s_floorcast
+typedef struct s_fccast
 {
 	double		x;	// world X coordinate
 	double		y;	// world Y coordinate
@@ -57,7 +57,7 @@ typedef struct s_floorcast
 	double		row_distance;	// distance to current row
 	t_ray_pos	cell;	// (cell_x, cell_y) world grid cell
 	t_ray_dir	tex;	// (tex_x, tex_y) texture coordinate
-}	t_floorcast;
+}	t_fccast;
 
 typedef struct s_ray
 {
@@ -66,7 +66,7 @@ typedef struct s_ray
 	t_ray_pos	pos;
 	t_ray_step	step;
 	t_draw		draw;
-	t_floorcast	floor;
+	t_fccast	fc;
 }	t_ray;
 
 
