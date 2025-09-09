@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress_handler_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:56 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/03 02:51:02 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:36:50 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ int	key_hook_press(int keycode, t_data *data)
 		data->player.turn_left = 1;
 	if (keycode == XK_Right)
 		data->player.turn_right = 1;
+	if (keycode == XK_Up)
+		data->player.look_up = 1;
+	if (keycode == XK_Down)
+		data->player.look_down = 1;
 	if (keycode == XK_space)
 		data->player.sprint = 1;
 	if (keycode == XK_e)
@@ -49,6 +53,10 @@ int	key_hook_release(int keycode, t_data *data)
 		data->player.turn_left = 0;
 	if (keycode == XK_Right && data->player.turn_right)
 		data->player.turn_right = 0;
+	if (keycode == XK_Up && data->player.look_up)
+		data->player.look_up = 0;
+	if (keycode == XK_Down && data->player.look_down)
+		data->player.look_down = 0;
 	if (keycode == XK_space && data->player.sprint)
 		data->player.sprint = 0;
 	return (0);

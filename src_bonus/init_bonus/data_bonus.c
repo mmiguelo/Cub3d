@@ -59,7 +59,7 @@ void	init_cycle_images(t_data *data)
 	init_bonus_image(data, &data->sunset, "./textures/bonus/sunset.xpm");
 	init_bonus_image(data,
 		&data->door_spritesheet, "./textures/bonus/RD_WB_spritesheet.xpm");
-	init_bonus_image(data, &data->textures.celing, IMG_CELING);
+	init_bonus_image(data, &data->textures.ceiling, IMG_CELING);
 	init_bonus_image(data, &data->textures.floor, IMG_FLOOR);
 }
 

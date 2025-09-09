@@ -35,6 +35,6 @@ void	destroy_images(t_data *data)
 	image_destroyer(data, &data->sunset);
 	image_destroyer(data, &data->moon);
 	image_destroyer(data, &data->door_spritesheet);
-	image_destroyer(data, &data->textures.celing);
+	image_destroyer(data, &data->textures.ceiling);
 	image_destroyer(data, &data->textures.floor);
 }

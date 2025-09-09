@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/09 14:32:01 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:33:16 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,15 @@
 # define FOV 66
 // indoors (1) / outdoors (0)
 # define INDOOR 1
-// default (0.0) between -1.0 and 1.0 //TODO range yet to be dediced
-# define P_HEIGHT 0.0
+// default (0.5) between -1.0 and 1.0 //TODO range yet to be dediced
+# define P_HEIGHT 0.5
 
 # define FOV_RAD FOV * PI / 180.0
 # define PLANE_LEN tan(FOV_RAD / 2.0);
 //# define FOV_RAD 1.1519173063162575
 //# define PLANE_LEN 0.7673269879789604
 # define SPEED 0.015
-# define ROT_SPEED 0.03
+# define ROT_SPEED 0.05
 # define PLAYER_RAD 0.2
 # define DARKNESS 0.12
 # define DAY_NIGHT_CYCLE 0.0002
@@ -145,7 +145,7 @@ typedef struct s_textures
 	t_img	south;
 	t_img	east;
 	t_img	west;
-	t_img	celing;
+	t_img	ceiling;
 	t_img	floor;
 }	t_textures;
 
@@ -170,6 +170,8 @@ typedef struct s_player
 	int		move_right;
 	int		turn_left;
 	int		turn_right;
+	int		look_up;
+	int		look_down;
 	int		sprint;
 	double	height; // look up and down
 }	t_player;

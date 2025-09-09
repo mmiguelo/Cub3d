@@ -66,6 +66,14 @@ void	turn_player(t_player *player)
 		calculate_rotation(player, -ROT_SPEED);
 	if (player->turn_right)
 		calculate_rotation(player, ROT_SPEED);
+	if (player->look_up)
+		player->height += ROT_SPEED;
+	if (player->look_down)
+		player->height -= ROT_SPEED;
+	if (player->height < 0.0)
+		player->height = 0.0;
+	if (player->height > 1.0)
+		player->height = 1.0;
 }
 
 void	calculate_rotation(t_player *player, double rotation_speed)
