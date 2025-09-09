@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/08 18:30:39 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/09 14:32:01 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,21 @@
 # define VALID_MAP_CHARS "01NSWEDdn"
 # define WS " \t\n\r\v\f"
 
+//	GAME OPTIONS:
 # define TILE_SIZE 64
 # define WIN_WIDTH 1024
 # define WIN_HEIGHT 768
 # define PI 3.14159265358979323846
 # define FOV 66
-# define FOV_RAD 1.1519173063162575
-# define PLANE_LEN 0.7673269879789604
+// indoors (1) / outdoors (0)
+# define INDOOR 1
+// default (0.0) between -1.0 and 1.0 //TODO range yet to be dediced
+# define P_HEIGHT 0.0
+
+# define FOV_RAD FOV * PI / 180.0
+# define PLANE_LEN tan(FOV_RAD / 2.0);
+//# define FOV_RAD 1.1519173063162575
+//# define PLANE_LEN 0.7673269879789604
 # define SPEED 0.015
 # define ROT_SPEED 0.03
 # define PLAYER_RAD 0.2
@@ -100,14 +108,6 @@
 # define MAP_CLUE "In the heart of the maze, where walls conceal, the truth\
  will reveal."
 
-
-//	GAME OPTIONS:
-
-/* // player "height"
-# define P_HEIGHT 0.0 */
-
-// indoors (1) / outdoors (0)
-# define INDOOR 1
 
 // Bonus Textures Path
 # define IMG_BONUS "textures/bonus/"
@@ -171,6 +171,7 @@ typedef struct s_player
 	int		turn_left;
 	int		turn_right;
 	int		sprint;
+	double	height; // look up and down
 }	t_player;
 
 typedef enum e_door_mode
@@ -262,6 +263,8 @@ typedef struct s_data
 	void		*win;
 	int			fd;
 	char		*line;
+	double		fov_rad; // move somewhere?
+	double		plane_len; // move somewhere?
 	t_ray		ray;
 }	t_data;
 

@@ -20,11 +20,6 @@ void	init_textures(t_data *data)
 	load_textures(data, &data->textures.west);
 }
 
-/* void	init_floor_and_ceiling(t_data *data, t_floorcast *floor)
-{
-	floor->x = 
-} */
-
 void	init_game(t_data *data)
 {
 	data->ceiling.r = -1;
@@ -46,6 +41,7 @@ void	init_game(t_data *data)
 	data->bsunset = false;
 	data->bsun = true;
 	data->bmoon = false;
-	/* if (INDOOR == true)
-		init_floor_and_ceiling(data, &data->ray.floor); */
+	data->fov_rad = FOV_RAD * PI / 180.0;
+	data->plane_len = tan(FOV_RAD / 2.0);
+	data->player.height = P_HEIGHT;
 }
