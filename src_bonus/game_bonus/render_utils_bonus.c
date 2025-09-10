@@ -26,8 +26,13 @@ void	render_wall_texture(t_data *data, t_ray *ray)
 
 int	color(t_draw *draw, t_img *texture)
 {
-	return (*(int *)(texture->addr + (draw->tex_y * texture->line_length
-			+ draw->tex_x * (texture->bpp / 8))));
+	int	pixel;
+
+	pixel = *(int *)(texture->addr + (draw->tex_y * texture->line_length
+			+ draw->tex_x * (texture->bpp / 8)));
+	if (pixel == IGNORE)
+		return (-1);
+	return (pixel);
 }
 
 void	put_pixel(t_img *img, int x, int y, int color)

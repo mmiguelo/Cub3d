@@ -45,7 +45,7 @@ void	render_door(t_data *data, t_ray *ray)
 	active = is_door_active(data, door);
 	if (!active)
 	{
-		door->tile = '1';
+		//door->tile = '1';
 		ray->draw.hit = true;
 		return ;
 	}
@@ -53,6 +53,7 @@ void	render_door(t_data *data, t_ray *ray)
 	ray->draw.hit = true;
 }
 
+// TODO too many lines
 void	update_doors(t_data *data)
 {
 	t_door	*door;
@@ -113,6 +114,8 @@ void	engage_door(t_data *data, t_door *door, t_door_state new_state)
 	}
 }
 
+
+// TODO 26 lines and too many variables
 void	find_which_door_texture(t_data *data, t_ray *ray, t_door *door)
 {
 	t_img	*texture;

@@ -65,9 +65,9 @@ void	init_cycle_images(t_data *data)
 
 void	init_door_image(t_data *data)
 {
-	parse(data, "./textures/bonus/spritesheet.xpm", ".xpm");
+	parse(data, "./textures/bonus/RD_WB_spritesheet.xpm", ".xpm");
 	data->door_spritesheet.img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/bonus/spritesheet.xpm", &data->door_spritesheet.width,
+			"./textures/bonus/RD_WB_spritesheet.xpm", &data->door_spritesheet.width,
 			&data->door_spritesheet.height);
 	data->door_spritesheet.addr = mlx_get_data_addr(data->door_spritesheet.img,
 			&data->door_spritesheet.bpp, &data->door_spritesheet.line_length,

@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/10 14:31:15 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/10 15:28:36 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@
 # define NOON    0xFFFFE0
 # define EVENING 0xFCAF45
 # define NIGHT   0x14183C
+# define IGNORE 0xFF00FD
 # define FPS_HISTORY_SIZE 30
 # define MAX_DOORS 10
 # define DOOR_FPS 10.0
