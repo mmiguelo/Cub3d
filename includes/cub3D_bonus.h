@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/08 14:55:58 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/10 11:32:54 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@
 # define WS " \t\n\r\v\f"
 
 # define TILE_SIZE 64
-# define WIN_WIDTH 1024
-# define WIN_HEIGHT 768
+# define WIN_WIDTH 1600
+# define WIN_HEIGHT 900
 # define PI 3.14159265358979323846
 # define FOV 66
 # define FOV_RAD 1.1519173063162575
@@ -214,6 +214,7 @@ typedef struct s_minimap
 	int		wall_color;
 	int		player_color;
 	int		tile_size;
+	int		door_color;
 }	t_minimap;
 
 typedef struct s_data

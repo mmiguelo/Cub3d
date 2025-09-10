@@ -14,6 +14,7 @@
 
 void	render_minimap(t_data *data)
 {
+	t_door	*door;
 	int	y;
 	int	x;
 
@@ -30,6 +31,15 @@ void	render_minimap(t_data *data)
 			else if (data->map.grid[y][x] == 'N' || data->map.grid[y][x] == 'S'
 				|| data->map.grid[y][x] == 'E' || data->map.grid[y][x] == 'W')
 				draw_minimap(data, x, y, data->minimap.floor_color);
+			else if (ft_strrchr("dDn", data->map.grid[y][x]))
+			{
+				door = find_door(&data->map, x, y);
+				if (is_door_active(data, door))
+					draw_minimap(data, x, y, data->minimap.door_color);
+				else
+					draw_minimap(data, x, y, data->minimap.wall_color);
+			}
+				
 		}
 	}
 	draw_minimap_player(data);
