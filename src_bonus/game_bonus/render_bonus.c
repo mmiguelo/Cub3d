@@ -63,11 +63,17 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 	double	total_light;
 	char	cell;
 
+	
+	// Esta verificacao e para o raio nao ultrapassar o "limite"
+	if (data->ray.pos.x < 0 || data->ray.pos.x >= data->map.width ||
+		data->ray.pos.y < 0 || data->ray.pos.y >= data->map.height)
+	{
+		ray->draw.start++;
+		return;
+	}
 	cell = data->map.grid[data->ray.pos.y][data->ray.pos.x];
 	ray->draw.tex_y = ray->draw.tex_pos;
 	ray->draw.tex_pos += ray->draw.step;
-	if (cell == 'D' || cell == 'd' || cell == 'n')
-		;
 	// if (cell == 'D' || cell == 'd' || cell == 'n')
 	// {
 	// 	door = find_door(&data->map, ray->pos.x, ray->pos.y);
@@ -76,15 +82,85 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 	// 	else
 	// 		render_wall_texture(data, ray);
 	// }
-	else
-		render_wall_texture(data, ray);
+	// else
+	render_wall_texture(data, ray);
 	ray->draw.brightness = 1 / (1 + ray->draw.perpwalldist * DARKNESS);
 	if (ray->draw.brightness < 0.2)
 		ray->draw.brightness = 0.2;
 	total_light = ray->draw.brightness * data->global_light;
 	ray->draw.color = apply_brightness(ray->draw.color, total_light);
-	put_pixel(&data->image, x, ray->draw.start, ray->draw.color);
+	if (ray->draw.color != -1)
+		put_pixel(&data->image, x, ray->draw.start, ray->draw.color);
 	ray->draw.start++;
+}
+
+void	draw_line_door(t_data *data, t_ray *ray, int x)
+{
+	t_door	*door;
+	double	total_light;
+	char	cell;
+
+	
+	// Esta verificacao e para o raio nao ultrapassar o "limite"
+	if (data->ray.pos.x < 0 || data->ray.pos.x >= data->map.width ||
+		data->ray.pos.y < 0 || data->ray.pos.y >= data->map.height)
+	{
+		ray->draw.start++;
+		return;
+	}
+	// Esta verificacao e para nao desenhar por cima da parede
+	if (ray->draw.perpwalldist >= data->tmp_wall_dist)
+	{
+		ray->draw.start++;
+		return;
+	}
+	cell = data->map.grid[data->ray.pos.y][data->ray.pos.x];
+	ray->draw.tex_y = ray->draw.tex_pos;
+	ray->draw.tex_pos += ray->draw.step;
+	if (cell == 'D' || cell == 'd' || cell == 'n')
+	{
+		door = find_door(&data->map, ray->pos.x, ray->pos.y);
+		if (door && door->active)
+			find_which_door_texture(data, ray, door);
+		else
+			render_wall_texture(data, ray);
+	}
+	ray->draw.brightness = 1 / (1 + ray->draw.perpwalldist * DARKNESS);
+	if (ray->draw.brightness < 0.2)
+		ray->draw.brightness = 0.2;
+	total_light = ray->draw.brightness * data->global_light;
+	ray->draw.color = apply_brightness(ray->draw.color, total_light);
+	if (ray->draw.color != -1)
+		put_pixel(&data->image, x, ray->draw.start, ray->draw.color);
+	ray->draw.start++;
+}
+
+void	check_hit_door(t_data *data, t_ray *ray)
+{
+	if (ray->step.side_dist_x < ray->step.side_dist_y)
+	{
+		ray->step.side_dist_x += ray->step.delta_dist_x;
+		ray->pos.x += ray->step.x;
+		ray->draw.side = 0;
+	}
+	else
+	{
+		ray->step.side_dist_y += ray->step.delta_dist_y;
+		ray->pos.y += ray->step.y;
+		ray->draw.side = 1;
+	}
+	if (ray->pos.x >= 0 && ray->pos.x < data->map.width
+		&& ray->pos.y >= 0 && ray->pos.y < data->map.height)
+	{
+		if (data->map.grid[ray->pos.y][ray->pos.x] == '1')
+			ray->draw.hit = true;
+		if (ft_strchr("Ddn", data->map.grid[ray->pos.y][ray->pos.x]))
+			ray->draw.hit = true;
+		else
+			ray->draw.hit = false;
+	}
+	else
+		ray->draw.hit = true;
 }
 
 void	render_column(t_data *data, int x)
@@ -97,6 +173,21 @@ void	render_column(t_data *data, int x)
 	calculate_texture(data, &data->ray);
 	while (data->ray.draw.start < data->ray.draw.end)
 		draw_line(data, &data->ray, x);
+	// TODO duas opcoes: 
+	// 1- encontra porta (guarda o rayhit da porta antes de continuar) recalcula o ray dir ate uma parede
+	//		(a maneira que a marioli???? implementou)
+	// 2- guardar o wall distance e se ultrapassar nao "pinta"
+	// a 2 e que esta implementada agora mas 1 pode melhorar o preformance
+	double wall_dist = data->ray.draw.perpwalldist; // temp 2
+	data->ray.draw.hit = false;
+	calculate_variables(&data->player, &data->ray, x);
+	while (!data->ray.draw.hit)
+		check_hit_door(data, &data->ray); //hit na door e nas walls
+	calculate_perpwalldist(&data->ray, &data->ray.draw);
+	calculate_texture(data, &data->ray);
+	data->tmp_wall_dist = wall_dist; // temp 2
+	while (data->ray.draw.start < data->ray.draw.end)
+		draw_line_door(data, &data->ray, x); // usei um diferente por causa do wall distance
 }
 
 void	check_hit(t_data *data, t_ray *ray)

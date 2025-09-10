@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/10 15:28:36 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/10 19:53:57 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@
 # define WS " \t\n\r\v\f"
 
 # define TILE_SIZE 64
-# define WIN_WIDTH 1600
-# define WIN_HEIGHT 900
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 768
 # define PI 3.14159265358979323846
 # define FOV 66
 # define FOV_RAD 1.1519173063162575
@@ -241,6 +241,7 @@ typedef struct s_data
 	double		time_of_day;
 	double		global_light;
 	double		move_speed;
+	double		tmp_wall_dist;
 	void		*mlx;
 	void		*win;
 	int			fd;

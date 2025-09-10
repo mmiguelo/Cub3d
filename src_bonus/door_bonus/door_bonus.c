@@ -45,7 +45,7 @@ void	render_door(t_data *data, t_ray *ray)
 	active = is_door_active(data, door);
 	if (!active)
 	{
-		//door->tile = '1';
+		door->tile = '1';
 		ray->draw.hit = true;
 		return ;
 	}
