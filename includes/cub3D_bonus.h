@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/10 11:32:54 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/10 12:08:30 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 # define PLANE_LEN 0.7673269879789604
 # define SPEED 0.015
 # define ROT_SPEED 0.03
-# define PLAYER_RAD 0.2
+# define PLAYER_RAD 0.1
 # define DARKNESS 0.12
 # define DAY_NIGHT_CYCLE 0.0002
 # define MORNING 0x87CEEB

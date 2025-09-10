@@ -96,6 +96,8 @@ int	is_blocking_tile(t_data *data, int x, int y)
 	if (tile == 'D' || tile == 'd' || tile == 'n')
 	{
 		door = find_door(&data->map, x, y);
+		if (data->map.grid[(int)data->player.y][(int)data->player.x] == tile)
+			return(0);
 		if (!door || !door->active)
 			return (1);
 		if (door->state == DOOR_CLOSED || door->state == DOOR_CLOSING)
