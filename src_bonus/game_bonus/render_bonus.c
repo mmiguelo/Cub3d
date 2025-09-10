@@ -59,7 +59,7 @@ void	calculate_texture(t_data *data, t_ray *ray)
 
 void	draw_line(t_data *data, t_ray *ray, int x)
 {
-	t_door	*door;
+	//t_door	*door;
 	double	total_light;
 	char	cell;
 
@@ -67,13 +67,15 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 	ray->draw.tex_y = ray->draw.tex_pos;
 	ray->draw.tex_pos += ray->draw.step;
 	if (cell == 'D' || cell == 'd' || cell == 'n')
-	{
-		door = find_door(&data->map, ray->pos.x, ray->pos.y);
-		if (door && door->active)
-			find_which_door_texture(data, ray, door);
-		else
-			render_wall_texture(data, ray);
-	}
+		;
+	// if (cell == 'D' || cell == 'd' || cell == 'n')
+	// {
+	// 	door = find_door(&data->map, ray->pos.x, ray->pos.y);
+	// 	if (door && door->active)
+	// 		find_which_door_texture(data, ray, door);
+	// 	else
+	// 		render_wall_texture(data, ray);
+	// }
 	else
 		render_wall_texture(data, ray);
 	ray->draw.brightness = 1 / (1 + ray->draw.perpwalldist * DARKNESS);
@@ -116,8 +118,8 @@ void	check_hit(t_data *data, t_ray *ray)
 	{
 		if (data->map.grid[ray->pos.y][ray->pos.x] == '1')
 			ray->draw.hit = true;
-		else if (ft_strchr("Ddn", data->map.grid[ray->pos.y][ray->pos.x]))
-			render_door(data, ray);
+		//else if (ft_strchr("Ddn", data->map.grid[ray->pos.y][ray->pos.x]))
+			//render_door(data, ray);
 		else
 			ray->draw.hit = false;
 	}

@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/10 12:08:30 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/10 14:31:15 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -373,5 +373,8 @@ void	change_door_state(t_data *data);
 
 t_door	*find_door_in_front(t_data *data, double max_dist);
 void	render_wall_texture(t_data *data, t_ray *ray);
+
+
+int	player_inside_door(t_data *data, t_door *door);
 
 #endif

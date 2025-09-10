@@ -84,35 +84,3 @@ void	calculate_rotation(t_player *player, double rotation_speed)
 	player->plane.y = old_plane_x * sin(rotation_speed) + player->plane.y
 		* cos(rotation_speed);
 }
-
-int	is_blocking_tile(t_data *data, int x, int y)
-{
-	t_door	*door;
-	char	tile;
-
-	tile = data->map.grid[y][x];
-	if (tile == '1')
-		return (1);
-	if (tile == 'D' || tile == 'd' || tile == 'n')
-	{
-		door = find_door(&data->map, x, y);
-		if (data->map.grid[(int)data->player.y][(int)data->player.x] == tile)
-			return(0);
-		if (!door || !door->active)
-			return (1);
-		if (door->state == DOOR_CLOSED || door->state == DOOR_CLOSING)
-			return (1);
-		return (0);
-	}
-	return (0);
-}
-
-void	check_collision(t_data *data, t_player *player)
-{
-	if (!is_blocking_tile(data, player->new_x + PLAYER_RAD, player->y)
-		&& !is_blocking_tile(data, player->new_x - PLAYER_RAD, player->y))
-		player->x = player->new_x;
-	if (!is_blocking_tile(data, player->x, player->new_y + PLAYER_RAD)
-		&& !is_blocking_tile(data, player->x, player->new_y - PLAYER_RAD))
-		player->y = player->new_y;
-}

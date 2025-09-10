@@ -66,14 +66,12 @@ void	update_doors(t_data *data)
 		cell = data->map.grid[door->y][door->x];
 		if (cell == 'D')
 			door->active = 1;
-		else if (data->map.grid[(int)data->player.y][(int)data->player.x] == cell)
-			door->active = 1;
 		else if (cell == 'd')
-			door->active = (data->bsun || data->bsunrise);
+			door->active = (data->bsun || data->bsunrise || player_inside_door(data, door));
 		else if (cell == 'n')
-			door->active = (data->bsunset || data->bmoon);
+			door->active = (data->bsunset || data->bmoon || player_inside_door(data, door));
 		else 
-			door->active = 0;
+			door->active = player_inside_door(data, door);
 		if (door->active)
 		{
 			if (door->state == DOOR_OPENING && door->frame < 14)

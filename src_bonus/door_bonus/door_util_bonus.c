@@ -44,3 +44,13 @@ t_door	*find_door(t_map *map, int x, int y)
 	}
 	return (NULL);
 }
+
+int	player_inside_door(t_data *data, t_door *door)
+{
+	if (data->player.x + PLAYER_RAD > door->x
+		&& data->player.x - PLAYER_RAD < door->x + 1
+		&& data->player.y + PLAYER_RAD > door->y
+		&& data->player.y - PLAYER_RAD < door->y + 1)
+		return (1);
+	return (0);
+}
