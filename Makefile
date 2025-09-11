@@ -28,33 +28,34 @@ GAME 	= 	close_window.c \
 			raycasting.c \
 			render.c
 
-GENERAL_BONUS	=	main_bonus.c \
-					cycle_bonus.c
-FREE_BONUS		=	free_bonus.c \
-					free_util_bonus.c
-PARSING_BONUS	= 	01_parse_bonus.c \
-					02_extensions_bonus.c \
-					03_textures_bonus.c \
-					04_color_bonus.c \
-					05_map_bonus.c \
-					06_map_utils_bonus.c
-INIT_BONUS		= 	data_bonus.c \
-					data_util_bonus.c
-LIGHT_BONUS		=	light_bonus.c \
-					light_util_bonus.c
-DEBUG_BONUS		= 	print_bonus.c
-GAME_BONUS		= 	close_window_bonus.c \
-					game_loop_bonus.c \
-					keypress_handler_bonus.c \
-					player_move_bonus.c \
-					raycasting_bonus.c \
-					render_bonus.c \
-					render_utils_bonus.c
-MINIMAP_BONUS	= 	minimap_bonus.c \
-					minimap_utils_bonus.c
-FPS_BONUS		=	fps_bonus.c
-DOOR_BONUS		=	door_bonus.c \
-					door_util_bonus.c
+GENERAL_BONUS		=	main_bonus.c \
+						cycle_bonus.c
+FREE_BONUS			=	free_bonus.c \
+						free_util_bonus.c
+PARSING_BONUS		= 	01_parse_bonus.c \
+						02_extensions_bonus.c \
+						03_textures_bonus.c \
+						04_color_bonus.c \
+						05_map_bonus.c \
+						06_map_utils_bonus.c
+INIT_BONUS			= 	data_bonus.c \
+						data_util_bonus.c
+LIGHT_BONUS			=	light_bonus.c \
+						light_util_bonus.c
+DEBUG_BONUS			= 	print_bonus.c
+GAME_BONUS			= 	close_window_bonus.c \
+						game_loop_bonus.c \
+						keypress_handler_bonus.c \
+						player_move_bonus.c \
+						raycasting_bonus.c \
+						render_bonus.c \
+						render_utils_bonus.c
+MINIMAP_BONUS		= 	minimap_bonus.c \
+						minimap_utils_bonus.c
+FLASHLIGHT_BONUS	=	flashlight_bonus.c
+FPS_BONUS			=	fps_bonus.c
+DOOR_BONUS			=	door_bonus.c \
+						door_util_bonus.c
 
 NAME 		= cub3D
 NAME_BONUS 	= cub3D_bonus
@@ -84,6 +85,7 @@ VPATH += src/parse
 VPATH += src_bonus
 VPATH += src_bonus/debug_bonus
 VPATH += src_bonus/door_bonus
+VPATH += src_bonus/flashlight_bonus
 VPATH += src_bonus/fps_bonus
 VPATH += src_bonus/free_bonus
 VPATH += src_bonus/game_bonus
@@ -105,6 +107,7 @@ SRC +=	$(PARSING)
 SRC_BONUS += $(GENERAL_BONUS)
 SRC_BONUS += $(DEBUG_BONUS)
 SRC_BONUS += $(DOOR_BONUS)
+SRC_BONUS += $(FLASHLIGHT_BONUS)
 SRC_BONUS += $(FPS_BONUS)
 SRC_BONUS += $(FREE_BONUS)
 SRC_BONUS += $(GAME_BONUS)

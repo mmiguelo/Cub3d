@@ -44,31 +44,6 @@ int	apply_brightness(int color, double brightness)
 	return ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
 
-/**
- * update_global_light - Updates the global lighting intensity based
- * on the time of day.
- *
- * The function creates a smooth, continuous day-night cycle using cosine wave:
- *
- *    - At midnight (time_of_day = 0.0 or 1.0), the light is at its min (0.2).
- *    - At sunrise (time_of_day = 0.25), the light begins to increase.
- *    - At noon (time_of_day = 0.5), the light reaches its maximum (1.0).
- *    - At sunset (time_of_day = 0.75), the light decreases again.
- *    - The cycle loops back to midnight (time_of_day = 1.0).
- *
- * The cosine function ensures the transition is smooth and continuous,
- * without flat plateaus between phases (similar to games like Elden Ring).
- *
- * Formula:
- *      cycle = cos((time_of_day * 2?) - ?)   // gives values in [-1, 1]
- *      global_light = 0.2 + ((cycle + 1) / 2) * (1.0 - 0.2)
- *
- * Resulting global_light is always clamped to [0.2, 1.0].
- *
- * @param data Pointer to the main game data structure containing:
- * @param time_of_day : a double in range [0.0, 1.0)
- * @param global_light: the computed light intensity multiplier
- */
 void	update_global_light(t_data *data)
 {
 	double	t;

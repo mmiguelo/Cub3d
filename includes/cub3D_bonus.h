@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/08 14:55:58 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/11 15:36:57 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@
 # define FPS_HISTORY_SIZE 30
 # define MAX_DOORS 10
 # define DOOR_FPS 10.0
-# define CFT 0
+# define INDOOR 0
+# define FLASHLIGHT_RANGE 12.0
+# define FLASHLIGHT_ANGLE (3.14159265358979323846 / 6) // cone de 30 graus (se quisermos 45 usar PI/4)
 
 # define ERR_EMPTY "File is empty\n"
 # define ERR_ARGS "Arguments are invalid\n"
@@ -216,12 +218,23 @@ typedef struct s_minimap
 	int		tile_size;
 }	t_minimap;
 
+typedef struct s_fl
+{
+	double	intensity;
+	t_pair	position;
+	double	distance;
+	double	angle;
+	int		flicker_frames;
+	double	flicker_factor;
+} 	t_fl;
+
 typedef struct s_data
 {
 	t_textures	textures;
 	t_color		floor;
 	t_color		ceiling;
 	t_player	player;
+	t_fl		fl;
 	t_map		map;
 	t_img		image;
 	t_img		fps;
@@ -236,6 +249,7 @@ typedef struct s_data
 	bool		bmoon;
 	bool		bsunrise;
 	bool		bsunset;
+	bool		fl_on;
 	double		time_of_day;
 	double		global_light;
 	double		move_speed;
@@ -372,5 +386,8 @@ void	change_door_state(t_data *data);
 
 t_door	*find_door_in_front(t_data *data, double max_dist);
 void	render_wall_texture(t_data *data, t_ray *ray);
+
+unsigned int get_pixel(t_img *img, int x, int y);
+void draw_flashlight_overlay(t_data *data);
 
 #endif
