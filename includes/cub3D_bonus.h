@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/09/11 16:20:34 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/11 17:07:56 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@
 
 //	GAME OPTIONS:
 # define TILE_SIZE 64
-# define WIN_WIDTH 1024
-# define WIN_HEIGHT 768
+# define WIN_WIDTH 960 //1024
+# define WIN_HEIGHT 540 //768
 # define PI 3.14159265358979323846
 # define FOV 66
 // indoors (1) / outdoors (0)

@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:22 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/11 16:13:28 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/11 17:13:51 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_fccast
 	double		pos_z;	// center of the screen
 	int			horizon; // camera/player height (default 0.5)
 	double		row_distance;	// distance to current row
+	int			dist_limit; // (optional limiting ceiling and floor render)
 	t_ray_pos	cell;	// (cell_x, cell_y) world grid cell
 	t_ray_dir	tex;	// (tex_x, tex_y) texture coordinate
 	t_ray_pos	temp;	//temp for norminette handling
