@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress_handler_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:56 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/09 16:36:50 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/11 17:50:30 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ int	key_hook_press(int keycode, t_data *data)
 		data->player.sprint = 1;
 	if (keycode == XK_e)
 		change_door_state(data);
+	if (keycode == XK_f)
+	{
+		data->fl_on = !data->fl_on;
+		if (data->fl_on)
+			data->fl.flicker_frames = 20 + rand() % 20;
+	}
 	return (0);
 }
 

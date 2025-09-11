@@ -12,11 +12,6 @@
 
 #include "cub3D_bonus.h"
 
-/* bool	is_night(t_data *data)
-{
-	return (data->global_light <= NIGHT_END);
-} */
-
 void	render_cycle(t_data *data)
 {
 	if (data->bsunrise)

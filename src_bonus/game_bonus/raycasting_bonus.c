@@ -14,9 +14,30 @@
 
 void	calculate_raycasting(t_data *data)
 {
-	int		x;
+	int	x;
+	int flicker_timer = 0;
 
-	update_fps(data);
+	if (data->fl_on)
+	{
+		if(data->fl.flicker_frames > 0)
+		{
+			if (flicker_timer == 0)
+			{
+				data->fl.flicker_factor = 0.2 + ((rand() % 80) / 100.0); // 0.6-1.0
+				flicker_timer = 3;
+			}
+			else
+				flicker_timer--;
+			data->fl.flicker_frames--;
+		}
+		else
+			data->fl.flicker_factor = 1.0;
+	}
+	else
+	{
+		data->fl.flicker_factor = 1.0;
+		data->fl.flicker_frames = 0;
+	}
 	update_doors(data);
 	if (INDOOR == false)
 		put_fc(data);
@@ -25,6 +46,7 @@ void	calculate_raycasting(t_data *data)
 	x = 0;
 	while (x < WIN_WIDTH)
 		render_column(data, x++);
+	draw_flashlight_overlay(data);
 	update_global_light(data);
 	update_time_of_day(data);
 	render_minimap(data);
