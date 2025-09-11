@@ -28,7 +28,6 @@ void	destroy_images(t_data *data)
 	image_destroyer(data, &data->textures.west);
 	image_destroyer(data, &data->textures.south);
 	image_destroyer(data, &data->textures.north);
-	image_destroyer(data, &data->bg);
 	image_destroyer(data, &data->image);
 	image_destroyer(data, &data->sun);
 	image_destroyer(data, &data->sunrise);

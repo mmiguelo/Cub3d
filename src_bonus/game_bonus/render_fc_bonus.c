@@ -63,7 +63,7 @@ void	render_fc_pixel(t_data *data, t_fccast *fc, t_img *texture)
 		brightness = 0.2;
 	tex_color = color(&data->ray.draw, texture);
 	tex_color = apply_global_brightness(tex_color, data->global_light * brightness);
-	put_pixel(&data->bg, fc->temp.x, fc->temp.y, tex_color);
+	put_pixel(&data->image, fc->temp.x, fc->temp.y, tex_color);
 }
 
 void	render_fc_row(t_data *data, t_fccast *fc, t_img *texture, int y)
