@@ -39,6 +39,7 @@ void	calculate_raycasting(t_data *data)
 		data->fl.flicker_frames = 0;
 	}
 	update_doors(data);
+	update_fps(data);
 	if (INDOOR == false)
 		put_fc(data);
 	else

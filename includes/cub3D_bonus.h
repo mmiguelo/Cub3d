@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/11 17:49:27 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/11 17:56:22 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 # define PI 3.14159265358979323846
 # define FOV 66
 // indoors (1) / outdoors (0)
-# define INDOOR 1
+# define INDOOR 0
 // default (0.5) between -1.0 and 1.0 //TODO range yet to be dediced
 # define P_HEIGHT 0.5
 
@@ -76,7 +76,6 @@
 # define FPS_HISTORY_SIZE 30
 # define MAX_DOORS 10
 # define DOOR_FPS 10.0
-# define INDOOR 0
 # define FLASHLIGHT_RANGE 12.0
 # define FLASHLIGHT_ANGLE (3.14159265358979323846 / 6) // cone de 30 graus (se quisermos 45 usar PI/4)
 

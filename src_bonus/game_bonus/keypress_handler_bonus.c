@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:56 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/11 17:50:30 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/11 18:02:52 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	key_hook_press(int keycode, t_data *data)
 		data->player.look_up = 1;
 	if (keycode == XK_Down)
 		data->player.look_down = 1;
-	if (keycode == XK_space)
+	if (keycode == XK_Shift_L)
 		data->player.sprint = 1;
 	if (keycode == XK_e)
 		change_door_state(data);
@@ -63,7 +63,7 @@ int	key_hook_release(int keycode, t_data *data)
 		data->player.look_up = 0;
 	if (keycode == XK_Down && data->player.look_down)
 		data->player.look_down = 0;
-	if (keycode == XK_space && data->player.sprint)
+	if (keycode == XK_Shift_L && data->player.sprint)
 		data->player.sprint = 0;
 	return (0);
 }
