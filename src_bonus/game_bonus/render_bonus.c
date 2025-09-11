@@ -108,13 +108,13 @@ void	draw_line_door(t_data *data, t_ray *ray, int x)
 		ray->draw.start++;
 		return;
 	}
-	// Esta verificacao e para nao desenhar por cima da parede
-	if (ray->draw.perpwalldist >= data->tmp_wall_dist)
+	cell = data->map.grid[data->ray.pos.y][data->ray.pos.x];
+	// Esta verificacao e para nao desenhar por cima da parede ou se e parede
+	if (cell == '1' || ray->draw.perpwalldist >= data->tmp_wall_dist)
 	{
 		ray->draw.start++;
 		return;
 	}
-	cell = data->map.grid[data->ray.pos.y][data->ray.pos.x];
 	ray->draw.tex_y = ray->draw.tex_pos;
 	ray->draw.tex_pos += ray->draw.step;
 	if (cell == 'D' || cell == 'd' || cell == 'n')
@@ -154,7 +154,7 @@ void	check_hit_door(t_data *data, t_ray *ray)
 	{
 		if (data->map.grid[ray->pos.y][ray->pos.x] == '1')
 			ray->draw.hit = true;
-		if (ft_strchr("Ddn", data->map.grid[ray->pos.y][ray->pos.x]))
+		else if (ft_strchr("Ddn", data->map.grid[ray->pos.y][ray->pos.x]))
 			ray->draw.hit = true;
 		else
 			ray->draw.hit = false;
