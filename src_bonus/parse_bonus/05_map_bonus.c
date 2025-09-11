@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:15 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/04 15:15:28 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/11 16:15:49 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	parse_door(t_data *data, int x, int y)
 	door = &data->map.doors[data->map.door_count++];
 	door->x = x;
 	door->y = y;
-	door->open = false;
+	door->state = DOOR_CLOSED;
 	door->tile = '1';
 	if (data->map.grid[y][x] == 'D')
 		door->mode = DOOR_ALWAYS;

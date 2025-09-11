@@ -30,8 +30,8 @@ void	put_fc(t_data *data)
 		x = -1;
 		while (++x < WIN_WIDTH)
 		{
-			pixel_addr = data->bg.addr + (y * data->bg.line_length)
-				+ (x * (data->bg.bpp / 8));
+			pixel_addr = data->image.addr + (y * data->image.line_length)
+				+ (x * (data->image.bpp / 8));
 			if (y < WIN_HEIGHT / 2)
 				*(unsigned int *)pixel_addr = sky_color;
 			else
@@ -63,6 +63,12 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 	double	total_light;
 	char	cell;
 
+	if (data->ray.pos.x < 0 || data->ray.pos.x >= data->map.width ||
+		data->ray.pos.y < 0 || data->ray.pos.y >= data->map.height)
+	{
+		ray->draw.start++;
+		return;
+	}
 	cell = data->map.grid[data->ray.pos.y][data->ray.pos.x];
 	ray->draw.tex_y = ray->draw.tex_pos;
 	ray->draw.tex_pos += ray->draw.step;
@@ -76,13 +82,22 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 	}
 	else
 		render_wall_texture(data, ray);
+	if (ray->draw.color == -1)
+	{
+		data->ray.draw.hit = false;
+		while (!data->ray.draw.hit)
+			check_hit(data, &data->ray);
+		calculate_perpwalldist(ray, &ray->draw);
+		calculate_texture(data, ray);
+		return ;
+	}
 	ray->draw.brightness = 1 / (1 + ray->draw.perpwalldist * DARKNESS);
 	if (ray->draw.brightness < 0.2)
 		ray->draw.brightness = 0.2;
 	total_light = ray->draw.brightness * data->global_light;
 	ray->draw.color = apply_brightness(ray->draw.color, total_light);
 	if (ray->draw.color != -1)
-		put_pixel(&data->bg, x, ray->draw.start, ray->draw.color);
+		put_pixel(&data->image, x, ray->draw.start, ray->draw.color);
 	ray->draw.start++;
 }
 
@@ -118,7 +133,7 @@ void	check_hit(t_data *data, t_ray *ray)
 		if (data->map.grid[ray->pos.y][ray->pos.x] == '1')
 			ray->draw.hit = true;
 		else if (ft_strchr("Ddn", data->map.grid[ray->pos.y][ray->pos.x]))
-			render_door(data, ray);
+			ray->draw.hit = true;
 		else
 			ray->draw.hit = false;
 	}

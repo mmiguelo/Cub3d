@@ -14,10 +14,9 @@
 
 void	render_minimap(t_data *data)
 {
+	t_door	*door;
 	int	y;
 	int	x;
-	int	px;
-	int	py;
 
 	y = -1;
 	while (++y < data->map.height && data->map.grid[y])
@@ -32,11 +31,18 @@ void	render_minimap(t_data *data)
 			else if (data->map.grid[y][x] == 'N' || data->map.grid[y][x] == 'S'
 				|| data->map.grid[y][x] == 'E' || data->map.grid[y][x] == 'W')
 				draw_minimap(data, x, y, data->minimap.floor_color);
+			else if (ft_strrchr("dDn", data->map.grid[y][x]))
+			{
+				door = find_door(&data->map, x, y);
+				if (is_door_active(data, door))
+					draw_minimap(data, x, y, data->minimap.door_color);
+				else
+					draw_minimap(data, x, y, data->minimap.wall_color);
+			}
+				
 		}
 	}
-	px = (int)(data->player.x);
-	py = (int)(data->player.y);
-	draw_minimap_player(data, px, py);
+	draw_minimap_player(data);
 }
 
 void	draw_minimap(t_data *data, int map_x, int map_y, int color)
@@ -57,30 +63,31 @@ void	draw_minimap(t_data *data, int map_x, int map_y, int color)
 	}
 }
 
-void	draw_minimap_player(t_data *data, int tile_x, int tile_y)
+void	draw_minimap_player(t_data *data)
 {
-	int	size;
-	int	start_x;
-	int	start_y;
+	int	radius;
+	int	center_x;
+	int	center_y;
 	int	y;
 	int	x;
 
-	size = data->minimap.tile_size * 0.6;
-	if (size < 2)
-		size = 2;
-	start_x = tile_x * data->minimap.tile_size
-		+ (data->minimap.tile_size - size) / 2;
-	start_y = tile_y * data->minimap.tile_size
-		+ (data->minimap.tile_size - size) / 2;
-	y = -1;
-	while (++y < size)
+	radius = data->minimap.tile_size * 0.3 / 2;
+	if (radius < 2)
+		radius = 2;
+	center_x = (int)(data->player.x * data->minimap.tile_size);
+	center_y = (int)(data->player.y * data->minimap.tile_size);
+	y = -radius;
+	while (y <= radius)
 	{
-		x = -1;
-		while (++x < size)
+		x = -radius;
+		while (x <= radius)
 		{
-			my_mlx_pixel_put(&data->image, start_x + x, start_y + y,
-				data->minimap.player_color);
+			if (x * x + y * y <= radius * radius)
+				my_mlx_pixel_put(&data->image, center_x + x, center_y + y,
+					data->minimap.player_color);
+			x++;
 		}
+		y++;
 	}
 }
 

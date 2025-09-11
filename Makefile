@@ -46,6 +46,7 @@ DEBUG_BONUS		= 	print_bonus.c
 GAME_BONUS		= 	close_window_bonus.c \
 					game_loop_bonus.c \
 					keypress_handler_bonus.c \
+					player_collision_bonus.c \
 					player_move_bonus.c \
 					raycasting_bonus.c \
 					render_bonus.c \

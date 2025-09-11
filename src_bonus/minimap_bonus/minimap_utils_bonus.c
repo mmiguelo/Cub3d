@@ -18,6 +18,7 @@ void	init_minimap(t_data *data)
 	data->minimap.floor_color = 0x000000;
 	data->minimap.wall_color = 0xFFFFFF;
 	data->minimap.player_color = 0x00FF00;
+	data->minimap.door_color = 0xFF0000;
 }
 
 void	calculate_tile_size(t_data *data)

@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/09 16:33:16 by frbranda         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/09/11 16:13:15 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
@@ -64,7 +65,7 @@
 //# define PLANE_LEN 0.7673269879789604
 # define SPEED 0.015
 # define ROT_SPEED 0.05
-# define PLAYER_RAD 0.2
+# define PLAYER_RAD 0.1
 # define DARKNESS 0.12
 # define DAY_NIGHT_CYCLE 0.0002
 # define MORNING 0x87CEEB
@@ -75,6 +76,7 @@
 # define FPS_HISTORY_SIZE 30
 # define MAX_DOORS 10
 # define DOOR_FPS 10.0
+# define CFT 0
 
 # define ERR_EMPTY "File is empty\n"
 # define ERR_ARGS "Arguments are invalid\n"
@@ -195,7 +197,6 @@ typedef struct s_door
 {
 	int				x;
 	int				y;
-	bool			open;
 	t_door_mode		mode;
 	t_door_state	state;
 	int				frame;
@@ -226,6 +227,7 @@ typedef struct s_frames
 	double	fps;
 	double	fps_history[FPS_HISTORY_SIZE];
 	int		fps_index;
+	double	next_frame;
 }	t_frames;
 
 typedef struct s_minimap
@@ -235,6 +237,7 @@ typedef struct s_minimap
 	int		wall_color;
 	int		player_color;
 	int		tile_size;
+	int		door_color;
 }	t_minimap;
 
 typedef struct s_data
@@ -244,7 +247,6 @@ typedef struct s_data
 	t_color		ceiling;
 	t_player	player;
 	t_map		map;
-	t_img		bg;
 	t_img		image;
 	t_img		fps;
 	t_img		sun;
@@ -261,6 +263,7 @@ typedef struct s_data
 	double		time_of_day;
 	double		global_light;
 	double		move_speed;
+	double		tmp_wall_dist;
 	void		*mlx;
 	void		*win;
 	int			fd;
@@ -371,14 +374,14 @@ void	init_minimap(t_data *data);
 void	calculate_tile_size(t_data *data);
 void	render_minimap(t_data *data);
 void	draw_minimap(t_data *data, int map_x, int map_y, int color);
-void	draw_minimap_player(t_data *data, int tile_x, int tile_y);
+void	draw_minimap_player(t_data *data);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	clear_image(t_img *img, int color);
 void	change_buffer_image(t_img *bg, t_img *image);
 
 // FPS
 void	init_fps(t_data *data);
-double	get_current_time_in_seconds(void);
+double	get_current_time_in_miliseconds(void);
 void	update_fps(t_data *data);
 void	render_fps(t_data *data);
 
@@ -398,5 +401,6 @@ void	render_wall_texture(t_data *data, t_ray *ray);
 
 // floor and ceiling (indoor)
 void	render_fc(t_data *data, t_fccast *fc);
+int	player_inside_door(t_data *data, t_door *door);
 
 #endif

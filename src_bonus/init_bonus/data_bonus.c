@@ -24,11 +24,6 @@ void	init_image(t_data *data)
 {
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
-	data->bg.img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
-	data->bg.addr = mlx_get_data_addr(data->bg.img,
-			&data->bg.bpp, &data->bg.line_length, &data->bg.endian);
-	data->bg.width = WIN_WIDTH;
-	data->bg.height = WIN_HEIGHT;
 	data->image.img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	data->image.addr = mlx_get_data_addr(data->image.img,
 			&data->image.bpp, &data->image.line_length,

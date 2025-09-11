@@ -53,6 +53,7 @@ void	render_door(t_data *data, t_ray *ray)
 	ray->draw.hit = true;
 }
 
+// TODO too many lines
 void	update_doors(t_data *data)
 {
 	t_door	*door;
@@ -67,11 +68,11 @@ void	update_doors(t_data *data)
 		if (cell == 'D')
 			door->active = 1;
 		else if (cell == 'd')
-			door->active = (data->bsun || data->bsunrise);
+			door->active = (data->bsun || data->bsunrise || player_inside_door(data, door));
 		else if (cell == 'n')
-			door->active = (data->bsunset || data->bmoon);
-		else
-			door->active = 0;
+			door->active = (data->bsunset || data->bmoon || player_inside_door(data, door));
+		else 
+			door->active = player_inside_door(data, door);
 		if (door->active)
 		{
 			if (door->state == DOOR_OPENING && door->frame < 14)
@@ -99,7 +100,6 @@ void	engage_door(t_data *data, t_door *door, t_door_state new_state)
 			{
 				door->frame = 14;
 				door->state = DOOR_OPEN;
-				door->open = true;
 			}
 		}
 		else if (new_state == DOOR_CLOSING)
@@ -109,12 +109,13 @@ void	engage_door(t_data *data, t_door *door, t_door_state new_state)
 			{
 				door->frame = 0;
 				door->state = DOOR_CLOSED;
-				door->open = false;
 			}
 		}
 	}
 }
 
+
+// TODO 26 lines and too many variables
 void	find_which_door_texture(t_data *data, t_ray *ray, t_door *door)
 {
 	t_img	*texture;
