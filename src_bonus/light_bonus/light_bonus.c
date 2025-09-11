@@ -32,6 +32,8 @@ int	apply_brightness(int color, double brightness)
 {
 	int	rgb[3];
 
+	if (color == IGNORE || color == -1)
+		return (-1);
 	rgb[0] = ((color >> 16) & 0xFF) * brightness;
 	rgb[1] = ((color >> 8) & 0xFF) * brightness;
 	rgb[2] = (color & 0xFF) * brightness;

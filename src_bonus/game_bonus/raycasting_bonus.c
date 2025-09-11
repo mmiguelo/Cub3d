@@ -92,3 +92,4 @@ void	calculate_perpwalldist(t_ray *ray, t_draw *draw)
 	if (draw->end >= WIN_HEIGHT)
 		draw->end = WIN_HEIGHT - 1;
 }
+

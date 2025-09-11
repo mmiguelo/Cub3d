@@ -59,31 +59,45 @@ void	calculate_texture(t_data *data, t_ray *ray)
 
 void	draw_line(t_data *data, t_ray *ray, int x)
 {
-	//t_door	*door;
+	t_door	*door;
 	double	total_light;
 	char	cell;
 
+	if (data->ray.pos.x < 0 || data->ray.pos.x >= data->map.width ||
+		data->ray.pos.y < 0 || data->ray.pos.y >= data->map.height)
+	{
+		ray->draw.start++;
+		return;
+	}
 	cell = data->map.grid[data->ray.pos.y][data->ray.pos.x];
 	ray->draw.tex_y = ray->draw.tex_pos;
 	ray->draw.tex_pos += ray->draw.step;
 	if (cell == 'D' || cell == 'd' || cell == 'n')
-		;
-	// if (cell == 'D' || cell == 'd' || cell == 'n')
-	// {
-	// 	door = find_door(&data->map, ray->pos.x, ray->pos.y);
-	// 	if (door && door->active)
-	// 		find_which_door_texture(data, ray, door);
-	// 	else
-	// 		render_wall_texture(data, ray);
-	// }
+	{
+		door = find_door(&data->map, ray->pos.x, ray->pos.y);
+		if (door && door->active)
+			find_which_door_texture(data, ray, door);
+		else
+			render_wall_texture(data, ray);
+	}
 	else
 		render_wall_texture(data, ray);
+	if (ray->draw.color == -1)
+	{
+		data->ray.draw.hit = false;
+		while (!data->ray.draw.hit)
+			check_hit(data, &data->ray);
+		calculate_perpwalldist(ray, &ray->draw);
+		calculate_texture(data, ray);
+		return ;
+	}
 	ray->draw.brightness = 1 / (1 + ray->draw.perpwalldist * DARKNESS);
 	if (ray->draw.brightness < 0.2)
 		ray->draw.brightness = 0.2;
 	total_light = ray->draw.brightness * data->global_light;
 	ray->draw.color = apply_brightness(ray->draw.color, total_light);
-	put_pixel(&data->image, x, ray->draw.start, ray->draw.color);
+	if (ray->draw.color != -1)
+		put_pixel(&data->image, x, ray->draw.start, ray->draw.color);
 	ray->draw.start++;
 }
 
@@ -118,8 +132,8 @@ void	check_hit(t_data *data, t_ray *ray)
 	{
 		if (data->map.grid[ray->pos.y][ray->pos.x] == '1')
 			ray->draw.hit = true;
-		//else if (ft_strchr("Ddn", data->map.grid[ray->pos.y][ray->pos.x]))
-			//render_door(data, ray);
+		else if (ft_strchr("Ddn", data->map.grid[ray->pos.y][ray->pos.x]))
+			ray->draw.hit = true;
 		else
 			ray->draw.hit = false;
 	}
