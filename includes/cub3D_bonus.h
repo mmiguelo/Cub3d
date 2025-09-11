@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/11 17:56:22 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/11 19:18:25 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 # define PI 3.14159265358979323846
 # define FOV 66
 // indoors (1) / outdoors (0)
-# define INDOOR 0
+# define INDOOR 1
 // default (0.5) between -1.0 and 1.0 //TODO range yet to be dediced
 # define P_HEIGHT 0.5
 

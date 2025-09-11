@@ -87,24 +87,6 @@ void	render_fc_row(t_data *data, t_fccast *fc, t_img *texture, int y)
 	}
 }
 
-int	calculate_max_fc_dist(t_data *data)
-{
-	double	max_map_dist;
-	int		max_screen_dist;
-	int		screen_limit;
-
-	max_map_dist= sqrt(data->map.width * data->map.width +
-		data->map.height * data->map.height);
-	// Convert to screen pixels from horizon
-	// Start with multiplier of 10, tune if needed
-	max_screen_dist = (int)(max_map_dist * 10);
-	screen_limit = (WIN_HEIGHT / 2);
-	if (max_screen_dist < screen_limit)
-		return (max_screen_dist);
-	else
-		return (screen_limit);
-}
-
 void render_fc(t_data *data, t_fccast *fc)
 {
 	int	y;
@@ -112,12 +94,9 @@ void render_fc(t_data *data, t_fccast *fc)
 	int	i;
 
 	init_fc_directions(data, fc);
-	//fc->dist_limit = calculate_max_fc_dist(data);
 	max_distance = WIN_HEIGHT - fc->horizon;
 	if (fc->horizon > max_distance)
 		max_distance = fc->horizon;
-	// if (max_distance > fc->dist_limit)
-	// 	max_distance = fc->dist_limit;
 	i = 0;
 	while (i < max_distance)
 	{
