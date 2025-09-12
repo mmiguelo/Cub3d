@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/11 15:36:57 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/12 11:43:13 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -389,5 +389,6 @@ void	render_wall_texture(t_data *data, t_ray *ray);
 
 unsigned int get_pixel(t_img *img, int x, int y);
 void draw_flashlight_overlay(t_data *data);
+void	toggle_flashlight(t_data *data);
 
 #endif

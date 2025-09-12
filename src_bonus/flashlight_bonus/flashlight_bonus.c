@@ -25,8 +25,9 @@ void draw_flashlight_overlay(t_data *data)
             if (dist < radius)
             {
                 int color = get_pixel(&data->image, x, y);
-                double factor = 1.5 - (dist / radius) * 0.8; 
-                if (factor < 1.0) factor = 1.0;
+                double factor = (2.5 - (dist / radius) * 1.8) * data->fl.flicker_factor;
+				if (factor < 1.0)
+					factor = 1.0;
                 color = apply_brightness(color, factor);
                 put_pixel(&data->image, x, y, color);
             }
@@ -42,4 +43,19 @@ unsigned int get_pixel(t_img *img, int x, int y)
         return (0);
     dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
     return (*(unsigned int *)dst);
+}
+
+void	toggle_flashlight(t_data *data)
+{
+	data->fl_on = !data->fl_on;
+	if (data->fl_on)
+	{
+		data->fl.flicker_frames = 20 + rand() % 20;
+		data->fl.flicker_factor = 1.0;
+	}
+	else
+	{
+		data->fl.flicker_frames = 0;
+		data->fl.flicker_factor = 1.0;
+	}
 }
