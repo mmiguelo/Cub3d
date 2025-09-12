@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/11 19:18:25 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/12 11:14:11 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 # define PI 3.14159265358979323846
 # define FOV 66
 // indoors (1) / outdoors (0)
-# define INDOOR 1
+# define INDOOR 0
 // default (0.5) between -1.0 and 1.0 //TODO range yet to be dediced
 # define P_HEIGHT 0.5
 
@@ -416,7 +416,9 @@ void	render_wall_texture(t_data *data, t_ray *ray);
 void	render_fc(t_data *data, t_fccast *fc);
 int	player_inside_door(t_data *data, t_door *door);
 
-unsigned int get_pixel(t_img *img, int x, int y);
-void draw_flashlight_overlay(t_data *data);
+// flashlight
+unsigned int	get_pixel(t_img *img, int x, int y);
+void 			draw_flashlight_overlay(t_data *data);
+void			toggle_flashlight(t_data *data);
 
 #endif

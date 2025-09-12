@@ -15,7 +15,7 @@
 void	calculate_raycasting(t_data *data)
 {
 	int	x;
-	int flicker_timer = 0;
+	static int flicker_timer = 0;
 
 	if (data->fl_on)
 	{
@@ -23,8 +23,8 @@ void	calculate_raycasting(t_data *data)
 		{
 			if (flicker_timer == 0)
 			{
-				data->fl.flicker_factor = 0.2 + ((rand() % 80) / 100.0); // 0.6-1.0
-				flicker_timer = 3;
+				data->fl.flicker_factor = 0.7 + ((rand() % 130) / 100.0); // 0.6-1.0
+				flicker_timer = 4;
 			}
 			else
 				flicker_timer--;
@@ -47,8 +47,8 @@ void	calculate_raycasting(t_data *data)
 	x = 0;
 	while (x < WIN_WIDTH)
 		render_column(data, x++);
-	draw_flashlight_overlay(data);
 	update_global_light(data);
+	draw_flashlight_overlay(data);
 	update_time_of_day(data);
 	render_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);

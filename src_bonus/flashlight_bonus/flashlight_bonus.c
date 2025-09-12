@@ -43,3 +43,10 @@ unsigned int get_pixel(t_img *img, int x, int y)
     dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
     return (*(unsigned int *)dst);
 }
+
+void	toggle_flashlight(t_data *data)
+{
+	data->fl_on = !data->fl_on;
+	if (data->fl_on)
+		data->fl.flicker_frames = 30 + (rand() % 60);
+}

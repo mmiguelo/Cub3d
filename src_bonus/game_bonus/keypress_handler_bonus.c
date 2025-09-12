@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:56 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/11 18:02:52 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/12 11:16:17 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,7 @@ int	key_hook_press(int keycode, t_data *data)
 	if (keycode == XK_e)
 		change_door_state(data);
 	if (keycode == XK_f)
-	{
-		data->fl_on = !data->fl_on;
-		if (data->fl_on)
-			data->fl.flicker_frames = 20 + rand() % 20;
-	}
+		toggle_flashlight(data);
 	return (0);
 }
 
