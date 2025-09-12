@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   door_util_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/12 12:15:08 by mmiguelo          #+#    #+#             */
+/*   Updated: 2025/09/12 12:15:08 by mmiguelo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D_bonus.h"
 
-void	change_door_state(t_data *data)
+void	toggle_door_state(t_data *data)
 {
 	t_door	*door;
 	int		map_x;
@@ -8,7 +20,7 @@ void	change_door_state(t_data *data)
 
 	map_x = (int)(data->player.x + (int)data->ray.dir.x);
 	map_y = (int)(data->player.y + (int)data->ray.dir.y);
-	door = find_door(&data->map, map_x, map_y);
+	door = get_door_at_tile(&data->map, map_x, map_y);
 	if (door && is_door_active(data, door))
 	{
 		if (door->state == DOOR_CLOSED)
@@ -31,7 +43,7 @@ int	is_door_active(t_data *data, t_door *door)
 	return (0);
 }
 
-t_door	*find_door(t_map *map, int x, int y)
+t_door	*get_door_at_tile(t_map *map, int x, int y)
 {
 	int	i;
 
@@ -53,4 +65,16 @@ int	player_inside_door(t_data *data, t_door *door)
 		&& data->player.y - PLAYER_RAD < door->y + 1)
 		return (1);
 	return (0);
+}
+
+void	update_door_frame(t_door *door)
+{
+	if (door->state == DOOR_OPENING && door->frame < 14)
+		door->frame++;
+	else if (door->state == DOOR_OPENING && door->frame == 14)
+		door->state = DOOR_OPEN;
+	else if (door->state == DOOR_CLOSING && door->frame > 0)
+		door->frame--;
+	else if (door->state == DOOR_CLOSING && door->frame == 0)
+		door->state = DOOR_CLOSED;
 }

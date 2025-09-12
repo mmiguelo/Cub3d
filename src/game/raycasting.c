@@ -12,7 +12,7 @@
 
 #include "cub3D.h"
 
-void	calculate_raycasting(t_data *data)
+void	render_frame(t_data *data)
 {
 	t_ray	ray;
 	int		x;

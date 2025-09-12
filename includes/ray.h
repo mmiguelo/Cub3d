@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:22 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/11 17:13:51 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/12 13:49:28 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,5 @@ typedef struct s_ray
 	t_draw		draw;
 	t_fccast	fc;
 }	t_ray;
-
 
 #endif

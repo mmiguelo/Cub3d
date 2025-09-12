@@ -30,7 +30,7 @@ int	draw_loop(void *param)
 
 	data = (t_data *)param;
 	calculate_movements(data);
-	calculate_raycasting(data);
+	render_frame(data);
 	return (0);
 }
 

@@ -40,7 +40,7 @@ void	init_bonus_image(t_data *data, t_img *texture, char *path)
 			path, &texture->width, &texture->height);
 	if (!texture->img)
 		ft_kill(data, ERR_TEX_LOAD);
-	texture->addr = mlx_get_data_addr(texture->img ,
+	texture->addr = mlx_get_data_addr(texture->img,
 			&texture->bpp, &texture->line_length, &texture->endian);
 	if (!texture->addr)
 		ft_kill(data, ERR_TEX_LOAD);

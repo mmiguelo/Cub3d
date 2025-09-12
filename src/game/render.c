@@ -69,7 +69,7 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 		ray->draw.color = color(&ray->draw, &data->textures.south);
 	else
 		ray->draw.color = color(&ray->draw, &data->textures.north);
-	put_pixel(&data->bg, x, ray->draw.start, ray->draw.color);
+	draw_pixel(&data->bg, x, ray->draw.start, ray->draw.color);
 	ray->draw.start++;
 }
 
@@ -79,7 +79,7 @@ int	color(t_draw *draw, t_img *texture)
 			+ draw->tex_x * (texture->bits_per_pixel / 8))));
 }
 
-void	put_pixel(t_img *img, int x, int y, int color)
+void	draw_pixel(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 

@@ -29,7 +29,7 @@ int	draw_loop(void *param)
 
 	data = (t_data *)param;
 	calculate_movements(&data->player, data->map.grid);
-	calculate_raycasting(data);
+	render_frame(data);
 	return (0);
 }
 

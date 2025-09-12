@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_fc_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/12 12:25:32 by mmiguelo          #+#    #+#             */
+/*   Updated: 2025/09/12 12:28:36 by mmiguelo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D_bonus.h"
 
 void	lerp_day_cycle_fc(t_data *data, double day_cycle)
@@ -47,25 +59,6 @@ void	calculate_text_coord(t_fccast *fc)
 		fc->tex.y += 1.0;
 }
 
-void	render_fc_pixel(t_data *data, t_fccast *fc, t_img *texture)
-{
-	int		tex_color;
-	double	brightness;
-
-	data->ray.draw.tex_x = (int)(fc->tex.x * texture->width) % texture->width;
-	data->ray.draw.tex_y = (int)(fc->tex.y * texture->height) % texture->height;
-	if (data->ray.draw.tex_x < 0)
-		data->ray.draw.tex_x += texture->width;
-	if (data->ray.draw.tex_y < 0)
-		data->ray.draw.tex_y += texture->height;
-	brightness = 1.0 / (1.0 + fc->row_distance * DARKNESS);
-	if (brightness < 0.2)
-		brightness = 0.2;
-	tex_color = color(&data->ray.draw, texture);
-	tex_color = apply_global_brightness(tex_color, data->global_light * brightness);
-	put_pixel(&data->image, fc->temp.x, fc->temp.y, tex_color);
-}
-
 void	render_fc_row(t_data *data, t_fccast *fc, t_img *texture, int y)
 {
 	int	x;
@@ -87,7 +80,7 @@ void	render_fc_row(t_data *data, t_fccast *fc, t_img *texture, int y)
 	}
 }
 
-void render_fc(t_data *data, t_fccast *fc)
+void	render_fc(t_data *data, t_fccast *fc)
 {
 	int	y;
 	int	max_distance;
@@ -111,4 +104,3 @@ void render_fc(t_data *data, t_fccast *fc)
 	}
 	lerp_day_cycle_fc(data, data->time_of_day);
 }
-

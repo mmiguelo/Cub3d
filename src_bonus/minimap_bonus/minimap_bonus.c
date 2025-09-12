@@ -15,8 +15,8 @@
 void	render_minimap(t_data *data)
 {
 	t_door	*door;
-	int	y;
-	int	x;
+	int		y;
+	int		x;
 
 	y = -1;
 	while (++y < data->map.height && data->map.grid[y])
@@ -33,13 +33,12 @@ void	render_minimap(t_data *data)
 				draw_minimap(data, x, y, data->minimap.floor_color);
 			else if (ft_strrchr("dDn", data->map.grid[y][x]))
 			{
-				door = find_door(&data->map, x, y);
+				door = get_door_at_tile(&data->map, x, y);
 				if (is_door_active(data, door))
 					draw_minimap(data, x, y, data->minimap.door_color);
 				else
 					draw_minimap(data, x, y, data->minimap.wall_color);
 			}
-				
 		}
 	}
 	draw_minimap_player(data);

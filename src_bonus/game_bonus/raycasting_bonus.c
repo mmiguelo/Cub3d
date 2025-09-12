@@ -12,18 +12,18 @@
 
 #include "cub3D_bonus.h"
 
-void	calculate_raycasting(t_data *data)
+void	render_frame(t_data *data)
 {
-	int	x;
-	static int flicker_timer = 0;
+	int			x;
+	static int	flicker_timer = 0;
 
 	if (data->fl_on)
 	{
-		if(data->fl.flicker_frames > 0)
+		if (data->fl.flicker_frames > 0)
 		{
 			if (flicker_timer == 0)
 			{
-				data->fl.flicker_factor = 0.7 + ((rand() % 130) / 100.0); // 0.6-1.0
+				data->fl.flicker_factor = 0.4 + ((rand() % 60) / 100.0);
 				flicker_timer = 4;
 			}
 			else
@@ -38,7 +38,7 @@ void	calculate_raycasting(t_data *data)
 		data->fl.flicker_factor = 1.0;
 		data->fl.flicker_frames = 0;
 	}
-	update_doors(data);
+	update_all_doors(data);
 	update_fps(data);
 	if (INDOOR == false)
 		put_fc(data);
@@ -118,4 +118,3 @@ void	calculate_perpwalldist(t_ray *ray, t_draw *draw)
 	if (draw->end >= WIN_HEIGHT)
 		draw->end = WIN_HEIGHT - 1;
 }
-

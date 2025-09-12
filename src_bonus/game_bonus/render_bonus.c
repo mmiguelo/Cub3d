@@ -63,20 +63,20 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 	double	total_light;
 	char	cell;
 
-	if (data->ray.pos.x < 0 || data->ray.pos.x >= data->map.width ||
-		data->ray.pos.y < 0 || data->ray.pos.y >= data->map.height)
+	if (data->ray.pos.x < 0 || data->ray.pos.x >= data->map.width
+		|| data->ray.pos.y < 0 || data->ray.pos.y >= data->map.height)
 	{
 		ray->draw.start++;
-		return;
+		return ;
 	}
 	cell = data->map.grid[data->ray.pos.y][data->ray.pos.x];
 	ray->draw.tex_y = ray->draw.tex_pos;
 	ray->draw.tex_pos += ray->draw.step;
 	if (cell == 'D' || cell == 'd' || cell == 'n')
 	{
-		door = find_door(&data->map, ray->pos.x, ray->pos.y);
+		door = get_door_at_tile(&data->map, ray->pos.x, ray->pos.y);
 		if (door && door->active)
-			find_which_door_texture(data, ray, door);
+			sample_door_texture(data, ray, door);
 		else
 			render_wall_texture(data, ray);
 	}
@@ -97,7 +97,7 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 	total_light = ray->draw.brightness * data->global_light;
 	ray->draw.color = apply_brightness(ray->draw.color, total_light);
 	if (ray->draw.color != -1)
-		put_pixel(&data->image, x, ray->draw.start, ray->draw.color);
+		draw_pixel(&data->image, x, ray->draw.start, ray->draw.color);
 	ray->draw.start++;
 }
 

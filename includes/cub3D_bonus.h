@@ -6,10 +6,9 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/12 11:14:11 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/12 14:05:29 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
@@ -76,8 +75,6 @@
 # define FPS_HISTORY_SIZE 30
 # define MAX_DOORS 10
 # define DOOR_FPS 10.0
-# define FLASHLIGHT_RANGE 12.0
-# define FLASHLIGHT_ANGLE (3.14159265358979323846 / 6) // cone de 30 graus (se quisermos 45 usar PI/4)
 
 # define ERR_EMPTY "File is empty\n"
 # define ERR_ARGS "Arguments are invalid\n"
@@ -111,13 +108,11 @@
 # define MAP_CLUE "In the heart of the maze, where walls conceal, the truth\
  will reveal."
 
-
 // Bonus Textures Path
 # define IMG_BONUS "textures/bonus/"
 # define IMG_CELING "./textures/bonus/ceiling/ceiling.xpm"
-# define IMG_LIGHTS "./textures/bonus/ceiling/ligths.xpm" //case we have 2 cellings textures
+# define IMG_LIGHTS "./textures/bonus/ceiling/ligths.xpm"
 # define IMG_FLOOR "./textures/bonus/floor/floor.xpm"
-
 
 /*=============================================================================#
 #                                   STRUCTS                                    #
@@ -243,13 +238,14 @@ typedef struct s_minimap
 
 typedef struct s_fl
 {
-	double	intensity;
+	//double	intensity;
 	t_pair	position;
-	double	distance;
-	double	angle;
 	int		flicker_frames;
 	double	flicker_factor;
-} 	t_fl;
+	double	dist;
+	double	radius;
+	double	factor;
+}	t_fl;
 
 typedef struct s_data
 {
@@ -359,7 +355,7 @@ void	get_player_vector(t_data *data);
 void	get_player_vector2(t_data *data);
 
 // RAYCASTING / RENDERING
-void	calculate_raycasting(t_data *data);
+void	render_frame(t_data *data);
 void	put_fc(t_data *data);
 void	calculate_variables(t_player *player, t_ray *ray, int x);
 void	calculate_variables2(t_ray *ray, double player_x, double player_y);
@@ -370,7 +366,7 @@ void	render_texture(t_ray *ray);
 void	render_column(t_data *data, int x);
 void	draw_line(t_data *data, t_ray *ray, int x);
 int		color(t_draw *draw, t_img *texture);
-void	put_pixel(t_img *img, int x, int y, int color);
+void	draw_pixel(t_img *img, int x, int y, int color);
 
 // LIGHT MANIPULATION
 int		apply_brightness(int color, double brightness);
@@ -400,25 +396,27 @@ void	render_fps(t_data *data);
 
 //door
 void	parse_door(t_data *data, int x, int y);
-void	find_which_door_texture(t_data *data, t_ray *ray, t_door *door);
-void	render_door(t_data *data, t_ray *ray);
-void	engage_door(t_data *data, t_door *door, t_door_state new_state);
+void	sample_door_texture(t_data *data, t_ray *ray, t_door *door);
+void	mark_door_hit(t_data *data, t_ray *ray);
+void	animate_door_frame(t_data *data, t_door *door, t_door_state new_state);
 int		is_door_active(t_data *data, t_door *door);
-t_door	*find_door(t_map *map, int x, int y);
+t_door	*get_door_at_tile(t_map *map, int x, int y);
 t_door	*find_nearby_door(t_data *data, double px, double py, double max_dist);
-void	update_doors(t_data *data);
-void	change_door_state(t_data *data);
+void	update_all_doors(t_data *data);
+void	toggle_door_state(t_data *data);
+void	update_door_frame(t_door *door);
 
-t_door	*find_door_in_front(t_data *data, double max_dist);
 void	render_wall_texture(t_data *data, t_ray *ray);
 
 // floor and ceiling (indoor)
 void	render_fc(t_data *data, t_fccast *fc);
-int	player_inside_door(t_data *data, t_door *door);
+int		player_inside_door(t_data *data, t_door *door);
+void	render_fc_pixel(t_data *data, t_fccast *fc, t_img *texture);
 
 // flashlight
 unsigned int	get_pixel(t_img *img, int x, int y);
-void 			draw_flashlight_overlay(t_data *data);
-void			toggle_flashlight(t_data *data);
+void	draw_flashlight_overlay(t_data *data);
+void	toggle_flashlight(t_data *data);
+void	apply_flashlight_pixel(t_data *data, t_fl *flashlight, int x, int y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/16 00:17:02 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/12 13:36:50 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,7 @@ void	get_player_vector(t_data *data);
 void	get_player_vector2(t_data *data);
 
 // RAYCASTING / RENDERING
-void	calculate_raycasting(t_data *data);
+void	render_frame(t_data *data);
 void	put_fc(t_data *data);
 void	calculate_variables(t_player *player, t_ray *ray, int x);
 void	calculate_variables2(t_ray *ray, double player_x, double player_y);
@@ -249,6 +249,6 @@ void	calculate_texture(t_data *data, t_ray *ray);
 void	render_texture(t_ray *ray);
 void	draw_line(t_data *data, t_ray *ray, int x);
 int		color(t_draw *draw, t_img *texture);
-void	put_pixel(t_img *img, int x, int y, int color);
+void	draw_pixel(t_img *img, int x, int y, int color);
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_collision_bonus.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/12 12:15:25 by mmiguelo          #+#    #+#             */
+/*   Updated: 2025/09/12 12:41:27 by mmiguelo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D_bonus.h"
 
 int	is_blocking_tile(t_data *data, int x, int y)
@@ -10,7 +22,7 @@ int	is_blocking_tile(t_data *data, int x, int y)
 		return (1);
 	if (tile == 'D' || tile == 'd' || tile == 'n')
 	{
-		door = find_door(&data->map, x, y);
+		door = get_door_at_tile(&data->map, x, y);
 		if (player_inside_door(data, door))
 			return (0);
 		if (!door || !door->active)
@@ -34,8 +46,7 @@ int	can_move(t_data *data, double x, double y)
 
 void	check_collision(t_data *data, t_player *player)
 {
-	if (can_move(data, player->new_x, player->y)
-)
+	if (can_move(data, player->new_x, player->y))
 		player->x = player->new_x;
 	if (can_move(data, player->x, player->new_y))
 		player->y = player->new_y;
