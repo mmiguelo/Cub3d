@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/15 19:42:37 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/15 23:20:20 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,27 +230,18 @@ typedef struct s_frames
 
 typedef struct s_minimap
 {
-	double		tile_size;
-	double		radius;
-	int		floor_color;
-	int		wall_color;
-	int		player_color;
-	int		door_color;
-	double		size;
-	double		center_x;
-	double		center_y;
-	double	angle;
-	double	cos_a;
-	double	sin_a;
-	double		start_tile_x;
-	double		start_tile_y;
-	double		radius_px;
-	double		map_x;
-	double		map_y;
-	double		screen_x;
-	double		screen_y;
-	double		dist_sq;
-}	t_minimap;
+    t_img   minimap_map;      // full map buffer
+    t_img   minimap_buffer;   // circular visible minimap
+    int     tile_size;
+    int     radius;           // radius in tiles
+    int     size;             // buffer size in pixels
+    int     center_x;
+    int     center_y;
+    int     player_color;
+    int     wall_color;
+    int     floor_color;
+    int     door_color;
+}   t_minimap;
 
 typedef struct s_fl
 {
@@ -400,11 +391,11 @@ void			change_day(bool *to_false, bool *to_true);
 void			render_cycle(t_data *data);
 
 // MINIMAP
-void			draw_minimap_tile(t_data *data, int screen_x, int screen_y,
-					int color);
+//void			draw_minimap_tile(t_data *data, int screen_x, int screen_y,
+//					int color);
 void			init_minimap(t_data *data);
-void			render_minimap(t_data *data, t_minimap *minimap);
-void			draw_minimap_player(t_data *data);
+//void			render_minimap(t_data *data, t_minimap *minimap);
+//void			draw_minimap_player(t_data *data);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void			clear_image(t_img *img, int color);
 void			calc_minimap_transform(t_data *data, t_minimap *m);
@@ -444,5 +435,14 @@ void			toggle_flashlight(t_data *data);
 void			apply_flashlight_pixel(t_data *data,
 					t_fl *flashlight, int x, int y);
 void			update_flicker(t_data *data);
+
+//test
+void	init_img(t_img *img, void *mlx, int width, int height);
+void	render_full_minimap_map(t_data *data);
+void	draw_minimap_tile(t_img *img, int start_x, int start_y, int color, int size);
+void	draw_minimap_player(t_img *img, int center_x, int center_y, int color, int tile_size);
+void	render_minimap(t_data *data);
+int	get_tile_color(t_data *data, int x, int y);
+void	draw_minimap_player(t_img *img, int center_x, int center_y, int color, int tile_size);
 
 #endif

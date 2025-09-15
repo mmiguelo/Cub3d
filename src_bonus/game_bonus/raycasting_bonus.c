@@ -32,8 +32,8 @@ void	render_frame(t_data *data)
 	update_global_light(data);
 	draw_flashlight_overlay(data);
 	update_time_of_day(data);
-	render_minimap(data, &data->minimap);
 	mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
+	render_minimap(data);
 	render_fps(data);
 	render_cycle(data);
 	mlx_string_put(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2,

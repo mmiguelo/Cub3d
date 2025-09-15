@@ -12,7 +12,7 @@
 
 #include "cub3D_bonus.h"
 
-void	draw_minimap_border(t_data *data, int color)
+/* void	draw_minimap_border(t_data *data, int color)
 {
 	int	center;
 	int	radius;
@@ -30,9 +30,9 @@ void	draw_minimap_border(t_data *data, int color)
 		my_mlx_pixel_put(&data->image, x, y, color);
 		angle++;
 	}
-}
+} */
 
-static int	get_tile_color(t_data *data, int x, int y)
+int	get_tile_color(t_data *data, int x, int y)
 {
 	t_door	*door;
 	char	cell;
@@ -57,7 +57,7 @@ static int	get_tile_color(t_data *data, int x, int y)
 	return (color);
 }
 
-void	render_minimap(t_data *data, t_minimap *m)
+/* void	render_minimap(t_data *data, t_minimap *m)
 {
 	double	px;
 	double	py;
@@ -137,4 +137,4 @@ void	draw_minimap_player(t_data *data)
 		}
 		y++;
 	}
-}
+} */

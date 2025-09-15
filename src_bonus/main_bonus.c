@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:59:01 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/08/15 15:23:41 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/15 22:57:26 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int ac, char **av)
 	parse(&data, av[1], ".cub");
 	parse_file_content(&data, av[1]);
 	get_player_vector(&data);
-	init_minimap(&data);
 	init_fps(&data);
 	game_loop(&data);
 	return (0);
