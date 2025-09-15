@@ -59,17 +59,17 @@ static int	get_tile_color(t_data *data, int x, int y)
 
 void	render_minimap(t_data *data, t_minimap *m)
 {
-	int	px;
-	int	py;
-	int	color;
+	double	px;
+	double	py;
+	int		color;
 
 	calc_minimap_transform(data, m);
 	py = -1;
-	while (++py < m->radius * 2 + 1)
+	while (++py <= m->radius * 2 + 1)
 	{
 		m->map_y = m->start_tile_y + py;
 		px = -1;
-		while (++px < m->radius * 2 + 1)
+		while (++px <= m->radius * 2 + 1)
 		{
 			m->map_x = m->start_tile_x + px;
 			color = get_tile_color(data, m->map_x, m->map_y);
@@ -86,11 +86,11 @@ void	render_minimap(t_data *data, t_minimap *m)
 
 void	draw_minimap_tile(t_data *data, int screen_x, int screen_y, int color)
 {
-	int	x;
-	int	y;
-	int	dx;
-	int	dy;
-	int	center;
+	double	x;
+	double	y;
+	double	dx;
+	double	dy;
+	double	center;
 
 	center = data->minimap.size / 2;
 	y = 0;
@@ -113,11 +113,11 @@ void	draw_minimap_tile(t_data *data, int screen_x, int screen_y, int color)
 
 void	draw_minimap_player(t_data *data)
 {
-	int	radius;
-	int	center_x;
-	int	center_y;
-	int	x;
-	int	y;
+	double	radius;
+	double	center_x;
+	double	center_y;
+	double	x;
+	double	y;
 
 	center_y = data->minimap.size / 2;
 	center_x = data->minimap.size / 2;

@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/15 15:44:35 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:01:28 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,26 +228,26 @@ typedef struct s_frames
 
 typedef struct s_minimap
 {
-	int		tile_size;
-	int		radius;
+	double		tile_size;
+	double		radius;
 	int		floor_color;
 	int		wall_color;
 	int		player_color;
 	int		door_color;
-	int		size;
-	int		center_x;
-	int		center_y;
+	double		size;
+	double		center_x;
+	double		center_y;
 	double	angle;
 	double	cos_a;
 	double	sin_a;
-	int		start_tile_x;
-	int		start_tile_y;
-	int		radius_px;
-	int		map_x;
-	int		map_y;
-	int		screen_x;
-	int		screen_y;
-	int		dist_sq;
+	double		start_tile_x;
+	double		start_tile_y;
+	double		radius_px;
+	double		map_x;
+	double		map_y;
+	double		screen_x;
+	double		screen_y;
+	double		dist_sq;
 }	t_minimap;
 
 typedef struct s_fl

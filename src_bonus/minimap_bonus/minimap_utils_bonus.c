@@ -14,14 +14,14 @@
 
 int	minimap_tile_screen(t_minimap *minimap, int px, int py)
 {
-	int	dx;
-	int	dy;
+	double	dx;
+	double	dy;
 
 	dx = px - minimap->radius;
 	dy = py - minimap->radius;
-	minimap->screen_x = minimap->center_x + (int)(((dx + 0.5) * minimap->cos_a
+	minimap->screen_x = minimap->center_x + (((dx + 0.5) * minimap->cos_a
 				- (dy + 0.5) * minimap->sin_a) * minimap->tile_size);
-	minimap->screen_y = minimap->center_y + (int)(((dx + 0.5) * minimap->sin_a
+	minimap->screen_y = minimap->center_y + (((dx + 0.5) * minimap->sin_a
 				+ (dy + 0.5) * minimap->cos_a) * minimap->tile_size);
 	minimap->dist_sq = (minimap->screen_x - minimap->center_x)
 		* (minimap->screen_x - minimap->center_x)
@@ -33,13 +33,13 @@ int	minimap_tile_screen(t_minimap *minimap, int px, int py)
 void	init_minimap(t_data *data)
 {
 	data->minimap.tile_size = 6;
-	data->minimap.radius = 8;
+	data->minimap.radius = 14;
 	data->minimap.floor_color = 0x222222;
 	data->minimap.wall_color = 0xFFFFFF;
 	data->minimap.player_color = 0x00FF00;
 	data->minimap.door_color = 0xFF0000;
 	data->minimap.size = data->minimap.tile_size
-		* (data->minimap.radius * 2 + 1);
+		* (data->minimap.radius * 2);
 }
 
 void	calc_minimap_transform(t_data *data, t_minimap *m)
@@ -49,8 +49,8 @@ void	calc_minimap_transform(t_data *data, t_minimap *m)
 	m->angle = atan2(data->player.dir.y, data->player.dir.x);
 	m->cos_a = cos(m->angle + PI / 2);
 	m->sin_a = sin(m->angle - PI / 2);
-	m->start_tile_x = (int)data->player.x - m->radius;
-	m->start_tile_y = (int)data->player.y - m->radius;
+	m->start_tile_x = data->player.x - m->radius;
+	m->start_tile_y = data->player.y - m->radius;
 	m->radius_px = m->radius * m->tile_size;
 }
 
