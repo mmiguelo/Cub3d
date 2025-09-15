@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_fc_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 12:25:32 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/12 12:28:36 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:23:57 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	calculate_text_coord(t_fccast *fc)
 
 void	render_fc_row(t_data *data, t_fccast *fc, t_img *texture, int y)
 {
-	int	x;
+	int				x;
+	unsigned int	check;
 
 	fc->x = data->player.x + fc->row_distance * fc->dir0.x;
 	fc->y = data->player.y + fc->row_distance * fc->dir0.y;
@@ -73,7 +74,9 @@ void	render_fc_row(t_data *data, t_fccast *fc, t_img *texture, int y)
 		calculate_text_coord(fc);
 		fc->temp.x = x;
 		fc->temp.y = y;
-		render_fc_pixel(data, fc, texture);
+		check = get_pixel(&data->image, fc->temp.x, fc->temp.y);
+		if (check == BG)
+			render_fc_pixel(data, fc, texture);
 		fc->x += fc->step.x;
 		fc->y += fc->step.y;
 		x++;
@@ -97,7 +100,7 @@ void	render_fc(t_data *data, t_fccast *fc)
 		y = fc->horizon + i;
 		if (y < WIN_HEIGHT)
 			render_fc_row(data, fc, &data->textures.floor, y);
-		y = fc->horizon - i;
+		y = fc->horizon - i - 1;
 		if (y >= 0)
 			render_fc_row(data, fc, &data->textures.ceiling, y);
 		i++;

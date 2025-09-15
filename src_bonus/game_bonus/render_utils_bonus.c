@@ -14,8 +14,8 @@
 
 void	render_fc_pixel(t_data *data, t_fccast *fc, t_img *texture)
 {
-	int		tex_color;
-	double	brightness;
+	int			tex_color;
+	double		brightness;
 
 	data->ray.draw.tex_x = (int)(fc->tex.x * texture->width) % texture->width;
 	data->ray.draw.tex_y = (int)(fc->tex.y * texture->height) % texture->height;

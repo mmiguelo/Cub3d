@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:22 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/12 13:49:28 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/15 16:54:08 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ typedef struct s_fccast
 	t_ray_dir	tex;	// (tex_x, tex_y) texture coordinate
 	t_ray_pos	temp;	//temp for norminette handling
 }	t_fccast;
+
+typedef struct s_doorcast
+{
+	t_ray_pos	map;
+	t_ray_pos	start;
+	double		dist;
+}	t_doorcast;
 
 typedef struct s_ray
 {
