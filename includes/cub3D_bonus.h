@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/12 14:05:29 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/15 15:44:35 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,12 +228,26 @@ typedef struct s_frames
 
 typedef struct s_minimap
 {
-	t_img	minimap_buffer;
+	int		tile_size;
+	int		radius;
 	int		floor_color;
 	int		wall_color;
 	int		player_color;
-	int		tile_size;
 	int		door_color;
+	int		size;
+	int		center_x;
+	int		center_y;
+	double	angle;
+	double	cos_a;
+	double	sin_a;
+	int		start_tile_x;
+	int		start_tile_y;
+	int		radius_px;
+	int		map_x;
+	int		map_y;
+	int		screen_x;
+	int		screen_y;
+	int		dist_sq;
 }	t_minimap;
 
 typedef struct s_fl
@@ -287,136 +301,146 @@ typedef struct s_data
 #=============================================================================*/
 
 // ERROR HANDLING / CLEAN UP
-int		ft_kill(t_data *data, char *message);
-void	close_window(t_data *data, char *msg);
-void	free_textures(t_data *data);
-void	freedom(t_data *data);
-void	destroy_images(t_data *data);
-void	destroy_textures(t_textures *textures, void *mlx);
-void	free_tex(t_img *tex, void *mlx);
-void	free_gnl(t_data *data);
+int				ft_kill(t_data *data, char *message);
+void			close_window(t_data *data, char *msg);
+void			free_textures(t_data *data);
+void			freedom(t_data *data);
+void			destroy_images(t_data *data);
+void			destroy_textures(t_textures *textures, void *mlx);
+void			free_tex(t_img *tex, void *mlx);
+void			free_gnl(t_data *data);
 
 // PARSING / INITIALIZATION
-void	parse(t_data *data, char *filename, char *extension);
-void	parse_line(t_data *data, char *line);
-void	parse_file_content(t_data *data, char *filename);
-void	process_line(t_data *data, char *line, int *i);
-void	check_extension(t_data *data, char *filename, char *extension);
-void	check_directory(t_data *data, char *filename);
-void	check_map(t_data *data, t_map	*map, char *line, int height);
-void	init(t_data *data);
-void	init_game(t_data *data);
-void	init_image(t_data *data);
-void	init_cycle_images(t_data *data);
-void	init_textures(t_data *data);
-void	load_textures(t_data *data, t_img *texture);
-void	check_textures(t_data *data, char *line);
-void	assign_texture(t_data *data, char **path, char *line, int *i);
-void	assign_rgb(t_data *data, t_color *color, char *line);
-void	parse_color(t_data *data, t_color *color);
-int		is_all_assets(t_data *data);
-void	check_duplicated_color(t_data *data, t_color *ceiling, t_color *floor);
-void	check_required_textures(t_data *data, t_textures textures);
+void			parse(t_data *data, char *filename, char *extension);
+void			parse_line(t_data *data, char *line);
+void			parse_file_content(t_data *data, char *filename);
+void			process_line(t_data *data, char *line, int *i);
+void			check_extension(t_data *data, char *filename, char *extension);
+void			check_directory(t_data *data, char *filename);
+void			check_map(t_data *data, t_map	*map, char *line, int height);
+void			init(t_data *data);
+void			init_game(t_data *data);
+void			init_image(t_data *data);
+void			init_cycle_images(t_data *data);
+void			init_textures(t_data *data);
+void			load_textures(t_data *data, t_img *texture);
+void			check_textures(t_data *data, char *line);
+void			assign_texture(t_data *data, char **path, char *line, int *i);
+void			assign_rgb(t_data *data, t_color *color, char *line);
+void			parse_color(t_data *data, t_color *color);
+int				is_all_assets(t_data *data);
+void			check_duplicated_color(t_data *data,
+					t_color *ceiling, t_color *floor);
+void			check_required_textures(t_data *data, t_textures textures);
 
 // MAP UTILITIES
-int		count_width(const char *str);
-void	append_map_line(t_data *data, char ***grid, char *line, int height);
-int		empty_line(char *line);
-char	*clean_ws(t_data *data, char *line);
-void	check_map_walls_and_player(t_data *data, t_map *map);
-void	check_surroundings(t_data *data, char **grid, int x, int y);
-bool	is_valid_map_line(char *line);
-bool	is_already_rgb(t_color *color);
+int				count_width(const char *str);
+void			append_map_line(t_data *data,
+					char ***grid, char *line, int height);
+int				empty_line(char *line);
+char			*clean_ws(t_data *data, char *line);
+void			check_map_walls_and_player(t_data *data, t_map *map);
+void			check_surroundings(t_data *data, char **grid, int x, int y);
+bool			is_valid_map_line(char *line);
+bool			is_already_rgb(t_color *color);
 
 // DEBUG / PRINT
 // TODO: delete in the end
-void	print_assets(t_data *data, char *process);
-void	print_map(t_data *data);
-void	print_parsing_map(t_data *data, int y);
+void			print_assets(t_data *data, char *process);
+void			print_map(t_data *data);
+void			print_parsing_map(t_data *data, int y);
 
 // GAME LOOP / INPUT
-void	game_loop(t_data *data);
-int		draw_loop(void *param);
-int		x_press(t_data *data);
-int		key_hook_press(int keycode, t_data *data);
-int		key_hook_release(int keycode, t_data *data);
-int		mouse_move(int x, int y, t_data *data);
+void			game_loop(t_data *data);
+int				draw_loop(void *param);
+int				x_press(t_data *data);
+int				key_hook_press(int keycode, t_data *data);
+int				key_hook_release(int keycode, t_data *data);
+int				mouse_move(int x, int y, t_data *data);
 //void	center_mouse(void *win);
 
 // PLAYER MOVEMENT
-void	calculate_movements(t_data *data);
-void	move_strafe(t_data *data);
-void	turn_player(t_player *player);
-void	calculate_rotation(t_player *player, double rotation_speed);
-void	check_collision(t_data *data, t_player *player);
+void			calculate_movements(t_data *data);
+void			move_strafe(t_data *data);
+void			turn_player(t_player *player);
+void			calculate_rotation(t_player *player, double rotation_speed);
+void			check_collision(t_data *data, t_player *player);
 
 // PLAYER VECTOR
-void	get_player_vector(t_data *data);
-void	get_player_vector2(t_data *data);
+void			get_player_vector(t_data *data);
+void			get_player_vector2(t_data *data);
 
 // RAYCASTING / RENDERING
-void	render_frame(t_data *data);
-void	put_fc(t_data *data);
-void	calculate_variables(t_player *player, t_ray *ray, int x);
-void	calculate_variables2(t_ray *ray, double player_x, double player_y);
-void	check_hit(t_data *data, t_ray *ray);
-void	calculate_perpwalldist(t_ray *ray, t_draw *draw);
-void	calculate_texture(t_data *data, t_ray *ray);
-void	render_texture(t_ray *ray);
-void	render_column(t_data *data, int x);
-void	draw_line(t_data *data, t_ray *ray, int x);
-int		color(t_draw *draw, t_img *texture);
-void	draw_pixel(t_img *img, int x, int y, int color);
+void			render_frame(t_data *data);
+void			put_fc(t_data *data);
+void			calculate_variables(t_player *player, t_ray *ray, int x);
+void			calculate_variables2(t_ray *ray, double player_x,
+					double player_y);
+void			handle_wall_or_door(t_data *data, t_ray *ray);
+void			apply_lighting(t_data *data, t_ray *ray, int x);
+void			check_hit(t_data *data, t_ray *ray);
+void			calculate_perpwalldist(t_ray *ray, t_draw *draw);
+void			calculate_texture(t_data *data, t_ray *ray);
+void			render_texture(t_ray *ray);
+void			render_column(t_data *data, int x);
+void			draw_line(t_data *data, t_ray *ray, int x);
+int				color(t_draw *draw, t_img *texture);
+void			draw_pixel(t_img *img, int x, int y, int color);
 
 // LIGHT MANIPULATION
-int		apply_brightness(int color, double brightness);
-int		apply_global_brightness(int color, double global_light);
-void	update_global_light(t_data *data);
-void	update_time_of_day(t_data *data);
-int		lerp_day_cycle(t_data *data, double day_cycle);
-int		lerp_color(int start, int end, double t);
-void	change_day(bool *to_false, bool *to_true);
-void	render_cycle(t_data *data);
+int				apply_brightness(int color, double brightness);
+int				apply_global_brightness(int color, double global_light);
+void			update_global_light(t_data *data);
+void			update_time_of_day(t_data *data);
+int				lerp_day_cycle(t_data *data, double day_cycle);
+int				lerp_color(int start, int end, double t);
+void			change_day(bool *to_false, bool *to_true);
+void			render_cycle(t_data *data);
 
 // MINIMAP
-void	init_minimap(t_data *data);
-void	calculate_tile_size(t_data *data);
-void	render_minimap(t_data *data);
-void	draw_minimap(t_data *data, int map_x, int map_y, int color);
-void	draw_minimap_player(t_data *data);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	clear_image(t_img *img, int color);
-void	change_buffer_image(t_img *bg, t_img *image);
+void			draw_minimap_tile(t_data *data, int screen_x, int screen_y,
+					int color);
+void			init_minimap(t_data *data);
+void			render_minimap(t_data *data, t_minimap *minimap);
+void			draw_minimap_player(t_data *data);
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void			clear_image(t_img *img, int color);
+void			calc_minimap_transform(t_data *data, t_minimap *m);
+int				minimap_tile_screen(t_minimap *minimap, int px, int py);
 
 // FPS
-void	init_fps(t_data *data);
-double	get_current_time_in_miliseconds(void);
-void	update_fps(t_data *data);
-void	render_fps(t_data *data);
+void			init_fps(t_data *data);
+double			get_current_time_in_miliseconds(void);
+void			update_fps(t_data *data);
+void			render_fps(t_data *data);
 
 //door
-void	parse_door(t_data *data, int x, int y);
-void	sample_door_texture(t_data *data, t_ray *ray, t_door *door);
-void	mark_door_hit(t_data *data, t_ray *ray);
-void	animate_door_frame(t_data *data, t_door *door, t_door_state new_state);
-int		is_door_active(t_data *data, t_door *door);
-t_door	*get_door_at_tile(t_map *map, int x, int y);
-t_door	*find_nearby_door(t_data *data, double px, double py, double max_dist);
-void	update_all_doors(t_data *data);
-void	toggle_door_state(t_data *data);
-void	update_door_frame(t_door *door);
+void			parse_door(t_data *data, int x, int y);
+void			sample_door_texture(t_data *data, t_ray *ray, t_door *door);
+void			mark_door_hit(t_data *data, t_ray *ray);
+void			animate_door_frame(t_data *data, t_door *door,
+					t_door_state new_state);
+int				is_door_active(t_data *data, t_door *door);
+t_door			*get_door_at_tile(t_map *map, int x, int y);
+t_door			*find_nearby_door(t_data *data, double px,
+					double py, double max_dist);
+void			update_all_doors(t_data *data);
+void			toggle_door_state(t_data *data);
+void			update_door_frame(t_door *door);
 
-void	render_wall_texture(t_data *data, t_ray *ray);
+void			render_wall_texture(t_data *data, t_ray *ray);
 
 // floor and ceiling (indoor)
-void	render_fc(t_data *data, t_fccast *fc);
-int		player_inside_door(t_data *data, t_door *door);
-void	render_fc_pixel(t_data *data, t_fccast *fc, t_img *texture);
+void			render_fc(t_data *data, t_fccast *fc);
+int				player_inside_door(t_data *data, t_door *door);
+void			render_fc_pixel(t_data *data, t_fccast *fc, t_img *texture);
 
 // flashlight
 unsigned int	get_pixel(t_img *img, int x, int y);
-void	draw_flashlight_overlay(t_data *data);
-void	toggle_flashlight(t_data *data);
-void	apply_flashlight_pixel(t_data *data, t_fl *flashlight, int x, int y);
+void			draw_flashlight_overlay(t_data *data);
+void			toggle_flashlight(t_data *data);
+void			apply_flashlight_pixel(t_data *data,
+					t_fl *flashlight, int x, int y);
+void			update_flicker(t_data *data);
 
 #endif

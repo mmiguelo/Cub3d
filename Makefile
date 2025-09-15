@@ -51,7 +51,8 @@ GAME_BONUS			= 	close_window_bonus.c \
 						raycasting_bonus.c \
 						render_bonus.c \
 						render_fc_bonus.c \
-						render_utils_bonus.c
+						render_utils_bonus.c \
+						render_utils2_bonus.c
 MINIMAP_BONUS		= 	minimap_bonus.c \
 						minimap_utils_bonus.c
 FLASHLIGHT_BONUS	=	flashlight_bonus.c

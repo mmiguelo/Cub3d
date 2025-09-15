@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 13:39:47 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/12 14:04:51 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/15 10:15:37 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,32 @@ void	apply_flashlight_pixel(t_data *data, t_fl *flashlight, int x, int y)
 			flashlight->factor = 1.0;
 		color = apply_brightness(color, flashlight->factor);
 		draw_pixel(&data->image, x, y, color);
+	}
+}
+
+void	update_flicker(t_data *data)
+{
+	static int	flicker_timer = 0;
+
+	if (data->fl_on)
+	{
+		if (data->fl.flicker_frames > 0)
+		{
+			if (flicker_timer == 0)
+			{
+				data->fl.flicker_factor = 0.4 + ((rand() % 60) / 100.0);
+				flicker_timer = 4;
+			}
+			else
+				flicker_timer--;
+			data->fl.flicker_frames--;
+		}
+		else
+			data->fl.flicker_factor = 1.0;
+	}
+	else
+	{
+		data->fl.flicker_factor = 1.0;
+		data->fl.flicker_frames = 0;
 	}
 }

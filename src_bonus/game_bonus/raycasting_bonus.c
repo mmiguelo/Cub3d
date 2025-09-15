@@ -15,29 +15,8 @@
 void	render_frame(t_data *data)
 {
 	int			x;
-	static int	flicker_timer = 0;
 
-	if (data->fl_on)
-	{
-		if (data->fl.flicker_frames > 0)
-		{
-			if (flicker_timer == 0)
-			{
-				data->fl.flicker_factor = 0.4 + ((rand() % 60) / 100.0);
-				flicker_timer = 4;
-			}
-			else
-				flicker_timer--;
-			data->fl.flicker_frames--;
-		}
-		else
-			data->fl.flicker_factor = 1.0;
-	}
-	else
-	{
-		data->fl.flicker_factor = 1.0;
-		data->fl.flicker_frames = 0;
-	}
+	update_flicker(data);
 	update_all_doors(data);
 	update_fps(data);
 	if (INDOOR == false)
@@ -50,7 +29,7 @@ void	render_frame(t_data *data)
 	update_global_light(data);
 	draw_flashlight_overlay(data);
 	update_time_of_day(data);
-	render_minimap(data);
+	render_minimap(data, &data->minimap);
 	mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
 	render_fps(data);
 	render_cycle(data);

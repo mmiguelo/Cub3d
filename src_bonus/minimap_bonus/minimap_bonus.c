@@ -12,53 +12,102 @@
 
 #include "cub3D_bonus.h"
 
-void	render_minimap(t_data *data)
+void	draw_minimap_border(t_data *data, int color)
+{
+	int	center;
+	int	radius;
+	int	angle;
+	int	x;
+	int	y;
+
+	center = data->minimap.size / 2;
+	radius = data->minimap.radius * data->minimap.tile_size;
+	angle = 0;
+	while (angle < 360)
+	{
+		x = center + (int)(cos(angle * PI / 180.0) * radius);
+		y = center + (int)(sin(angle * PI / 180.0) * radius);
+		my_mlx_pixel_put(&data->image, x, y, color);
+		angle++;
+	}
+}
+
+static int	get_tile_color(t_data *data, int x, int y)
 {
 	t_door	*door;
-	int		y;
-	int		x;
+	char	cell;
+	int		color;
 
-	y = -1;
-	while (++y < data->map.height && data->map.grid[y])
+	color = -1;
+	if (x < 0 || x >= data->map.width || y < 0 || y >= data->map.height)
+		return (color);
+	cell = data->map.grid[y][x];
+	if (cell == '1')
+		color = data->minimap.wall_color;
+	else if (cell == '0' || ft_strrchr("NSEW", cell))
+		color = data->minimap.floor_color;
+	else if (ft_strrchr("dDn", cell))
 	{
-		x = -1;
-		while (++x < data->map.width && data->map.grid[y][x])
+		door = get_door_at_tile(&data->map, x, y);
+		if (is_door_active(data, door))
+			color = data->minimap.door_color;
+		else
+			color = data->minimap.wall_color;
+	}
+	return (color);
+}
+
+void	render_minimap(t_data *data, t_minimap *m)
+{
+	int	px;
+	int	py;
+	int	color;
+
+	calc_minimap_transform(data, m);
+	py = -1;
+	while (++py < m->radius * 2 + 1)
+	{
+		m->map_y = m->start_tile_y + py;
+		px = -1;
+		while (++px < m->radius * 2 + 1)
 		{
-			if (data->map.grid[y][x] == '1')
-				draw_minimap(data, x, y, data->minimap.wall_color);
-			else if (data->map.grid[y][x] == '0')
-				draw_minimap(data, x, y, data->minimap.floor_color);
-			else if (data->map.grid[y][x] == 'N' || data->map.grid[y][x] == 'S'
-				|| data->map.grid[y][x] == 'E' || data->map.grid[y][x] == 'W')
-				draw_minimap(data, x, y, data->minimap.floor_color);
-			else if (ft_strrchr("dDn", data->map.grid[y][x]))
-			{
-				door = get_door_at_tile(&data->map, x, y);
-				if (is_door_active(data, door))
-					draw_minimap(data, x, y, data->minimap.door_color);
-				else
-					draw_minimap(data, x, y, data->minimap.wall_color);
-			}
+			m->map_x = m->start_tile_x + px;
+			color = get_tile_color(data, m->map_x, m->map_y);
+			if (color == -1)
+				continue ;
+			if (!minimap_tile_screen(m, px, py))
+				continue ;
+			draw_minimap_tile(data, m->screen_x, m->screen_y, color);
 		}
 	}
 	draw_minimap_player(data);
+	draw_minimap_border(data, 0xFFFFFF);
 }
 
-void	draw_minimap(t_data *data, int map_x, int map_y, int color)
+void	draw_minimap_tile(t_data *data, int screen_x, int screen_y, int color)
 {
-	int	y;
 	int	x;
-	int	start_x;
-	int	start_y;
+	int	y;
+	int	dx;
+	int	dy;
+	int	center;
 
-	start_x = map_x * data->minimap.tile_size;
-	start_y = map_y * data->minimap.tile_size;
-	y = -1;
-	while (++y < data->minimap.tile_size)
+	center = data->minimap.size / 2;
+	y = 0;
+	while (y < data->minimap.tile_size)
 	{
-		x = -1;
-		while (++x < data->minimap.tile_size)
-			my_mlx_pixel_put(&data->image, start_x + x, start_y + y, color);
+		x = 0;
+		while (x < data->minimap.tile_size)
+		{
+			dx = screen_x + x - center;
+			dy = screen_y + y - center;
+			if (dx * dx + dy * dy <= data->minimap.radius_px
+				* data->minimap.radius_px)
+				my_mlx_pixel_put(&data->image, screen_x + x, screen_y + y,
+					color);
+			x++;
+		}
+		y++;
 	}
 }
 
@@ -67,14 +116,14 @@ void	draw_minimap_player(t_data *data)
 	int	radius;
 	int	center_x;
 	int	center_y;
-	int	y;
 	int	x;
+	int	y;
 
-	radius = data->minimap.tile_size * 0.3 / 2;
+	center_y = data->minimap.size / 2;
+	center_x = data->minimap.size / 2;
+	radius = data->minimap.tile_size / 2;
 	if (radius < 2)
 		radius = 2;
-	center_x = (int)(data->player.x * data->minimap.tile_size);
-	center_y = (int)(data->player.y * data->minimap.tile_size);
 	y = -radius;
 	while (y <= radius)
 	{
@@ -88,14 +137,4 @@ void	draw_minimap_player(t_data *data)
 		}
 		y++;
 	}
-}
-
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
-{
-	char	*dst;
-
-	if (x < 0 || y < 0 || x >= img->width || y >= img->height)
-		return ;
-	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
 }

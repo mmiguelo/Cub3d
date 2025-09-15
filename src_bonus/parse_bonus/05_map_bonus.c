@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   05_map_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:15 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/11 16:15:49 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/15 14:05:09 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ void	parse_door(t_data *data, int x, int y)
 		ft_kill(data, "Too many doors in map");
 	if ((data->map.grid[y][x + 1] == '1' && data->map.grid[y][x - 1] != '1')
 		|| (data->map.grid[y][x - 1] == '1' && data->map.grid[y][x + 1] != '1')
-		|| (data->map.grid[y + 1][x] == '1' && data->map.grid[y - 1][x] != 1)
-		|| (data->map.grid[y - 1][x] == '1' && data->map.grid[y + 1][x] != 1))
+		|| (data->map.grid[y + 1][x] == '1' && data->map.grid[y - 1][x] != '1')
+		|| (data->map.grid[y - 1][x] == '1' && data->map.grid[y + 1][x] != '1'))
 		ft_kill(data, "Door must be placed between two walls");
 	door = &data->map.doors[data->map.door_count++];
 	door->x = x;

@@ -34,9 +34,9 @@ int	is_door_active(t_data *data, t_door *door)
 {
 	if (!door)
 		return (0);
-	if (door->mode == DOOR_DAY && (data->bsun || data->bsunrise))
+	if ((door->mode == DOOR_DAY) && (data->bsun || data->bsunrise))
 		return (1);
-	if (door->mode == DOOR_NIGHT && (data->bsunset || data->bmoon))
+	if ((door->mode == DOOR_NIGHT) && (data->bmoon || data->bsunset))
 		return (1);
 	if (door->mode == DOOR_ALWAYS)
 		return (1);
