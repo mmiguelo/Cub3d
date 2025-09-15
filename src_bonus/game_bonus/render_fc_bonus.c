@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 12:25:32 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/15 18:42:15 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:23:57 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	render_fc_row(t_data *data, t_fccast *fc, t_img *texture, int y)
 		fc->temp.x = x;
 		fc->temp.y = y;
 		check = get_pixel(&data->image, fc->temp.x, fc->temp.y);
-		if (check == 0x000000)
+		if (check == BG)
 			render_fc_pixel(data, fc, texture);
 		fc->x += fc->step.x;
 		fc->y += fc->step.y;

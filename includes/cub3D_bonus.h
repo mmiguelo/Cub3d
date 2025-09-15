@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/15 17:25:53 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:23:50 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 # define FOV 66
 // indoors (1) / outdoors (0)
 # define INDOOR 1
-// default (0.5) between -1.0 and 1.0 //TODO range yet to be dediced
+// default (0.5) between -1.0 and 1.0 (only indoors wllas not implemented)
 # define P_HEIGHT 0.5
 # define INTERACT_RANGE 0.1
 
@@ -73,6 +73,7 @@
 # define EVENING 0xFCAF45
 # define NIGHT   0x14183C
 # define IGNORE 0xFF00FD
+# define BG 0x00e5ff
 # define FPS_HISTORY_SIZE 30
 # define MAX_DOORS 10
 # define DOOR_FPS 10.0
