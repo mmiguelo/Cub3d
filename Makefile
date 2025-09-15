@@ -57,6 +57,7 @@ MINIMAP_BONUS		= 	minimap_bonus.c \
 FLASHLIGHT_BONUS	=	flashlight_bonus.c
 FPS_BONUS			=	fps_bonus.c
 DOOR_BONUS			=	door_bonus.c \
+						door_interact_bonus.c \
 						door_util_bonus.c
 
 NAME 		= cub3D

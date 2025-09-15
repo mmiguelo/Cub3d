@@ -36,11 +36,11 @@ void	init_game(t_data *data)
 	data->frames.old_time = 0.0;
 	data->move_speed = 1.0;
 	data->global_light = lerp_day_cycle(data, data->time_of_day);
-	data->time_of_day = 0.75;
+	data->time_of_day = 0.25;
 	data->bsunrise = false;
 	data->bsunset = false;
-	data->bsun = false;
-	data->bmoon = true;
+	data->bsun = true;
+	data->bmoon = false;
 	data->fov_rad = FOV_RAD * PI / 180.0;
 	data->plane_len = tan(FOV_RAD / 2.0);
 	data->player.height = P_HEIGHT;

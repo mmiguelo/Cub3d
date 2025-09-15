@@ -12,24 +12,6 @@
 
 #include "cub3D_bonus.h"
 
-void	toggle_door_state(t_data *data)
-{
-	t_door	*door;
-	int		map_x;
-	int		map_y;
-
-	map_x = (int)(data->player.x + (int)data->ray.dir.x);
-	map_y = (int)(data->player.y + (int)data->ray.dir.y);
-	door = get_door_at_tile(&data->map, map_x, map_y);
-	if (door && is_door_active(data, door))
-	{
-		if (door->state == DOOR_CLOSED)
-			door->state = DOOR_OPENING;
-		else if (door->state == DOOR_OPEN)
-			door->state = DOOR_CLOSING;
-	}
-}
-
 int	is_door_active(t_data *data, t_door *door)
 {
 	if (!door)

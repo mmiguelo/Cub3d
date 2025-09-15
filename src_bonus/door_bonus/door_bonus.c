@@ -66,10 +66,8 @@ void	update_all_doors(t_data *data)
 		cell = data->map.grid[door->y][door->x];
 		if (cell == 'D')
 			door->active = 1;
-		else if (cell == 'd')
-			door->active = (data->bsun || player_inside_door(data, door));
-		else if (cell == 'n')
-			door->active = (data->bmoon || player_inside_door(data, door));
+		else if (cell == 'd' || cell == 'n')
+			door->active = is_door_active(data, door) || player_inside_door(data, door);
 		else
 			door->active = player_inside_door(data, door);
 		if (door->active)
