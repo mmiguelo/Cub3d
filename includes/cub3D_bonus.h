@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/15 17:15:21 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:25:53 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 # define PI 3.14159265358979323846
 # define FOV 66
 // indoors (1) / outdoors (0)
-# define INDOOR 0
+# define INDOOR 1
 // default (0.5) between -1.0 and 1.0 //TODO range yet to be dediced
 # define P_HEIGHT 0.5
 # define INTERACT_RANGE 0.1
