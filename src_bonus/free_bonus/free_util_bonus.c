@@ -36,4 +36,6 @@ void	destroy_images(t_data *data)
 	image_destroyer(data, &data->door_spritesheet);
 	image_destroyer(data, &data->textures.ceiling);
 	image_destroyer(data, &data->textures.floor);
+	//image_destroyer(data, &data->minimap.minimap_buffer);
+	image_destroyer(data, &data->minimap.minimap_map);
 }

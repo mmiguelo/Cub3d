@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 12:59:59 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/04 14:34:19 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/16 16:01:47 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	free_gnl(t_data *data)
 
 int	ft_kill(t_data *data, char *msg)
 {
+	print_map(data);
 	if (ft_strcmp(msg, ERR_EMPTY) != 0)
 		free_gnl(data);
 	if (data)

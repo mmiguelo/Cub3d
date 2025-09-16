@@ -16,6 +16,8 @@ void	game_loop(t_data *data)
 {
 	init_image(data);
 	init_textures(data);
+	init_minimap(data);
+	render_full_minimap_map(data);
 	mlx_hook(data->win, DestroyNotify, StructureNotifyMask, x_press, data);
 	mlx_loop_hook(data->mlx, &draw_loop, data);
 	mlx_hook(data->win, MotionNotify, PointerMotionMask, mouse_move, data);

@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 13:39:47 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/15 10:15:37 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/16 12:07:07 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	apply_flashlight_pixel(t_data *data, t_fl *flashlight, int x, int y)
 	if (flashlight->dist < flashlight->radius)
 	{
 		color = get_pixel(&data->image, x, y);
-		flashlight->factor = (2.5 - (flashlight->dist / flashlight->radius)
+		flashlight->factor = (2 - (flashlight->dist / flashlight->radius)
 				* 1.8) * flashlight->flicker_factor;
 		if (flashlight->factor < 1.0)
 			flashlight->factor = 1.0;

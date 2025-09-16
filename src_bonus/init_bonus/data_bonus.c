@@ -23,11 +23,19 @@ void	init(t_data *data)
 void	init_image(t_data *data)
 {
 	data->mlx = mlx_init();
+	if (!data->mlx)
+		ft_kill(data, "mlx_init failed");
 	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+	if (!data->win)
+		ft_kill(data, "mlx_new_window failed");
 	data->image.img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!data->image.img)
+		ft_kill(data, "mlx_new_image failed");
 	data->image.addr = mlx_get_data_addr(data->image.img,
 			&data->image.bpp, &data->image.line_length,
 			&data->image.endian);
+	if (!data->image.addr)
+		ft_kill(data, "mlx_get_data_addr failed");
 	data->image.width = WIN_WIDTH;
 	data->image.height = WIN_HEIGHT;
 	init_cycle_images(data);

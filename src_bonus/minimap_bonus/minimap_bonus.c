@@ -32,7 +32,7 @@ void	draw_minimap_border(t_data *data, int color)
 	}
 }
 
-static int	get_tile_color(t_data *data, int x, int y)
+/* int	get_tile_color(t_data *data, int x, int y)
 {
 	t_door	*door;
 	char	cell;
@@ -55,9 +55,9 @@ static int	get_tile_color(t_data *data, int x, int y)
 			color = data->minimap.wall_color;
 	}
 	return (color);
-}
+} */
 
-void	render_minimap(t_data *data, t_minimap *m)
+/* void	render_minimap(t_data *data, t_minimap *m)
 {
 	double	px;
 	double	py;
@@ -82,9 +82,9 @@ void	render_minimap(t_data *data, t_minimap *m)
 	}
 	draw_minimap_player(data);
 	draw_minimap_border(data, 0xFFFFFF);
-}
+} */
 
-void	draw_minimap_tile(t_data *data, int screen_x, int screen_y, int color)
+/* void	draw_minimap_tile(t_data *data, int screen_x, int screen_y, int color)
 {
 	double	x;
 	double	y;
@@ -109,7 +109,7 @@ void	draw_minimap_tile(t_data *data, int screen_x, int screen_y, int color)
 		}
 		y++;
 	}
-}
+} */
 
 void	draw_minimap_player(t_data *data)
 {
@@ -119,9 +119,9 @@ void	draw_minimap_player(t_data *data)
 	double	x;
 	double	y;
 
-	center_y = data->minimap.size / 2;
-	center_x = data->minimap.size / 2;
-	radius = data->minimap.tile_size / 2;
+	center_y = (data->minimap.size / 2);
+	center_x = (data->minimap.size / 2);
+	radius = data->minimap.tile_size / 3;
 	if (radius < 2)
 		radius = 2;
 	y = -radius;
@@ -131,8 +131,14 @@ void	draw_minimap_player(t_data *data)
 		while (x <= radius)
 		{
 			if (x * x + y * y <= radius * radius)
-				my_mlx_pixel_put(&data->image, center_x + x, center_y + y,
-					data->minimap.player_color);
+			{
+				int px = center_x + x;
+                int py = center_y + y;
+
+                int underlying_color = get_pixel(&data->image, px, py);
+                if (underlying_color != data->minimap.wall_color)
+                    my_mlx_pixel_put(&data->image, px, py, data->minimap.player_color);
+            }
 			x++;
 		}
 		y++;

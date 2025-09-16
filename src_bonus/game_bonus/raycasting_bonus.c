@@ -22,8 +22,6 @@ void	render_frame(t_data *data)
 	clear_image(&data->image, BG);
 	if (INDOOR == false)
 		put_fc(data);
-	// else
-	// 	render_fc(data, &data->ray.fc);
 	x = 0;
 	while (x < WIN_WIDTH)
 		render_column(data, x++);
@@ -32,8 +30,9 @@ void	render_frame(t_data *data)
 	update_global_light(data);
 	draw_flashlight_overlay(data);
 	update_time_of_day(data);
-	render_minimap(data, &data->minimap);
+	render_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->image.img, 0, 0);
+	render_full_door_map(data);
 	render_fps(data);
 	render_cycle(data);
 	mlx_string_put(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2,

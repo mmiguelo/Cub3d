@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/15 19:42:37 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/09/16 13:53:10 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@
 
 //	GAME OPTIONS:
 # define TILE_SIZE 64
-# define WIN_WIDTH 960 //1024
-# define WIN_HEIGHT 540 //768
+# define WIN_WIDTH 1280 //960
+# define WIN_HEIGHT 720 //540
 # define PI 3.14159265358979323846
 # define FOV 66
 // indoors (1) / outdoors (0)
@@ -230,26 +230,28 @@ typedef struct s_frames
 
 typedef struct s_minimap
 {
-	double		tile_size;
-	double		radius;
+	t_img	minimap_map;
+	t_img	minimap_buffer;
+	double	tile_size;
+	double	radius;
 	int		floor_color;
 	int		wall_color;
 	int		player_color;
 	int		door_color;
-	double		size;
-	double		center_x;
-	double		center_y;
+	double	size;
+	double	center_x;
+	double	center_y;
 	double	angle;
 	double	cos_a;
 	double	sin_a;
-	double		start_tile_x;
-	double		start_tile_y;
-	double		radius_px;
-	double		map_x;
-	double		map_y;
-	double		screen_x;
-	double		screen_y;
-	double		dist_sq;
+	double	start_tile_x;
+	double	start_tile_y;
+	double	radius_px;
+	double	map_x;
+	double	map_y;
+	double	screen_x;
+	double	screen_y;
+	double	dist_sq;
 }	t_minimap;
 
 typedef struct s_fl
@@ -403,7 +405,7 @@ void			render_cycle(t_data *data);
 void			draw_minimap_tile(t_data *data, int screen_x, int screen_y,
 					int color);
 void			init_minimap(t_data *data);
-void			render_minimap(t_data *data, t_minimap *minimap);
+//void			render_minimap(t_data *data, t_minimap *minimap);
 void			draw_minimap_player(t_data *data);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void			clear_image(t_img *img, int color);
@@ -444,5 +446,14 @@ void			toggle_flashlight(t_data *data);
 void			apply_flashlight_pixel(t_data *data,
 					t_fl *flashlight, int x, int y);
 void			update_flicker(t_data *data);
+
+//test
+void	render_full_minimap_map(t_data *data);
+void	render_minimap(t_data *data);
+int		get_tile_color(t_data *data, int x, int y);
+void	init_img(t_img *img, void *mlx, int width, int height);
+void	draw_minimap_border(t_data *data, int color);
+void	normalize_map(t_data *data, t_map *map);
+void	render_full_door_map(t_data *data);
 
 #endif

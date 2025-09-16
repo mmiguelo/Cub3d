@@ -3,7 +3,7 @@
 #==============================================================================#
 
 CC = cc
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror -O3
 MLX_FLAGS = -lmlx -lm -lXext -lX11 -lXrandr -lXcursor -lXinerama -lXrender
 INC = -I./includes -I./minilibx-linux
 BONUS_INC = $(INC)
