@@ -28,7 +28,7 @@ int	draw_loop(void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
-	calculate_movements(&data->player, data->map.grid);
+	calculate_movements(data);
 	render_frame(data);
 	return (0);
 }

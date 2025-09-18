@@ -47,7 +47,19 @@ void	render_wall_texture(t_data *data, t_ray *ray)
 int	color(t_draw *draw, t_img *texture)
 {
 	int	pixel;
+	int	tex_x;
+	int	tex_y;
 
+	tex_x = draw->tex_x;
+	tex_y = draw->tex_y;
+	if (tex_x < 0)
+		tex_x = 0;
+	if (tex_x >= texture->width)
+		tex_x = texture->width - 1;
+	if (tex_y < 0)
+		tex_y = 0;
+	if (tex_y >= texture->height)
+		tex_y = texture->height - 1;
 	pixel = *(int *)(texture->addr + (draw->tex_y * texture->line_length
 				+ draw->tex_x * (texture->bpp / 8)));
 	if (pixel == IGNORE)

@@ -12,37 +12,37 @@
 
 #include "cub3D.h"
 
-void	calculate_movements(t_player *player, char **map)
+void	calculate_movements(t_data *data)
 {
-	if (player->move_forward)
+	if (data->player.move_forward)
 	{
-		player->new_x = player->x + player->dir.x * SPEED;
-		player->new_y = player->y + player->dir.y * SPEED;
-		check_collision(player, map);
+		data->player.new_x = data->player.x + data->player.dir.x * SPEED;
+		data->player.new_y = data->player.y + data->player.dir.y * SPEED;
+		check_collision(data, &data->player);
 	}
-	if (player->move_backward)
+	if (data->player.move_backward)
 	{
-		player->new_x = player->x - player->dir.x * SPEED;
-		player->new_y = player->y - player->dir.y * SPEED;
-		check_collision(player, map);
+		data->player.new_x = data->player.x - data->player.dir.x * SPEED;
+		data->player.new_y = data->player.y - data->player.dir.y * SPEED;
+		check_collision(data, &data->player);
 	}
-	move_strafe(player, map);
-	turn_player(player);
+	move_strafe(data);
+	turn_player(&data->player);
 }
 
-void	move_strafe(t_player *player, char **map)
+void	move_strafe(t_data *data)
 {
-	if (player->move_left)
+	if (data->player.move_left)
 	{
-		player->new_x = player->x + player->dir.y * SPEED;
-		player->new_y = player->y - player->dir.x * SPEED;
-		check_collision(player, map);
+		data->player.new_x = data->player.x + data->player.dir.y * SPEED;
+		data->player.new_y = data->player.y - data->player.dir.x * SPEED;
+		check_collision(data, &data->player);
 	}
-	if (player->move_right)
+	if (data->player.move_right)
 	{
-		player->new_x = player->x - player->dir.y * SPEED;
-		player->new_y = player->y + player->dir.x * SPEED;
-		check_collision(player, map);
+		data->player.new_x = data->player.x - data->player.dir.y * SPEED;
+		data->player.new_y = data->player.y + data->player.dir.x * SPEED;
+		check_collision(data, &data->player);
 	}
 }
 
@@ -69,18 +69,4 @@ void	calculate_rotation(t_player *player, double rotation_speed)
 		* sin(rotation_speed);
 	player->plane.y = old_plane_x * sin(rotation_speed) + player->plane.y
 		* cos(rotation_speed);
-}
-
-void	check_collision(t_player *player, char **map)
-{
-	if (map[(int)player->y][(int)(player->new_x + PLAYER_RAD)] != '1'
-			&& map[(int)player->y][(int)(player->new_x - PLAYER_RAD)] != '1')
-	{
-		player->x = player->new_x;
-	}
-	if (map[(int)(player->new_y + PLAYER_RAD)][(int)player->x] != '1'
-			&& map[(int)(player->new_y - PLAYER_RAD)][(int)player->x] != '1')
-	{
-		player->y = player->new_y;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/12 13:36:50 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/17 10:50:05 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,11 +228,11 @@ int		key_hook_press(int keycode, t_data *data);
 int		key_hook_release(int keycode, t_data *data);
 
 // PLAYER MOVEMENT
-void	calculate_movements(t_player *player, char **map);
-void	move_strafe(t_player *player, char **map);
+void	calculate_movements(t_data *data);
+void	move_strafe(t_data *data);
 void	turn_player(t_player *player);
 void	calculate_rotation(t_player *player, double rotation_speed);
-void	check_collision(t_player *player, char **map);
+void	check_collision(t_data *data, t_player *player);
 
 // PLAYER VECTOR
 void	get_player_vector(t_data *data);

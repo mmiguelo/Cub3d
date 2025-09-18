@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/16 13:53:10 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/17 14:13:41 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -383,7 +383,7 @@ void			calculate_variables2(t_ray *ray, double player_x,
 void			handle_wall_or_door(t_data *data, t_ray *ray);
 void			apply_lighting(t_data *data, t_ray *ray, int x);
 void			check_hit(t_data *data, t_ray *ray);
-void			calculate_perpwalldist(t_ray *ray, t_draw *draw);
+void			calculate_perpwalldist(t_data *data, t_draw *draw);
 void			calculate_texture(t_data *data, t_ray *ray);
 void			render_texture(t_ray *ray);
 void			render_column(t_data *data, int x);

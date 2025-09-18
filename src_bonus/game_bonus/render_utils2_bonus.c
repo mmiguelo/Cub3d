@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:23:51 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/15 10:23:53 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/17 12:27:38 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@ void	handle_wall_or_door(t_data *data, t_ray *ray)
 {
 	t_door	*door;
 	char	cell;
+	int		tex_y_int;
 
 	cell = data->map.grid[data->ray.pos.y][data->ray.pos.x];
-	ray->draw.tex_y = ray->draw.tex_pos;
+	tex_y_int = (int)ray->draw.tex_pos;
+	if (tex_y_int < -TILE_SIZE * 2)
+		tex_y_int = -TILE_SIZE * 2;
+	ray->draw.tex_y = tex_y_int;
 	ray->draw.tex_pos += ray->draw.step;
 	if (cell == 'D' || cell == 'd' || cell == 'n')
 	{

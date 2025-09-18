@@ -25,6 +25,7 @@ GAME 	= 	close_window.c \
 			game_loop.c \
 			keypress_handler.c \
 			player.c \
+			collisions.c \
 			raycasting.c \
 			render.c
 

@@ -6,7 +6,7 @@
 /*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 12:25:32 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/16 16:30:13 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/17 12:35:09 by mmiguelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,12 @@ void	render_fc(t_data *data, t_fccast *fc)
 	max_distance = WIN_HEIGHT - fc->horizon;
 	if (fc->horizon > max_distance)
 		max_distance = fc->horizon;
-	i = 0;
+	i = 1;
 	while (i < max_distance)
 	{
 		fc->row_distance = fc->pos_z / i;
+		if (fc->row_distance > 1e6)
+			fc->row_distance = 1e6;
 		y = fc->horizon + i;
 		if (y < WIN_HEIGHT)
 			render_fc_row(data, fc, &data->textures.floor, y);

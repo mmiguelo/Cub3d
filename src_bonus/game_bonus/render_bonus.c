@@ -42,6 +42,8 @@ void	put_fc(t_data *data)
 
 void	calculate_texture(t_data *data, t_ray *ray)
 {
+	int horizon;
+
 	if (ray->draw.side == 0)
 		ray->draw.wallx = data->player.y + ray->draw.perpwalldist * ray->dir.y;
 	else
@@ -52,9 +54,17 @@ void	calculate_texture(t_data *data, t_ray *ray)
 		ray->draw.tex_x = TILE_SIZE - ray->draw.tex_x - 1;
 	if (ray->draw.side == 1 && ray->dir.y < 0)
 		ray->draw.tex_x = TILE_SIZE - ray->draw.tex_x - 1;
+	if (ray->draw.tex_x < 0)
+		ray->draw.tex_x = 0;
+	if (ray->draw.tex_x >= TILE_SIZE)
+		ray->draw.tex_x = TILE_SIZE - 1;
 	ray->draw.step = 1.0 * TILE_SIZE / ray->draw.line_height;
-	ray->draw.tex_pos = (ray->draw.start - WIN_HEIGHT / 2
-			+ ray->draw.line_height / 2) * ray->draw.step;
+	if (ray->draw.step < 0.01)
+    ray->draw.step = 0.01;
+	horizon = (int)(WIN_HEIGHT / 2 + (data->player.height - 0.5) * WIN_HEIGHT);
+	ray->draw.tex_pos = (ray->draw.start - horizon + ray->draw.line_height / 2.0) * ray->draw.step;
+	if (ray->draw.tex_pos < -TILE_SIZE * 2.0)
+		ray->draw.tex_pos = -TILE_SIZE * 2.0;
 }
 
 void	draw_line(t_data *data, t_ray *ray, int x)
@@ -71,7 +81,7 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 		data->ray.draw.hit = false;
 		while (!data->ray.draw.hit)
 			check_hit(data, &data->ray);
-		calculate_perpwalldist(ray, &ray->draw);
+		calculate_perpwalldist(data, &ray->draw);
 		calculate_texture(data, ray);
 		return ;
 	}
@@ -85,8 +95,10 @@ void	render_column(t_data *data, int x)
 	calculate_variables(&data->player, &data->ray, x);
 	while (!data->ray.draw.hit)
 		check_hit(data, &data->ray);
-	calculate_perpwalldist(&data->ray, &data->ray.draw);
+	calculate_perpwalldist(data, &data->ray.draw);
 	calculate_texture(data, &data->ray);
+	if (data->ray.draw.start > data->ray.draw.end)
+		data->ray.draw.start = data->ray.draw.end;
 	while (data->ray.draw.start < data->ray.draw.end)
 		draw_line(data, &data->ray, x);
 }
