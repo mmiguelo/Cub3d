@@ -91,12 +91,17 @@ make
 <summary>✨ Features</summary><br>
 
 + Wall collision detection
-+ Real-time minimap rendering
++ Real-time minimap rendering (updates dynamically with in-game events)
 + Real-time FPS counter
 + Distance-based brightness attenuation
 + Global day/night ambient lighting cycle
-+ Dynamic ceiling color using 4 LERP cycles
++ Dynamic ceiling color transitions using 4 LERP cycles to simulate time of day
 + Player sprint mechanic
++ Ability to look up and down
++ Dynamic doors that appear/disappear depending on time of day
++ Visibility inside rooms when doors are open, even if the player is outside
++ Flashlight mechanic
++ Ability to render ceilling and floor textures by changing a `DEFINE INDOOR` to `1` in header file
 
 
 </details>
@@ -104,28 +109,30 @@ make
 <details>
 <summary>🎮 Controls</summary><br>
 
-| Key / Input   | Action                    |
-| ------------- | ------------------------- |
-| `W`           | Move forward              |
-| `S`           | Move backward             |
-| `A`           | Strafe left               |
-| `D`           | Strafe right              |
-| `SPACE`       | Sprint / Run              |
-| `← / →`       | Rotate camera (keyboard)  |
-| *Mouse Move*  | Rotate camera (mouse)     |
-| `ESC`         | Quit game                 |
+| Key / Input   | Action                     |
+| ------------- | -------------------------- |
+| `W`           | Move forward               |
+| `S`           | Move backward              |
+| `A`           | Strafe left                |
+| `D`           | Strafe right               |
+| `Shift`       | Sprint / Run               |
+| `← / →`       | Rotate camera left / right |
+| `↑ / ↓`       | Rotate camera up / down    |
+| *Mouse Move*  | Rotate camera (mouse)      |
+| `E`           | Interact with door         |
+| `F`           | Toggle flashlight          |
+| `ESC`         | Quit game                  |
 
 </details>
 
 ---
 
 <details>
-<summary> TODO </summary><br>
+<summary> TODO on the long run </summary><br>
 
 game:
-+ add door to appear and be able to interacte only at night
-+ add item to end game inside that room
-+ create item to appear and to be able to catch only at day
++ add item to end game inside a room
++ create item to appear and to be able to catch only at day/nigh
 + put item with clue in easternmost part of map and other in westernmost part
 
 git hub
