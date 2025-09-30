@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/17 14:13:41 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/09/30 12:10:49 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -455,5 +455,8 @@ void	init_img(t_img *img, void *mlx, int width, int height);
 void	draw_minimap_border(t_data *data, int color);
 void	normalize_map(t_data *data, t_map *map);
 void	render_full_door_map(t_data *data);
+
+//fc
+void	init_fc_directions(t_data *data, t_fccast *fc);
 
 #endif

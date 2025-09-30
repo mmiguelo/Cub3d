@@ -20,6 +20,7 @@ void	put_fc(t_data *data)
 	int		sky_color;
 	int		floor_color;
 
+	init_fc_directions(data, &data->ray.fc);
 	sky_color = lerp_day_cycle(data, data->time_of_day);
 	sky_color = apply_global_brightness(sky_color, data->global_light);
 	floor_color = (data->floor.r << 16) | (data->floor.g << 8) | data->floor.b;
@@ -32,7 +33,7 @@ void	put_fc(t_data *data)
 		{
 			pixel_addr = data->image.addr + (y * data->image.line_length)
 				+ (x * (data->image.bpp / 8));
-			if (y < WIN_HEIGHT / 2)
+			if (y < data->ray.fc.horizon)
 				*(unsigned int *)pixel_addr = sky_color;
 			else
 				*(unsigned int *)pixel_addr = floor_color;
