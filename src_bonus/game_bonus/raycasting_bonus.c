@@ -85,23 +85,41 @@ void	calculate_variables2(t_ray *ray, double player_x, double player_y)
 	}
 }
 
-void	calculate_perpwalldist(t_data *data, t_draw *draw)
+void	calculate_perpwalldist(t_ray *ray, t_draw *draw)
 {
-	int horizon = (int)(WIN_HEIGHT / 2 + (data->player.height - 0.5) * WIN_HEIGHT);
+	int	pitch_offset;
 
 	if (draw->side == 0)
-		draw->perpwalldist = data->ray.step.side_dist_x - data->ray.step.delta_dist_x;
+		draw->perpwalldist = ray->step.side_dist_x - ray->step.delta_dist_x;
 	else
-		draw->perpwalldist = data->ray.step.side_dist_y - data->ray.step.delta_dist_y;
-	if (draw->perpwalldist <= 0.001)
-    draw->perpwalldist = 0.001;
+		draw->perpwalldist = ray->step.side_dist_y - ray->step.delta_dist_y;
 	draw->line_height = (int)(WIN_HEIGHT / draw->perpwalldist);
-	if (draw->line_height > WIN_HEIGHT * 7)
-		draw->line_height = WIN_HEIGHT * 7;
-	draw->start = -draw->line_height / 2 + horizon;
-	if (draw->start < 0)
-		draw->start = 0;
-	draw->end = draw->line_height / 2 + horizon;
+	pitch_offset = (int)((ray->cam.height - 0.5) * WIN_HEIGHT);
+	draw->start = -draw->line_height / 2 + WIN_HEIGHT / 2 + pitch_offset;
+	draw->end = draw->line_height / 2 + WIN_HEIGHT / 2 + pitch_offset;
 	if (draw->end >= WIN_HEIGHT)
 		draw->end = WIN_HEIGHT - 1;
+	if (draw->start < 0)
+		draw->start = 0;
 }
+
+// void	calculate_perpwalldist(t_data *data, t_draw *draw)
+// {
+// 	int horizon = (int)(WIN_HEIGHT / 2 + (data->player.height - 0.5) * WIN_HEIGHT);
+
+// 	if (draw->side == 0)
+// 		draw->perpwalldist = data->ray.step.side_dist_x - data->ray.step.delta_dist_x;
+// 	else
+// 		draw->perpwalldist = data->ray.step.side_dist_y - data->ray.step.delta_dist_y;
+// 	if (draw->perpwalldist <= 0.001)
+//     draw->perpwalldist = 0.001;
+// 	draw->line_height = (int)(WIN_HEIGHT / draw->perpwalldist);
+// 	if (draw->line_height > WIN_HEIGHT * 7)
+// 		draw->line_height = WIN_HEIGHT * 7;
+// 	draw->start = -draw->line_height / 2 + horizon;
+// 	if (draw->start < 0)
+// 		draw->start = 0;
+// 	draw->end = draw->line_height / 2 + horizon;
+// 	if (draw->end >= WIN_HEIGHT)
+// 		draw->end = WIN_HEIGHT - 1;
+// }

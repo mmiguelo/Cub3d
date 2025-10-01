@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:22 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/15 16:54:08 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/10/01 15:49:14 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_camera
 	double	plane_x;
 	double	plane_y;
 	double	screen_x;
+	double	height;
 }	t_camera;
 
 typedef struct s_ray_dir
