@@ -66,12 +66,15 @@ void	calculate_texture(t_data *data, t_ray *ray)
 
 void	draw_line(t_data *data, t_ray *ray, int x)
 {
+	int current_y;
+
 	if (data->ray.pos.x < 0 || data->ray.pos.x >= data->map.width
 		|| data->ray.pos.y < 0 || data->ray.pos.y >= data->map.height)
 	{
 		ray->draw.start++;
 		return ;
 	}
+	current_y = ray->draw.start;
 	handle_wall_or_door(data, ray);
 	if (ray->draw.color == -1)
 	{
@@ -80,13 +83,9 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 			check_hit(data, &data->ray);
 		ray->cam.height = data->player.height; //added
 		calculate_perpwalldist(ray, &ray->draw);
+		if (ray->draw.start < current_y)
+		ray->draw.start = current_y;
 		calculate_texture(data, ray);
-		// if (ray->draw.start < 0)
-        // {
-        //     ray->draw.tex_pos += (-ray->draw.start) * ray->draw.step;
-        //     ray->draw.start = 0;
-        // }
-		return ;
 	}
 	apply_lighting(data, ray, x);
 	ray->draw.start++;
