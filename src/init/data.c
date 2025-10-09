@@ -35,6 +35,8 @@ void	init_game(t_data *data)
 	data->frames.time = 0.0;
 	data->frames.old_time = 0.0;
 	data->move_speed = 1;
+	data->fov_rad = FOV * PI / 180.0;
+	data->plane_len = tan(data->fov_rad / 2.0);
 }
 
 void	init_image(t_data *data)

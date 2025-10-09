@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flashlight_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 13:39:47 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/16 12:07:07 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/10/09 10:22:12 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

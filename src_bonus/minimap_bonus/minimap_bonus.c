@@ -32,95 +32,29 @@ void	draw_minimap_border(t_data *data, int color)
 	}
 }
 
-/* int	get_tile_color(t_data *data, int x, int y)
+static void	minimap_colorization(t_data *data, double x, double y)
 {
-	t_door	*door;
-	char	cell;
-	int		color;
+	double	center_x;
+	double	center_y;
+	int		px;
+	int		py;
+	int		underlying_color;
 
-	color = -1;
-	if (x < 0 || x >= data->map.width || y < 0 || y >= data->map.height)
-		return (color);
-	cell = data->map.grid[y][x];
-	if (cell == '1')
-		color = data->minimap.wall_color;
-	else if (cell == '0' || ft_strrchr("NSEW", cell))
-		color = data->minimap.floor_color;
-	else if (ft_strrchr("dDn", cell))
-	{
-		door = get_door_at_tile(&data->map, x, y);
-		if (is_door_active(data, door))
-			color = data->minimap.door_color;
-		else
-			color = data->minimap.wall_color;
-	}
-	return (color);
-} */
-
-/* void	render_minimap(t_data *data, t_minimap *m)
-{
-	double	px;
-	double	py;
-	int		color;
-
-	calc_minimap_transform(data, m);
-	py = -1;
-	while (++py <= m->radius * 2 + 1)
-	{
-		m->map_y = m->start_tile_y + py;
-		px = -1;
-		while (++px <= m->radius * 2 + 1)
-		{
-			m->map_x = m->start_tile_x + px;
-			color = get_tile_color(data, m->map_x, m->map_y);
-			if (color == -1)
-				continue ;
-			if (!minimap_tile_screen(m, px, py))
-				continue ;
-			draw_minimap_tile(data, m->screen_x, m->screen_y, color);
-		}
-	}
-	draw_minimap_player(data);
-	draw_minimap_border(data, 0xFFFFFF);
-} */
-
-/* void	draw_minimap_tile(t_data *data, int screen_x, int screen_y, int color)
-{
-	double	x;
-	double	y;
-	double	dx;
-	double	dy;
-	double	center;
-
-	center = data->minimap.size / 2;
-	y = 0;
-	while (y < data->minimap.tile_size)
-	{
-		x = 0;
-		while (x < data->minimap.tile_size)
-		{
-			dx = screen_x + x - center;
-			dy = screen_y + y - center;
-			if (dx * dx + dy * dy <= data->minimap.radius_px
-				* data->minimap.radius_px)
-				my_mlx_pixel_put(&data->image, screen_x + x, screen_y + y,
-					color);
-			x++;
-		}
-		y++;
-	}
-} */
+	center_y = (data->minimap.size / 2);
+	center_x = (data->minimap.size / 2);
+	py = center_y + y;
+	px = center_x + x;
+	underlying_color = get_pixel(&data->image, px, py);
+	if (underlying_color != data->minimap.wall_color)
+		my_mlx_pixel_put(&data->image, px, py, data->minimap.player_color);
+}
 
 void	draw_minimap_player(t_data *data)
 {
 	double	radius;
-	double	center_x;
-	double	center_y;
 	double	x;
 	double	y;
 
-	center_y = (data->minimap.size / 2);
-	center_x = (data->minimap.size / 2);
 	radius = data->minimap.tile_size / 3;
 	if (radius < 2)
 		radius = 2;
@@ -131,15 +65,63 @@ void	draw_minimap_player(t_data *data)
 		while (x <= radius)
 		{
 			if (x * x + y * y <= radius * radius)
-			{
-				int px = center_x + x;
-                int py = center_y + y;
-
-                int underlying_color = get_pixel(&data->image, px, py);
-                if (underlying_color != data->minimap.wall_color)
-                    my_mlx_pixel_put(&data->image, px, py, data->minimap.player_color);
-            }
+				minimap_colorization(data, x, y);
 			x++;
+		}
+		y++;
+	}
+}
+
+void	render_full_door_map(t_data *data)
+{
+	t_minimap	*m;
+	int			y;
+	int			x;
+	int			py;
+	int			px;
+
+	m = &data->minimap;
+	y = -1;
+	while (++y < data->map.height)
+	{
+		x = -1;
+		while (++x < data->map.width)
+		{
+			if (!ft_strrchr("dDn", data->map.grid[y][x]))
+				continue ;
+			py = -1;
+			while (++py < m->tile_size)
+			{
+				px = -1;
+				while (++px < m->tile_size)
+					my_mlx_pixel_put(&m->minimap_map, x * m->tile_size + px,
+						y * m->tile_size + py, get_tile_color(data, x, y));
+			}
+		}
+	}
+}
+
+void	normalize_map(t_data *data, t_map *map)
+{
+	int		y;
+	int		len;
+	char	*new_row;
+
+	y = 0;
+	while (y < map->height)
+	{
+		len = ft_strlen(map->grid[y]);
+		if (len < map->width)
+		{
+			new_row = malloc(map->width + 1);
+			if (!new_row)
+				ft_kill(data, ERR_MALLOC);
+			ft_memcpy(new_row, map->grid[y], len);
+			while (len < map->width)
+				new_row[len++] = ' ';
+			new_row[len] = '\0';
+			free(map->grid[y]);
+			map->grid[y] = new_row;
 		}
 		y++;
 	}

@@ -39,14 +39,14 @@ void	get_player_vector(t_data *data)
 	{
 		data->player.dir.x = 0;
 		data->player.dir.y = -1;
-		data->player.plane.x = PLANE_LEN;
+		data->player.plane.x = data->plane_len;
 		data->player.plane.y = 0;
 	}
 	if (data->map.direction == 'S')
 	{
 		data->player.dir.x = 0;
 		data->player.dir.y = 1;
-		data->player.plane.x = -PLANE_LEN;
+		data->player.plane.x = -data->plane_len;
 		data->player.plane.y = 0;
 	}
 	get_player_vector2(data);
@@ -59,13 +59,13 @@ void	get_player_vector2(t_data *data)
 		data->player.dir.x = -1;
 		data->player.dir.y = 0;
 		data->player.plane.x = 0;
-		data->player.plane.y = -PLANE_LEN;
+		data->player.plane.y = -data->plane_len;
 	}
 	if (data->map.direction == 'E')
 	{
 		data->player.dir.x = 1;
 		data->player.dir.y = 0;
 		data->player.plane.x = 0;
-		data->player.plane.y = PLANE_LEN;
+		data->player.plane.y = data->plane_len;
 	}
 }

@@ -36,6 +36,19 @@ void	destroy_images(t_data *data)
 	image_destroyer(data, &data->door_spritesheet);
 	image_destroyer(data, &data->textures.ceiling);
 	image_destroyer(data, &data->textures.floor);
-	//image_destroyer(data, &data->minimap.minimap_buffer);
 	image_destroyer(data, &data->minimap.minimap_map);
+}
+
+void	clear_image(t_img *img, int color)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < img->height)
+	{
+		x = -1;
+		while (++x < img->width)
+			my_mlx_pixel_put(img, x, y, color);
+	}
 }

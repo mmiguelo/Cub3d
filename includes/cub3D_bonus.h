@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/10/01 15:57:16 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/10/09 11:27:31 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,32 @@
 # define WIN_WIDTH 1280 //960
 # define WIN_HEIGHT 720 //540
 # define PI 3.14159265358979323846
+// default 66
 # define FOV 66
 // indoors (1) / outdoors (0)
 # define INDOOR 1
-// default (0.5) between -1.0 and 1.0 (only indoors wllas not implemented)
+// default (0.5) between -1.0 and 1.0
 # define P_HEIGHT 0.5
 # define INTERACT_RANGE 0.1
-
-# define FOV_RAD FOV * PI / 180.0
-# define PLANE_LEN tan(FOV_RAD / 2.0);
-//# define FOV_RAD 1.1519173063162575
-//# define PLANE_LEN 0.7673269879789604
 # define SPEED 0.015
 # define ROT_SPEED 0.05
 # define PLAYER_RAD 0.1
 # define DARKNESS 0.12
 # define DAY_NIGHT_CYCLE 0.0002
+//# define FOV_RAD FOV * PI / 180.0
+//# define PLANE_LEN tan(FOV_RAD / 2.0)
+//# define FOV_RAD 1.1519173063162575
+//# define PLANE_LEN 0.7673269879789604
+
+//colors
 # define MORNING 0x87CEEB
 # define NOON    0xFFFFE0
 # define EVENING 0xFCAF45
 # define NIGHT   0x14183C
 # define IGNORE 0xFF00FD
 # define BG 0x00e5ff
+
+//limitations
 # define FPS_HISTORY_SIZE 30
 # define MAX_DOORS 10
 # define DOOR_FPS 10.0
@@ -295,8 +299,9 @@ typedef struct s_data
 	void		*win;
 	int			fd;
 	char		*line;
-	double		fov_rad; // move somewhere?
-	double		plane_len; // move somewhere?
+	double		fov_rad;
+	double		plane_len;
+	int			indoor;
 	t_ray		ray;
 }	t_data;
 
@@ -405,12 +410,11 @@ void			render_cycle(t_data *data);
 void			draw_minimap_tile(t_data *data, int screen_x, int screen_y,
 					int color);
 void			init_minimap(t_data *data);
-//void			render_minimap(t_data *data, t_minimap *minimap);
 void			draw_minimap_player(t_data *data);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void			clear_image(t_img *img, int color);
 void			calc_minimap_transform(t_data *data, t_minimap *m);
-int				minimap_tile_screen(t_minimap *minimap, int px, int py);
+void			paint_in_ignore(t_img *img, int color);
 
 // FPS
 void			init_fps(t_data *data);
@@ -448,15 +452,15 @@ void			apply_flashlight_pixel(t_data *data,
 void			update_flicker(t_data *data);
 
 //test
-void	render_full_minimap_map(t_data *data);
-void	render_minimap(t_data *data);
-int		get_tile_color(t_data *data, int x, int y);
-void	init_img(t_img *img, void *mlx, int width, int height);
-void	draw_minimap_border(t_data *data, int color);
-void	normalize_map(t_data *data, t_map *map);
-void	render_full_door_map(t_data *data);
+void			render_full_minimap_map(t_data *data);
+void			render_minimap(t_data *data);
+int				get_tile_color(t_data *data, int x, int y);
+void			init_img(t_img *img, void *mlx, int width, int height);
+void			draw_minimap_border(t_data *data, int color);
+void			normalize_map(t_data *data, t_map *map);
+void			render_full_door_map(t_data *data);
 
 //fc
-void	init_fc_directions(t_data *data, t_fccast *fc);
+void			init_fc_directions(t_data *data, t_fccast *fc);
 
 #endif

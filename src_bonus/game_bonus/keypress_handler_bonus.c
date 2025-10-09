@@ -3,19 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   keypress_handler_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:56 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/12 12:43:28 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/10/09 12:29:00 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
 
-int	key_hook_press(int keycode, t_data *data)
+static void	handle_actions(int keycode, t_data *data)
 {
 	if (keycode == XK_Escape)
 		close_window(data, GAME_ENDED);
+	if (keycode == XK_e)
+		toggle_door_state(data);
+	if (keycode == XK_f)
+		toggle_flashlight(data);
+	if (keycode == XK_r)
+		data->player.height = P_HEIGHT;
+	if (keycode == XK_t)
+		data->indoor = !data->indoor;
+}
+
+int	key_hook_press(int keycode, t_data *data)
+{
 	if (keycode == XK_w)
 		data->player.move_forward = 1;
 	if (keycode == XK_s)
@@ -34,10 +46,7 @@ int	key_hook_press(int keycode, t_data *data)
 		data->player.look_down = 1;
 	if (keycode == XK_Shift_L)
 		data->player.sprint = 1;
-	if (keycode == XK_e)
-		toggle_door_state(data);
-	if (keycode == XK_f)
-		toggle_flashlight(data);
+	handle_actions(keycode, data);
 	return (0);
 }
 
@@ -73,11 +82,22 @@ int	x_press(t_data *data)
 
 int	mouse_move(int x, int y, t_data *data)
 {
-	(void)y;
+	if (y < WIN_HEIGHT / 2)
+	{
+		data->player.height += (ROT_SPEED * 0.4);
+		if (data->player.height < 0.0)
+			data->player.height = 0.0;
+	}
+	else if (y > WIN_HEIGHT / 2)
+	{
+		data->player.height -= (ROT_SPEED * 0.4);
+		if (data->player.height > 1.0)
+			data->player.height = 1.0;
+	}
 	if (x < WIN_WIDTH / 2)
-		calculate_rotation(&data->player, -ROT_SPEED);
+		calculate_rotation(&data->player, -(ROT_SPEED * 0.4));
 	else if (x > WIN_WIDTH / 2)
-		calculate_rotation(&data->player, ROT_SPEED);
-	mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, y);
+		calculate_rotation(&data->player, (ROT_SPEED * 0.4));
+	mlx_mouse_move(data->mlx, data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	return (0);
 }

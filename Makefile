@@ -55,7 +55,8 @@ GAME_BONUS			= 	close_window_bonus.c \
 						render_utils_bonus.c \
 						render_utils2_bonus.c
 MINIMAP_BONUS		= 	minimap_bonus.c \
-						minimap_utils_bonus.c
+						minimap_utils_bonus.c \
+						minimap_utils_bonus_2.c
 FLASHLIGHT_BONUS	=	flashlight_bonus.c
 FPS_BONUS			=	fps_bonus.c
 DOOR_BONUS			=	door_bonus.c \
@@ -232,7 +233,7 @@ fclean: clean clean_bonus
 
 download:
 	@if [ ! -d "minilibx-linux" ]; then \
-		wget https://cdn.intra.42.fr/document/document/38531/minilibx-linux.tgz && \
+		wget https://cdn.intra.42.fr/document/document/40925/minilibx-linux.tgz && \
 		tar -xzf minilibx-linux.tgz; \
 		rm -rf minilibx-linux.tgz; \
 		echo "$(GREEN)MinilibX cloned into ./minilibx-linux$(RESET)"; \
@@ -240,7 +241,7 @@ download:
 		echo "$(YELLOW)MinilibX already exists at ./minilibx-linux$(RESET)"; \
 	fi
 
-re: fclean all
+re: fclean all bonus
 
 # Phony Targets
-.PHONY: all clean fclean re r rv v download
+.PHONY: all clean fclean re r rv v download bonus

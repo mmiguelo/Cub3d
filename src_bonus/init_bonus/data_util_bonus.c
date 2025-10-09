@@ -41,7 +41,8 @@ void	init_game(t_data *data)
 	data->bsunset = false;
 	data->bsun = true;
 	data->bmoon = false;
-	data->fov_rad = FOV_RAD * PI / 180.0;
-	data->plane_len = tan(FOV_RAD / 2.0);
+	data->fov_rad = FOV * PI / 180.0;
+	data->plane_len = tan(data->fov_rad / 2.0);
 	data->player.height = P_HEIGHT;
+	data->indoor = true;
 }

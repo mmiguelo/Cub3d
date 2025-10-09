@@ -57,16 +57,15 @@ void	calculate_texture(t_data *data, t_ray *ray)
 	if (ray->draw.side == 1 && ray->dir.y < 0)
 		ray->draw.tex_x = TILE_SIZE - ray->draw.tex_x - 1;
 	ray->draw.step = 1.0 * TILE_SIZE / ray->draw.line_height;
-	// ray->draw.tex_pos = (ray->draw.start - WIN_HEIGHT / 2
-	// 		+ ray->draw.line_height / 2) * ray->draw.step;
 	pitch_offset = (int)((ray->cam.height - 0.5) * WIN_HEIGHT);
 	unshifted_start = ray->draw.start - pitch_offset;
-	ray->draw.tex_pos = (unshifted_start - WIN_HEIGHT / 2 + ray->draw.line_height / 2) * ray->draw.step;
+	ray->draw.tex_pos = (unshifted_start - WIN_HEIGHT / 2
+			+ ray->draw.line_height / 2) * ray->draw.step;
 }
 
 void	draw_line(t_data *data, t_ray *ray, int x)
 {
-	int current_y;
+	int	current_y;
 
 	if (data->ray.pos.x < 0 || data->ray.pos.x >= data->map.width
 		|| data->ray.pos.y < 0 || data->ray.pos.y >= data->map.height)
@@ -81,11 +80,13 @@ void	draw_line(t_data *data, t_ray *ray, int x)
 		data->ray.draw.hit = false;
 		while (!data->ray.draw.hit)
 			check_hit(data, &data->ray);
-		ray->cam.height = data->player.height; //added
+		ray->cam.height = data->player.height;
 		calculate_perpwalldist(ray, &ray->draw);
 		if (ray->draw.start < current_y)
-		ray->draw.start = current_y;
+			ray->draw.start = current_y;
 		calculate_texture(data, ray);
+		if (ray->draw.color == -1)
+			return ;
 	}
 	apply_lighting(data, ray, x);
 	ray->draw.start++;
@@ -97,12 +98,11 @@ void	render_column(t_data *data, int x)
 	calculate_variables(&data->player, &data->ray, x);
 	while (!data->ray.draw.hit)
 		check_hit(data, &data->ray);
-	data->ray.cam.height = data->player.height; // added
+	data->ray.cam.height = data->player.height;
 	calculate_perpwalldist(&data->ray, &data->ray.draw);
-	calculate_texture(data, &data->ray); // calculates tex_pos using unclamped start
+	calculate_texture(data, &data->ray);
 	if (data->ray.draw.start < 0)
 	{
-		// Skip the pixels that would be off-screen
 		data->ray.draw.tex_pos += (-data->ray.draw.start) * data->ray.draw.step;
 		data->ray.draw.start = 0;
 	}

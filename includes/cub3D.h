@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/17 10:50:05 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/10/09 09:44:34 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@
 # define WIN_HEIGHT 768
 # define PI 3.1415926535
 # define FOV 66
-# define FOV_RAD 1.1519173063162575
-# define PLANE_LEN 0.7673269879789604
+//# define FOV_RAD 1.1519173063162575
+//# define PLANE_LEN 0.7673269879789604
 # define SPEED 0.015
 # define ROT_SPEED 0.03
 # define PLAYER_RAD 0.2
@@ -164,6 +164,8 @@ typedef struct s_data
 	t_img		bg;
 	t_img		image;
 	double		move_speed;
+	double		fov_rad;
+	double		plane_len;
 	void		*mlx;
 	void		*win;
 	int			fd;
