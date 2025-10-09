@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/10/09 13:31:05 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:52:48 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 //# define FOV_RAD 1.1519173063162575
 //# define PLANE_LEN 0.7673269879789604
 # define SPEED 0.015
-# define ROT_SPEED 0.03
+# define ROT_SPEED 0.015
 # define PLAYER_RAD 0.2
 
 # define VALID_MAP_CHARS "01NSWE"

@@ -1,7 +1,7 @@
-SO textures/wall.xpm
-NO textures/wall_1_.xpm
-WE textures/wall_2_.xpm
-EA textures/wall_3_.xpm
+SO textures/south.xpm
+NO textures/north.xpm
+WE textures/west.xpm
+EA textures/east.xpm
 
 F 191, 160, 116
 C 229, 227, 196
@@ -14,6 +14,7 @@ C 229, 227, 196
                                    100000000001 11111111111
                                    100000000001 10000000001
                                    100000000001110000000001
+                                   100000000000000000000001
                                    100000000000000000000001
                                    100000000001110000000001
                                    100000000001 10000000001

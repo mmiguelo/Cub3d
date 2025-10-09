@@ -38,7 +38,8 @@ PARSING_BONUS		= 	01_parse_bonus.c \
 						03_textures_bonus.c \
 						04_color_bonus.c \
 						05_map_bonus.c \
-						06_map_utils_bonus.c
+						06_map_utils_bonus.c \
+						07_parse_doors_bonus.c
 INIT_BONUS			= 	data_bonus.c \
 						data_util_bonus.c
 LIGHT_BONUS			=	light_bonus.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   05_map_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:00:15 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/15 14:05:09 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/10/09 14:18:46 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,28 +102,4 @@ void	check_surroundings(t_data *data, char **grid, int x, int y)
 		ft_kill(data, ERR_MAP);
 	if (ft_strchr("Ddn", grid[y][x]))
 		parse_door(data, x, y);
-}
-
-void	parse_door(t_data *data, int x, int y)
-{
-	t_door	*door;
-
-	if (data->map.door_count >= MAX_DOORS)
-		ft_kill(data, "Too many doors in map");
-	if ((data->map.grid[y][x + 1] == '1' && data->map.grid[y][x - 1] != '1')
-		|| (data->map.grid[y][x - 1] == '1' && data->map.grid[y][x + 1] != '1')
-		|| (data->map.grid[y + 1][x] == '1' && data->map.grid[y - 1][x] != '1')
-		|| (data->map.grid[y - 1][x] == '1' && data->map.grid[y + 1][x] != '1'))
-		ft_kill(data, "Door must be placed between two walls");
-	door = &data->map.doors[data->map.door_count++];
-	door->x = x;
-	door->y = y;
-	door->state = DOOR_CLOSED;
-	door->tile = '1';
-	if (data->map.grid[y][x] == 'D')
-		door->mode = DOOR_ALWAYS;
-	else if (data->map.grid[y][x] == 'd')
-		door->mode = DOOR_DAY;
-	else if (data->map.grid[y][x] == 'n')
-		door->mode = DOOR_NIGHT;
 }
