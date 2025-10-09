@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/10/09 11:27:31 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:33:14 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <stdbool.h> // true/false
 # include <errno.h> // error codes
 # include <fcntl.h> // for O_DIRECTORY
-# include <math.h> // math trig fuctions like sin(),cos(),sqrt(),floor(),ceil()?
+# include <math.h> // math trig fuctions like sin(),cos(),sqrt(),floor(),ceil()
 # include <X11/X.h>
-# include <X11/keysym.h> // key press number?
+# include <X11/keysym.h> // key press number
 # include <X11/Xlib.h>
 # include <../minilibx-linux/mlx.h> // MinilibX (minilibx-linux.tgz needed)
 # include "../libft/libft.h"
@@ -54,9 +54,7 @@
 # define PI 3.14159265358979323846
 // default 66
 # define FOV 66
-// indoors (1) / outdoors (0)
-# define INDOOR 1
-// default (0.5) between -1.0 and 1.0
+// default (0.5) between 0.0 and 1.0
 # define P_HEIGHT 0.5
 # define INTERACT_RANGE 0.1
 # define SPEED 0.015
@@ -64,8 +62,7 @@
 # define PLAYER_RAD 0.1
 # define DARKNESS 0.12
 # define DAY_NIGHT_CYCLE 0.0002
-//# define FOV_RAD FOV * PI / 180.0
-//# define PLANE_LEN tan(FOV_RAD / 2.0)
+
 //# define FOV_RAD 1.1519173063162575
 //# define PLANE_LEN 0.7673269879789604
 

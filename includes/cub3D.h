@@ -6,7 +6,7 @@
 /*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 13:01:30 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/10/09 09:44:34 by frbranda         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:31:05 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <stdbool.h> // true/false
 # include <errno.h> // error codes
 # include <fcntl.h> // for O_DIRECTORY
-# include <math.h> // math trig fuctions like sin(),cos(),sqrt(),floor(),ceil()?
+# include <math.h> // math trig fuctions like sin(),cos(),sqrt(),floor(),ceil()
 # include <X11/X.h>
-# include <X11/keysym.h> // key press number?
+# include <X11/keysym.h> // key press number
 # include <../minilibx-linux/mlx.h> // MinilibX (minilibx-linux.tgz needed)
 # include "../libft/libft.h"
 # include "ray.h"
