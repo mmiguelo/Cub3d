@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_collision_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmiguelo <mmiguelo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: frbranda <frbranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 12:15:25 by mmiguelo          #+#    #+#             */
-/*   Updated: 2025/09/12 12:41:27 by mmiguelo         ###   ########.fr       */
+/*   Updated: 2025/10/10 09:38:24 by frbranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	is_blocking_tile(t_data *data, int x, int y)
 			return (0);
 		if (!door || !door->active)
 			return (1);
-		if (door->state == DOOR_CLOSED || door->state == DOOR_CLOSING)
+		if (door->state != DOOR_OPEN)
 			return (1);
 		return (0);
 	}
