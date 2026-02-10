@@ -339,7 +339,7 @@ Cub3d/
 ### 👥 Authors
 
 [![mmiguelo](https://img.shields.io/badge/mmiguelo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mmiguelo)
-[![frbranda](https://img.shields.io/badge/frbranda-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/KrispyFbacon))
+[![frbranda](https://img.shields.io/badge/frbranda-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/KrispyFbacon)
 
 </div>
 
