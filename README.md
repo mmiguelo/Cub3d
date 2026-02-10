@@ -10,7 +10,7 @@ A raycasting engine inspired by the legendary **Wolfenstein 3D** — built from 
 
 ![42 School](https://img.shields.io/badge/42-School-blue?style=for-the-badge&logo=42&logoColor=white)
 ![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
-![Norminette](https://img.shields.io/badge/Norminette-passing-brightgreen?style=for-the-badge)
+[![Norminette](https://img.shields.io/badge/Norm-OK-brightgreen?style=for-the-badge)](https://github.com/42School/norminette)
 
 </div>
 
