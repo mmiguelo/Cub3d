@@ -8,8 +8,8 @@ A raycasting engine inspired by the legendary **Wolfenstein 3D** — built from 
 
 <br>
 
-![42 School](https://img.shields.io/badge/42-School-blue?style=for-the-badge&logo=42&logoColor=white)
-![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
+[![42 School](https://img.shields.io/badge/42-School-000000?style=for-the-badge&logo=42&logoColor=white)](https://42.fr)
+[![Language](https://img.shields.io/badge/Language-C-00599C?style=for-the-badge&logo=c&logoColor=white)](https://en.wikipedia.org/wiki/C_(programming_language))
 [![Norminette](https://img.shields.io/badge/Norm-OK-brightgreen?style=for-the-badge)](https://github.com/42School/norminette)
 
 </div>
