@@ -178,7 +178,7 @@ C 229, 227, 196                ← Ceiling color (R, G, B)
 | **Flashlight** | Toggleable flashlight with a realistic flicker effect |
 | **Sprint** | Hold shift to run at increased speed |
 | **Look Up / Down** | Vertical camera movement for enhanced perspective |
-| **Floor & Ceiling Textures** | Toggle textured floor/ceiling rendering via `INDOOR` define in the header |
+| **4D Mode (Indoor / Outdoor)** | Toggle between indoor and outdoor rendering in real time using `T` — dynamically switches floor/ceiling textures, lighting, and atmosphere |
 | **FPS Counter** | Real-time frames-per-second display |
 | **Mouse Look** | Camera rotation via mouse movement |
 
@@ -199,6 +199,7 @@ C 229, 227, 196                ← Ceiling color (R, G, B)
 | *Mouse Move* | Rotate camera |
 | `E` | Interact with door |
 | `F` | Toggle flashlight |
+| `T` | Toggle Indoor / Outdoor mode (4D switch) |
 | `ESC` | Quit game |
 
 </details>
